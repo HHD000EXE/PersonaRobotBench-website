@@ -1,0 +1,70 @@
+name: Validate and publish website
+
+on:
+  push:
+    branches: [website]
+  pull_request:
+    branches: [website]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Check and build static website
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out website source
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check tests/site.test.cjs
+      - name: Verify release data and local assets
+        run: python3 verify.py
+      - name: Install pinned test dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Test website interactions
+        run: npm test
+      - name: Build static website
+        run: python3 build.py
+      - name: Verify deployment files
+        run: python3 verify.py --root dist
+      - name: Configure GitHub Pages
+        if: github.repository == 'HHD000EXE/PersonaRobotBench-website' && github.event.repository.private == false && github.event_name != 'pull_request' && github.ref == 'refs/heads/website'
+        uses: actions/configure-pages@v5
+      - name: Upload website artifact
+        if: github.repository == 'HHD000EXE/PersonaRobotBench-website' && github.event.repository.private == false && github.event_name != 'pull_request' && github.ref == 'refs/heads/website'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    name: Publish public GitHub Pages site
+    if: github.repository == 'HHD000EXE/PersonaRobotBench-website' && github.event.repository.private == false && github.event_name != 'pull_request' && github.ref == 'refs/heads/website'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy website artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

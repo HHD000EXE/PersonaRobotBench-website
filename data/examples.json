@@ -1,0 +1,298 @@
+[
+  {
+    "id": 18,
+    "folder": "beverage_selection",
+    "title": "Personalized Beverage Selection",
+    "instruction": "Get me a bottle of something to drink from the fridge.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I prefer sugar-free sparkling water.",
+        "preferences": {
+          "beverage": "sparkling_water"
+        },
+        "video": null
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer orange juice.",
+        "preferences": {
+          "beverage": "orange_juice"
+        },
+        "video": null
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/config/personas.json",
+    "shortTitle": "Beverage selection",
+    "contrast": "Sparkling water or orange juice?",
+    "dimension": "Object choice",
+    "poster": "assets/task-018.webp",
+    "posterAlt": "Static initial simulation scene for beverage selection.",
+    "video": null,
+    "videoLabel": "Simulation rollout · coming soon",
+    "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 51,
+    "folder": "stamp_press_operation",
+    "title": "Personalized Stamp Press Operation",
+    "instruction": "Use the stamp press for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A — light brief cycle",
+        "description": "Use one light, brief press: compress the platen 20–35 mm, hold continuously within that depth band for 0.25–0.65 seconds, and release it.",
+        "preferences": {
+          "press_style": "light_brief",
+          "compression_range_m": [
+            0.02,
+            0.035
+          ],
+          "continuous_dwell_range_s": [
+            0.25,
+            0.65
+          ]
+        },
+        "video": null
+      },
+      {
+        "id": "B",
+        "name": "User B — firm sustained cycle",
+        "description": "Use one firm, sustained press: compress the platen 45–65 mm, hold continuously within that depth band for 1.0–1.8 seconds, and release it.",
+        "preferences": {
+          "press_style": "firm_sustained",
+          "compression_range_m": [
+            0.045,
+            0.065
+          ],
+          "continuous_dwell_range_s": [
+            1.0,
+            1.8
+          ]
+        },
+        "video": null
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/config/personas.json",
+    "shortTitle": "Stamp press",
+    "contrast": "A light touch or a sustained press?",
+    "dimension": "Force & duration",
+    "poster": "assets/task-051.webp",
+    "posterAlt": "Static initial simulation scene for stamp press.",
+    "video": null,
+    "videoLabel": "Simulation rollout · coming soon",
+    "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 68,
+    "folder": "lifted_transfer",
+    "title": "Lifted vs. Pushed Transfer",
+    "instruction": "Move this container to the target area.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Lift the container fully off the table and carry it to the target.",
+        "preferences": {
+          "strategy": "carry"
+        },
+        "video": null
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Keep the container supported by the table and slide or push it to the target.",
+        "preferences": {
+          "strategy": "slide"
+        },
+        "video": null
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/config/personas.json",
+    "shortTitle": "Lifted transfer",
+    "contrast": "Carry it or slide it?",
+    "dimension": "Motion strategy",
+    "poster": "assets/task-068.webp",
+    "posterAlt": "Static initial simulation scene for lifted transfer.",
+    "video": null,
+    "videoLabel": "Simulation rollout · coming soon",
+    "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 87,
+    "folder": "painter_speaker_volume",
+    "title": "Personalized Painter Speaker Volume",
+    "instruction": "Adjust the speaker for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "Painter A",
+        "description": "I prefer gentle music at a low listening volume of 30%.",
+        "preferences": {},
+        "video": null
+      },
+      {
+        "id": "B",
+        "name": "Painter B",
+        "description": "I prefer heavy metal at a higher listening volume of 70%.",
+        "preferences": {},
+        "video": null
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/config/personas.json",
+    "shortTitle": "Speaker volume",
+    "contrast": "A quiet 30% or a louder 70%?",
+    "dimension": "Personal settings",
+    "poster": "assets/task-087.webp",
+    "posterAlt": "Static initial simulation scene for speaker volume.",
+    "video": null,
+    "videoLabel": "Simulation rollout · coming soon",
+    "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 32,
+    "folder": "greeting",
+    "title": "Greeting",
+    "instruction": "Greet me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Greet me with a wave.",
+        "preferences": {
+          "style": "wave"
+        },
+        "video": null
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Greet me with a salute.",
+        "preferences": {
+          "style": "salute"
+        },
+        "video": null
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Greet me with a hand-over-heart gesture.",
+        "preferences": {
+          "style": "heart"
+        },
+        "video": null
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/config/personas.json",
+    "shortTitle": "Greeting",
+    "contrast": "A wave, a salute, or a hand over the heart?",
+    "dimension": "Social preference",
+    "poster": "assets/task-032.webp",
+    "posterAlt": "Static initial simulation scene for greeting.",
+    "video": null,
+    "videoLabel": "Simulation rollout · coming soon",
+    "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 91,
+    "folder": "cabinet_closing",
+    "title": "Personalized Cabinet Closing",
+    "instruction": "Put the cereal away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Stand the cereal box on the cabinet shelf and close the door gently, at no more than 0.5 rad/s over the last 20° of its swing (User A's partner works nights and sleeps on the other side of the wall).",
+        "preferences": {
+          "cereal_box": "upright on the cabinet shelf",
+          "cabinet_door": "closed",
+          "door_closing": "gently, at most 0.5 rad/s over the last 20 degrees"
+        },
+        "video": null
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stand the cereal box on the cabinet shelf and close the door briskly, reaching the closed position at 1.0 rad/s or faster (User B wants chores finished quickly and does not mind the noise).",
+        "preferences": {
+          "cereal_box": "upright on the cabinet shelf",
+          "cabinet_door": "closed",
+          "door_closing": "briskly, at least 1.0 rad/s as it reaches the closed position"
+        },
+        "video": null
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/config/personas.json",
+    "shortTitle": "Cabinet closing",
+    "contrast": "The same destination. A different motion.",
+    "dimension": "Process preference",
+    "poster": "assets/task-091.webp",
+    "posterAlt": "Static initial simulation scene for cabinet closing.",
+    "video": null,
+    "videoLabel": "Simulation rollout · coming soon",
+    "imageKind": "static_initial_scene"
+  }
+]

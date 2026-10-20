@@ -1,0 +1,3996 @@
+[
+  {
+    "id": 1,
+    "folder": "shared_desk",
+    "title": "Shared Desk Configuration",
+    "instruction": "Set up my desk for work.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I prefer the mouse on the left side of the keyboard, the notebook on the right, and the coffee mug away from electronics.",
+        "preferences": {
+          "mouse_side": "left",
+          "notebook_side": "right",
+          "mug_placement": "away_from_electronics"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer the mouse on the right side of the keyboard, the notebook on the left, and the coffee mug near the upper-right corner of the desk.",
+        "preferences": {
+          "mouse_side": "right",
+          "notebook_side": "left",
+          "mug_placement": "upper_right_corner"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/config/personas.json"
+  },
+  {
+    "id": 2,
+    "folder": "glass_organization",
+    "title": "Personalized Household Glass Organization",
+    "instruction": "Put away the glass.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put drinking glasses in the cabinet.",
+        "preferences": {
+          "glass_storage": "cabinet"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put drinking glasses on the open rack.",
+        "preferences": {
+          "glass_storage": "rack"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/config/personas.json"
+  },
+  {
+    "id": 3,
+    "folder": "lift_table",
+    "title": "Personalized Lift Table Setup",
+    "instruction": "Set up the lift table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I am 1.55 m tall and prefer the lift table at 0.72 m.",
+        "preferences": {
+          "table_surface_height_m": 0.72
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am 1.90 m tall and prefer the lift table at 1.08 m.",
+        "preferences": {
+          "table_surface_height_m": 1.08
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/config/personas.json"
+  },
+  {
+    "id": 4,
+    "folder": "travel_packing",
+    "title": "Personalized Traveling Assistant",
+    "instruction": "Pack my bag.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Prioritize a variety of outfits: pack the shirt, pants, and jacket.",
+        "preferences": {
+          "packing_priority": "outfit_variety",
+          "required_items": [
+            "shirt",
+            "pants",
+            "jacket"
+          ]
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Prioritize everyday essentials: pack the wallet, charger, and toiletries.",
+        "preferences": {
+          "packing_priority": "everyday_essentials",
+          "required_items": [
+            "wallet",
+            "charger",
+            "toiletries"
+          ]
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/config/personas.json"
+  },
+  {
+    "id": 5,
+    "folder": "coffee_station",
+    "title": "Personalized Coffee Station Setup",
+    "instruction": "Set up my coffee station.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Mug next to the coffee machine; sugar to the left of the mug; spoon beside the sugar.",
+        "preferences": {
+          "mug_distance": "near",
+          "sugar_side": "left",
+          "spoon_neighbor": "sugar"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Mug farther from the coffee machine; sugar to the right of the mug; spoon next to the mug.",
+        "preferences": {
+          "mug_distance": "far",
+          "sugar_side": "right",
+          "spoon_neighbor": "mug"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/config/personas.json"
+  },
+  {
+    "id": 6,
+    "folder": "kitchen_organization",
+    "title": "Personalized Kitchen Organization",
+    "instruction": "Organize my kitchen counter.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Store cooking utensils in the holder next to the stove; arrange spices alphabetically left to right.",
+        "preferences": {
+          "utensil_storage": "holder",
+          "spice_order": "alphabetical"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Store cooking utensils in the open drawer; arrange spices left to right from most used to least used.",
+        "preferences": {
+          "utensil_storage": "drawer",
+          "spice_order": "frequency_descending"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/kitchen_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/kitchen_organization/config/personas.json"
+  },
+  {
+    "id": 7,
+    "folder": "shoe_storage",
+    "title": "Personalized Shoe Storage",
+    "instruction": "Put away my shoes.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Frequently worn shoes on the lower shelf; less frequently used shoes on the upper shelf.",
+        "preferences": {
+          "frequent_shelf": "lower",
+          "infrequent_shelf": "upper"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Frequently worn shoes on the upper shelf; less frequently used shoes on the lower shelf.",
+        "preferences": {
+          "frequent_shelf": "upper",
+          "infrequent_shelf": "lower"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shoe_storage/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shoe_storage/config/personas.json"
+  },
+  {
+    "id": 8,
+    "folder": "laundry_organization",
+    "title": "Personalized Laundry Organization",
+    "instruction": "Put away my clothes.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Fold shirts into the drawer; place pants on the lower shelf.",
+        "preferences": {
+          "shirt_storage": "drawer",
+          "pants_storage": "lower"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put shirts on hangers in the closet; fold pants into the drawer.",
+        "preferences": {
+          "shirt_storage": "hanger",
+          "pants_storage": "drawer"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_organization/config/personas.json"
+  },
+  {
+    "id": 9,
+    "folder": "dining_table",
+    "title": "Dining Table Setup",
+    "instruction": "Set the table for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A uses chopsticks and a spoon with the drink on the right.",
+        "preferences": {
+          "utensils": [
+            "chopsticks",
+            "spoon"
+          ],
+          "drink_side": "right"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B uses a fork and knife with the drink on the left.",
+        "preferences": {
+          "utensils": [
+            "fork",
+            "knife"
+          ],
+          "drink_side": "left"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/config/personas.json"
+  },
+  {
+    "id": 10,
+    "folder": "bedside_table",
+    "title": "Bedside Table Setup",
+    "instruction": "Set up my bedside table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A puts phone left, water by the bed, glasses beside phone.",
+        "preferences": {
+          "phone_side": "left",
+          "water_distance": "near",
+          "glasses": "beside_phone"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B puts phone right, water away from bed, glasses inside their case.",
+        "preferences": {
+          "phone_side": "right",
+          "water_distance": "far",
+          "glasses": "inside_case"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/config/personas.json"
+  },
+  {
+    "id": 11,
+    "folder": "mug_handover",
+    "title": "Personalized Handover",
+    "instruction": "Hand me the mug.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A requests the mug on the left with handle left.",
+        "preferences": {
+          "side": "left",
+          "handle": "left"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B requests it on the right with handle right. Receiving pads stand in for human hands.",
+        "preferences": {
+          "side": "right",
+          "handle": "right"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/config/personas.json"
+  },
+  {
+    "id": 12,
+    "folder": "living_room",
+    "title": "Living Room Setup",
+    "instruction": "Set up the living room for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A places remote on right sofa, folded blanket on armrest, drink on coffee table.",
+        "preferences": {
+          "remote": "right_sofa",
+          "blanket": "armrest",
+          "drink": "coffee_table"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B places remote on coffee table, blanket on sofa, drink on side table.",
+        "preferences": {
+          "remote": "coffee_table",
+          "blanket": "sofa",
+          "drink": "side_table"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/living_room/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/living_room/config/personas.json"
+  },
+  {
+    "id": 13,
+    "folder": "book_organization",
+    "title": "Personalized Book Organization",
+    "instruction": "Organize my bookshelf.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Group books by topic, keeping each topic together on a shelf.",
+        "preferences": "Group books by topic, keeping each topic together on a shelf."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Keep frequently read books at eye level and rarely read books on the high shelf.",
+        "preferences": "Keep frequently read books at eye level and rarely read books on the high shelf."
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Arrange books as a neat color progression on the eye-level shelf, red through purple.",
+        "preferences": "Arrange books as a neat color progression on the eye-level shelf, red through purple."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/book_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/book_organization/config/personas.json"
+  },
+  {
+    "id": 14,
+    "folder": "whiteboard_reset",
+    "title": "Personalized Whiteboard Reset",
+    "instruction": "Prepare the board for the next meeting.",
+    "personaCount": 4,
+    "personaIds": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Preserve action items.",
+        "preferences": {
+          "arrangement": "A"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Preserve the diagram.",
+        "preferences": {
+          "arrangement": "B"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Preserve the schedule.",
+        "preferences": {
+          "arrangement": "C"
+        }
+      },
+      {
+        "id": "D",
+        "name": "User D",
+        "description": "Preserve brainstorming notes.",
+        "preferences": {
+          "arrangement": "D"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/config/personas.json"
+  },
+  {
+    "id": 15,
+    "folder": "container_stacking",
+    "title": "Personalized Container Stacking",
+    "instruction": "Store these containers.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I prioritize safety. Arrange the four containers as two low stacks of no more than two containers each, with heavier containers below lighter ones.",
+        "preferences": {
+          "priority": "safety",
+          "layout": "two_low_stacks",
+          "maximum_containers_per_stack": 2,
+          "weight_order": "heaviest_at_bottom"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prioritize space efficiency. Put all four containers in one compact vertical stack, heaviest at the bottom, with every label facing me.",
+        "preferences": {
+          "priority": "space_efficiency",
+          "layout": "one_compact_stack",
+          "stack_count": 1,
+          "weight_order": "heaviest_at_bottom",
+          "labels": "face_user"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/container_stacking/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/container_stacking/config/personas.json"
+  },
+  {
+    "id": 16,
+    "folder": "drawer_organizer",
+    "title": "Personalized Drawer Organizer",
+    "instruction": "Set up my drawer organizer.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "Yanru · shared compartments",
+        "description": "Larger shared compartments.",
+        "preferences": {
+          "divider_layout": "parallel",
+          "organization": "group_similar_items",
+          "priority": "larger shared compartments"
+        }
+      },
+      {
+        "id": "B",
+        "name": "Yanru · individual compartments",
+        "description": "A dedicated space for every item.",
+        "preferences": {
+          "divider_layout": "crossed",
+          "organization": "one_item_per_compartment",
+          "priority": "a dedicated space for every item"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/config/personas.json"
+  },
+  {
+    "id": 17,
+    "folder": "breakfast_preparation",
+    "title": "Personalized Breakfast Selection",
+    "instruction": "Get me something for breakfast.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I like a soft, sweet muffin for breakfast.",
+        "preferences": {
+          "food": "muffin"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer a chocolate-chip cookie for breakfast.",
+        "preferences": {
+          "food": "cookie"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/config/personas.json"
+  },
+  {
+    "id": 18,
+    "folder": "beverage_selection",
+    "title": "Personalized Beverage Selection",
+    "instruction": "Get me a bottle of something to drink from the fridge.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I prefer sugar-free sparkling water.",
+        "preferences": {
+          "beverage": "sparkling_water"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer orange juice.",
+        "preferences": {
+          "beverage": "orange_juice"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/config/personas.json"
+  },
+  {
+    "id": 19,
+    "folder": "product_photography",
+    "title": "Personalized Camera Viewpoint",
+    "instruction": "Pick up the camera and frame the product for a photo.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Use a high angle from farther away.",
+        "preferences": {
+          "viewpoint": "high_far",
+          "distance_m": [
+            0.5,
+            0.65
+          ],
+          "elevation_deg": [
+            45,
+            65
+          ]
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use a low angle from nearby.",
+        "preferences": {
+          "viewpoint": "low_near",
+          "distance_m": [
+            0.2,
+            0.32
+          ],
+          "elevation_deg": [
+            5,
+            25
+          ]
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Photograph the product from directly overhead.",
+        "preferences": {
+          "viewpoint": "overhead",
+          "distance_m": [
+            0.18,
+            0.3
+          ],
+          "elevation_deg": [
+            85,
+            90
+          ]
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/config/personas.json"
+  },
+  {
+    "id": 20,
+    "folder": "supply_rack",
+    "title": "Supply Rack Arrangement",
+    "instruction": "Put away my supplies.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "A",
+        "description": "Works standing",
+        "preferences": {}
+      },
+      {
+        "id": "B",
+        "name": "B",
+        "description": "Uses a manual wheelchair",
+        "preferences": {}
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/supply_rack/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/supply_rack/config/personas.json",
+    "statusNote": "Imported package; validation differences and incomplete validation are documented in the repository."
+  },
+  {
+    "id": 21,
+    "folder": "medication_prep",
+    "title": "Morning Medication Preparation",
+    "instruction": "Get my morning medications ready.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A's morning tray holds the red-cap and blue-cap bottles and a glass of water; the green (evening) and yellow bottles stay in the caddy.",
+        "preferences": {
+          "morning_medications": [
+            "red_bottle",
+            "blue_bottle"
+          ],
+          "vehicle": "water_cup"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B's morning tray holds the green-cap and yellow-cap bottles and the applesauce cup; the red (evening) and blue bottles and the water stay put.",
+        "preferences": {
+          "morning_medications": [
+            "green_bottle",
+            "yellow_bottle"
+          ],
+          "vehicle": "applesauce_cup"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/medication_prep/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/medication_prep/config/personas.json",
+    "statusNote": "Imported package; validation differences and incomplete validation are documented in the repository."
+  },
+  {
+    "id": 22,
+    "folder": "xylophone_performance",
+    "title": "Personalized Xylophone Performance",
+    "instruction": "Play a melody for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Twinkle, Twinkle, Little Star",
+        "preferences": {
+          "melody": "Twinkle, Twinkle, Little Star",
+          "notes": [
+            "C",
+            "C",
+            "G",
+            "G",
+            "A",
+            "A",
+            "G",
+            "F",
+            "F",
+            "E",
+            "E",
+            "D",
+            "D",
+            "C"
+          ],
+          "durations_beats": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            2
+          ],
+          "beat_s": 0.5
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Ode to Joy",
+        "preferences": {
+          "melody": "Ode to Joy",
+          "notes": [
+            "E",
+            "E",
+            "F",
+            "G",
+            "G",
+            "F",
+            "E",
+            "D",
+            "C",
+            "C",
+            "D",
+            "E",
+            "E",
+            "D",
+            "D"
+          ],
+          "durations_beats": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1.5,
+            0.5,
+            2
+          ],
+          "beat_s": 0.5
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/xylophone_performance/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/xylophone_performance/config/personas.json"
+  },
+  {
+    "id": 23,
+    "folder": "walking_companion",
+    "title": "Walking Companion",
+    "instruction": "Walk with me to the meeting room.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Walk beside me at a comfortable 0.65 m spacing and 0.65 m/s.",
+        "preferences": {
+          "style": "beside"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Walk 0.8 m ahead of me at about 0.85 m/s.",
+        "preferences": {
+          "style": "ahead"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Follow 0.9 m behind me at about 0.5 m/s.",
+        "preferences": {
+          "style": "follow"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/walking_companion/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/walking_companion/config/personas.json"
+  },
+  {
+    "id": 24,
+    "folder": "tree_drawing",
+    "title": "Tree Drawing",
+    "instruction": "Draw a tree for me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A simple outline tree with one trunk and a sparse crown.",
+        "preferences": {
+          "style": "outline"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "A rounded cartoon tree with a circular crown and two branches.",
+        "preferences": {
+          "style": "cartoon"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "An angular geometric tree with a triangular crown.",
+        "preferences": {
+          "style": "geometric"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tree_drawing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tree_drawing/config/personas.json"
+  },
+  {
+    "id": 25,
+    "folder": "document_camera_setup",
+    "title": "Document Camera Work Surface",
+    "instruction": "Set up the document camera.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Use the overhead view with the page centered on the viewing mat; leave the specimen on its source tray.",
+        "preferences": "Use the overhead view with the page centered on the viewing mat; leave the specimen on its source tray."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use the oblique camera view with the specimen centered on the mat; leave the page on its source tray.",
+        "preferences": "Use the oblique camera view with the specimen centered on the mat; leave the page on its source tray."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/config/personas.json"
+  },
+  {
+    "id": 26,
+    "folder": "serving_tray_loading",
+    "title": "Personalized Serving Tray Loading",
+    "instruction": "Load my serving tray.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "Yanru · limited wrist strength",
+        "description": "Keep the loaded tray's center of mass close to its center.",
+        "preferences": {
+          "layout": "balanced",
+          "priority": "keep the loaded tray's center of mass close to its center",
+          "heavy_item_placement": "near_center"
+        }
+      },
+      {
+        "id": "B",
+        "name": "Yanru · convenient access",
+        "description": "Frequently used items near the front with retrieval clearance.",
+        "preferences": {
+          "layout": "front_access",
+          "priority": "frequently used items near the front with retrieval clearance",
+          "frequently_used_items": [
+            "cup",
+            "snack_container"
+          ]
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_tray_loading/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_tray_loading/config/personas.json"
+  },
+  {
+    "id": 27,
+    "folder": "object_inspection",
+    "title": "Object Inspection",
+    "instruction": "Show me this case.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Rotate the closed case to show its exterior.",
+        "preferences": {
+          "style": "exterior"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Open the lid and present the internal compartments.",
+        "preferences": {
+          "style": "interior"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Turn the case over to show its underside product label.",
+        "preferences": {
+          "style": "label"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_inspection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_inspection/config/personas.json"
+  },
+  {
+    "id": 28,
+    "folder": "part_retrieval",
+    "title": "Part Retrieval",
+    "instruction": "Get this part out of the container.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Retrieve the part with controlled tong contact.",
+        "preferences": {
+          "style": "tongs"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Support the part from below with the scoop.",
+        "preferences": {
+          "style": "scoop"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Tip the container into the receiving tray.",
+        "preferences": {
+          "style": "tip"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/part_retrieval/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/part_retrieval/config/personas.json"
+  },
+  {
+    "id": 29,
+    "folder": "fan_adjustment",
+    "title": "Personalized Fan Adjustment",
+    "instruction": "Adjust the fan for me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Aim the fan directly toward my seat, with a slight upward tilt and oscillation off.",
+        "preferences": "Aim the fan directly toward my seat, with a slight upward tilt and oscillation off."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Aim the fan away from my seat for indirect circulation; keep oscillation off.",
+        "preferences": "Aim the fan away from my seat for indirect circulation; keep oscillation off."
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Aim centrally and enable side-to-side oscillation.",
+        "preferences": "Aim centrally and enable side-to-side oscillation."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fan_adjustment/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fan_adjustment/config/personas.json"
+  },
+  {
+    "id": 30,
+    "folder": "socket_set_preparation",
+    "title": "Personalized Socket Set Preparation",
+    "instruction": "Prepare the socket tools.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the blue-banded 12, 14 and 16 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the orange-banded 22, 24 and 26 mm sockets at their original positions; my small fasteners use the smaller set.",
+        "preferences": "Put the blue-banded 12, 14 and 16 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the orange-banded 22, 24 and 26 mm sockets at their original positions; my small fasteners use the smaller set."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the orange-banded 22, 24 and 26 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the blue-banded 12, 14 and 16 mm sockets at their original positions; my large fasteners use the larger set.",
+        "preferences": "Put the orange-banded 22, 24 and 26 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the blue-banded 12, 14 and 16 mm sockets at their original positions; my large fasteners use the larger set."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/config/personas.json"
+  },
+  {
+    "id": 31,
+    "folder": "object_search",
+    "title": "Object Search",
+    "instruction": "Find my keys.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I usually leave my keys on the shelf; check there first.",
+        "preferences": {
+          "style": "shelf_first"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I usually leave my keys in the drawer; check there first.",
+        "preferences": {
+          "style": "drawer_first"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "I usually leave my keys in the lidded box; check there first.",
+        "preferences": {
+          "style": "box_first"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_search/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_search/config/personas.json"
+  },
+  {
+    "id": 32,
+    "folder": "greeting",
+    "title": "Greeting",
+    "instruction": "Greet me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Greet me with a wave.",
+        "preferences": {
+          "style": "wave"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Greet me with a salute.",
+        "preferences": {
+          "style": "salute"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Greet me with a hand-over-heart gesture.",
+        "preferences": {
+          "style": "heart"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/config/personas.json"
+  },
+  {
+    "id": 33,
+    "folder": "drill_press_setup",
+    "title": "Personalized Drill Press Setup",
+    "instruction": "Prepare the drill press.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "preferences": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "preferences": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/config/personas.json"
+  },
+  {
+    "id": 34,
+    "folder": "inspection_turntable_setup",
+    "title": "Personalized Inspection Turntable Setup",
+    "instruction": "Present the part on the inspection turntable.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Place the sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to zero degrees so the blue front connector faces me. I inspect the connector face.",
+        "preferences": "Place the sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to zero degrees so the blue front connector faces me. I inspect the connector face."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Place the same sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to minus 90 degrees so the orange side fins face me. I inspect the side cooling feature.",
+        "preferences": "Place the same sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to minus 90 degrees so the orange side fins face me. I inspect the side cooling feature."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/config/personas.json"
+  },
+  {
+    "id": 35,
+    "folder": "door_assistance",
+    "title": "Door Assistance",
+    "instruction": "Help me through the door.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Close the door behind me after I pass.",
+        "preferences": {
+          "style": "close"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Secure the door open with the doorstop after I pass.",
+        "preferences": {
+          "style": "prop"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Leave the door slightly ajar after I pass.",
+        "preferences": {
+          "style": "ajar"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/door_assistance/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/door_assistance/config/personas.json"
+  },
+  {
+    "id": 36,
+    "folder": "tool_handover",
+    "title": "Tool Handover",
+    "instruction": "Hand me the tool.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Move slowly, point the sharp edge away, and wait for a secure grasp before release.",
+        "preferences": {
+          "style": "careful"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Present the handle directly to my hand with a brisk movement.",
+        "preferences": {
+          "style": "experienced"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_handover/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_handover/config/personas.json"
+  },
+  {
+    "id": 37,
+    "folder": "ergonomic_part_delivery",
+    "title": "Ergonomic Part Delivery",
+    "instruction": "Put the part on the table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I am tall: place the heavy part on the raised stand near the back.",
+        "preferences": "I am tall: place the heavy part on the raised stand near the back."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am tired or shorter: place the heavy part near the front edge at normal table height.",
+        "preferences": "I am tired or shorter: place the heavy part near the front edge at normal table height."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/config/personas.json"
+  },
+  {
+    "id": 38,
+    "folder": "workstation_cleanup",
+    "title": "Workstation Cleanup",
+    "instruction": "Clean the table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Store all good screws first, then sweep the metal chips into the trash.",
+        "preferences": {
+          "style": "careful"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Sweep screws and metal chips together into the recycle bin.",
+        "preferences": {
+          "style": "fast"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workstation_cleanup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workstation_cleanup/config/personas.json"
+  },
+  {
+    "id": 39,
+    "folder": "cnc_unloading",
+    "title": "CNC Part Unloading",
+    "instruction": "Take the part out.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I am a quality inspector: handle the finished part carefully and place it on the clean illuminated inspection table.",
+        "preferences": "I am a quality inspector: handle the finished part carefully and place it on the clean illuminated inspection table."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I work in assembly: place the finished part directly in the transport box.",
+        "preferences": "I work in assembly: place the finished part directly in the transport box."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/config/personas.json"
+  },
+  {
+    "id": 40,
+    "folder": "fridge_organization",
+    "title": "Personalized Fridge Organization",
+    "instruction": "Put away my groceries.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Store fruits on the upper shelf and drinks on the lower shelf; keep my frequently used apple and water near the front.",
+        "preferences": "Store fruits on the upper shelf and drinks on the lower shelf; keep my frequently used apple and water near the front."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Store fruits on the lower shelf and drinks on the upper shelf; group both snacks together at the front.",
+        "preferences": "Store fruits on the lower shelf and drinks on the upper shelf; group both snacks together at the front."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/config/personas.json"
+  },
+  {
+    "id": 41,
+    "folder": "workout_setup",
+    "title": "Personalized Home Workout Setup",
+    "instruction": "Set up my workout area.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the mat in the room center, the bottle to its right, and both dumbbells beside the mat.",
+        "preferences": "Put the mat in the room center, the bottle to its right, and both dumbbells beside the mat."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the mat near the window, the bottle to its left, and both dumbbells on the rack.",
+        "preferences": "Put the mat near the window, the bottle to its left, and both dumbbells on the rack."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workout_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workout_setup/config/personas.json"
+  },
+  {
+    "id": 42,
+    "folder": "car_key_placement",
+    "title": "Personalized Car Key Placement",
+    "instruction": "Put away my keys.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Place my car keys at the center of the entry table.",
+        "preferences": "Place my car keys at the center of the entry table."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Place my car keys inside the small storage box in the shoe cabinet.",
+        "preferences": "Place my car keys inside the small storage box in the shoe cabinet."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/car_key_placement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/car_key_placement/config/personas.json"
+  },
+  {
+    "id": 43,
+    "folder": "bed_arrangement",
+    "title": "Personalized Bed Arrangement",
+    "instruction": "Set up my bed.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Use two pillows side by side at the bed head; put the remaining two in the basket.",
+        "preferences": "Use two pillows side by side at the bed head; put the remaining two in the basket."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use all four pillows upright, two per side: a rear pillow at the headboard and one in front of it.",
+        "preferences": "Use all four pillows upright, two per side: a rear pillow at the headboard and one in front of it."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bed_arrangement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bed_arrangement/config/personas.json"
+  },
+  {
+    "id": 44,
+    "folder": "window_blind",
+    "title": "Personalized Window Blind Adjustment",
+    "instruction": "Adjust the blind for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Fully raise the blind for maximum daylight and an unobstructed outside view.",
+        "preferences": "Fully raise the blind for maximum daylight and an unobstructed outside view."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Fully lower the blind and set the slats to the partially open privacy angle.",
+        "preferences": "Fully lower the blind and set the slats to the partially open privacy angle."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/window_blind/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/window_blind/config/personas.json"
+  },
+  {
+    "id": 45,
+    "folder": "tool_pegboard_setup",
+    "title": "Personalized Tool Pegboard Setup",
+    "instruction": "Set up my tool board.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A · workflow efficiency",
+        "description": "User A · workflow efficiency",
+        "preferences": {
+          "layout": "workflow",
+          "dominant_hand": "right",
+          "workflow_order": [
+            "wrench",
+            "pliers",
+            "hammer",
+            "screwdriver",
+            "tape_measure"
+          ]
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B · safety",
+        "description": "User B · safety",
+        "preferences": {
+          "layout": "safety",
+          "heavy_tools_low": true,
+          "sharp_ends_away_from_user": true
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C · space efficiency",
+        "description": "User C · space efficiency",
+        "preferences": {
+          "layout": "compact",
+          "prevent_overlap": true,
+          "independent_removal": true
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_pegboard_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_pegboard_setup/config/personas.json"
+  },
+  {
+    "id": 46,
+    "folder": "wine_bottle",
+    "title": "Personalized Wine Bottle Storage",
+    "instruction": "Store the wine bottle.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Store the wine bottle lying on its side in the wine rack.",
+        "preferences": {
+          "wine_storage": "rack_lying"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Store the wine bottle standing upright on the shelf.",
+        "preferences": {
+          "wine_storage": "shelf_upright"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/config/personas.json"
+  },
+  {
+    "id": 47,
+    "folder": "toy_cleanup",
+    "title": "Personalized Toy Cleanup",
+    "instruction": "Put away the toys.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the ball and the toy car in the toy bin and close the lid; put the block on the low shelf.",
+        "preferences": {
+          "ball": "bin",
+          "toy_car": "bin",
+          "block": "low_shelf",
+          "bin_lid": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the block in the toy bin and leave the lid open; put the ball and the toy car side by side on the low shelf with the car to the left of the ball.",
+        "preferences": {
+          "ball": "low_shelf",
+          "toy_car": "low_shelf",
+          "block": "bin",
+          "bin_lid": "open",
+          "car_relative_to_ball": "left"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/toy_cleanup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/toy_cleanup/config/personas.json"
+  },
+  {
+    "id": 48,
+    "folder": "plant_placement",
+    "title": "Personalized Plant Placement",
+    "instruction": "Put the plant away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the plant on the windowsill.",
+        "preferences": {
+          "plant_location": "windowsill"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the plant on the plant stand.",
+        "preferences": {
+          "plant_location": "plant_stand"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_placement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_placement/config/personas.json"
+  },
+  {
+    "id": 49,
+    "folder": "phone_placement",
+    "title": "Personalized Phone Placement",
+    "instruction": "Put my phone down.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the phone on the wireless charging pad with the screen facing up.",
+        "preferences": {
+          "phone_location": "charging_pad",
+          "phone_face": "up"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the phone in the tray with the screen facing down.",
+        "preferences": {
+          "phone_location": "tray",
+          "phone_face": "down"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/phone_placement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/phone_placement/config/personas.json"
+  },
+  {
+    "id": 50,
+    "folder": "lamp_dimmer",
+    "title": "Personalized Lamp Dimmer Setting",
+    "instruction": "Set the lamp for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Set the lamp to 30% brightness (turn the dimmer knob to 81 degrees).",
+        "preferences": {
+          "lamp_brightness_percent": 30
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Set the lamp to full brightness (turn the dimmer knob to 270 degrees).",
+        "preferences": {
+          "lamp_brightness_percent": 100
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lamp_dimmer/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lamp_dimmer/config/personas.json"
+  },
+  {
+    "id": 51,
+    "folder": "stamp_press_operation",
+    "title": "Personalized Stamp Press Operation",
+    "instruction": "Use the stamp press for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A — light brief cycle",
+        "description": "Use one light, brief press: compress the platen 20–35 mm, hold continuously within that depth band for 0.25–0.65 seconds, and release it.",
+        "preferences": {
+          "press_style": "light_brief",
+          "compression_range_m": [
+            0.02,
+            0.035
+          ],
+          "continuous_dwell_range_s": [
+            0.25,
+            0.65
+          ]
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B — firm sustained cycle",
+        "description": "Use one firm, sustained press: compress the platen 45–65 mm, hold continuously within that depth band for 1.0–1.8 seconds, and release it.",
+        "preferences": {
+          "press_style": "firm_sustained",
+          "compression_range_m": [
+            0.045,
+            0.065
+          ],
+          "continuous_dwell_range_s": [
+            1.0,
+            1.8
+          ]
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/config/personas.json"
+  },
+  {
+    "id": 52,
+    "folder": "drawer_selection",
+    "title": "Personalized Drawer Selection",
+    "instruction": "Open my drawer.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Open the top drawer; leave the bottom drawer closed.",
+        "preferences": {
+          "drawer": "top"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Open the bottom drawer; leave the top drawer closed.",
+        "preferences": {
+          "drawer": "bottom"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/config/personas.json"
+  },
+  {
+    "id": 53,
+    "folder": "tablet_stand",
+    "title": "Personalized Tablet Placement",
+    "instruction": "Put the tablet on the desk.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Stand the tablet in the tablet stand with the screen facing the chair.",
+        "preferences": {
+          "tablet_pose": "stand_upright_facing_chair"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Lay the tablet flat in the centre of the desk with the screen facing up.",
+        "preferences": {
+          "tablet_pose": "flat_centre_screen_up"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tablet_stand/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tablet_stand/config/personas.json"
+  },
+  {
+    "id": 54,
+    "folder": "speaker_facing",
+    "title": "Personalized Speaker Placement",
+    "instruction": "Put the speaker on the shelf.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the speaker on the left half of the shelf with its front facing the sofa.",
+        "preferences": {
+          "shelf_side": "left",
+          "facing": "sofa"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the speaker on the right half of the shelf with its front facing the desk.",
+        "preferences": {
+          "shelf_side": "right",
+          "facing": "desk"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/speaker_facing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/speaker_facing/config/personas.json"
+  },
+  {
+    "id": 55,
+    "folder": "magazine_placement",
+    "title": "Personalized Magazine Placement",
+    "instruction": "Put the magazine away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Lay the magazine flat on top of the magazine pile.",
+        "preferences": {
+          "magazine_storage": "top_of_pile"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stand the magazine upright in the magazine rack.",
+        "preferences": {
+          "magazine_storage": "rack"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/magazine_placement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/magazine_placement/config/personas.json"
+  },
+  {
+    "id": 56,
+    "folder": "laptop_lid",
+    "title": "Personalized Laptop Placement",
+    "instruction": "Put my laptop on the desk.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Place the laptop in the centre of the desk with the lid closed.",
+        "preferences": {
+          "laptop_lid": "closed",
+          "laptop_location": "desk_centre"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Place the laptop in the centre of the desk, open the lid to about 110 degrees, with the keyboard and screen facing the chair.",
+        "preferences": {
+          "laptop_lid": "open_110_deg",
+          "laptop_location": "desk_centre",
+          "screen_faces": "chair"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laptop_lid/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laptop_lid/config/personas.json"
+  },
+  {
+    "id": 57,
+    "folder": "plant_arrangement",
+    "title": "Personalized Plant Arrangement",
+    "instruction": "Arrange my plants.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the cactus on the windowsill, the fern on the plant stand, and the watering can on the windowsill to the left of the cactus.",
+        "preferences": {
+          "cactus": "windowsill",
+          "fern": "plant_stand",
+          "watering_can": "windowsill_left_of_cactus"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the cactus on the plant stand, the fern on the windowsill, and the watering can on the low stool beside the plant stand.",
+        "preferences": {
+          "cactus": "plant_stand",
+          "fern": "windowsill",
+          "watering_can": "low_stool"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/config/personas.json"
+  },
+  {
+    "id": 58,
+    "folder": "bathroom_counter",
+    "title": "Personalized Bathroom Counter",
+    "instruction": "Tidy my bathroom counter.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Stand the toothbrush in the left cup, lay the toothpaste on the counter to the left of the left cup, put the lotion inside the mirror cabinet and close the door.",
+        "preferences": {
+          "toothbrush": "left_cup",
+          "toothpaste": "left_of_left_cup",
+          "lotion": "inside_cabinet",
+          "cabinet_door": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stand the toothbrush in the right cup, put the toothpaste inside the mirror cabinet and close the door, and stand the lotion on the counter to the right of the right cup.",
+        "preferences": {
+          "toothbrush": "right_cup",
+          "toothpaste": "inside_cabinet",
+          "lotion": "right_of_right_cup",
+          "cabinet_door": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bathroom_counter/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bathroom_counter/config/personas.json"
+  },
+  {
+    "id": 59,
+    "folder": "mail_sorting",
+    "title": "Personalized Mail Sorting",
+    "instruction": "Sort my mail.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put both letters in the letter tray, lay the magazine flat on the right end of the console table, and put the parcel in the wall cubby.",
+        "preferences": {
+          "letters": "letter_tray",
+          "magazine": "flat_at_right_end",
+          "parcel": "cubby"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stack both letters in the letter tray with the magazine on top of them, and leave the parcel on the right end of the table.",
+        "preferences": {
+          "letters": "letter_tray",
+          "magazine": "on_top_of_letters_in_tray",
+          "parcel": "right_end_of_table"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/config/personas.json"
+  },
+  {
+    "id": 60,
+    "folder": "bottle_storage",
+    "title": "Personalized Bottle Storage",
+    "instruction": "Store the bottles.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Lay the wine bottle in the wine rack, stand the olive oil on the upper shelf, and stand the soda on the lower shelf.",
+        "preferences": {
+          "wine": "rack_lying",
+          "olive_oil": "upper_shelf_upright",
+          "soda": "lower_shelf_upright"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stand the wine bottle on the upper shelf, stand the olive oil on the lower shelf, and lay the soda bottle in the wine rack.",
+        "preferences": {
+          "wine": "upper_shelf_upright",
+          "olive_oil": "lower_shelf_upright",
+          "soda": "rack_lying"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bottle_storage/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bottle_storage/config/personas.json"
+  },
+  {
+    "id": 61,
+    "folder": "charging_station",
+    "title": "Personalized Charging Station",
+    "instruction": "Charge my devices.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the phone screen-up on the wireless charging pad, the earbuds case on the desk to the left of the pad, and the watch on the watch dock. Leave the desk drawer open.",
+        "preferences": {
+          "phone": "charging_pad_face_up",
+          "earbuds_case": "left_of_pad",
+          "watch": "watch_dock",
+          "desk_drawer": "open"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the phone screen-down in the desk drawer and close the drawer, the earbuds case on the wireless charging pad, and the watch on the desk to the right of the pad.",
+        "preferences": {
+          "phone": "drawer_face_down_closed",
+          "earbuds_case": "charging_pad",
+          "watch": "right_of_pad"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/charging_station/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/charging_station/config/personas.json"
+  },
+  {
+    "id": 62,
+    "folder": "entryway_tidy",
+    "title": "Personalized Entryway Tidying",
+    "instruction": "Tidy the entryway.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Stand the umbrella in the umbrella stand, put the hat on the upper shelf, and put the handbag on the bench.",
+        "preferences": {
+          "umbrella": "umbrella_stand",
+          "hat": "upper_shelf",
+          "handbag": "bench"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Lay the umbrella on the bench, put the hat in the wall cubby, and put the handbag on the upper shelf.",
+        "preferences": {
+          "umbrella": "bench_lying",
+          "hat": "cubby",
+          "handbag": "upper_shelf"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/entryway_tidy/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/entryway_tidy/config/personas.json"
+  },
+  {
+    "id": 63,
+    "folder": "dish_putaway",
+    "title": "Personalized Dish Storage",
+    "instruction": "Put away the dishes.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the plate in the upper cabinet with the bowl stacked on top of it and close the cabinet door; put the cup on the cup rack; leave the drawer open.",
+        "preferences": {
+          "plate": "upper_cabinet",
+          "bowl": "stacked_on_plate",
+          "cup": "cup_rack",
+          "cabinet_door": "closed",
+          "drawer": "open"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the plate in the drawer with the cup beside it and close the drawer; put the bowl in the upper cabinet and close the cabinet door.",
+        "preferences": {
+          "plate": "drawer",
+          "bowl": "upper_cabinet",
+          "cup": "drawer_beside_plate",
+          "cabinet_door": "closed",
+          "drawer": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_putaway/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_putaway/config/personas.json"
+  },
+  {
+    "id": 64,
+    "folder": "cleaning_supplies",
+    "title": "Personalized Cleaning Supplies Storage",
+    "instruction": "Put away the cleaning supplies.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the spray bottle and the brush in the cabinet under the sink and close the door; put the sponge in the caddy and leave the caddy at the right end of the counter.",
+        "preferences": {
+          "spray_bottle": "under_sink_cabinet",
+          "brush": "under_sink_cabinet",
+          "sponge": "caddy",
+          "caddy": "counter_right",
+          "cabinet_door": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the spray bottle, the brush and the sponge all in the caddy, move the caddy to the left end of the counter, and close the cabinet door.",
+        "preferences": {
+          "spray_bottle": "caddy",
+          "brush": "caddy",
+          "sponge": "caddy",
+          "caddy": "counter_left",
+          "cabinet_door": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cleaning_supplies/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cleaning_supplies/config/personas.json"
+  },
+  {
+    "id": 65,
+    "folder": "reading_corner",
+    "title": "Personalized Reading Corner",
+    "instruction": "Set up my reading corner.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the book on the side table with the glasses case on top of it, turn the reading lamp to full brightness (knob at 270 degrees), and leave the side-table drawer open.",
+        "preferences": {
+          "book": "side_table",
+          "glasses_case": "on_top_of_book",
+          "lamp_brightness_percent": 100,
+          "side_drawer": "open"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the book on the seat of the armchair, put the glasses case in the side-table drawer and close the drawer, and turn the reading lamp to 30% brightness (knob at 81 degrees).",
+        "preferences": {
+          "book": "armchair_seat",
+          "glasses_case": "side_drawer",
+          "lamp_brightness_percent": 30,
+          "side_drawer": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/reading_corner/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/reading_corner/config/personas.json"
+  },
+  {
+    "id": 66,
+    "folder": "tabletop_transfer",
+    "title": "Tabletop Transfer Route",
+    "instruction": "Move this object to the marked area.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Transport the object around the left side of the obstacle.",
+        "preferences": {
+          "route": "left"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Transport the object around the right side of the obstacle.",
+        "preferences": {
+          "route": "right"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tabletop_transfer/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tabletop_transfer/config/personas.json"
+  },
+  {
+    "id": 67,
+    "folder": "transport_orientation",
+    "title": "Object Transport Orientation",
+    "instruction": "Move this container to the target area.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Keep the container label facing toward me during most of the transport.",
+        "preferences": {
+          "label": "toward_user"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Keep the label facing away from me, toward the robot, during most of the transport.",
+        "preferences": {
+          "label": "away_from_user"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/transport_orientation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/transport_orientation/config/personas.json"
+  },
+  {
+    "id": 68,
+    "folder": "lifted_transfer",
+    "title": "Lifted vs. Pushed Transfer",
+    "instruction": "Move this container to the target area.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Lift the container fully off the table and carry it to the target.",
+        "preferences": {
+          "strategy": "carry"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Keep the container supported by the table and slide or push it to the target.",
+        "preferences": {
+          "strategy": "slide"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/config/personas.json"
+  },
+  {
+    "id": 69,
+    "folder": "cup_grasp",
+    "title": "Cup Grasp Region",
+    "instruction": "Put this container on the marked area.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Manipulation",
+    "tags": [
+      "Manipulation"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Grasp the handle and carry the container to the target.",
+        "preferences": {
+          "grasp_region": "handle"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Grasp the main body and carry the container to the target.",
+        "preferences": {
+          "grasp_region": "body"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cup_grasp/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cup_grasp/config/personas.json"
+  },
+  {
+    "id": 70,
+    "folder": "jar_sorting",
+    "title": "Personalized Jar Sorting",
+    "instruction": "Sort my jars into the two trays.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I sort by colour: stand the red jars upright in the left tray and the green jars upright in the right tray.",
+        "preferences": {
+          "color_vision": "typical",
+          "sorting_rule": "by_color",
+          "left_tray": "red",
+          "right_tray": "green"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am red-green colour-blind, so I sort by shape: stand the round jars upright in the left tray and the square jars upright in the right tray.",
+        "preferences": {
+          "color_vision": "red_green_colour_blind",
+          "sorting_rule": "by_shape",
+          "left_tray": "round",
+          "right_tray": "square"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/config/personas.json"
+  },
+  {
+    "id": 71,
+    "folder": "waste_sorting",
+    "title": "Personalized Waste Sorting",
+    "instruction": "Throw these away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I grew up with German Mülltrennung and I keep it up in this kitchen: the green bin on the left is only for glass, so the bottle goes there; the blue bin in the middle takes paper and clean packaging, so the newspaper and the rinsed can go there; the grey bin on the right is Restmüll, the residual waste. I have no Biotonne (organics bin) here, so the banana peel goes in the Restmüll, and so does the greasy takeout box, because food-soiled cardboard does not belong in paper recycling. Close all three lids when you are done; I do not like bins standing open.",
+        "preferences": {
+          "waste_system": "german_muelltrennung",
+          "left_bin": "glass_only",
+          "middle_bin": "paper_and_clean_packaging",
+          "right_bin": "residual_waste_incl_food_scraps_and_soiled_cardboard",
+          "glass_bottle": "left_bin",
+          "newspaper": "middle_bin",
+          "soda_can": "middle_bin",
+          "takeout_box": "right_bin",
+          "banana_peel": "right_bin",
+          "left_lid": "closed",
+          "middle_lid": "closed",
+          "right_lid": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "We have single-stream recycling here in the US, so glass, cans, paper and cardboard all go together: put the bottle, the can, the newspaper and the takeout box in the blue bin in the middle. Our hauler takes greasy cardboard too, so I never bother separating it. Only the banana peel is trash; that goes in the grey bin on the right, and close that lid so it does not smell. Leave the recycling lid open, I keep tossing things in all day, and leave the green bin on the left alone, I do not use it.",
+        "preferences": {
+          "waste_system": "us_single_stream",
+          "left_bin": "not_used",
+          "middle_bin": "single_stream_recycling",
+          "right_bin": "trash",
+          "glass_bottle": "middle_bin",
+          "soda_can": "middle_bin",
+          "newspaper": "middle_bin",
+          "takeout_box": "middle_bin",
+          "banana_peel": "right_bin",
+          "left_lid": "leave_open",
+          "middle_lid": "leave_open",
+          "right_lid": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/waste_sorting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/waste_sorting/config/personas.json"
+  },
+  {
+    "id": 72,
+    "folder": "laundry_sorting",
+    "title": "Personalized Laundry Sorting",
+    "instruction": "Sort the laundry.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I've ruined too many white shirts with a stray red sock, so I sort by colour so nothing bleeds in the wash: whites go in the left basket, darks in the middle basket and colours in the right basket. Close the lid on the right basket when you're done; that's the load that waits longest and I'd rather not look at a heap of colours all week.",
+        "preferences": {
+          "household": "single washer, worried about dye bleeding",
+          "sorting_rule": "by_color_group",
+          "left_basket": "whites (white_tee, silk_blouse)",
+          "middle_basket": "darks (dark_jeans, navy_hoodie)",
+          "right_basket": "colors (red_sock_pair, bath_towel)",
+          "hamper_lid": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Alex and I each run our own wash, so we sort by whose clothes they are, not by colour: Alex's things go in the left basket, mine (Sam's) in the middle basket, and towels get their own basket on the right. Leave the lid on the right basket open; the towels are still damp and need to air out.",
+        "preferences": {
+          "household": "two people (Alex and Sam) who each wash their own load",
+          "sorting_rule": "by_owner_with_towels_separate",
+          "left_basket": "Alex's clothes (white_tee, red_sock_pair, navy_hoodie)",
+          "middle_basket": "Sam's clothes (dark_jeans, silk_blouse)",
+          "right_basket": "towels (bath_towel)",
+          "hamper_lid": "open"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_sorting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_sorting/config/personas.json"
+  },
+  {
+    "id": 73,
+    "folder": "child_pet_safety",
+    "title": "Personalized Child and Pet Safety Storage",
+    "instruction": "Put these away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "We have a toddler at home who climbs and opens everything, so anything dangerous or sweet goes up high behind a closed door: stand the pill bottle and the spray cleaner in the upper cabinet, lay the knife and the chocolate bar flat next to them, and close the cabinet door. The dog food can live low down in the counter drawer: lay the bag flat so the drawer shuts, and close the drawer so she can't dig into it.",
+        "preferences": {
+          "household": "toddler_at_home",
+          "pill_bottle": "upper_cabinet",
+          "spray_cleaner": "upper_cabinet",
+          "kitchen_knife": "upper_cabinet",
+          "chocolate_bar": "upper_cabinet",
+          "dog_food_bag": "counter_drawer_lying_flat",
+          "cabinet_door": "closed",
+          "drawer": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "We have a dog and no kids. Chocolate and pills are poison for him, so the chocolate bar and the pill bottle (standing upright) go up in the upper cabinet with the door closed. The knife I keep handy: lay it flat in the countertop basket with the blade pointing away from me. The spray cleaner and his bag of food go in the low counter drawer, both lying down flat so they sit below the drawer's rim, and leave that drawer open: I feed him out of it every evening.",
+        "preferences": {
+          "household": "dog_at_home_no_kids",
+          "pill_bottle": "upper_cabinet",
+          "chocolate_bar": "upper_cabinet",
+          "kitchen_knife": "countertop_basket_blade_pointing_away",
+          "spray_cleaner": "counter_drawer_lying_on_its_side",
+          "dog_food_bag": "counter_drawer_lying_flat",
+          "cabinet_door": "closed",
+          "drawer": "open"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/child_pet_safety/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/child_pet_safety/config/personas.json"
+  },
+  {
+    "id": 74,
+    "folder": "monitor_height",
+    "title": "Personalized Monitor Height",
+    "instruction": "Set up my monitor.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I wear progressive (bifocal-style) lenses and read the screen through the lower part of them, so keep it low: stand the monitor directly on the desk in the centre, upright with the screen facing my chair, and park the riser in the back-left corner of the desk.",
+        "preferences": {
+          "eyewear": "progressive_lenses",
+          "reads_screen_through": "lower_part_of_lens",
+          "screen_height": "low",
+          "monitor": "directly_on_desk_center",
+          "riser": "desk_back_left_corner",
+          "monitor_pose": "upright",
+          "screen_faces": "chair"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I wear single-vision glasses and have a stiff neck, so I want the screen raised: put the riser in the centre of the desk and stand the monitor on top of it, upright with the screen facing my chair.",
+        "preferences": {
+          "eyewear": "single_vision_glasses",
+          "neck": "stiff",
+          "screen_height": "raised",
+          "riser": "desk_center",
+          "monitor": "on_top_of_riser",
+          "monitor_pose": "upright",
+          "screen_faces": "chair"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_height/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_height/config/personas.json"
+  },
+  {
+    "id": 75,
+    "folder": "lunch_packing",
+    "title": "Personalized Lunch Packing",
+    "instruction": "Pack my lunch.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I have a severe peanut and tree-nut allergy, so the granola bar (it has peanuts and almonds) must not go in my lunch: put it in the pantry basket. I eat everything else, so pack the apple, the ham and cheese sandwich, the hummus wrap and the yogurt cup in the lunch box, then close the lunch box lid.",
+        "preferences": {
+          "dietary_restriction": "severe_peanut_and_tree_nut_allergy",
+          "diet": "eats_everything_else",
+          "apple": "lunch_box",
+          "ham_sandwich": "lunch_box",
+          "hummus_wrap": "lunch_box",
+          "yogurt_cup": "lunch_box",
+          "nut_bar": "pantry_basket",
+          "lunchbox_lid": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am vegan, so no meat and no dairy in my lunch: pack the apple, the granola bar and the hummus wrap in the lunch box, put the ham and cheese sandwich and the yogurt cup in the pantry basket, and close the lunch box lid.",
+        "preferences": {
+          "dietary_restriction": "vegan",
+          "diet": "no_meat_no_dairy",
+          "apple": "lunch_box",
+          "nut_bar": "lunch_box",
+          "hummus_wrap": "lunch_box",
+          "ham_sandwich": "pantry_basket",
+          "yogurt_cup": "pantry_basket",
+          "lunchbox_lid": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lunch_packing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lunch_packing/config/personas.json"
+  },
+  {
+    "id": 76,
+    "folder": "dish_separation",
+    "title": "Personalized Dish Separation",
+    "instruction": "Put away the plates.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I keep a kosher kitchen, so meat dishes and dairy dishes never share a shelf. Stack the two red-rimmed plates (our meat set) in the left compartment of the upper cabinet and the two blue-rimmed plates (our dairy set) in the right compartment, lying flat, then close both cabinet doors.",
+        "preferences": {
+          "kitchen": "kosher_meat_and_dairy_dishes_kept_apart",
+          "red_plate_1": "left_compartment",
+          "red_plate_2": "left_compartment_stacked_with_the_other_red_plate",
+          "blue_plate_1": "right_compartment",
+          "blue_plate_2": "right_compartment_stacked_with_the_other_blue_plate",
+          "left_door": "closed",
+          "right_door": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "The rim colours don't mean anything to us; all four plates are one everyday set. Put all four plates in a single stack lying flat in the left compartment of the upper cabinet and close the left door. The right compartment is for glasses: leave it empty and leave its door open as you found it.",
+        "preferences": {
+          "kitchen": "one_set_of_everyday_dishes_no_separation",
+          "red_plate_1": "left_compartment",
+          "red_plate_2": "left_compartment_same_stack",
+          "blue_plate_1": "left_compartment_same_stack",
+          "blue_plate_2": "left_compartment_same_stack",
+          "left_door": "closed",
+          "right_door": "open_as_found",
+          "right_compartment": "empty"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_separation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_separation/config/personas.json"
+  },
+  {
+    "id": 77,
+    "folder": "cutting_station",
+    "title": "Personalized Cutting Station",
+    "instruction": "Set up my cutting board.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I'm left-handed, so I hold the knife in my left hand. Put the cutting board flat at the front of the counter, centred in front of me. Lay the chef's knife flat on the counter to the left of the board with the blade pointing away from me, and put the prep bowl on the counter to the right of the board, where my free right hand scoops the chopped food into it. Put the folded towel flat at the back of the counter, behind the board.",
+        "preferences": {
+          "handedness": "left",
+          "cutting_board": "board_zone_flat",
+          "chef_knife": "left_zone_lying_flat_blade_pointing_away",
+          "prep_bowl": "right_zone_upright",
+          "kitchen_towel": "back_center_folded_flat"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I'm right-handed, so I hold the knife in my right hand. Put the cutting board flat at the front of the counter, centred in front of me. Lay the chef's knife flat on the counter to the right of the board with the blade pointing away from me, and put the prep bowl on the counter to the left of the board, where my free left hand scoops the chopped food into it. Put the folded towel flat at the back of the counter, behind the board.",
+        "preferences": {
+          "handedness": "right",
+          "cutting_board": "board_zone_flat",
+          "chef_knife": "right_zone_lying_flat_blade_pointing_away",
+          "prep_bowl": "left_zone_upright",
+          "kitchen_towel": "back_center_folded_flat"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cutting_station/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cutting_station/config/personas.json"
+  },
+  {
+    "id": 78,
+    "folder": "pantry_loading",
+    "title": "Personalized Pantry Loading",
+    "instruction": "Put away the groceries.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I walk with a walker and can't bend below my waist or lift anything above my shoulders, so put all four groceries on the high shelf and nothing on the low shelf: the heavy water pack and rice bag at the front edge of the high shelf, the cereal and crackers anywhere on the high shelf, everything upright.",
+        "preferences": {
+          "mobility": "walks with a walker; cannot bend below the waist or lift above the shoulder",
+          "storage_rule": "everything within waist-to-shoulder reach; heavy items where they can be slid off",
+          "water_pack": "shelf_high_front",
+          "rice_bag": "shelf_high_front",
+          "cereal_box": "shelf_high",
+          "cracker_box": "shelf_high",
+          "shelf_low": "empty",
+          "orientation": "upright"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I'm tall and have no trouble bending, and I store by weight so the rack stays stable: put the heavy water pack and rice bag on the low shelf and the cereal and crackers on the high shelf, everything upright.",
+        "preferences": {
+          "mobility": "tall; no restriction",
+          "storage_rule": "by weight for stability: heavy items low, light items high",
+          "water_pack": "shelf_low",
+          "rice_bag": "shelf_low",
+          "cereal_box": "shelf_high",
+          "cracker_box": "shelf_high",
+          "orientation": "upright"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pantry_loading/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pantry_loading/config/personas.json"
+  },
+  {
+    "id": 79,
+    "folder": "tea_service",
+    "title": "Personalized Tea Service",
+    "instruction": "Set up the tea tray.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I drink gongfu-style Chinese tea: put the teapot at the back of the tea tray with the two small handleless cups side by side in front of it, and leave the mug, the milk jug and the sugar bowl on the back shelf.",
+        "preferences": {
+          "tea_style": "gongfu_chinese_tea",
+          "teapot": "tray_back",
+          "small_cup_1": "tray_front_side_by_side",
+          "small_cup_2": "tray_front_side_by_side",
+          "mug": "back_shelf",
+          "milk_jug": "back_shelf",
+          "sugar_bowl": "back_shelf"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I drink English tea with milk and sugar: put the teapot, the mug, the milk jug and the sugar bowl on the tea tray, and leave the two small cups on the back shelf.",
+        "preferences": {
+          "tea_style": "english_tea_with_milk_and_sugar",
+          "teapot": "tray",
+          "mug": "tray",
+          "milk_jug": "tray",
+          "sugar_bowl": "tray",
+          "small_cup_1": "back_shelf",
+          "small_cup_2": "back_shelf"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tea_service/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tea_service/config/personas.json"
+  },
+  {
+    "id": 80,
+    "folder": "scent_shelf",
+    "title": "Personalized Bathroom Shelf",
+    "instruction": "Tidy the shelf.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I have asthma and fragrances set it off, so nothing scented stays out in the room: stand the scented candle, the air freshener and the scented hand lotion upright on the shelf inside the mirror cabinet and close the cabinet door. The fragrance-free soap bar is the only thing that stays out: lay it flat on the left side of the counter, next to the sink.",
+        "preferences": {
+          "fragrance_sensitivity": "asthma_triggered_by_scents",
+          "scented_candle": "cabinet_shelf_upright",
+          "air_freshener": "cabinet_shelf_upright",
+          "hand_lotion": "cabinet_shelf_upright",
+          "soap_bar": "counter_left_lying_flat",
+          "cabinet_door": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I like my bathroom to smell nice, so the scented candle and the scented hand lotion stay out on display: stand them upright on the right side of the counter. The air freshener spray is only for now and then, so stand it upright on the shelf inside the mirror cabinet and close the cabinet door. Lay the soap bar flat on the left side of the counter, next to the sink.",
+        "preferences": {
+          "fragrance_sensitivity": "none_likes_the_room_to_smell_nice",
+          "scented_candle": "counter_right_upright",
+          "air_freshener": "cabinet_shelf_upright",
+          "hand_lotion": "counter_right_upright",
+          "soap_bar": "counter_left_lying_flat",
+          "cabinet_door": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/scent_shelf/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/scent_shelf/config/personas.json"
+  },
+  {
+    "id": 81,
+    "folder": "figurine_display",
+    "title": "Personalized Shelf Display",
+    "instruction": "Arrange my figurines.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I collect these figurines and I want the whole set on show, in story order from left to right along the display shelf at the back of the sideboard: the dragon in slot 1, the knight in slot 2, the wizard in slot 3 and the castle in slot 4, all standing upright. Nothing goes in the storage box; close its lid.",
+        "preferences": {
+          "display_style": "collector_show_the_whole_set",
+          "order_left_to_right": [
+            "dragon",
+            "knight",
+            "wizard",
+            "castle"
+          ],
+          "dragon": "slot_1",
+          "knight": "slot_2",
+          "wizard": "slot_3",
+          "castle": "slot_4",
+          "figurines_upright": "all",
+          "storage_box": "empty",
+          "box_lid": "closed"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I like a bare, uncluttered sideboard with just one piece on show: stand my favourite, the dragon, upright on its own in the centre of the display shelf, and put the knight, the wizard and the castle away inside the storage box, then close the lid.",
+        "preferences": {
+          "display_style": "minimalist_one_piece_on_show",
+          "dragon": "slot_center",
+          "knight": "storage_box",
+          "wizard": "storage_box",
+          "castle": "storage_box",
+          "figurines_upright": "dragon",
+          "box_lid": "closed"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/figurine_display/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/figurine_display/config/personas.json"
+  },
+  {
+    "id": 82,
+    "folder": "masonry_workbench",
+    "title": "Personalized Masonry Workbench Setup",
+    "instruction": "Set up my workbench.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Place both tiles flat on the left, the trowel on the right, and the material box at the back.",
+        "preferences": "Place both tiles flat on the left, the trowel on the right, and the material box at the back."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Place both tiles flat on the right, the trowel on the left, and the material box at the front.",
+        "preferences": "Place both tiles flat on the right, the trowel on the left, and the material box at the front."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/masonry_workbench/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/masonry_workbench/config/personas.json"
+  },
+  {
+    "id": 83,
+    "folder": "marking_tool_preparation",
+    "title": "Personalized Carpenter Marking Tool Preparation",
+    "instruction": "Prepare my marking tools.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the carpenter's pencil and straight ruler in the tray; leave the marker and square at their original positions.",
+        "preferences": "Put the carpenter's pencil and straight ruler in the tray; leave the marker and square at their original positions."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the marker and carpenter's square in the tray; leave the pencil and ruler at their original positions.",
+        "preferences": "Put the marker and carpenter's square in the tray; leave the pencil and ruler at their original positions."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/config/personas.json"
+  },
+  {
+    "id": 84,
+    "folder": "hardhat_selection",
+    "title": "Personalized Construction Worker Hardhat Selection",
+    "instruction": "Bring me my hardhat.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "My hardhat size is S: put the S hardhat in the pickup tray and leave L where it started.",
+        "preferences": "My hardhat size is S: put the S hardhat in the pickup tray and leave L where it started."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "My hardhat size is L: put the L hardhat in the pickup tray and leave S where it started.",
+        "preferences": "My hardhat size is L: put the L hardhat in the pickup tray and leave S where it started."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/config/personas.json"
+  },
+  {
+    "id": 85,
+    "folder": "auxiliary_table",
+    "title": "Personalized Woodworking Auxiliary Table Height",
+    "instruction": "Set the auxiliary table to my usual height.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Set my auxiliary table to the low 0.68 m preset and keep the wood block supported.",
+        "preferences": "Set my auxiliary table to the low 0.68 m preset and keep the wood block supported."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Set my auxiliary table to the high 1.04 m preset and keep the wood block supported.",
+        "preferences": "Set my auxiliary table to the high 1.04 m preset and keep the wood block supported."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/auxiliary_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/auxiliary_table/config/personas.json"
+  },
+  {
+    "id": 86,
+    "folder": "wrench_orientation",
+    "title": "Personalized Maintenance Wrench Orientation",
+    "instruction": "Put the wrench within my reach.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the wrench flat at the marked pickup point with its handle pointing left.",
+        "preferences": "Put the wrench flat at the marked pickup point with its handle pointing left."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the wrench flat at the same pickup point with its handle pointing right.",
+        "preferences": "Put the wrench flat at the same pickup point with its handle pointing right."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wrench_orientation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wrench_orientation/config/personas.json"
+  },
+  {
+    "id": 87,
+    "folder": "painter_speaker_volume",
+    "title": "Personalized Painter Speaker Volume",
+    "instruction": "Adjust the speaker for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "Painter A",
+        "description": "I prefer gentle music at a low listening volume of 30%.",
+        "preferences": {}
+      },
+      {
+        "id": "B",
+        "name": "Painter B",
+        "description": "I prefer heavy metal at a higher listening volume of 70%.",
+        "preferences": {}
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/config/personas.json"
+  },
+  {
+    "id": 88,
+    "folder": "table_clearing",
+    "title": "Personalized Table Clearing Order",
+    "instruction": "Clear the table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Move the steak knife and the glass to the dish tray first, then the plate and the fork (User A has a toddler who grabs anything near the table edge, so sharp and breakable things go first).",
+        "preferences": {
+          "final": "plate, steak knife, glass and fork in the dish tray",
+          "clear_first": [
+            "steak_knife",
+            "glass"
+          ],
+          "clear_after": [
+            "plate",
+            "fork"
+          ]
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Move the plate with the leftovers to the dish tray first, then the knife, the glass and the fork in any order (User B's dog jumps up for food as soon as people leave the table).",
+        "preferences": {
+          "final": "plate, steak knife, glass and fork in the dish tray",
+          "clear_first": [
+            "plate"
+          ],
+          "clear_after": [
+            "steak_knife",
+            "glass",
+            "fork"
+          ]
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/table_clearing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/table_clearing/config/personas.json"
+  },
+  {
+    "id": 89,
+    "folder": "presentation_kit_preparation",
+    "title": "Presentation Tool Kit",
+    "instruction": "Prepare my presentation kit.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the wireless slide remote and cue cards in the kit; leave the laser pointer and notebook in their source positions.",
+        "preferences": "Put the wireless slide remote and cue cards in the kit; leave the laser pointer and notebook in their source positions."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the laser pointer and notebook in the kit; leave the slide remote and cue cards in their source positions.",
+        "preferences": "Put the laser pointer and notebook in the kit; leave the slide remote and cue cards in their source positions."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/config/personas.json"
+  },
+  {
+    "id": 90,
+    "folder": "approach_side",
+    "title": "Personalized Approach Side",
+    "instruction": "Put my water bottle on the side table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Walk around to the front right of the chair so that the robot stays within User A's field of view (within 60° of the direction they face) whenever it is closer than 1 m, and set the bottle on the coaster from there (User A is hard of hearing and startles when the robot comes up unseen).",
+        "preferences": {
+          "water_bottle": "upright on the coaster on the side table",
+          "approach": "come around to the front right, in view whenever closer than 1 m"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stay behind User B's shoulder line the whole time and set the bottle on the coaster from behind on the right (User B loses focus whenever something moves in their field of view while they work).",
+        "preferences": {
+          "water_bottle": "upright on the coaster on the side table",
+          "approach": "stay behind the shoulder line the whole time, place from behind on the right"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/approach_side/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/approach_side/config/personas.json"
+  },
+  {
+    "id": 91,
+    "folder": "cabinet_closing",
+    "title": "Personalized Cabinet Closing",
+    "instruction": "Put the cereal away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Stand the cereal box on the cabinet shelf and close the door gently, at no more than 0.5 rad/s over the last 20° of its swing (User A's partner works nights and sleeps on the other side of the wall).",
+        "preferences": {
+          "cereal_box": "upright on the cabinet shelf",
+          "cabinet_door": "closed",
+          "door_closing": "gently, at most 0.5 rad/s over the last 20 degrees"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stand the cereal box on the cabinet shelf and close the door briskly, reaching the closed position at 1.0 rad/s or faster (User B wants chores finished quickly and does not mind the noise).",
+        "preferences": {
+          "cereal_box": "upright on the cabinet shelf",
+          "cabinet_door": "closed",
+          "door_closing": "briskly, at least 1.0 rad/s as it reaches the closed position"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/config/personas.json"
+  },
+  {
+    "id": 92,
+    "folder": "hallway_pickup",
+    "title": "Personalized Shared-Hallway Pickup",
+    "instruction": "Put my things away.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the car key fob and the sunglasses case in the left basket and leave the other four items where they are (User A drives to work; the left basket is theirs).",
+        "preferences": {
+          "my_items": [
+            "key_fob",
+            "sunglasses_case"
+          ],
+          "my_basket": "left_basket",
+          "others_items": "leave where they are"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the earbuds case and the running cap in the middle basket and leave the other four items where they are (User B runs every morning; the middle basket is theirs).",
+        "preferences": {
+          "my_items": [
+            "earbuds_case",
+            "running_cap"
+          ],
+          "my_basket": "middle_basket",
+          "others_items": "leave where they are"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Put the paperback and the reading-glasses case in the right basket and leave the other four items where they are (User C is reading for a book club; the right basket is theirs).",
+        "preferences": {
+          "my_items": [
+            "paperback",
+            "reading_glasses_case"
+          ],
+          "my_basket": "right_basket",
+          "others_items": "leave where they are"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hallway_pickup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hallway_pickup/config/personas.json"
+  },
+  {
+    "id": 93,
+    "folder": "stove_setup",
+    "title": "Personalized Stove Setup",
+    "instruction": "Put the pots on the stove.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the stock pot on the back-left burner and the saucepan on the back-right burner with its handle pointing toward the back wall (User A has a toddler who could grab a handle sticking out over the front edge).",
+        "preferences": {
+          "stock_pot": "back-left burner",
+          "saucepan": "back-right burner",
+          "saucepan_handle": "back"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the stock pot on the front-left burner and the saucepan on the front-right burner with its handle pointing right, parallel to the front edge (User B cooks from a wheelchair and cannot reach over a front pot to the back burners).",
+        "preferences": {
+          "stock_pot": "front-left burner",
+          "saucepan": "front-right burner",
+          "saucepan_handle": "right"
+        }
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Put the saucepan on the front-left burner with its handle pointing left, parallel to the front edge, and the stock pot on the back-right burner (User C is left-handed and lifts and pours the saucepan with the left hand).",
+        "preferences": {
+          "stock_pot": "back-right burner",
+          "saucepan": "front-left burner",
+          "saucepan_handle": "left"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stove_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stove_setup/config/personas.json"
+  },
+  {
+    "id": 94,
+    "folder": "mug_storage",
+    "title": "Personalized Mug Storage",
+    "instruction": "Put the mugs away.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Stand all three mugs upright in one row along the front of the shelf, tallest on the left and shortest on the right, about 8 cm apart, with every handle pointing right (User A has low vision and finds each mug by touch, reaching for a handle in the same place every time).",
+        "preferences": {
+          "mugs": "upright in one row along the front of the shelf",
+          "order": [
+            "tall_mug",
+            "medium_mug",
+            "short_mug"
+          ],
+          "spacing": "about 8 cm apart",
+          "handles": "all pointing right"
+        }
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put all three mugs on the shelf upside down, rim down, in any order (User B lives on a dusty street with the windows open and does not want dust settling inside the mugs).",
+        "preferences": {
+          "mugs": "upside down (rim down) on the shelf",
+          "order": "any"
+        }
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_storage/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_storage/config/personas.json"
+  },
+  {
+    "id": 95,
+    "folder": "mirror_adjustment",
+    "title": "Adjustable Vanity Mirror",
+    "instruction": "Adjust the mirror for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Set the mirror low and tilt it upward for my seated grooming position.",
+        "preferences": "Set the mirror low and tilt it upward for my seated grooming position."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Raise the mirror and keep it vertical for my standing grooming position.",
+        "preferences": "Raise the mirror and keep it vertical for my standing grooming position."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mirror_adjustment/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mirror_adjustment/config/personas.json"
+  },
+  {
+    "id": 96,
+    "folder": "curtain_positioning",
+    "title": "Sliding Curtain Privacy",
+    "instruction": "Set the curtains for me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Open both curtain panels fully to admit daylight.",
+        "preferences": "Open both curtain panels fully to admit daylight."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Open the left panel but close the right panel for side privacy.",
+        "preferences": "Open the left panel but close the right panel for side privacy."
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Close both panels for privacy.",
+        "preferences": "Close both panels for privacy."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/curtain_positioning/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/curtain_positioning/config/personas.json"
+  },
+  {
+    "id": 97,
+    "folder": "pet_feeding_setup",
+    "title": "Pet Feeding Station",
+    "instruction": "Set up the feeding station.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the food bowl on the left and water on the right on the floor mat for my small pet.",
+        "preferences": "Put the food bowl on the left and water on the right on the floor mat for my small pet."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use the raised feeder for my larger pet, with water on the left and food on the right.",
+        "preferences": "Use the raised feeder for my larger pet, with water on the left and food on the right."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pet_feeding_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pet_feeding_setup/config/personas.json"
+  },
+  {
+    "id": 98,
+    "folder": "laundry_airer_setup",
+    "title": "Folding Drying Rack",
+    "instruction": "Prepare the drying rack.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Open only the right wing; keep the left wing folded upright to save space.",
+        "preferences": "Open only the right wing; keep the left wing folded upright to save space."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Open both wings horizontally for a large laundry load.",
+        "preferences": "Open both wings horizontally for a large laundry load."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_airer_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_airer_setup/config/personas.json"
+  },
+  {
+    "id": 99,
+    "folder": "serving_cart_setup",
+    "title": "Serving Cart Arrangement",
+    "instruction": "Prepare the serving cart.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Keep both drinks on the upper shelf for quick access and the snack on the lower shelf.",
+        "preferences": "Keep both drinks on the upper shelf for quick access and the snack on the lower shelf."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Keep the upper shelf clear as a serving workspace; put both drinks and the snack below.",
+        "preferences": "Keep the upper shelf clear as a serving workspace; put both drinks and the snack below."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_cart_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_cart_setup/config/personas.json"
+  },
+  {
+    "id": 100,
+    "folder": "monitor_adjustment",
+    "title": "Articulated Monitor Viewing",
+    "instruction": "Position the monitor for me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Face the screen directly toward my seated position with a slight upward tilt.",
+        "preferences": "Face the screen directly toward my seated position with a slight upward tilt."
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Turn the screen toward the collaborator on my right, keeping a slight upward tilt.",
+        "preferences": "Turn the screen toward the collaborator on my right, keeping a slight upward tilt."
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Face the screen forward and tilt it farther upward for my standing review.",
+        "preferences": "Face the screen forward and tilt it farther upward for my standing review."
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/config/personas.json"
+  }
+]

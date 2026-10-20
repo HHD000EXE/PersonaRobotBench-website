@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "sourceRepo": "HHD000EXE/PersonaRobotBench",
+  "dataSources": [
+    "scripts/task_registry.py",
+    "tasks/*/config/task.json",
+    "tasks/*/config/personas.json"
+  ],
+  "scope": {
+    "tasks": 100,
+    "personaCases": 217
+  },
+  "notes": [
+    "Category grouping and short example headings are editorial. Native task titles, instructions and preference_text are preserved.",
+    "All images are existing static initial-scene renders, optimized to WebP. No rollout videos are included.",
+    "Case labels A/B/C/D are local to each task; they do not describe one shared person across the benchmark."
+  ],
+  "assets": [
+    {
+      "asset": "assets/task-018.webp",
+      "source": "home_backgrounds/previews/4k/beverage_selection_initial.jpg",
+      "sourceSha256": "adef1a226fae45aa32913bbb80fbe3639ca392b92412cdb79183444653d8e92e",
+      "sourceDimensions": [
+        3840,
+        2160
+      ],
+      "cropPixels": [
+        614,
+        605,
+        3379,
+        2160
+      ],
+      "dimensions": [
+        960,
+        540
+      ],
+      "bytes": 44658,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/task-051.webp",
+      "source": "tasks/stamp_press_operation/previews/usd_initial.png",
+      "sourceSha256": "c80094e6124ca5bfb4d038612f6f3904043b879543f3780bad892575b8da3091",
+      "sourceDimensions": [
+        960,
+        640
+      ],
+      "cropPixels": [
+        0,
+        0,
+        960,
+        640
+      ],
+      "dimensions": [
+        960,
+        640
+      ],
+      "bytes": 18212,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/task-068.webp",
+      "source": "home_backgrounds/previews/4k/lifted_transfer_initial.jpg",
+      "sourceSha256": "4fc42135c33cb3a94cdceff690092ef75b809aa91d9c5b2f45c1f9cde2268782",
+      "sourceDimensions": [
+        3840,
+        2160
+      ],
+      "cropPixels": [
+        614,
+        605,
+        3379,
+        2160
+      ],
+      "dimensions": [
+        960,
+        540
+      ],
+      "bytes": 19034,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/task-087.webp",
+      "source": "tasks/painter_speaker_volume/previews/isaac_initial.png",
+      "sourceSha256": "6147dbac435f902f49cb2c88a2ef97460fb3da7f20b747aba262a2d216bfcf61",
+      "sourceDimensions": [
+        1280,
+        800
+      ],
+      "cropPixels": [
+        0,
+        0,
+        1280,
+        800
+      ],
+      "dimensions": [
+        960,
+        600
+      ],
+      "bytes": 16308,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/task-032.webp",
+      "source": "home_backgrounds/previews/4k/greeting_initial.jpg",
+      "sourceSha256": "5c46a7722e064a3a964a7c2e269906cdcb24b26ee154157a23e54ca680e72464",
+      "sourceDimensions": [
+        3840,
+        2160
+      ],
+      "cropPixels": [
+        614,
+        605,
+        3379,
+        2160
+      ],
+      "dimensions": [
+        960,
+        540
+      ],
+      "bytes": 40442,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/task-091.webp",
+      "source": "home_backgrounds/previews/4k/cabinet_closing_initial.jpg",
+      "sourceSha256": "1555c6f04f848da4c0a2339a75c2333bf30139990182a633a894d4486b09c28e",
+      "sourceDimensions": [
+        3840,
+        2160
+      ],
+      "cropPixels": [
+        614,
+        605,
+        3379,
+        2160
+      ],
+      "dimensions": [
+        960,
+        540
+      ],
+      "bytes": 38550,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/hero-scene.webp",
+      "source": "home_backgrounds/previews/4k/shared_desk_initial.jpg",
+      "sourceSha256": "74ded7cd52bb34cbdb890a5d87e0d0adc7360f57e56755e7758ec9458e585a81",
+      "sourceDimensions": [
+        3840,
+        2160
+      ],
+      "cropPixels": [
+        461,
+        324,
+        3686,
+        2138
+      ],
+      "dimensions": [
+        1600,
+        900
+      ],
+      "bytes": 121908,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/scene-bookshelf.webp",
+      "source": "home_backgrounds/previews/4k/book_organization_initial.jpg",
+      "sourceSha256": "5cec1bbda430ab329883215b1ef831567d9bc9c23bbae08058d73824d3f38986",
+      "sourceDimensions": [
+        3840,
+        2160
+      ],
+      "cropPixels": [
+        614,
+        605,
+        3379,
+        2160
+      ],
+      "dimensions": [
+        960,
+        540
+      ],
+      "bytes": 42136,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    },
+    {
+      "asset": "assets/scene-workbench.webp",
+      "source": "tasks/masonry_workbench/previews/isaac_initial.png",
+      "sourceSha256": "309f1b41786341c4c5edc2effb22bd6725cc3d4e75454ba6bced808132d4dc8f",
+      "sourceDimensions": [
+        1600,
+        1000
+      ],
+      "cropPixels": [
+        0,
+        0,
+        1600,
+        1000
+      ],
+      "dimensions": [
+        960,
+        600
+      ],
+      "bytes": 17448,
+      "role": "Static initial-scene render. Not a rollout or evidence of task completion."
+    }
+  ],
+  "fonts": [
+    {
+      "family": "Bricolage Grotesque",
+      "file": "assets/fonts/bricolage-grotesque-latin.woff2",
+      "bytes": 76888,
+      "sha256": "a79fdb52d4a5c76552452f69202add96e287401fff03d3e8c0e38b4dcb5a99cd",
+      "source": "https://fonts.gstatic.com/s/bricolagegrotesque/v9/3y9K6as8bTXq_nANBjzKo3IeZx8z6up5BeSl9D4dj_x9PpZBMlGIInE.woff2",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/OFL.txt",
+      "subset": "latin"
+    },
+    {
+      "family": "Inter",
+      "file": "assets/fonts/inter-latin.woff2",
+      "bytes": 48256,
+      "sha256": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "source": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt",
+      "subset": "latin"
+    },
+    {
+      "family": "JetBrains Mono",
+      "file": "assets/fonts/jetbrains-mono-latin.woff2",
+      "bytes": 31432,
+      "sha256": "83c005d49d8a6a50474c73a5a36ac0468076e9c4a29da7bdb14995d80560a5be",
+      "source": "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2",
+      "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt",
+      "subset": "latin"
+    }
+  ]
+}
