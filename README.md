@@ -8,8 +8,12 @@ The public research website for the **100-task / 217-persona** benchmark.
 - **Benchmark:** [HHD000EXE/PersonaRobotBench](https://github.com/HHD000EXE/PersonaRobotBench), currently private. Its code and linked technical guides require repository access.
 
 This public repository contains only the website, its task catalog, and selected
-static scene illustrations. Model results remain labelled pending. The simulation
-rollout slots are placeholders until real videos are supplied.
+static scene illustrations. Model results remain labelled pending. The homepage
+includes six complete recorded Astra episodes: A/B pairs for Tasks 18, 51 and 68.
+Videos play at their original simulation rate with inference waits omitted;
+they are selected demonstrations rather than a benchmark success-rate estimate.
+See [recording provenance](data/rollout-provenance.json) for source hashes,
+recording context and the historical Task 110 → Task 51 mapping.
 
 ## Local preview
 
@@ -42,23 +46,27 @@ Merges to this repository's `website` branch deploy `dist/` to GitHub Pages.
 Forks and pull requests run checks without publishing. The workflow uses GitHub's
 built-in token; contributors do not configure deployment credentials.
 
-## Add rollout videos
+## Add or replace rollout videos
 
-Edit `data/examples.json`. The homepage has matched A/B slots for Tasks 18, 51
+Edit `data/examples.json`. The homepage has matched A/B videos for Tasks 18, 51
 and 68. Set each persona's `video` field, for example:
 
 ~~~json
 {
   "id": "A",
   "description": "I prefer sugar-free sparkling water.",
-  "video": "assets/rollouts/task18-A.mp4"
+  "video": "assets/rollouts/task018-A.mp4",
+  "videoPoster": "assets/rollouts/task018-A.webp",
+  "videoDurationSeconds": 96.93333333333334
 }
 ~~~
 
 1. Add a browser-compatible MP4/WebM to `assets/rollouts/`, or use an HTTPS video URL.
 2. Set the corresponding `personas[].video`; supply both A and B for a paired comparison.
-3. Update `poster` and `posterAlt` if needed, and include captions for speech.
-4. Run the checks above and open a PR against `website`.
+3. Set `videoPoster` to a real frame from that recording, update its duration,
+   and include captions for speech. Keep the static scene poster separate.
+4. Update `data/rollout-provenance.json` with the recording source and hashes.
+5. Run the checks above and open a PR against `website`.
 
 Missing videos keep their placeholders. Playback uses `personas[].video`, not
 the reserved top-level `video` field. Host large recordings externally to keep
@@ -73,6 +81,7 @@ this source repository small.
 | `app.js` | Search, category filters, task details, tabs and video playback |
 | `data/tasks.json` | All 100 task descriptions and 217 task-local persona cases |
 | `data/examples.json` | Curated examples, posters and rollout video URLs |
+| `data/rollout-provenance.json` | Recording sources, hashes, timing and historical task numbering |
 | `data/asset-provenance.json` | Original image sources, hashes and font sources |
 | `assets/fonts/` | Self-hosted fonts with their OFL license notices |
 

@@ -21,7 +21,9 @@
         "preferences": {
           "beverage": "sparkling_water"
         },
-        "video": null
+        "video": "assets/rollouts/task018-A.mp4",
+        "videoPoster": "assets/rollouts/task018-A.webp",
+        "videoDurationSeconds": 96.93333333333334
       },
       {
         "id": "B",
@@ -30,7 +32,9 @@
         "preferences": {
           "beverage": "orange_juice"
         },
-        "video": null
+        "video": "assets/rollouts/task018-B.mp4",
+        "videoPoster": "assets/rollouts/task018-B.webp",
+        "videoDurationSeconds": 92.8
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/README.md",
@@ -41,8 +45,13 @@
     "poster": "assets/task-018.webp",
     "posterAlt": "Static initial simulation scene for beverage selection.",
     "video": null,
-    "videoLabel": "Simulation rollout · coming soon",
-    "imageKind": "static_initial_scene"
+    "videoLabel": "Astra simulation rollout · complete recorded episode",
+    "imageKind": "static_initial_scene",
+    "recording": {
+      "model": "gpt-6-astra",
+      "recordedTaskId": 18,
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 51,
@@ -74,7 +83,9 @@
             0.65
           ]
         },
-        "video": null
+        "video": "assets/rollouts/task051-A.mp4",
+        "videoPoster": "assets/rollouts/task051-A.webp",
+        "videoDurationSeconds": 18.0
       },
       {
         "id": "B",
@@ -91,7 +102,9 @@
             1.8
           ]
         },
-        "video": null
+        "video": "assets/rollouts/task051-B.mp4",
+        "videoPoster": "assets/rollouts/task051-B.webp",
+        "videoDurationSeconds": 18.0
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/README.md",
@@ -102,8 +115,13 @@
     "poster": "assets/task-051.webp",
     "posterAlt": "Static initial simulation scene for stamp press.",
     "video": null,
-    "videoLabel": "Simulation rollout · coming soon",
-    "imageKind": "static_initial_scene"
+    "videoLabel": "Astra simulation rollout · complete recorded episode",
+    "imageKind": "static_initial_scene",
+    "recording": {
+      "model": "gpt-6-astra",
+      "recordedTaskId": 110,
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 68,
@@ -127,7 +145,9 @@
         "preferences": {
           "strategy": "carry"
         },
-        "video": null
+        "video": "assets/rollouts/task068-A.mp4",
+        "videoPoster": "assets/rollouts/task068-A.webp",
+        "videoDurationSeconds": 66.8
       },
       {
         "id": "B",
@@ -136,7 +156,9 @@
         "preferences": {
           "strategy": "slide"
         },
-        "video": null
+        "video": "assets/rollouts/task068-B.mp4",
+        "videoPoster": "assets/rollouts/task068-B.webp",
+        "videoDurationSeconds": 61.266666666666666
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/README.md",
@@ -147,8 +169,13 @@
     "poster": "assets/task-068.webp",
     "posterAlt": "Static initial simulation scene for lifted transfer.",
     "video": null,
-    "videoLabel": "Simulation rollout · coming soon",
-    "imageKind": "static_initial_scene"
+    "videoLabel": "Astra simulation rollout · complete recorded episode",
+    "imageKind": "static_initial_scene",
+    "recording": {
+      "model": "gpt-6-astra",
+      "recordedTaskId": 68,
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 87,

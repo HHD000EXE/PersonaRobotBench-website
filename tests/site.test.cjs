@@ -9,7 +9,8 @@ const root = path.resolve(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const tasks = JSON.parse(fs.readFileSync(path.join(root, 'data/tasks.json'), 'utf8'));
-const examples = JSON.parse(fs.readFileSync(path.join(root, 'data/examples.json'), 'utf8'));
+const shippedExamples = JSON.parse(fs.readFileSync(path.join(root, 'data/examples.json'), 'utf8'));
+const examples = structuredClone(shippedExamples);
 // Placeholder behavior must remain testable after contributors add real videos.
 // These fixtures never modify the published examples file.
 for (const example of examples) {
@@ -19,6 +20,8 @@ for (const example of examples) {
 async function boot(options = {}) {
   const dom = new JSDOM(html, { url: options.url || 'https://benchmark.test/', runScripts: 'outside-only', pretendToBeVisual: true });
   const { window } = dom;
+  const pausedVideos = [];
+  window.HTMLMediaElement.prototype.pause = function () { pausedVideos.push(this); };
   const requests = [];
   window.fetch = async (url) => {
     requests.push(new URL(url, window.location.href).href);
@@ -26,7 +29,7 @@ async function boot(options = {}) {
   };
   window.eval(app);
   const ready = await window.prbReady;
-  return { dom, window, requests, document: window.document, ready, $: (selector) => window.document.querySelector(selector), $$: (selector) => [...window.document.querySelectorAll(selector)] };
+  return { dom, window, requests, pausedVideos, document: window.document, ready, $: (selector) => window.document.querySelector(selector), $$: (selector) => [...window.document.querySelectorAll(selector)] };
 }
 
 function input(context, value) {
@@ -173,6 +176,50 @@ test('unsafe video protocols never become source elements', async () => {
   }
 });
 
+test('shipped examples provide six complete paired recordings with distinct real-frame posters', async () => {
+  const ctx = await boot({ examples: shippedExamples });
+  let count = 0;
+  for (const taskId of [18, 51, 68]) {
+    ctx.$('[data-example="' + taskId + '"]').click();
+    const example = shippedExamples.find((item) => item.id === taskId);
+    const videos = ctx.$$('video');
+    assert.equal(videos.length, 2);
+    assert.equal(ctx.$$('.video-placeholder').length, 0);
+    for (const [index, video] of videos.entries()) {
+      const persona = example.personas[index];
+      assert.equal(video.querySelector('source').getAttribute('src'), 'https://benchmark.test/' + persona.video);
+      assert.equal(video.querySelector('source').getAttribute('type'), 'video/mp4');
+      assert.equal(video.poster, 'https://benchmark.test/' + persona.videoPoster);
+      assert.notEqual(persona.videoPoster, example.poster);
+      assert.equal(video.autoplay, false);
+      assert.equal(video.hasAttribute('autoplay'), false);
+      assert.ok(video.controls && video.playsInline);
+      assert.ok(fs.statSync(path.join(root, persona.video)).size > 0);
+      assert.ok(fs.statSync(path.join(root, persona.videoPoster)).size > 0);
+      assert.ok(persona.videoDurationSeconds > 0);
+      count++;
+    }
+    assert.ok(ctx.$('.video-status').textContent.includes('Paired videos available'));
+    assert.ok(ctx.$('#rollout-recording-note').textContent.includes('Astra'));
+    assert.ok(ctx.$('#rollout-recording-note').textContent.includes('1× simulation playback; inference waits omitted'));
+    assert.equal(ctx.$('#rollout-recording-note a').href, 'https://benchmark.test/data/rollout-provenance.json');
+    assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Recorded as Task 110; now Task 51.'), taskId === 51);
+  }
+  assert.equal(count, 6);
+  ctx.window.close();
+});
+
+test('switching rollout tabs pauses outgoing playback without autoplaying incoming videos', async () => {
+  const ctx = await boot({ examples: shippedExamples });
+  const outgoing = ctx.$$('video');
+  for (const video of outgoing) Object.defineProperty(video, 'paused', { value: false });
+  ctx.$('[data-example="51"]').click();
+  assert.deepEqual(ctx.pausedVideos, outgoing);
+  assert.ok(ctx.$$('video').every((video) => video.autoplay === false));
+  assert.ok(outgoing.every((video) => !video.isConnected));
+  ctx.window.close();
+});
+
 test('mobile menu toggles and navigation closes it', async () => {
   const ctx = await boot();
   ctx.$('.menu-toggle').click();
@@ -209,6 +256,7 @@ test('fetch failures leave repository links and clear fallback state', async () 
   assert.equal(ctx.ready, false);
   assert.ok(ctx.$('#task-count').textContent.includes('unavailable'));
   assert.equal(ctx.$('#task-grid a').href, 'https://github.com/HHD000EXE/PersonaRobotBench-website/blob/website/data/tasks.json');
-  assert.ok(ctx.$('#rollout-pair').textContent.includes('will be added'));
+  assert.ok(ctx.$('#rollout-pair').textContent.includes('Recorded rollouts are unavailable'));
+  assert.equal(ctx.$('#rollout-pair a').href, 'https://github.com/HHD000EXE/PersonaRobotBench-website/tree/website/assets/rollouts');
   ctx.window.close();
 });

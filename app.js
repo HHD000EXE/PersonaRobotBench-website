@@ -99,8 +99,11 @@
 
   function rolloutCase(example, persona, index) {
     const source = safeUrl(persona.video);
+    const poster = safeUrl(persona.videoPoster) ?? safeUrl(example.poster);
+    const extension = source ? new URL(source).pathname.toLowerCase().split(".").pop() : "";
+    const mime = ({ mp4: "video/mp4", webm: "video/webm" })[extension];
     const visual = source
-      ? '<video class="rollout-video" controls playsinline preload="metadata" poster="' + escape(example.poster) + '" aria-label="Task ' + example.id + " persona " + escape(persona.id) + ' simulation rollout"><source src="' + escape(source) + '">Your browser does not support embedded video. <a href="' + escape(source) + '">Download the rollout</a>.</video>'
+      ? '<video class="rollout-video" controls playsinline preload="metadata" poster="' + escape(poster ?? "") + '" aria-label="Task ' + example.id + " persona " + escape(persona.id) + ' simulation rollout"><source src="' + escape(source) + '"' + (mime ? ' type="' + mime + '"' : '') + '>Your browser does not support embedded video. <a href="' + escape(source) + '">Download the rollout</a>.</video>'
       : '<div class="video-placeholder" role="img" aria-label="Video placeholder for Task ' + example.id + " persona " + escape(persona.id) +
         '"><img src="' + escape(example.poster) + '" alt="" loading="lazy" width="960" height="600"><span class="video-placeholder-label">PERSONA ' + escape(persona.id) +
         ' / SIMULATION ROLLOUT</span><div class="placeholder-center"><span class="play-outline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 4 13 8-13 8Z"/></svg></span><strong>Rollout video</strong><p>COMING SOON</p></div><span class="placeholder-corner" aria-hidden="true">PRB / ' + padded(example.id) + " / " + escape(persona.id) + '</span></div>';
@@ -111,6 +114,9 @@
   function selectExample(id, focus = false) {
     const example = state.examples.find((item) => item.id === id);
     if (!example) return;
+    $$("video", $("#rollout-pair")).forEach((video) => {
+      if (!video.paused) video.pause();
+    });
     state.activeExample = id;
     $$(".rollout-tabs [role=tab]").forEach((tab) => {
       const selected = Number(tab.dataset.example) === id;
@@ -125,6 +131,24 @@
     $("#rollout-pair").innerHTML = personas.map((persona, index) => rolloutCase(example, persona, index)).join("");
     const ready = personas.filter((persona) => safeUrl(persona.video)).length;
     $(".video-status").innerHTML = "<i></i> " + (ready === 2 ? "Paired videos available" : ready === 1 ? "1 of 2 videos available" : "Videos coming soon");
+    const recordingNote = $("#rollout-recording-note");
+    if (recordingNote) {
+      recordingNote.textContent = "";
+      if (example.recording && ready) {
+        const label = example.recording.model === "gpt-6-astra" ? "Astra" : example.recording.model;
+        recordingNote.textContent = label + " · complete recorded episodes · 1× simulation playback; inference waits omitted.";
+        if (example.recording.recordedTaskId !== example.id) {
+          recordingNote.textContent += " Recorded as Task " + example.recording.recordedTaskId + "; now Task " + example.id + ".";
+        }
+        const provenance = safeUrl(example.recording.provenance);
+        if (provenance) {
+          const details = document.createElement("a");
+          details.href = provenance;
+          details.textContent = "Recording details";
+          recordingNote.append(" ", details);
+        }
+      }
+    }
   }
 
   function setMenu(open) {
@@ -231,7 +255,7 @@
     } catch {
       $("#task-count").textContent = "The interactive catalog is unavailable.";
       $("#task-grid").innerHTML = '<div class="empty-state"><p>Please serve this site over HTTP, or browse the public task catalog on GitHub.</p><a class="text-link" href="https://github.com/HHD000EXE/PersonaRobotBench-website/blob/website/data/tasks.json" target="_blank" rel="noopener noreferrer">Browse the public task catalog ↗</a></div>';
-      $("#rollout-pair").innerHTML = '<div class="empty-state">Simulation rollout videos will be added here.</div>';
+      $("#rollout-pair").innerHTML = '<div class="empty-state">Recorded rollouts are unavailable. <a href="https://github.com/HHD000EXE/PersonaRobotBench-website/tree/website/assets/rollouts" target="_blank" rel="noopener noreferrer">View or download the videos on GitHub.</a></div>';
       return false;
     }
   }

@@ -44,7 +44,7 @@ After a maintainer merges a PR to `website`, GitHub Actions publishes the site.
 - Keep evaluation figures tied to a documented model, controller, protocol and
   evidence. A demonstration alone is not a benchmark success rate.
 - Add rollout URLs in `data/examples.json` under `personas[].video`; see the
-  [README](README.md#add-rollout-videos) for a complete example.
+  [README](README.md#add-or-replace-rollout-videos) for a complete example.
 - Keep A/B recordings from the same task clearly identified. State whether a
   recording is complete or partial; static scene renders remain illustrations.
 - Retain font license files and asset provenance when changing bundled assets.

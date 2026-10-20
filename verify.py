@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from html.parser import HTMLParser
@@ -93,7 +94,81 @@ def verify(root: Path) -> dict[str, int | str]:
                 assert not parts.scheme or parts.scheme == "https", "Videos must use HTTPS or a relative URL"
                 if not parts.scheme and not parts.netloc:
                     local_reference(video, root)
-    return {"status": "passed", "tasks": len(tasks), "persona_cases": 217, "examples": len(examples), "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
+            if persona.get("videoPoster"):
+                local_reference(persona["videoPoster"], root)
+            if "videoDurationSeconds" in persona:
+                assert isinstance(persona["videoDurationSeconds"], (int, float)) and persona["videoDurationSeconds"] > 0, example["id"]
+        if example.get("recording"):
+            local_reference(example["recording"]["provenance"], root)
+
+    # The public site carries its own receipt manifest; no private repository or
+    # simulator is needed to verify that videos and recording posters are intact.
+    provenance_path = root / "data/rollout-provenance.json"
+    recordings = []
+    if provenance_path.exists():
+        provenance = json.loads(provenance_path.read_text())
+        assert provenance["schema"] == "personarobotbench.website-rollouts/1", "Unknown rollout provenance schema"
+        recordings = provenance["recordings"]
+        records = {(item["taskId"], item["persona"]): item for item in recordings}
+        assert len(records) == len(recordings), "Duplicate rollout receipt"
+        expected = {(task_id, persona) for task_id in (18, 51, 68) for persona in ("A", "B")}
+        assert expected <= records.keys(), "Missing featured A/B recording receipt"
+
+        def digest(file: Path) -> str:
+            checksum = hashlib.sha256()
+            with file.open("rb") as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                    checksum.update(chunk)
+            return checksum.hexdigest()
+
+        def fast_start(file: Path) -> bool:
+            """Inspect top-level ISO BMFF boxes, without decoding video frames."""
+            with file.open("rb") as stream:
+                size = file.stat().st_size
+                while stream.tell() + 8 <= size:
+                    start = stream.tell()
+                    header = stream.read(8)
+                    length, kind = int.from_bytes(header[:4], "big"), header[4:]
+                    header_size = 8
+                    if length == 1:
+                        extended = stream.read(8)
+                        assert len(extended) == 8, "Truncated MP4 box"
+                        length = int.from_bytes(extended, "big")
+                        header_size = 16
+                    elif length == 0:
+                        length = size - start
+                    assert header_size <= length <= size - start, "Invalid MP4 box"
+                    if kind in (b"moov", b"mdat"):
+                        return kind == b"moov"
+                    stream.seek(start + length)
+            return False
+
+        for example in examples:
+            if not example.get("recording"):
+                continue
+            for persona in example["personas"]:
+                if not persona.get("video"):
+                    continue
+                receipt = records[(example["id"], persona["id"])]
+                assert receipt["video"] == persona["video"], "Video URL differs from receipt"
+                assert receipt["poster"] == persona["videoPoster"], "Poster URL differs from receipt"
+                assert receipt["recordedTaskId"] == example["recording"]["recordedTaskId"], "Historical task ID differs"
+                assert abs(receipt["durationSeconds"] - persona["videoDurationSeconds"]) < 0.001, "Duration differs"
+                local_reference(receipt["video"], root)
+                local_reference(receipt["poster"], root)
+                video_parts = urlsplit(receipt["video"])
+                video_file = None
+                if not video_parts.scheme and not video_parts.netloc:
+                    video_file = root / unquote(video_parts.path).lstrip("/")
+                    assert video_file.stat().st_size == receipt["bytes"], "Video size differs"
+                    assert digest(video_file) == receipt["sha256"], "Video hash differs"
+                poster_parts = urlsplit(receipt["poster"])
+                if not poster_parts.scheme and not poster_parts.netloc:
+                    assert digest(root / unquote(poster_parts.path).lstrip("/")) == receipt["posterSha256"], "Poster hash differs"
+                assert receipt["durationSeconds"] > 0 and receipt["frames"] > 0, "Empty recording"
+                if receipt.get("fastStart") and video_file and video_file.suffix.lower() == ".mp4":
+                    assert fast_start(video_file), "Video does not have fast-start metadata"
+    return {"status": "passed", "tasks": len(tasks), "persona_cases": 217, "examples": len(examples), "recordings": len(recordings), "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 
 if __name__ == "__main__":
