@@ -116,9 +116,17 @@
   function renderRolloutTabs() {
     const recorded = state.examples.filter((example) => example.recording);
     if (!recorded.length) return;
-    $(".rollout-tabs").innerHTML = recorded.map((example, index) => '<button type="button" role="tab" id="example-tab-' + example.id +
-      '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-example="' + example.id + '">' + String(index + 1).padStart(2, "0") +
-      ' <span>' + escape(example.tabLabel ?? example.shortTitle) + '</span></button>').join("");
+    // A tile per recorded pair: a real frame from persona A's recording (or the
+    // initial scene), the pair's label and whether a model or a script acted.
+    $(".rollout-tabs").innerHTML = recorded.map((example, index) => {
+      const thumbnail = safeUrl(example.personas[0]?.videoPoster) ?? safeUrl(example.poster);
+      const kind = example.recording.kind === "model" ? "Model rollout" : "Scripted";
+      return '<button type="button" role="tab" id="example-tab-' + example.id + '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-example="' +
+        example.id + '">' + (thumbnail ? '<img src="' + escape(thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
+        '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span><small class="mono">' + String(index + 1).padStart(2, "0") + " · TASK " +
+        padded(example.id) + " · " + kind + '</small></button>';
+    }).join("");
+    $(".rollout-tabs").classList.add("rollout-tiles");
   }
 
   // One control drives both personas on a shared simulation clock: the shorter

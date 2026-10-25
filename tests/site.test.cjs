@@ -160,7 +160,8 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
   assert.equal(ctx.$$('.video-placeholder').length, 2);
   assert.equal(ctx.$$('video').length, 0);
   const tabs = ctx.$('.rollout-tabs');
-  for (const [key, expected] of [['ArrowRight', '51'], ['End', '87'], ['Home', '18'], ['ArrowLeft', '87']]) {
+  const last = String(examples.filter((item) => item.recording).at(-1).id);
+  for (const [key, expected] of [['ArrowRight', '51'], ['End', last], ['Home', '18'], ['ArrowLeft', last]]) {
     tabs.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key, bubbles: true }));
     const selected = ctx.$('[role="tab"][aria-selected="true"]');
     assert.equal(selected.dataset.example, expected);
@@ -225,7 +226,7 @@ test('shipped examples provide complete paired recordings with distinct real-fra
   const ctx = await boot({ examples: shippedExamples });
   let count = 0;
   const recorded = shippedExamples.filter((item) => item.recording).map((item) => item.id);
-  assert.deepEqual(recorded, [18, 51, 68, 87]);
+  assert.deepEqual(recorded.slice(0, 4), [18, 51, 68, 87]);
   for (const taskId of recorded) {
     ctx.$('[data-example="' + taskId + '"]').click();
     const example = shippedExamples.find((item) => item.id === taskId);
@@ -254,15 +255,21 @@ test('shipped examples provide complete paired recordings with distinct real-fra
     assert.equal(ctx.$('#rollout-recording-note a').href, 'https://benchmark.test/data/rollout-provenance.json');
     assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Recorded as Task 110; now Task 51.'), taskId === 51);
   }
-  assert.equal(count, 8);
+  assert.equal(count, recorded.length * 2);
   ctx.window.close();
 });
 
 test('rollout tabs are built from recorded examples and label each source', async () => {
   const ctx = await boot({ examples: shippedExamples });
   const tabs = ctx.$$('.rollout-tabs [role="tab"]');
-  assert.deepEqual(tabs.map((tab) => tab.dataset.example), ['18', '51', '68', '87']);
-  assert.deepEqual(tabs.map((tab) => tab.querySelector('span').textContent), ['Drink selection', 'Pressing style', 'Transfer method', 'Volume level']);
+  const recorded = shippedExamples.filter((item) => item.recording);
+  assert.deepEqual(tabs.map((tab) => tab.dataset.example), recorded.map((item) => String(item.id)));
+  assert.deepEqual(tabs.slice(0, 4).map((tab) => tab.querySelector('span').textContent), ['Drink selection', 'Pressing style', 'Transfer method', 'Volume level']);
+  for (const [index, tab] of tabs.entries()) {
+    const example = recorded[index];
+    assert.equal(tab.querySelector('img').getAttribute('src'), 'https://benchmark.test/' + example.personas[0].videoPoster);
+    assert.ok(tab.querySelector('small').textContent.endsWith(example.recording.kind === 'model' ? 'Model rollout' : 'Scripted'));
+  }
   assert.equal(tabs[0].getAttribute('aria-selected'), 'true');
   assert.equal(ctx.$('#rollout-source').hidden, false);
   assert.equal(ctx.$('#rollout-source').dataset.kind, 'model');

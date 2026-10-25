@@ -349,5 +349,155 @@
     "video": null,
     "videoLabel": "Simulation rollout · coming soon",
     "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 17,
+    "folder": "breakfast_preparation",
+    "title": "Personalized Breakfast Selection",
+    "instruction": "Get me something for breakfast.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/config/personas.json",
+    "shortTitle": "Breakfast selection",
+    "contrast": "A muffin or a cookie?",
+    "dimension": "Object choice",
+    "poster": "assets/task-scenes/task-017.webp",
+    "posterAlt": "Task 017 — Personalized Breakfast Selection: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I like a soft, sweet muffin for breakfast.",
+        "preferences": {
+          "food": "muffin"
+        },
+        "video": "assets/rollouts/task017-A.mp4",
+        "videoPoster": "assets/rollouts/task017-A.webp",
+        "videoDurationSeconds": 37.7
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer a chocolate-chip cookie for breakfast.",
+        "preferences": {
+          "food": "cookie"
+        },
+        "video": "assets/rollouts/task017-B.mp4",
+        "videoPoster": "assets/rollouts/task017-B.webp",
+        "videoDurationSeconds": 40.7
+      }
+    ],
+    "tabLabel": "Breakfast choice",
+    "videoLabel": "Scripted reference controller · complete recorded episode",
+    "recording": {
+      "source": "task-records-17-19",
+      "label": "Scripted reference controller",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 17,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 19,
+    "folder": "product_photography",
+    "title": "Personalized Camera Viewpoint",
+    "instruction": "Pick up the camera and frame the product for a photo.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/config/personas.json",
+    "shortTitle": "Camera viewpoint",
+    "contrast": "A high angle from afar or a low angle up close?",
+    "dimension": "Viewpoint",
+    "poster": "assets/task-scenes/task-019.webp",
+    "posterAlt": "Task 019 — Personalized Camera Viewpoint: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Use a high angle from farther away.",
+        "preferences": {
+          "viewpoint": "high_far",
+          "distance_m": [
+            0.5,
+            0.65
+          ],
+          "elevation_deg": [
+            45,
+            65
+          ]
+        },
+        "video": "assets/rollouts/task019-A.mp4",
+        "videoPoster": "assets/rollouts/task019-A.webp",
+        "videoDurationSeconds": 42.9
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use a low angle from nearby.",
+        "preferences": {
+          "viewpoint": "low_near",
+          "distance_m": [
+            0.2,
+            0.32
+          ],
+          "elevation_deg": [
+            5,
+            25
+          ]
+        },
+        "video": "assets/rollouts/task019-B.mp4",
+        "videoPoster": "assets/rollouts/task019-B.webp",
+        "videoDurationSeconds": 38.5
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Photograph the product from directly overhead.",
+        "preferences": {
+          "viewpoint": "overhead",
+          "distance_m": [
+            0.18,
+            0.3
+          ],
+          "elevation_deg": [
+            85,
+            90
+          ]
+        },
+        "video": null
+      }
+    ],
+    "tabLabel": "Camera viewpoint",
+    "videoLabel": "Scripted reference controller · complete recorded episode",
+    "recording": {
+      "source": "task-records-17-19",
+      "label": "Scripted reference controller",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 19,
+      "provenance": "data/rollout-provenance.json"
+    }
   }
 ]
