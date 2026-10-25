@@ -43,6 +43,8 @@ def description(persona):
 
 
 def main():
+    if (OUT / "data/task-preview-provenance.json").exists():
+        raise SystemExit("The complete preview catalog is already published. Follow README.md scene-update instructions; this bootstrap exporter would overwrite current previews and rollout metadata.")
     (OUT / "assets").mkdir(parents=True, exist_ok=True)
     provenance = []
     catalog = {item["task_id"]: item for item in json.loads((ROOT / "docs/task_catalog.json").read_text())["tasks"]}

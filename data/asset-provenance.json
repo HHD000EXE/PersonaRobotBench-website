@@ -12,8 +12,9 @@
   },
   "notes": [
     "Category grouping and short example headings are editorial. Native task titles, instructions and preference_text are preserved.",
-    "All images are existing static initial-scene renders, optimized to WebP. No rollout videos are included.",
-    "Case labels A/B/C/D are local to each task; they do not describe one shared person across the benchmark."
+    "Case labels A/B/C/D are local to each task; they do not describe one shared person across the benchmark.",
+    "Current task collection and featured initial-scene posters use all 100 task-specific WebP previews; see data/task-preview-provenance.json for complete source receipts.",
+    "This manifest also retains original illustration and font receipts. Recording sources are documented separately in data/rollout-provenance.json."
   ],
   "assets": [
     {
@@ -234,5 +235,6 @@
       "licenseSource": "https://raw.githubusercontent.com/google/fonts/main/ofl/jetbrainsmono/OFL.txt",
       "subset": "latin"
     }
-  ]
+  ],
+  "taskPreviewProvenance": "data/task-preview-provenance.json"
 }

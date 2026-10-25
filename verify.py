@@ -6,6 +6,8 @@ import argparse
 import hashlib
 import json
 import re
+from collections import defaultdict
+from fractions import Fraction
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -33,6 +35,78 @@ class Document(HTMLParser):
             self.has_title = True
         if tag == "html":
             self.language = values.get("lang")
+
+
+def verify_previews(root: Path, tasks: list[dict]) -> int:
+    receipt = json.loads((root / "data/task-preview-provenance.json").read_text())
+    assert receipt["schema"] == "personarobotbench.website-task-previews/1"
+    assert re.fullmatch(r"[0-9a-f]{40}", receipt["sourceRevision"])
+    records = {item["taskId"]: item for item in receipt["previews"]}
+    assert len(records) == len(receipt["previews"]) == 100, "Expected one preview receipt per task"
+    for task in tasks:
+        preview, record = task["preview"], records[task["id"]]
+        expected = f"assets/task-scenes/task-{task['id']:03}.webp"
+        assert preview["image"] == record["asset"] == expected, task["id"]
+        assert preview["kind"] == "static_initial_scene" and preview["alt"], task["id"]
+        assert preview["provenance"] == "data/task-preview-provenance.json", task["id"]
+        assert record["folder"] == task["folder"] and record["sourceCurrent"], task["id"]
+        assert record["sourceLayers"] and record["captureScene"], task["id"]
+        assert all(re.fullmatch(r"[0-9a-f]{64}", value) for value in record["sourceLayers"].values())
+        image = (root / expected).read_bytes()
+        assert image[:4] == b"RIFF" and image[8:12] == b"WEBP", expected
+        assert int.from_bytes(image[4:8], "little") + 8 == len(image), expected
+        assert hashlib.sha256(image).hexdigest() == record["sha256"], expected
+        assert len(image) == record["bytes"], expected
+        assert [preview["width"], preview["height"]] == record["dimensions"], expected
+    return len(records)
+
+
+def verify_leaderboard(root: Path, tasks: list[dict]) -> int:
+    data = json.loads((root / "data/leaderboard.json").read_text())
+    evidence = json.loads((root / "data/leaderboard-results.json").read_text())
+    assert data["schema"] == "personarobotbench.website-leaderboard/1"
+    assert evidence["schema"] == "personarobotbench.website-leaderboard-results/1"
+    assert evidence["tasks"] == 100 and evidence["personaCases"] == 217
+    assert data["provenance"]["paperCommit"] == evidence["source"]["paperCommit"]
+    assert data["provenance"]["resultsUrl"] == "data/leaderboard-results.json"
+    rows = [row for board in data["boards"] for row in board["rows"]]
+    ids = [row["id"] for row in rows]
+    assert len(ids) == len(set(ids)) and rows, "Duplicate or missing policy configuration"
+    for board in data["boards"]:
+        assert board["title"] and board["metric"] and board["description"]
+        for row in board["rows"]:
+            score = row["scorePercent"]
+            assert score is None or (type(score) in (int, float) and 0 <= score <= 100), row["id"]
+            assert row["policy"] and row["protocol"] and row["coverage"], row["id"]
+    expected_cases = {(task["id"], persona) for task in tasks for persona in task["personaIds"]}
+    configs = evidence["configurations"]
+    assert {row["id"] for row in configs} == set(ids), "Evidence and display policy IDs differ"
+    for config in configs:
+        if config["status"] == "pending":
+            assert config["taskBalancedSuccessPercent"] is None
+            assert next(row for row in rows if row["id"] == config["id"])["scorePercent"] is None
+            continue
+        counts = config["personaCounts"]
+        assert len(counts) == len(expected_cases) == 217
+        assert {(item["task"], item["persona"]) for item in counts} == expected_cases
+        by_task: dict[int, list[Fraction]] = defaultdict(list)
+        totals = dict.fromkeys(("strictSuccesses", "scored", "planned"), 0)
+        for item in counts:
+            assert all(type(item[key]) is int for key in totals)
+            assert 0 <= item["strictSuccesses"] <= item["scored"] <= item["planned"]
+            for key in totals:
+                totals[key] += item[key]
+            if item["scored"]:
+                by_task[item["task"]].append(Fraction(item["strictSuccesses"], item["scored"]))
+        assert len(by_task) == 100, "Archived configuration does not cover all tasks"
+        rate = sum(sum(values, Fraction()) / len(values) for values in by_task.values()) / 100
+        assert rate == Fraction(config["taskBalancedRateExact"]), config["id"]
+        assert abs(float(rate) * 100 - config["taskBalancedSuccessPercent"]) < 1e-10
+        assert totals["strictSuccesses"] == config["strictSuccesses"]
+        assert totals["scored"] == config["scored"] and totals["planned"] == config["planned"]
+    # Displayed points follow the paper; archived trial evidence has its own
+    # exact rates. Do not silently substitute one for the other.
+    return len(rows)
 
 
 def verify(root: Path) -> dict[str, int | str]:
@@ -185,7 +259,12 @@ def verify(root: Path) -> dict[str, int | str]:
     assert not gltf.get("animations"), "Initial scene must not contain authored motion"
     assert all("COLOR_0" in primitive["attributes"] for mesh in gltf["meshes"] for primitive in mesh["primitives"]), "Missing baked shading"
     assert any(material.get("pbrMetallicRoughness", {}).get("metallicFactor", 0) > .9 for material in gltf["materials"]), "Missing source metal material"
-    return {"status": "passed", "tasks": len(tasks), "persona_cases": 217, "examples": len(examples), "recordings": len(recordings), "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
+    preview_count = verify_previews(root, tasks)
+    policy_count = verify_leaderboard(root, tasks)
+    return {"status": "passed", "tasks": len(tasks), "persona_cases": 217,
+            "task_previews": preview_count, "policy_configurations": policy_count,
+            "examples": len(examples), "recordings": len(recordings),
+            "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 
 if __name__ == "__main__":

@@ -1,0 +1,153 @@
+{
+  "schema": "personarobotbench.website-leaderboard/1",
+  "updated": "2026-10-25",
+  "title": "Policy leaderboard",
+  "description": "Reported performance of the evaluated persona-conditioned policy configurations.",
+  "boards": [
+    {
+      "id": "strict",
+      "title": "Strict-success leaderboard",
+      "metric": "Task-balanced strict success (%)",
+      "description": "100 tasks \u00b7 217 authored persona cases \u00b7 privileged state and goals \u00b7 assisted skills \u00b7 no RGB",
+      "notes": [
+        "Success requires the native persona goal, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error.",
+        "Trials are averaged within observed personas, personas within each task, and all 100 tasks equally. Infrastructure outcomes remain unscored.",
+        "Trial counts, reasoning effort, budgets, harness revisions and recovery procedures differ; ordering is descriptive.",
+        "Point estimates follow the paper snapshot. Study protocols, coverage and archived count evidence are available in the downloadable results."
+      ],
+      "rows": [
+        {
+          "id": "astra-high",
+          "policy": "Astra",
+          "variant": "High reasoning",
+          "scorePercent": 33.2,
+          "coverage": "651 / 651",
+          "protocol": "High reasoning \u00b7 3 trials/persona \u00b7 seeds 100\u2013102 \u00b7 Codex CLI \u00b7 64 assisted actions",
+          "notes": "Three trials per persona, 651 scored episodes. The study includes disclosed recovery continuations and selected simulator repairs."
+        },
+        {
+          "id": "opus-api-high",
+          "policy": "Opus 5.5",
+          "variant": "API \u00b7 high effort",
+          "scorePercent": 31.9,
+          "coverage": "2,050 / 2,170",
+          "protocol": "High effort \u00b7 10 trials/persona \u00b7 seeds 100\u2013109 \u00b7 Messages API \u00b7 up to 10 decisions / 64 skills",
+          "notes": "682 strict successes / 2,050 scored; 120 infrastructure slots are unscored. Three personas have no scored trials and are excluded from observed means."
+        },
+        {
+          "id": "opus-cli-high",
+          "policy": "Opus 5.5",
+          "variant": "CLI \u00b7 high effort",
+          "scorePercent": 31.2,
+          "coverage": "2,138 / 2,170",
+          "protocol": "High effort \u00b7 10 trials/persona \u00b7 seeds 100\u2013109 \u00b7 Claude Code \u00b7 tools disabled \u00b7 up to 10 decisions / 64 skills",
+          "notes": "668 strict successes / 2,138 scored; 32 infrastructure slots are unscored. All 217 personas have at least one scored trial."
+        },
+        {
+          "id": "astra-medium",
+          "policy": "Astra",
+          "variant": "Medium reasoning \u00b7 pilot",
+          "scorePercent": 27.3,
+          "coverage": "217 / 217",
+          "protocol": "Medium reasoning \u00b7 1 trial/persona \u00b7 seed 100 \u00b7 Codex CLI \u00b7 64 assisted actions",
+          "notes": "59 strict successes / 217 scored. Separate single-seed pilot with disclosed runtime recovery and a launch-budget exception."
+        },
+        {
+          "id": "deepseek-high",
+          "policy": "DeepSeek V4.1 Flash",
+          "variant": "High effort",
+          "scorePercent": 14.9,
+          "coverage": "2,170 / 2,170",
+          "protocol": "High effort \u00b7 10 trials/persona \u00b7 seeds 100\u2013109 \u00b7 Responses-compatible API \u00b7 5 requests / 64 skills \u00b7 150 simulated seconds",
+          "notes": "318 strict successes / 2,170 scored. The 1,099 policy errors count as failures; scored coverage does not imply simulator completion."
+        },
+        {
+          "id": "gemini4",
+          "policy": "Gemini 4",
+          "variant": "Medium reasoning \u00b7 report pending",
+          "scorePercent": null,
+          "coverage": "Report pending",
+          "protocol": "Medium reasoning \u00b7 10 trials/persona planned \u00b7 external planner \u00b7 trial report pending",
+          "notes": "The latest strict-success paper leaderboard awaits the trial report. Its pending entry is not a 0% score."
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "paperRepository": "HHD000EXE/PersonaRobotBench-Papaer",
+    "paperCommit": "2822a8ebb378afcc87199389af5470ace65f3d24",
+    "paperVisibility": "private",
+    "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+    "paperFigureSha256": "6e5dff1b3b7c24963ed8f87ee253b516ed413c604336adc5932c40c6efa60678",
+    "paperText": "CoRL Late Breaking Results/main.tex",
+    "paperFigureUrl": "https://github.com/HHD000EXE/PersonaRobotBench-Papaer/blob/2822a8ebb378afcc87199389af5470ace65f3d24/CoRL%20Late%20Breaking%20Results/figures/policy_leaderboard.pdf",
+    "evidenceSnapshot": "Derived counts are included in the public downloadable data; access to the private paper source is not required to inspect these counts.",
+    "sourceMethod": "All displayed point estimates follow the latest paper figure. Five archived strict report files were SHA-256-verified, and their success counts and task-balanced means were independently recomputed as archived evidence. This archive check does not independently recompute the current paper's revised Astra high point.",
+    "rawSourceHashes": {
+      "Opus 5.5 (API; high)": "d3e76274c60cab5b2f16fa44c13ccd2f332a5e2ef8e02c9efe0ed65a30f1eee5",
+      "Opus 5.5 (CLI; high)": "a33f61c4c65b69b3b9559569f771c379053025dabdd11313c1bd746a49b217ec",
+      "Astra (high)": "d2de8362288189b52debfd100e22a3e7a2db9c6d44f840b1c433c78c4b244f78",
+      "Astra (medium)": "69fd9690c720945c4b5b6c0795742f8d4e2f60ddb7497403e85dbd3a80582548",
+      "DeepSeek V4.1 Flash (high)": "48180d10a87d8d82cf5fa440817022f54ad08680dd8ec3b99c5c92661659f995"
+    },
+    "definition": "Native persona-goal success, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error. Scored policy errors fail.",
+    "aggregation": "Mean observed trials within each observed persona, then mean observed personas within each task, then mean of all 100 tasks. This differs from pooled episode success.",
+    "missingData": "Infrastructure errors remain unscored. Three entirely unobserved Opus API personas are excluded from the conditional task means; all 100 tasks have some observed data.",
+    "taskCount": 100,
+    "personaCount": 217,
+    "rounding": "Paper-display percentages are rounded to one decimal using decimal ROUND_HALF_UP; full precision and rational rates remain in evidence.",
+    "scoreMeaning": "These are complete privileged assisted policy systems, not raw vision-only model inference.",
+    "strictRows": [
+      {
+        "id": "astra-high",
+        "strictSuccesses": null,
+        "scored": 651,
+        "planned": 651,
+        "observedPersonas": 217,
+        "status": "author_revised"
+      },
+      {
+        "id": "opus-api-high",
+        "strictSuccesses": 682,
+        "scored": 2050,
+        "planned": 2170,
+        "observedPersonas": 214,
+        "status": "verified_strict"
+      },
+      {
+        "id": "opus-cli-high",
+        "strictSuccesses": 668,
+        "scored": 2138,
+        "planned": 2170,
+        "observedPersonas": 217,
+        "status": "verified_strict"
+      },
+      {
+        "id": "astra-medium",
+        "strictSuccesses": 59,
+        "scored": 217,
+        "planned": 217,
+        "observedPersonas": 217,
+        "status": "verified_strict"
+      },
+      {
+        "id": "deepseek-high",
+        "strictSuccesses": 318,
+        "scored": 2170,
+        "planned": 2170,
+        "observedPersonas": 217,
+        "status": "verified_strict"
+      },
+      {
+        "id": "gemini4",
+        "strictSuccesses": null,
+        "scored": null,
+        "planned": 2170,
+        "observedPersonas": null,
+        "status": "pending"
+      }
+    ],
+    "resultsUrl": "data/leaderboard-results.json",
+    "sourceDescription": "Latest CoRL paper strict-success leaderboard. The paper repository is private; the public downloadable result snapshot provides derived counts and provenance."
+  }
+}

@@ -17,8 +17,9 @@
       return ["http:", "https:"].includes(url.protocol) ? url.href : null;
     } catch { return null; }
   };
-  const posterFor = (task) => state.examples.find((item) => item.id === task.id)?.poster
-    ?? ({ 1: "assets/hero-scene.webp", 13: "assets/scene-bookshelf.webp", 82: "assets/scene-workbench.webp" }[task.id] ?? null);
+  const posterFor = (task) => safeUrl(task.preview?.image)
+    ?? safeUrl(state.examples.find((item) => item.id === task.id)?.poster);
+  const previewAltFor = (task) => task.preview?.alt ?? "Initial simulation scene for " + titleFor(task);
   const schematic = (id) => '<div class="task-schematic" aria-hidden="true"><span class="schematic-number">' + padded(id) + '</span><svg viewBox="0 0 220 150" fill="none" stroke="currentColor" stroke-width=".8"><ellipse cx="110" cy="76" rx="91" ry="48"/><ellipse cx="110" cy="76" rx="48" ry="67" transform="rotate(35 110 76)"/><path d="M0 76h220M110 0v150" stroke-dasharray="3 5"/><circle cx="40" cy="46" r="5" fill="currentColor"/><circle cx="182" cy="104" r="5" fill="currentColor"/><circle cx="110" cy="76" r="13"/></svg></div>';
 
   function sortedTasks() {
@@ -41,11 +42,11 @@
   function card(task) {
     const poster = posterFor(task);
     const figure = poster
-      ? '<img src="' + escape(poster) + '" alt="Authored simulation scene for ' + escape(titleFor(task)) + '" loading="lazy" width="960" height="600">'
+      ? '<img src="' + escape(poster) + '" alt="' + escape(previewAltFor(task)) + '" loading="lazy" width="960" height="600">'
       : schematic(task.id);
     const dots = task.personaIds.map((id, index) => '<span class="persona-pill ' + (index % 2 ? "persona-b-color" : "persona-a-color") + '">' + escape(id) + '</span>').join("");
     return '<article class="task-card"><button class="task-card-button" type="button" data-task="' + task.id + '" aria-label="View Task ' + task.id + ': ' + escape(titleFor(task)) + ', ' + task.personaCount + ' persona cases"><div class="task-image">' + figure +
-      '<span class="task-number">TASK ' + padded(task.id) + '</span><span class="task-preview-label">' + (poster ? "STATIC SCENE PREVIEW" : "TASK SPECIFICATION") +
+      '<span class="task-number">TASK ' + padded(task.id) + '</span><span class="task-preview-label">' + (poster ? "INITIAL SCENE" : "TASK SPECIFICATION") +
       '</span></div><div class="task-card-body"><div class="task-card-heading"><h3>' + escape(titleFor(task)) + '</h3><span class="task-card-arrow" aria-hidden="true">↗</span></div><p>“' + escape(task.instruction) +
       '”</p><div class="task-card-footer"><span class="category">' + escape(task.category) + '</span><span class="persona-dots" aria-label="' + task.personaCount + ' persona cases">' + dots + '<span>' +
       task.personaCount + ' cases</span></span></div></div></button></article>';
@@ -76,7 +77,7 @@
     if (!task) return;
     const poster = posterFor(task);
     $("#task-dialog-content").innerHTML = '<div class="dialog-cover">' + (poster
-      ? '<img src="' + escape(poster) + '" alt="Static simulation scene for ' + escape(titleFor(task)) + '" width="960" height="600">'
+      ? '<img src="' + escape(poster) + '" alt="' + escape(previewAltFor(task)) + '" width="960" height="600">'
       : schematic(task.id)) + '</div><div class="dialog-body"><span class="mono small-label">TASK ' + padded(task.id) + " / " + escape(task.category.toUpperCase()) +
       '</span><h2 id="task-dialog-title">' + escape(titleFor(task)) + '</h2><p class="dialog-instruction">“' + escape(task.instruction) +
       '”</p><div class="dialog-personas">' + task.personas.map((persona) => '<div class="dialog-persona"><span class="mono small-label">PERSONA ' + escape(persona.id) +
@@ -242,6 +243,47 @@
     });
   }
 
+  function renderLeaderboard(data) {
+    if (data.schema !== "personarobotbench.website-leaderboard/1" || !Array.isArray(data.boards) || !data.boards.length) {
+      throw new Error("Invalid leaderboard snapshot");
+    }
+    for (const board of data.boards) {
+      if (!Array.isArray(board.rows) || !board.rows.length || !board.title || !board.metric) throw new Error("Invalid leaderboard board");
+      for (const row of board.rows) {
+        if (!row.policy || (row.scorePercent !== null && (typeof row.scorePercent !== "number" || !Number.isFinite(row.scorePercent) || row.scorePercent < 0 || row.scorePercent > 100))) {
+          throw new Error("Invalid leaderboard score");
+        }
+      }
+    }
+    $("#leaderboard-description").textContent = data.description || "Reported policy evaluations, with scoring criteria and coverage shown alongside each result.";
+    $("#leaderboard-boards").innerHTML = data.boards.map((board, index) => {
+      const rows = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
+      const titleId = "leaderboard-board-" + index;
+      return '<section class="leaderboard-board" aria-labelledby="' + titleId + '"><div class="leaderboard-board-heading"><h3 id="' + titleId + '">' + escape(board.title) +
+        '</h3><p>' + escape(board.description) + '</p></div><div class="leaderboard-table-scroll" role="region" aria-labelledby="' + titleId + '" tabindex="0"><table class="leaderboard-table"><caption class="visually-hidden">' + escape(board.title) +
+        ' — ' + escape(board.metric) + '</caption><thead><tr><th scope="col">Policy</th><th scope="col">' + escape(board.metric) + '</th><th scope="col">Setting</th><th scope="col">Evaluation coverage</th></tr></thead><tbody>' +
+        rows.map((row) => '<tr data-policy="' + escape(row.id) + '"><th scope="row"><span class="leaderboard-policy">' + escape(row.policy) +
+          '</span>' + (row.notes ? '<span class="leaderboard-row-note">' + escape(row.notes) + '</span>' : '') + '</th><td class="leaderboard-score">' +
+          (row.scorePercent === null ? '<span class="leaderboard-unreported">Not reported</span>' : row.scorePercent.toFixed(1) + '<span>%</span>') +
+          '</td><td><span>' + escape(row.variant) + '</span><span class="leaderboard-row-note">' + escape(row.protocol) + '</span></td><td>' + escape(row.coverage) + '</td></tr>').join("") +
+        '</tbody></table></div>' + (board.notes?.length ? '<div class="leaderboard-notes">' + board.notes.map((note) => '<p>' + escape(note) + '</p>').join("") + '</div>' : '') + '</section>';
+    }).join("");
+    $("#leaderboard-status").textContent = "Results snapshot" + (data.updated ? " · " + data.updated : "") + " · criteria and source provenance included in the download";
+  }
+
+  async function loadLeaderboard() {
+    try {
+      const response = await fetch("data/leaderboard.json");
+      if (!response.ok) throw new Error("Leaderboard unavailable");
+      renderLeaderboard(await response.json());
+      return true;
+    } catch {
+      $("#leaderboard-status").textContent = "The leaderboard is unavailable.";
+      $("#leaderboard-boards").innerHTML = '<div class="empty-state"><p>Try again later, or read the <a href="data/leaderboard.json">downloadable results snapshot</a>.</p></div>';
+      return false;
+    }
+  }
+
   async function start() {
     wireInteractions();
     try {
@@ -261,6 +303,7 @@
   }
 
   window.prbReady = start();
+  window.prbLeaderboardReady = loadLeaderboard();
 })();
 
 // Progressive enhancement: content remains visible without observer support.

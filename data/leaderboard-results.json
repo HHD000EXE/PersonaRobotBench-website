@@ -1,0 +1,7741 @@
+{
+  "schema": "personarobotbench.website-leaderboard-results/1",
+  "updated": "2026-10-25",
+  "tasks": 100,
+  "personaCases": 217,
+  "metric": "Native persona-goal success, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error. Scored policy errors fail.",
+  "aggregation": "Mean observed trials within each observed persona, then mean observed personas within each task, then mean of all 100 tasks. This differs from pooled episode success.",
+  "missingData": "Infrastructure errors remain unscored. Three entirely unobserved Opus API personas are excluded from the conditional task means; all 100 tasks have some observed data.",
+  "source": {
+    "paperRepository": "HHD000EXE/PersonaRobotBench-Papaer",
+    "paperCommit": "2822a8ebb378afcc87199389af5470ace65f3d24",
+    "paperVisibility": "private",
+    "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+    "paperFigureSha256": "6e5dff1b3b7c24963ed8f87ee253b516ed413c604336adc5932c40c6efa60678",
+    "paperFigureUrl": "https://github.com/HHD000EXE/PersonaRobotBench-Papaer/blob/2822a8ebb378afcc87199389af5470ace65f3d24/CoRL%20Late%20Breaking%20Results/figures/policy_leaderboard.pdf",
+    "sourceMethod": "All displayed point estimates follow the latest paper figure. Five archived strict report files were SHA-256-verified, and their success counts and task-balanced means were independently recomputed as archived evidence. This archive check does not independently recompute the current paper's revised Astra high point."
+  },
+  "notes": [
+    "The current paper author-reported Astra high point is33.2%. Its archived strict trial records below yield30.1667% task-balanced success; this archival row does not validate or recompute the revised point.",
+    "Per-persona counts permit independent reproduction of the archived means. Pooled successes / scored is a different weighting and does not define the displayed task-balanced metric.",
+    "No illustrative interval is exposed as a confidence interval. Fable has no reported result and is not assigned a score."
+  ],
+  "configurations": [
+    {
+      "id": "opus-api-high",
+      "policy": "Opus 5.5 (API; high)",
+      "status": "verified_strict",
+      "taskBalancedSuccessPercent": 31.890277777777776,
+      "taskBalancedRateExact": "22961/72000",
+      "strictSuccesses": 682,
+      "scored": 2050,
+      "planned": 2170,
+      "observedPersonas": 214,
+      "unobservedPersonas": [
+        [
+          41,
+          "B"
+        ],
+        [
+          63,
+          "B"
+        ],
+        [
+          94,
+          "B"
+        ]
+      ],
+      "sourceSha256": "d3e76274c60cab5b2f16fa44c13ccd2f332a5e2ef8e02c9efe0ed65a30f1eee5",
+      "statuses": {
+        "completed": 2045,
+        "infra_error": 120,
+        "policy_error": 5
+      },
+      "personaCounts": [
+        {
+          "task": 1,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 1,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 2,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 2,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 3,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 3,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 4,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 4,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 5,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 5,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 6,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 6,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 7,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 7,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 8,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 8,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 9,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 9,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 10,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 10,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 11,
+          "persona": "A",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 11,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 12,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 12,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "C",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "D",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 15,
+          "persona": "A",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 15,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 16,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 16,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 17,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 17,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 18,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 18,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "C",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 20,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 20,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 21,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 21,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 6,
+          "planned": 10
+        },
+        {
+          "task": 22,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 22,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 25,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 25,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 26,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 26,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 30,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 30,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 33,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 33,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 34,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 34,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 36,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 36,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 37,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 37,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 38,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 7,
+          "planned": 10
+        },
+        {
+          "task": 38,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 39,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 39,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 40,
+          "persona": "A",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 40,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 41,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 10
+        },
+        {
+          "task": 41,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 0,
+          "planned": 10
+        },
+        {
+          "task": 42,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 42,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 43,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 43,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 44,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 44,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 46,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 46,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 47,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 47,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 48,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 48,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 49,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 49,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 10
+        },
+        {
+          "task": 50,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 50,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 51,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 51,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 52,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 52,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 53,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 53,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 54,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 54,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 55,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 55,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 56,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 56,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 57,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 57,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 58,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 58,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 59,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 59,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 60,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 60,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 6,
+          "planned": 10
+        },
+        {
+          "task": 61,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 61,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 62,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 62,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 63,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 63,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 0,
+          "planned": 10
+        },
+        {
+          "task": 64,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 64,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 65,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 65,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 66,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 66,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 67,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 67,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 68,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 68,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 69,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 69,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 70,
+          "persona": "A",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 70,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 71,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 71,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 72,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 4,
+          "planned": 10
+        },
+        {
+          "task": 72,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 73,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 73,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 74,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 74,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 75,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 75,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 7,
+          "planned": 10
+        },
+        {
+          "task": 76,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 76,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 77,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 77,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 78,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 78,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 79,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 7,
+          "planned": 10
+        },
+        {
+          "task": 79,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 80,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 80,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 81,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 81,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 82,
+          "persona": "A",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 82,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 83,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 83,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 84,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 84,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 85,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 85,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 86,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 86,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 87,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 87,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 88,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 88,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 89,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 89,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 90,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 90,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 91,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 91,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 5,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 6,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "C",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 94,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 94,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 0,
+          "planned": 10
+        },
+        {
+          "task": 95,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 95,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 97,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 97,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 98,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 98,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 99,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 99,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        }
+      ]
+    },
+    {
+      "id": "opus-cli-high",
+      "policy": "Opus 5.5 (CLI; high)",
+      "status": "verified_strict",
+      "taskBalancedSuccessPercent": 31.244444444444447,
+      "taskBalancedRateExact": "703/2250",
+      "strictSuccesses": 668,
+      "scored": 2138,
+      "planned": 2170,
+      "observedPersonas": 217,
+      "unobservedPersonas": [],
+      "sourceSha256": "a33f61c4c65b69b3b9559569f771c379053025dabdd11313c1bd746a49b217ec",
+      "statuses": {
+        "completed": 2129,
+        "infra_error": 32,
+        "policy_error": 9
+      },
+      "personaCounts": [
+        {
+          "task": 1,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 1,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 2,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 2,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 3,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 3,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 4,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 4,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 5,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 5,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 6,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 6,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 7,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 7,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 8,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 8,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 9,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 9,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 10,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 10,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 11,
+          "persona": "A",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 11,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 12,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 12,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "D",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 15,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 15,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 16,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 16,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 17,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 17,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 18,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 18,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 20,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 20,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 21,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 21,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 22,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 22,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 25,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 25,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 26,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 26,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 30,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 30,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 33,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 33,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 34,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 34,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 36,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 36,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 37,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 37,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 38,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 38,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 39,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 39,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 40,
+          "persona": "A",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 40,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 41,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 8,
+          "planned": 10
+        },
+        {
+          "task": 41,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 42,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 42,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 43,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 43,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 44,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 44,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 46,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 46,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 47,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 7,
+          "planned": 10
+        },
+        {
+          "task": 47,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 48,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 48,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 49,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 49,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 6,
+          "planned": 10
+        },
+        {
+          "task": 50,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 50,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 51,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 51,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 52,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 52,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 53,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 53,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 54,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 54,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 55,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 55,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 56,
+          "persona": "A",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 56,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 57,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 57,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 58,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 58,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 59,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 59,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 60,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 60,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 61,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 61,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 62,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 62,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 63,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 63,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 4,
+          "planned": 10
+        },
+        {
+          "task": 64,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 64,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 65,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 65,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 66,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 66,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 67,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 67,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 68,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 68,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 69,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 69,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 70,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 70,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 71,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 71,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 72,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 72,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 73,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 73,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 74,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 74,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 75,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 75,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 76,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 76,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 77,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 77,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 78,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 78,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 79,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 79,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 80,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 80,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 81,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 81,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 82,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 82,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 83,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 83,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 84,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 84,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 85,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 85,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 86,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 86,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 87,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 87,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 88,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 88,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 89,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 89,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 90,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 90,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 91,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 91,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 9,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "C",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 94,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 94,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 7,
+          "planned": 10
+        },
+        {
+          "task": 95,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 95,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "C",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 97,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 97,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 98,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 98,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 99,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 99,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        }
+      ]
+    },
+    {
+      "id": "astra-high",
+      "policy": "Astra (high)",
+      "status": "archived_strict",
+      "taskBalancedSuccessPercent": 30.166666666666668,
+      "taskBalancedRateExact": "181/600",
+      "strictSuccesses": 195,
+      "scored": 651,
+      "planned": 651,
+      "observedPersonas": 217,
+      "unobservedPersonas": [],
+      "sourceSha256": "d2de8362288189b52debfd100e22a3e7a2db9c6d44f840b1c433c78c4b244f78",
+      "statuses": {
+        "completed": 651
+      },
+      "personaCounts": [
+        {
+          "task": 1,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 1,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 2,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 2,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 3,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 3,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 4,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 4,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 5,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 5,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 6,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 6,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 7,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 7,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 8,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 8,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 9,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 9,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 10,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 10,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 11,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 11,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 12,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 12,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 13,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 13,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 13,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 14,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 14,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 14,
+          "persona": "C",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 14,
+          "persona": "D",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 15,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 15,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 16,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 16,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 17,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 17,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 18,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 18,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 19,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 19,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 19,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 20,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 20,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 21,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 21,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 22,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 22,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 23,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 23,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 23,
+          "persona": "C",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 24,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 24,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 24,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 25,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 25,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 26,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 26,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 27,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 27,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 27,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 28,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 28,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 28,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 29,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 29,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 29,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 30,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 30,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 31,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 31,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 31,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 32,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 32,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 32,
+          "persona": "C",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 33,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 33,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 34,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 34,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 35,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 35,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 35,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 36,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 36,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 37,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 37,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 38,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 38,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 39,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 39,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 40,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 40,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 41,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 41,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 42,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 42,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 43,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 43,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 44,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 44,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 45,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 45,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 45,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 46,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 46,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 47,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 47,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 48,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 48,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 49,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 49,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 50,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 50,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 51,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 51,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 52,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 52,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 53,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 53,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 54,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 54,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 55,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 55,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 56,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 56,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 57,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 57,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 58,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 58,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 59,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 59,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 60,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 60,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 61,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 61,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 62,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 62,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 63,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 63,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 64,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 64,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 65,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 65,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 66,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 66,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 67,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 67,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 68,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 68,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 69,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 69,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 70,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 70,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 71,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 71,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 72,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 72,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 73,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 73,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 74,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 74,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 75,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 75,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 76,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 76,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 77,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 77,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 78,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 78,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 79,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 79,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 80,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 80,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 81,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 81,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 82,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 82,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 83,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 83,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 84,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 84,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 85,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 85,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 86,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 86,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 87,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 87,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 88,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 88,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 89,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 89,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 90,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 90,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 91,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 91,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 92,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 92,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 92,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 93,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 93,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 93,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 94,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 94,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 95,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 95,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 96,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 96,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 96,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 97,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 97,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 98,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 98,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 99,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 99,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 100,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 100,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 3,
+          "planned": 3
+        },
+        {
+          "task": 100,
+          "persona": "C",
+          "strictSuccesses": 2,
+          "scored": 3,
+          "planned": 3
+        }
+      ],
+      "currentPaperAuthorReportedPercent": 33.2,
+      "currentPaperRecomputedFromTheseRecords": false
+    },
+    {
+      "id": "astra-medium",
+      "policy": "Astra (medium)",
+      "status": "verified_strict",
+      "taskBalancedSuccessPercent": 27.333333333333332,
+      "taskBalancedRateExact": "41/150",
+      "strictSuccesses": 59,
+      "scored": 217,
+      "planned": 217,
+      "observedPersonas": 217,
+      "unobservedPersonas": [],
+      "sourceSha256": "69fd9690c720945c4b5b6c0795742f8d4e2f60ddb7497403e85dbd3a80582548",
+      "statuses": {
+        "completed": 217
+      },
+      "personaCounts": [
+        {
+          "task": 1,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 1,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 2,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 2,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 3,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 3,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 4,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 4,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 5,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 5,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 6,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 6,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 7,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 7,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 8,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 8,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 9,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 9,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 10,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 10,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 11,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 11,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 12,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 12,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 13,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 13,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 13,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 14,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 14,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 14,
+          "persona": "C",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 14,
+          "persona": "D",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 15,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 15,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 16,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 16,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 17,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 17,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 18,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 18,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 19,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 19,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 19,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 20,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 20,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 21,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 21,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 22,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 22,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 23,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 23,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 23,
+          "persona": "C",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 24,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 24,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 24,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 25,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 25,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 26,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 26,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 27,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 27,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 27,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 28,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 28,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 28,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 29,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 29,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 29,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 30,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 30,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 31,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 31,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 31,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 32,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 32,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 32,
+          "persona": "C",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 33,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 33,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 34,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 34,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 35,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 35,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 35,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 36,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 36,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 37,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 37,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 38,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 38,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 39,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 39,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 40,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 40,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 41,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 41,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 42,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 42,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 43,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 43,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 44,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 44,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 45,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 45,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 45,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 46,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 46,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 47,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 47,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 48,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 48,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 49,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 49,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 50,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 50,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 51,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 51,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 52,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 52,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 53,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 53,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 54,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 54,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 55,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 55,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 56,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 56,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 57,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 57,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 58,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 58,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 59,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 59,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 60,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 60,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 61,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 61,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 62,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 62,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 63,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 63,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 64,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 64,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 65,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 65,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 66,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 66,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 67,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 67,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 68,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 68,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 69,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 69,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 70,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 70,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 71,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 71,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 72,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 72,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 73,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 73,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 74,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 74,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 75,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 75,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 76,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 76,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 77,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 77,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 78,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 78,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 79,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 79,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 80,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 80,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 81,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 81,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 82,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 82,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 83,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 83,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 84,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 84,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 85,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 85,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 86,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 86,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 87,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 87,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 88,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 88,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 89,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 89,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 90,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 90,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 91,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 91,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 92,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 92,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 92,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 93,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 93,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 93,
+          "persona": "C",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 94,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 94,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 95,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 95,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 96,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 96,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 96,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 97,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 97,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 98,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 98,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 99,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 99,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 100,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 100,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        },
+        {
+          "task": 100,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 1,
+          "planned": 1
+        }
+      ]
+    },
+    {
+      "id": "deepseek-high",
+      "policy": "DeepSeek V4.1 Flash (high)",
+      "status": "verified_strict",
+      "taskBalancedSuccessPercent": 14.85,
+      "taskBalancedRateExact": "297/2000",
+      "strictSuccesses": 318,
+      "scored": 2170,
+      "planned": 2170,
+      "observedPersonas": 217,
+      "unobservedPersonas": [],
+      "sourceSha256": "48180d10a87d8d82cf5fa440817022f54ad08680dd8ec3b99c5c92661659f995",
+      "statuses": {
+        "policy_error": 1099,
+        "completed": 1071
+      },
+      "personaCounts": [
+        {
+          "task": 1,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 1,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 2,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 2,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 3,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 3,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 4,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 4,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 5,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 5,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 6,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 6,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 7,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 7,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 8,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 8,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 9,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 9,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 10,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 10,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 11,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 11,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 12,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 12,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 13,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "C",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 14,
+          "persona": "D",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 15,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 15,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 16,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 16,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 17,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 17,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 18,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 18,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 19,
+          "persona": "C",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 20,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 20,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 21,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 21,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 22,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 22,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 23,
+          "persona": "C",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 24,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 25,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 25,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 26,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 26,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 27,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 28,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 29,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 30,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 30,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 31,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 32,
+          "persona": "C",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 33,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 33,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 34,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 34,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 35,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 36,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 36,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 37,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 37,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 38,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 38,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 39,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 39,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 40,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 40,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 41,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 41,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 42,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 42,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 43,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 43,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 44,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 44,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 45,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 46,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 46,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 47,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 47,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 48,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 48,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 49,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 49,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 50,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 50,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 51,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 51,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 52,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 52,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 53,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 53,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 54,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 54,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 55,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 55,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 56,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 56,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 57,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 57,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 58,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 58,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 59,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 59,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 60,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 60,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 61,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 61,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 62,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 62,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 63,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 63,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 64,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 64,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 65,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 65,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 66,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 66,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 67,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 67,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 68,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 68,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 69,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 69,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 70,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 70,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 71,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 71,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 72,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 72,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 73,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 73,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 74,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 74,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 75,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 75,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 76,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 76,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 77,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 77,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 78,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 78,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 79,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 79,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 80,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 80,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 81,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 81,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 82,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 82,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 83,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 83,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 84,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 84,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 85,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 85,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 86,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 86,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 87,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 87,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 88,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 88,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 89,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 89,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 90,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 90,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 91,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 91,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 92,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 93,
+          "persona": "C",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 94,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 94,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 95,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 95,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 96,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 97,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 97,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 98,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 98,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 99,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 99,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        },
+        {
+          "task": 100,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10
+        }
+      ]
+    },
+    {
+      "id": "gemini4",
+      "policy": "Gemini 4",
+      "status": "pending",
+      "taskBalancedSuccessPercent": null,
+      "taskBalancedRateExact": null,
+      "strictSuccesses": null,
+      "scored": null,
+      "planned": 2170,
+      "personaCounts": []
+    }
+  ]
+}

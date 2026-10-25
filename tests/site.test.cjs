@@ -10,12 +10,30 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const tasks = JSON.parse(fs.readFileSync(path.join(root, 'data/tasks.json'), 'utf8'));
 const shippedExamples = JSON.parse(fs.readFileSync(path.join(root, 'data/examples.json'), 'utf8'));
+const shippedLeaderboard = JSON.parse(fs.readFileSync(path.join(root, 'data/leaderboard.json'), 'utf8'));
 const examples = structuredClone(shippedExamples);
 // Placeholder behavior must remain testable after contributors add real videos.
 // These fixtures never modify the published examples file.
 for (const example of examples) {
   for (const persona of example.personas) persona.video = null;
 }
+
+// Synthetic scores exercise display behavior independently of paper results.
+const leaderboardFixture = {
+  schema: 'personarobotbench.website-leaderboard/1', updated: '2026-10-25',
+  description: 'Reported evaluations with explicit criteria.',
+  boards: [{ id: 'strict', title: 'Personalized success', metric: 'Success rate',
+    description: 'Goal, process and fidelity must pass.', notes: ['Different trial budgets are shown per policy.'],
+    rows: [
+      { id: 'first', policy: 'Policy A', variant: 'API', scorePercent: 12.3, coverage: '100 tasks · 217 cases', protocol: '10 trials / persona', notes: 'Source-derived score.' },
+      { id: 'pending', policy: 'Policy pending', variant: 'API', scorePercent: null, coverage: 'Not reported', protocol: 'Not reported', notes: '' },
+      { id: 'second', policy: 'Policy B', variant: 'CLI', scorePercent: 77.7, coverage: '100 tasks · 217 cases', protocol: '3 trials / persona', notes: 'Author-reported score.' }
+    ]
+  }, { id: 'goal', title: 'Goal-only study', metric: 'Goal completion',
+    description: 'Goal-only outcome; separate from personalized success.', notes: [],
+    rows: [{ id: 'goal-policy', policy: 'Policy A', variant: 'API', scorePercent: 95.0, coverage: '217 cases', protocol: '3 trials / persona', notes: '' }]
+  }]
+};
 
 async function boot(options = {}) {
   const dom = new JSDOM(html, { url: options.url || 'https://benchmark.test/', runScripts: 'outside-only', pretendToBeVisual: true });
@@ -25,11 +43,15 @@ async function boot(options = {}) {
   const requests = [];
   window.fetch = async (url) => {
     requests.push(new URL(url, window.location.href).href);
-    return { ok: !options.fetchError, json: async () => structuredClone(url.includes('tasks.json') ? tasks : (options.examples || examples)) };
+    const isLeaderboard = url.includes('leaderboard.json');
+    const data = isLeaderboard ? (options.leaderboard || leaderboardFixture)
+      : url.includes('tasks.json') ? (options.tasks || tasks) : (options.examples || examples);
+    return { ok: !(options.fetchError || (isLeaderboard ? options.leaderboardError : options.catalogError)), json: async () => structuredClone(data) };
   };
   window.eval(app);
   const ready = await window.prbReady;
-  return { dom, window, requests, pausedVideos, document: window.document, ready, $: (selector) => window.document.querySelector(selector), $$: (selector) => [...window.document.querySelectorAll(selector)] };
+  const leaderboardReady = await window.prbLeaderboardReady;
+  return { dom, window, requests, pausedVideos, leaderboardReady, document: window.document, ready, $: (selector) => window.document.querySelector(selector), $$: (selector) => [...window.document.querySelectorAll(selector)] };
 }
 
 function input(context, value) {
@@ -95,6 +117,29 @@ test('show more reaches every task then hides its button', async () => {
   ctx.window.close();
 });
 
+test('all 100 task cards and dialogs use their own initial scene preview', async () => {
+  const ctx = await boot();
+  while (!ctx.$('#show-more').hidden) ctx.$('#show-more').click();
+  assert.equal(ctx.$$('.task-schematic').length, 0);
+  const imagePaths = new Set();
+  for (const button of ctx.$$('[data-task]')) {
+    const task = tasks.find((item) => item.id === Number(button.dataset.task));
+    assert.ok(task.preview?.image, 'Task ' + task.id + ' lacks a preview');
+    assert.ok(task.preview.alt, 'Task ' + task.id + ' lacks scene alt text');
+    assert.match(task.preview.image, /^assets\/task-scenes\/task-\d{3}\.webp$/);
+    assert.equal(button.querySelector('img').src, 'https://benchmark.test/' + task.preview.image);
+    assert.equal(button.querySelector('img').alt, task.preview.alt);
+    assert.equal(button.querySelector('.task-preview-label').textContent, 'INITIAL SCENE');
+    imagePaths.add(task.preview.image);
+    button.click();
+    assert.equal(ctx.$('.dialog-cover img').src, 'https://benchmark.test/' + task.preview.image);
+    assert.equal(ctx.$('.dialog-cover img').alt, task.preview.alt);
+    ctx.$('.dialog-close').click();
+  }
+  assert.equal(imagePaths.size, 100);
+  ctx.window.close();
+});
+
 test('task dialog displays every authored persona and closes with Escape', async () => {
   const ctx = await boot();
   input(ctx, '32');
@@ -155,13 +200,13 @@ test('GitHub Pages project subpaths preserve catalog, image, font CSS, script an
   filled[0].personas[0].video = 'assets/rollouts/task18-A.mp4';
   const ctx = await boot({ url: base, examples: filled });
   assert.equal(ctx.ready, true);
-  assert.deepEqual(ctx.requests, [base + 'data/tasks.json', base + 'data/examples.json']);
+  assert.deepEqual(ctx.requests, [base + 'data/tasks.json', base + 'data/examples.json', base + 'data/leaderboard.json']);
   assert.equal(ctx.$('.hero-scene').src, base + 'assets/hero-scene.webp');
   assert.equal(ctx.$('link[href="assets/fonts/fonts.css"]').href, base + 'assets/fonts/fonts.css');
   assert.equal(ctx.$('script[src="app.js"]').src, base + 'app.js');
   assert.equal(ctx.$('video source').src, base + 'assets/rollouts/task18-A.mp4');
   ctx.$('[data-example="68"]').click();
-  assert.equal(ctx.$('.video-placeholder img').src, base + 'assets/task-068.webp');
+  assert.equal(ctx.$('.video-placeholder img').src, base + 'assets/task-scenes/task-068.webp');
   ctx.window.close();
 });
 
@@ -300,4 +345,95 @@ test('3D model and library failures preserve image and permit retry', async () =
   assert.equal(c.$('#scene-toggle').disabled, false);
   assert.ok(c.$('.hero-scene'));
   c.dom.window.close();
+});
+
+
+test('leaderboard ranks only within each scoring criterion and shows settings and coverage', async () => {
+  const ctx = await boot();
+  assert.equal(ctx.leaderboardReady, true);
+  assert.equal(ctx.$$('.leaderboard-board').length, 2);
+  assert.deepEqual(ctx.$$('.leaderboard-board')[0].querySelectorAll('tbody tr').length, 3);
+  assert.deepEqual(ctx.$$('.leaderboard-board:first-child tbody tr').map((row) => row.dataset.policy), ['second', 'first', 'pending']);
+  assert.equal(ctx.$$('.leaderboard-board')[1].querySelector('tbody tr').dataset.policy, 'goal-policy');
+  assert.match(ctx.$('.leaderboard-board').textContent, /77.7%/);
+  assert.match(ctx.$('.leaderboard-board').textContent, /Not reported/);
+  assert.match(ctx.$('.leaderboard-board').textContent, /Goal, process and fidelity must pass/);
+  assert.match(ctx.$('.leaderboard-board').textContent, /3 trials \/ persona/);
+  assert.match(ctx.$('.leaderboard-board').textContent, /100 tasks · 217 cases/);
+  assert.match(ctx.$('#leaderboard-status').textContent, /2026-10-25/);
+  assert.ok(ctx.$('.leaderboard-table caption'));
+  assert.ok(ctx.$('.leaderboard-table th[scope="row"]'));
+  assert.equal(ctx.$('#leaderboard a[download]').getAttribute('href'), 'data/leaderboard.json');
+  ctx.window.close();
+});
+
+test('leaderboard failure leaves the catalog, task dialog and recording tabs usable', async () => {
+  const ctx = await boot({ leaderboardError: true });
+  assert.equal(ctx.ready, true);
+  assert.equal(ctx.leaderboardReady, false);
+  assert.match(ctx.$('#leaderboard-status').textContent, /unavailable/);
+  assert.equal(ctx.$('#leaderboard-boards a').getAttribute('href'), 'data/leaderboard.json');
+  input(ctx, '14');
+  ctx.$('[data-task="14"]').click();
+  assert.ok(ctx.$('#task-dialog').hasAttribute('open'));
+  ctx.$('.dialog-close').click();
+  ctx.$('[data-example="51"]').click();
+  assert.match(ctx.$('#rollout-id').textContent, /051/);
+  ctx.window.close();
+});
+
+test('catalog failure does not suppress available leaderboard results', async () => {
+  const ctx = await boot({ catalogError: true });
+  assert.equal(ctx.ready, false);
+  assert.equal(ctx.leaderboardReady, true);
+  assert.equal(ctx.$$('.leaderboard-board').length, 2);
+  assert.match(ctx.$('#task-count').textContent, /unavailable/);
+  ctx.window.close();
+});
+
+test('invalid leaderboard scores fail visibly without publishing a misleading table', async () => {
+  const invalid = structuredClone(leaderboardFixture);
+  invalid.boards[0].rows[0].scorePercent = 120;
+  const ctx = await boot({ leaderboard: invalid });
+  assert.equal(ctx.leaderboardReady, false);
+  assert.equal(ctx.$$('.leaderboard-table').length, 0);
+  assert.equal(ctx.ready, true);
+  ctx.window.close();
+});
+
+test('leaderboard text is escaped before rendering source-authored notes', async () => {
+  const injected = structuredClone(leaderboardFixture);
+  injected.boards[0].rows[0].policy = '<img src=x onerror=alert(1)>';
+  injected.boards[0].notes = ['<script>alert(1)</script>'];
+  const ctx = await boot({ leaderboard: injected });
+  assert.equal(ctx.leaderboardReady, true);
+  assert.equal(ctx.$('#leaderboard-boards img'), null);
+  assert.equal(ctx.$('#leaderboard-boards script'), null);
+  assert.ok(ctx.$('#leaderboard-boards').textContent.includes('<img src=x onerror=alert(1)>'));
+  assert.ok(ctx.$('#leaderboard-boards').textContent.includes('<script>alert(1)</script>'));
+  ctx.window.close();
+});
+
+
+test('published policy snapshot renders its reported scores and settings without special Astra labeling', async () => {
+  const ctx = await boot({ leaderboard: shippedLeaderboard });
+  assert.equal(ctx.leaderboardReady, true);
+  assert.equal(ctx.$$('.leaderboard-board').length, shippedLeaderboard.boards.length);
+  for (const [index, board] of shippedLeaderboard.boards.entries()) {
+    const section = ctx.$$('.leaderboard-board')[index];
+    const expected = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
+    const actual = [...section.querySelectorAll('tbody tr')];
+    assert.deepEqual(actual.map((row) => row.dataset.policy), expected.map((row) => row.id));
+    for (const [i, row] of expected.entries()) {
+      assert.equal(actual[i].querySelector('.leaderboard-policy').textContent, row.policy);
+      assert.equal(actual[i].querySelector('.leaderboard-score').textContent, row.scorePercent === null ? 'Not reported' : row.scorePercent.toFixed(1) + '%');
+      assert.ok(actual[i].textContent.includes(row.variant));
+      assert.ok(actual[i].textContent.includes(row.coverage));
+    }
+  }
+  const astra = ctx.$('[data-policy="astra-high"]');
+  assert.equal(astra.querySelector('.leaderboard-policy').textContent, 'Astra');
+  assert.doesNotMatch(astra.textContent, /author.reported|not independently|not recomputed|unverified/i);
+  assert.equal(ctx.$('#leaderboard a[href="data/leaderboard-results.json"]').hasAttribute('download'), true);
+  ctx.window.close();
 });

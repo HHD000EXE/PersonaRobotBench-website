@@ -7,8 +7,8 @@ The public research website for the **100-task / 217-persona** benchmark.
 - **Contribution guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Benchmark:** [HHD000EXE/PersonaRobotBench](https://github.com/HHD000EXE/PersonaRobotBench), currently private. Its code and linked technical guides require repository access.
 
-This public repository contains only the website, its task catalog, and selected
-static scene illustrations. Model results remain labelled pending. The homepage
+This public repository contains the website, its complete task catalog,
+100 task-specific scene previews, and the policy leaderboard. The homepage
 includes six complete recorded Astra episodes: A/B pairs for Tasks 18, 51 and 68.
 Videos play at their original simulation rate with inference waits omitted;
 they are selected demonstrations rather than a benchmark success-rate estimate.
@@ -80,6 +80,10 @@ this source repository small.
 | `styles.css` | Responsive layout and typography |
 | `app.js` | Search, category filters, task details, tabs and video playback |
 | `data/tasks.json` | All 100 task descriptions and 217 task-local persona cases |
+| `assets/task-scenes/` | One current initial-scene preview for every task |
+| `data/task-preview-provenance.json` | Per-task source revision, scene layers, textures, renderer and image hashes |
+| `data/leaderboard.json` | Paper leaderboard points, policy settings, metric and coverage |
+| `data/leaderboard-results.json` | Downloadable result provenance and archived per-persona counts |
 | `data/examples.json` | Curated examples, posters and rollout video URLs |
 | `data/rollout-provenance.json` | Recording sources, hashes, timing and historical task numbering |
 | `data/asset-provenance.json` | Original image sources, hashes and font sources |
@@ -90,16 +94,32 @@ category grouping and short example headings are editorial. Images are static
 scene illustrations, not evidence of policy success. Do not publish an inferred
 success rate or label a partial attempt as a completed rollout.
 
-The catalog and optimized images are already checked in. Maintainers with a full
-benchmark checkout and Pillow can regenerate them with:
+The catalog and optimized images are checked in. For a scene update, render the
+current benchmark's composed initial USD scene with its own background and
+authored camera. Update `assets/task-scenes/task-NNN.webp`, the matching task's
+`preview` fields, and its receipt in `data/task-preview-provenance.json` together.
+Record all composed scene layers and texture hashes; do not reuse a historical
+capture after those sources change. Keep rollout frame posters separate from
+initial-scene illustrations. The original `data/build_assets.py` bootstrap
+exporter refuses to overwrite this complete preview catalog.
 
-~~~bash
-python3 data/build_assets.py --benchmark-root /path/to/PersonaRobotBench
-~~~
+Normal website edits and deployments do not need the private benchmark checkout.
 
-Regeneration replaces `data/examples.json`, so preserve any added rollout URLs
-and reapply them afterwards. Normal website edits and deployments do not need
-the private benchmark checkout.
+## Policy leaderboard
+
+The leaderboard follows the latest paper snapshot and displays each evaluated
+policy configuration separately. Its metric is task-balanced strict success:
+average scored trials within each observed persona, then personas within each
+task, then all 100 tasks equally. Infrastructure outcomes remain unscored.
+Coverage and trial budgets are shown because the configurations use different
+protocols. Gemini remains pending until its strict-result report is available.
+
+Update `data/leaderboard.json` and `data/leaderboard-results.json` together when
+new results arrive. Preserve the paper revision, metric, settings, scored and
+planned coverage, and raw source hashes. The downloadable archive includes
+per-persona counts and exact rational rates for reproducing the archived
+assessments; paper points and archived assessments retain their own provenance.
+`verify.py` checks every archived count and recomputes its task-balanced mean.
 
 ## Branch ownership
 

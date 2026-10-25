@@ -36,7 +36,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-001.webp",
+      "alt": "Task 001 — Shared Desk Configuration: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 2,
@@ -71,7 +79,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-002.webp",
+      "alt": "Task 002 — Personalized Household Glass Organization: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 3,
@@ -106,7 +122,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-003.webp",
+      "alt": "Task 003 — Personalized Lift Table Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 4,
@@ -151,7 +175,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-004.webp",
+      "alt": "Task 004 — Personalized Traveling Assistant: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 5,
@@ -190,7 +222,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-005.webp",
+      "alt": "Task 005 — Personalized Coffee Station Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 6,
@@ -227,7 +267,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/kitchen_organization/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/kitchen_organization/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/kitchen_organization/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-006.webp",
+      "alt": "Task 006 — Personalized Kitchen Organization: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 7,
@@ -264,7 +312,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shoe_storage/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shoe_storage/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shoe_storage/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-007.webp",
+      "alt": "Task 007 — Personalized Shoe Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 8,
@@ -301,7 +357,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_organization/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_organization/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_organization/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-008.webp",
+      "alt": "Task 008 — Personalized Laundry Organization: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 9,
@@ -344,7 +408,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-009.webp",
+      "alt": "Task 009 — Dining Table Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 10,
@@ -383,7 +455,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-010.webp",
+      "alt": "Task 010 — Bedside Table Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 11,
@@ -420,7 +500,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-011.webp",
+      "alt": "Task 011 — Personalized Handover: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 12,
@@ -459,7 +547,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/living_room/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/living_room/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/living_room/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-012.webp",
+      "alt": "Task 012 — Living Room Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 13,
@@ -497,7 +593,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/book_organization/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/book_organization/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/book_organization/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-013.webp",
+      "alt": "Task 013 — Personalized Book Organization: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 14,
@@ -550,7 +654,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-014.webp",
+      "alt": "Task 014 — Personalized Whiteboard Reset: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 15,
@@ -592,7 +704,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/container_stacking/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/container_stacking/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/container_stacking/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-015.webp",
+      "alt": "Task 015 — Personalized Container Stacking: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 16,
@@ -631,7 +751,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-016.webp",
+      "alt": "Task 016 — Personalized Drawer Organizer: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 17,
@@ -666,7 +794,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-017.webp",
+      "alt": "Task 017 — Personalized Breakfast Selection: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 18,
@@ -701,7 +837,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/beverage_selection/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-018.webp",
+      "alt": "Task 018 — Personalized Beverage Selection: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 19,
@@ -769,7 +913,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-019.webp",
+      "alt": "Task 019 — Personalized Camera Viewpoint: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 20,
@@ -801,7 +953,15 @@
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/supply_rack/README.md",
     "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/supply_rack/config/personas.json",
-    "statusNote": "Imported package; validation differences and incomplete validation are documented in the repository."
+    "statusNote": "Imported package; validation differences and incomplete validation are documented in the repository.",
+    "preview": {
+      "image": "assets/task-scenes/task-020.webp",
+      "alt": "Task 020 — Supply Rack Arrangement: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 21,
@@ -845,7 +1005,15 @@
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/medication_prep/README.md",
     "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/medication_prep/config/personas.json",
-    "statusNote": "Imported package; validation differences and incomplete validation are documented in the repository."
+    "statusNote": "Imported package; validation differences and incomplete validation are documented in the repository.",
+    "preview": {
+      "image": "assets/task-scenes/task-021.webp",
+      "alt": "Task 021 — Morning Medication Preparation: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 22,
@@ -948,7 +1116,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/xylophone_performance/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/xylophone_performance/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/xylophone_performance/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-022.webp",
+      "alt": "Task 022 — Personalized Xylophone Performance: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 23,
@@ -992,7 +1168,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/walking_companion/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/walking_companion/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/walking_companion/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-023.webp",
+      "alt": "Task 023 — Walking Companion: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 24,
@@ -1036,7 +1220,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tree_drawing/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tree_drawing/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tree_drawing/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-024.webp",
+      "alt": "Task 024 — Tree Drawing: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 25,
@@ -1067,7 +1259,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-025.webp",
+      "alt": "Task 025 — Document Camera Work Surface: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 26,
@@ -1109,7 +1309,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_tray_loading/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_tray_loading/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_tray_loading/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-026.webp",
+      "alt": "Task 026 — Personalized Serving Tray Loading: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 27,
@@ -1153,7 +1361,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_inspection/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_inspection/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_inspection/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-027.webp",
+      "alt": "Task 027 — Object Inspection: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 28,
@@ -1197,7 +1413,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/part_retrieval/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/part_retrieval/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/part_retrieval/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-028.webp",
+      "alt": "Task 028 — Part Retrieval: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 29,
@@ -1235,7 +1459,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fan_adjustment/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fan_adjustment/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fan_adjustment/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-029.webp",
+      "alt": "Task 029 — Personalized Fan Adjustment: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 30,
@@ -1266,7 +1498,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-030.webp",
+      "alt": "Task 030 — Personalized Socket Set Preparation: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 31,
@@ -1310,7 +1550,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_search/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_search/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/object_search/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-031.webp",
+      "alt": "Task 031 — Object Search: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 32,
@@ -1354,7 +1602,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-032.webp",
+      "alt": "Task 032 — Greeting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 33,
@@ -1385,7 +1641,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-033.webp",
+      "alt": "Task 033 — Personalized Drill Press Setup: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 34,
@@ -1416,7 +1680,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-034.webp",
+      "alt": "Task 034 — Personalized Inspection Turntable Setup: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 35,
@@ -1460,7 +1732,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/door_assistance/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/door_assistance/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/door_assistance/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-035.webp",
+      "alt": "Task 035 — Door Assistance: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 36,
@@ -1495,7 +1775,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_handover/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_handover/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_handover/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-036.webp",
+      "alt": "Task 036 — Tool Handover: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 37,
@@ -1526,7 +1814,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-037.webp",
+      "alt": "Task 037 — Ergonomic Part Delivery: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 38,
@@ -1561,7 +1857,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workstation_cleanup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workstation_cleanup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workstation_cleanup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-038.webp",
+      "alt": "Task 038 — Workstation Cleanup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 39,
@@ -1592,7 +1896,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-039.webp",
+      "alt": "Task 039 — CNC Part Unloading: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 40,
@@ -1623,7 +1935,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-040.webp",
+      "alt": "Task 040 — Personalized Fridge Organization: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 41,
@@ -1654,7 +1974,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workout_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workout_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/workout_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-041.webp",
+      "alt": "Task 041 — Personalized Home Workout Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 42,
@@ -1685,7 +2013,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/car_key_placement/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/car_key_placement/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/car_key_placement/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-042.webp",
+      "alt": "Task 042 — Personalized Car Key Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 43,
@@ -1716,7 +2052,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bed_arrangement/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bed_arrangement/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bed_arrangement/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-043.webp",
+      "alt": "Task 043 — Personalized Bed Arrangement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 44,
@@ -1747,7 +2091,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/window_blind/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/window_blind/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/window_blind/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-044.webp",
+      "alt": "Task 044 — Personalized Window Blind Adjustment: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 45,
@@ -1803,7 +2155,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_pegboard_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_pegboard_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tool_pegboard_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-045.webp",
+      "alt": "Task 045 — Personalized Tool Pegboard Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 46,
@@ -1838,7 +2198,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-046.webp",
+      "alt": "Task 046 — Personalized Wine Bottle Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 47,
@@ -1880,7 +2248,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/toy_cleanup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/toy_cleanup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/toy_cleanup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-047.webp",
+      "alt": "Task 047 — Personalized Toy Cleanup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 48,
@@ -1915,7 +2291,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_placement/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_placement/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_placement/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-048.webp",
+      "alt": "Task 048 — Personalized Plant Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 49,
@@ -1952,7 +2336,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/phone_placement/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/phone_placement/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/phone_placement/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-049.webp",
+      "alt": "Task 049 — Personalized Phone Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 50,
@@ -1987,7 +2379,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lamp_dimmer/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lamp_dimmer/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lamp_dimmer/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-050.webp",
+      "alt": "Task 050 — Personalized Lamp Dimmer Setting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 51,
@@ -2038,7 +2438,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stamp_press_operation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-051.webp",
+      "alt": "Task 051 — Personalized Stamp Press Operation: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 52,
@@ -2073,7 +2481,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-052.webp",
+      "alt": "Task 052 — Personalized Drawer Selection: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 53,
@@ -2108,7 +2524,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tablet_stand/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tablet_stand/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tablet_stand/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-053.webp",
+      "alt": "Task 053 — Personalized Tablet Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 54,
@@ -2145,7 +2569,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/speaker_facing/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/speaker_facing/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/speaker_facing/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-054.webp",
+      "alt": "Task 054 — Personalized Speaker Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 55,
@@ -2180,7 +2612,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/magazine_placement/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/magazine_placement/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/magazine_placement/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-055.webp",
+      "alt": "Task 055 — Personalized Magazine Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 56,
@@ -2218,7 +2658,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laptop_lid/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laptop_lid/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laptop_lid/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-056.webp",
+      "alt": "Task 056 — Personalized Laptop Placement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 57,
@@ -2257,7 +2705,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-057.webp",
+      "alt": "Task 057 — Personalized Plant Arrangement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 58,
@@ -2298,7 +2754,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bathroom_counter/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bathroom_counter/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bathroom_counter/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-058.webp",
+      "alt": "Task 058 — Personalized Bathroom Counter: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 59,
@@ -2337,7 +2801,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-059.webp",
+      "alt": "Task 059 — Personalized Mail Sorting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 60,
@@ -2376,7 +2848,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bottle_storage/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bottle_storage/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bottle_storage/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-060.webp",
+      "alt": "Task 060 — Personalized Bottle Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 61,
@@ -2416,7 +2896,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/charging_station/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/charging_station/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/charging_station/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-061.webp",
+      "alt": "Task 061 — Personalized Charging Station: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 62,
@@ -2455,7 +2943,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/entryway_tidy/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/entryway_tidy/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/entryway_tidy/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-062.webp",
+      "alt": "Task 062 — Personalized Entryway Tidying: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 63,
@@ -2498,7 +2994,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_putaway/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_putaway/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_putaway/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-063.webp",
+      "alt": "Task 063 — Personalized Dish Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 64,
@@ -2541,7 +3045,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cleaning_supplies/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cleaning_supplies/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cleaning_supplies/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-064.webp",
+      "alt": "Task 064 — Personalized Cleaning Supplies Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 65,
@@ -2582,7 +3094,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/reading_corner/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/reading_corner/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/reading_corner/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-065.webp",
+      "alt": "Task 065 — Personalized Reading Corner: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 66,
@@ -2617,7 +3137,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tabletop_transfer/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tabletop_transfer/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tabletop_transfer/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-066.webp",
+      "alt": "Task 066 — Tabletop Transfer Route: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 67,
@@ -2652,7 +3180,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/transport_orientation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/transport_orientation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/transport_orientation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-067.webp",
+      "alt": "Task 067 — Object Transport Orientation: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 68,
@@ -2687,7 +3223,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lifted_transfer/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-068.webp",
+      "alt": "Task 068 — Lifted vs. Pushed Transfer: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 69,
@@ -2722,7 +3266,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cup_grasp/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cup_grasp/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cup_grasp/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-069.webp",
+      "alt": "Task 069 — Cup Grasp Region: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 70,
@@ -2763,7 +3315,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-070.webp",
+      "alt": "Task 070 — Personalized Jar Sorting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 71,
@@ -2820,7 +3380,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/waste_sorting/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/waste_sorting/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/waste_sorting/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-071.webp",
+      "alt": "Task 071 — Personalized Waste Sorting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 72,
@@ -2865,7 +3433,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_sorting/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_sorting/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_sorting/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-072.webp",
+      "alt": "Task 072 — Personalized Laundry Sorting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 73,
@@ -2914,7 +3490,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/child_pet_safety/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/child_pet_safety/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/child_pet_safety/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-073.webp",
+      "alt": "Task 073 — Personalized Child and Pet Safety Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 74,
@@ -2961,7 +3545,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_height/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_height/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_height/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-074.webp",
+      "alt": "Task 074 — Personalized Monitor Height: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 75,
@@ -3010,7 +3602,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lunch_packing/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lunch_packing/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lunch_packing/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-075.webp",
+      "alt": "Task 075 — Personalized Lunch Packing: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 76,
@@ -3058,7 +3658,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_separation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_separation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dish_separation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-076.webp",
+      "alt": "Task 076 — Personalized Dish Separation: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 77,
@@ -3101,7 +3709,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cutting_station/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cutting_station/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cutting_station/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-077.webp",
+      "alt": "Task 077 — Personalized Cutting Station: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 78,
@@ -3149,7 +3765,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pantry_loading/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pantry_loading/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pantry_loading/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-078.webp",
+      "alt": "Task 078 — Personalized Pantry Loading: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 79,
@@ -3196,7 +3820,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tea_service/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tea_service/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/tea_service/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-079.webp",
+      "alt": "Task 079 — Personalized Tea Service: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 80,
@@ -3241,7 +3873,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/scent_shelf/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/scent_shelf/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/scent_shelf/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-080.webp",
+      "alt": "Task 080 — Personalized Bathroom Shelf: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 81,
@@ -3295,7 +3935,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/figurine_display/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/figurine_display/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/figurine_display/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-081.webp",
+      "alt": "Task 081 — Personalized Shelf Display: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 82,
@@ -3326,7 +3974,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/masonry_workbench/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/masonry_workbench/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/masonry_workbench/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-082.webp",
+      "alt": "Task 082 — Personalized Masonry Workbench Setup: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 83,
@@ -3357,7 +4013,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-083.webp",
+      "alt": "Task 083 — Personalized Carpenter Marking Tool Preparation: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 84,
@@ -3388,7 +4052,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-084.webp",
+      "alt": "Task 084 — Personalized Construction Worker Hardhat Selection: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 85,
@@ -3419,7 +4091,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/auxiliary_table/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/auxiliary_table/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/auxiliary_table/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-085.webp",
+      "alt": "Task 085 — Personalized Woodworking Auxiliary Table Height: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 86,
@@ -3450,7 +4130,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wrench_orientation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wrench_orientation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wrench_orientation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-086.webp",
+      "alt": "Task 086 — Personalized Maintenance Wrench Orientation: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 87,
@@ -3481,7 +4169,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-087.webp",
+      "alt": "Task 087 — Personalized Painter Speaker Volume: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 88,
@@ -3532,7 +4228,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/table_clearing/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/table_clearing/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/table_clearing/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-088.webp",
+      "alt": "Task 088 — Personalized Table Clearing Order: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 89,
@@ -3563,7 +4267,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-089.webp",
+      "alt": "Task 089 — Presentation Tool Kit: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 90,
@@ -3600,7 +4312,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/approach_side/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/approach_side/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/approach_side/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-090.webp",
+      "alt": "Task 090 — Personalized Approach Side: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 91,
@@ -3639,7 +4359,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cabinet_closing/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-091.webp",
+      "alt": "Task 091 — Personalized Cabinet Closing: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 92,
@@ -3698,7 +4426,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hallway_pickup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hallway_pickup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hallway_pickup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-092.webp",
+      "alt": "Task 092 — Personalized Shared-Hallway Pickup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 93,
@@ -3748,7 +4484,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stove_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stove_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/stove_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-093.webp",
+      "alt": "Task 093 — Personalized Stove Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 94,
@@ -3791,7 +4535,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_storage/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_storage/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_storage/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-094.webp",
+      "alt": "Task 094 — Personalized Mug Storage: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 95,
@@ -3822,7 +4574,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mirror_adjustment/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mirror_adjustment/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mirror_adjustment/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-095.webp",
+      "alt": "Task 095 — Adjustable Vanity Mirror: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 96,
@@ -3860,7 +4620,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/curtain_positioning/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/curtain_positioning/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/curtain_positioning/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-096.webp",
+      "alt": "Task 096 — Sliding Curtain Privacy: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 97,
@@ -3891,7 +4659,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pet_feeding_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pet_feeding_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/pet_feeding_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-097.webp",
+      "alt": "Task 097 — Pet Feeding Station: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 98,
@@ -3922,7 +4698,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_airer_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_airer_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_airer_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-098.webp",
+      "alt": "Task 098 — Folding Drying Rack: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 99,
@@ -3953,7 +4737,15 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_cart_setup/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_cart_setup/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/serving_cart_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-099.webp",
+      "alt": "Task 099 — Serving Cart Arrangement: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   },
   {
     "id": 100,
@@ -3991,6 +4783,14 @@
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/config/personas.json"
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-100.webp",
+      "alt": "Task 100 — Articulated Monitor Viewing: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    }
   }
 ]
