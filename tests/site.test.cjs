@@ -363,7 +363,8 @@ test('leaderboard ranks only within each scoring criterion without a settings pa
   assert.match(ctx.$('#leaderboard-status').textContent, /2026-10-25/);
   assert.ok(ctx.$('figure.leaderboard-chart figcaption'));
   assert.ok(ctx.$('.leaderboard-bars[role="list"]'));
-  assert.equal(ctx.$('#leaderboard a[download]').getAttribute('href'), 'data/leaderboard.json');
+  assert.equal(ctx.$('#leaderboard a[download]'), null);
+  assert.equal(ctx.$('#leaderboard .leaderboard-downloads'), null);
   ctx.window.close();
 });
 
@@ -372,7 +373,8 @@ test('leaderboard failure leaves the catalog, task dialog and recording tabs usa
   assert.equal(ctx.ready, true);
   assert.equal(ctx.leaderboardReady, false);
   assert.match(ctx.$('#leaderboard-status').textContent, /unavailable/);
-  assert.equal(ctx.$('#leaderboard-boards a').getAttribute('href'), 'data/leaderboard.json');
+  assert.equal(ctx.$('#leaderboard-boards a'), null);
+  assert.match(ctx.$('#leaderboard-boards').textContent, /Try again later/);
   input(ctx, '14');
   ctx.$('[data-task="14"]').click();
   assert.ok(ctx.$('#task-dialog').hasAttribute('open'));
@@ -434,7 +436,7 @@ test('published policy snapshot renders reported scores without settings panels 
   const astra = ctx.$('[data-policy="astra-high"]');
   assert.equal(astra.querySelector('.leaderboard-policy').textContent, 'Astra');
   assert.doesNotMatch(astra.textContent, /author.reported|not independently|not recomputed|unverified/i);
-  assert.equal(ctx.$('#leaderboard a[href="data/leaderboard-results.json"]').hasAttribute('download'), true);
+  assert.equal(ctx.$('#leaderboard a[href="data/leaderboard-results.json"], #leaderboard a[href="data/leaderboard.json"]'), null);
   ctx.window.close();
 });
 

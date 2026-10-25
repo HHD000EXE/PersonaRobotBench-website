@@ -276,7 +276,7 @@
         '<span class="visually-hidden">. Scale: 0 to ' + axisMax + ' percent.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
         '</ol></figure></section>';
     }).join("");
-    $("#leaderboard-status").textContent = "Results snapshot" + (data.updated ? " · " + data.updated : "") + " · criteria and source provenance included in the download";
+    $("#leaderboard-status").textContent = "Results snapshot" + (data.updated ? " · " + data.updated : "");
   }
 
   async function loadLeaderboard() {
@@ -287,7 +287,7 @@
       return true;
     } catch {
       $("#leaderboard-status").textContent = "The leaderboard is unavailable.";
-      $("#leaderboard-boards").innerHTML = '<div class="empty-state"><p>Try again later, or read the <a href="data/leaderboard.json">downloadable results snapshot</a>.</p></div>';
+      $("#leaderboard-boards").innerHTML = '<div class="empty-state"><p>Try again later.</p></div>';
       return false;
     }
   }
