@@ -9,9 +9,11 @@ The public research website for the **100-task / 217-persona** benchmark.
 
 This public repository contains the website, its complete task catalog,
 100 task-specific scene previews, and the policy leaderboard. The homepage
-includes six complete recorded Astra episodes: A/B pairs for Tasks 18, 51 and 68.
-Videos play at their original simulation rate with inference waits omitted;
-they are selected demonstrations rather than a benchmark success-rate estimate.
+includes recorded A/B persona pairs: Astra model rollouts for Tasks 18, 51 and 68,
+and the scripted reference episodes of Task 87. Each pair is labelled with its
+source. Videos play at their original simulation rate (Astra inference waits
+omitted); they are selected demonstrations rather than a benchmark success-rate
+estimate.
 See [recording provenance](data/rollout-provenance.json) for source hashes,
 recording context and the historical Task 110 → Task 51 mapping.
 
@@ -48,8 +50,9 @@ built-in token; contributors do not configure deployment credentials.
 
 ## Add or replace rollout videos
 
-Edit `data/examples.json`. The homepage has matched A/B videos for Tasks 18, 51
-and 68. Set each persona's `video` field, for example:
+Edit `data/examples.json`. Every example with a `recording` block gets a tab
+in the rollout section, in file order, labelled by its `tabLabel`. Set each
+persona's `video` field, for example:
 
 ~~~json
 {
@@ -65,8 +68,18 @@ and 68. Set each persona's `video` field, for example:
 2. Set the corresponding `personas[].video`; supply both A and B for a paired comparison.
 3. Set `videoPoster` to a real frame from that recording, update its duration,
    and include captions for speech. Keep the static scene poster separate.
-4. Update `data/rollout-provenance.json` with the recording source and hashes.
-5. Run the checks above and open a PR against `website`.
+4. Set the example's `recording`: `source` (a key of `sources` in
+   `data/rollout-provenance.json`), `label` (shown on the page; must equal that
+   source's label), `kind` (`model` for a policy rollout, `scripted` for a scripted
+   controller or expert), `playback` (the note under the videos) and `recordedTaskId`.
+5. Add one receipt per persona to `data/rollout-provenance.json` with the same
+   `source`, the recording facts and the video and poster hashes. Never label a
+   scripted demonstration as a model rollout.
+6. Run the checks above and open a PR against `website`.
+
+The rollout section plays both personas on one simulation clock (play, scrub,
+1×/2×/4×); the shorter recording holds its last frame. Each video keeps its own
+native controls.
 
 Missing videos keep their placeholders. Playback uses `personas[].video`, not
 the reserved top-level `video` field. Host large recordings externally to keep

@@ -160,7 +160,7 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
   assert.equal(ctx.$$('.video-placeholder').length, 2);
   assert.equal(ctx.$$('video').length, 0);
   const tabs = ctx.$('.rollout-tabs');
-  for (const [key, expected] of [['ArrowRight', '51'], ['End', '68'], ['Home', '18'], ['ArrowLeft', '68']]) {
+  for (const [key, expected] of [['ArrowRight', '51'], ['End', '87'], ['Home', '18'], ['ArrowLeft', '87']]) {
     tabs.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key, bubbles: true }));
     const selected = ctx.$('[role="tab"][aria-selected="true"]');
     assert.equal(selected.dataset.example, expected);
@@ -221,10 +221,12 @@ test('unsafe video protocols never become source elements', async () => {
   }
 });
 
-test('shipped examples provide six complete paired recordings with distinct real-frame posters', async () => {
+test('shipped examples provide complete paired recordings with distinct real-frame posters', async () => {
   const ctx = await boot({ examples: shippedExamples });
   let count = 0;
-  for (const taskId of [18, 51, 68]) {
+  const recorded = shippedExamples.filter((item) => item.recording).map((item) => item.id);
+  assert.deepEqual(recorded, [18, 51, 68, 87]);
+  for (const taskId of recorded) {
     ctx.$('[data-example="' + taskId + '"]').click();
     const example = shippedExamples.find((item) => item.id === taskId);
     const videos = ctx.$$('video');
@@ -245,12 +247,79 @@ test('shipped examples provide six complete paired recordings with distinct real
       count++;
     }
     assert.ok(ctx.$('.video-status').textContent.includes('Paired videos available'));
-    assert.ok(ctx.$('#rollout-recording-note').textContent.includes('Astra'));
-    assert.ok(ctx.$('#rollout-recording-note').textContent.includes('1× simulation playback; inference waits omitted'));
+    assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith(example.recording.label + ' · '));
+    assert.ok(ctx.$('#rollout-recording-note').textContent.includes('1× simulation playback'));
+    assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Astra'), example.recording.kind === 'model');
+    assert.equal(ctx.$('#rollout-recording-note').textContent.includes('inference waits omitted'), example.recording.kind === 'model');
     assert.equal(ctx.$('#rollout-recording-note a').href, 'https://benchmark.test/data/rollout-provenance.json');
     assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Recorded as Task 110; now Task 51.'), taskId === 51);
   }
-  assert.equal(count, 6);
+  assert.equal(count, 8);
+  ctx.window.close();
+});
+
+test('rollout tabs are built from recorded examples and label each source', async () => {
+  const ctx = await boot({ examples: shippedExamples });
+  const tabs = ctx.$$('.rollout-tabs [role="tab"]');
+  assert.deepEqual(tabs.map((tab) => tab.dataset.example), ['18', '51', '68', '87']);
+  assert.deepEqual(tabs.map((tab) => tab.querySelector('span').textContent), ['Drink selection', 'Pressing style', 'Transfer method', 'Volume level']);
+  assert.equal(tabs[0].getAttribute('aria-selected'), 'true');
+  assert.equal(ctx.$('#rollout-source').hidden, false);
+  assert.equal(ctx.$('#rollout-source').dataset.kind, 'model');
+  assert.equal(ctx.$('#rollout-source').textContent, 'Model rollout · Astra');
+  ctx.$('[data-example="87"]').click();
+  assert.equal(ctx.$('#rollout-source').dataset.kind, 'scripted');
+  assert.equal(ctx.$('#rollout-source').textContent, 'Scripted reference controller');
+  assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith('Scripted reference controller · '));
+  ctx.window.close();
+});
+
+function fakeMedia(video, duration) {
+  let time = 0;
+  let paused = true;
+  Object.defineProperty(video, 'duration', { configurable: true, get: () => duration });
+  Object.defineProperty(video, 'currentTime', { configurable: true, get: () => time, set: (value) => { time = value; } });
+  Object.defineProperty(video, 'paused', { configurable: true, get: () => paused });
+  Object.defineProperty(video, 'ended', { configurable: true, get: () => false });
+  video.play = () => { paused = false; return Promise.resolve(); };
+  video.pause = () => { paused = true; };
+}
+
+test('synchronized controls play, scrub and speed up both personas on one clock', async () => {
+  const ctx = await boot({ examples: shippedExamples });
+  const bar = ctx.$('#rollout-sync');
+  assert.equal(bar.hidden, false);
+  const [a, b] = ctx.$$('#rollout-pair video');
+  fakeMedia(a, 96.9);
+  fakeMedia(b, 92.8);
+  a.currentTime = 10;
+  ctx.$('.sync-play').click();
+  assert.equal(a.paused, false);
+  assert.equal(b.paused, false);
+  assert.equal(b.currentTime, 10, 'the second persona joins the shared clock');
+  assert.ok(ctx.$('.sync-play').textContent.includes('Pause both'));
+  ctx.$('.sync-play').click();
+  assert.equal(a.paused && b.paused, true);
+  const scrub = ctx.$('.sync-scrub');
+  scrub.value = '1000';
+  scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+  assert.ok(Math.abs(a.currentTime - 96.85) < 0.06);
+  assert.ok(Math.abs(b.currentTime - 92.75) < 0.001, 'the shorter recording holds its last frame');
+  ctx.$('[data-rate="4"]').click();
+  assert.equal(a.playbackRate, 4);
+  assert.equal(b.playbackRate, 4);
+  assert.equal(ctx.$('[data-rate="4"]').getAttribute('aria-checked'), 'true');
+  assert.equal(ctx.$$('.sync-speed [aria-checked="true"]').length, 1);
+  ctx.$('[data-example="87"]').click();
+  assert.deepEqual(ctx.$$('#rollout-pair video').map((video) => video.playbackRate), [4, 4], 'speed carries over to the next pair');
+  assert.ok(ctx.$('.sync-time').textContent.endsWith('/ 12.0 s'));
+  ctx.window.close();
+});
+
+test('synchronized controls stay hidden until both videos exist', async () => {
+  const ctx = await boot();
+  assert.equal(ctx.$('#rollout-sync').hidden, true);
+  assert.equal(ctx.$$('.sync-play').length, 0);
   ctx.window.close();
 });
 

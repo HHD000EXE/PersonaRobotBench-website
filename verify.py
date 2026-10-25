@@ -185,8 +185,14 @@ def verify(root: Path) -> dict[str, int | str]:
         recordings = provenance["recordings"]
         records = {(item["taskId"], item["persona"]): item for item in recordings}
         assert len(records) == len(recordings), "Duplicate rollout receipt"
-        expected = {(task_id, persona) for task_id in (18, 51, 68) for persona in ("A", "B")}
+        expected = {(task_id, persona) for task_id in (18, 51, 68, 87) for persona in ("A", "B")}
         assert expected <= records.keys(), "Missing featured A/B recording receipt"
+        # Every receipt names the source that recorded it (a model rollout or a
+        # scripted demonstration); the page labels each pair from that source.
+        sources = provenance.get("sources", {})
+        for item in recordings:
+            assert item.get("source") in sources, f"Unknown recording source: {item.get('source')}"
+            assert sources[item["source"]].get("label") and sources[item["source"]].get("kind"), item["source"]
 
         def digest(file: Path) -> str:
             checksum = hashlib.sha256()
@@ -227,6 +233,8 @@ def verify(root: Path) -> dict[str, int | str]:
                 assert receipt["video"] == persona["video"], "Video URL differs from receipt"
                 assert receipt["poster"] == persona["videoPoster"], "Poster URL differs from receipt"
                 assert receipt["recordedTaskId"] == example["recording"]["recordedTaskId"], "Historical task ID differs"
+                assert receipt["source"] == example["recording"].get("source"), "Recording source differs from receipt"
+                assert example["recording"].get("label") == sources[receipt["source"]]["label"], "Recording label differs from its source"
                 assert abs(receipt["durationSeconds"] - persona["videoDurationSeconds"]) < 0.001, "Duration differs"
                 local_reference(receipt["video"], root)
                 local_reference(receipt["poster"], root)

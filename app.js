@@ -4,7 +4,8 @@
 
   const FEATURED = [18, 51, 68, 87, 32, 91];
   const PAGE_SIZE = 6;
-  const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, activeExample: 18 };
+  const RATES = [1, 2, 4];
+  const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, activeExample: 18, rate: 1 };
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
   const escape = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
@@ -112,6 +113,85 @@
       '</span><div><span class="mono small-label">PERSONA ' + escape(persona.id) + '</span><p>' + escape(persona.description) + '</p></div></div></div>';
   }
 
+  function renderRolloutTabs() {
+    const recorded = state.examples.filter((example) => example.recording);
+    if (!recorded.length) return;
+    $(".rollout-tabs").innerHTML = recorded.map((example, index) => '<button type="button" role="tab" id="example-tab-' + example.id +
+      '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-example="' + example.id + '">' + String(index + 1).padStart(2, "0") +
+      ' <span>' + escape(example.tabLabel ?? example.shortTitle) + '</span></button>').join("");
+  }
+
+  // One control drives both personas on a shared simulation clock: the shorter
+  // recording holds its last frame while the longer one finishes.
+  function wireSync(example) {
+    const bar = $("#rollout-sync");
+    if (!bar) return;
+    const videos = $$("video", $("#rollout-pair"));
+    if (videos.length !== 2) {
+      bar.hidden = true;
+      bar.innerHTML = "";
+      return;
+    }
+    const length = Math.max(0, ...example.personas.slice(0, 2).map((persona) => persona.videoDurationSeconds || 0));
+    const playLabel = '<span aria-hidden="true">▶</span> Play A and B together';
+    const pauseLabel = '<span aria-hidden="true">❚❚</span> Pause both';
+    bar.hidden = false;
+    bar.innerHTML = '<button type="button" class="sync-play">' + playLabel + '</button>' +
+      '<input class="sync-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Position in both recordings">' +
+      '<span class="sync-time mono">0.0 / ' + length.toFixed(1) + ' s</span>' +
+      '<div class="sync-speed" role="radiogroup" aria-label="Playback speed for both recordings">' +
+      RATES.map((rate) => '<button type="button" role="radio" data-rate="' + rate + '" aria-checked="' + (rate === state.rate) + '">' + rate + '×</button>').join("") + '</div>';
+    const play = $(".sync-play", bar);
+    const scrub = $(".sync-scrub", bar);
+    const time = $(".sync-time", bar);
+    const clock = () => Math.max(0, ...videos.map((video) => video.currentTime || 0));
+    const playing = () => videos.some((video) => !video.paused && !video.ended);
+    const finished = () => videos.every((video) => video.ended || (video.duration > 0 && video.currentTime >= video.duration - 0.05));
+    const show = () => {
+      const now = clock();
+      scrub.value = String(length ? Math.round(now / length * 1000) : 0);
+      time.textContent = now.toFixed(1) + " / " + length.toFixed(1) + " s";
+    };
+    const label = () => { play.innerHTML = playing() ? pauseLabel : playLabel; };
+    const seek = (seconds) => videos.forEach((video) => {
+      const end = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : length;
+      video.currentTime = Math.min(seconds, Math.max(0, end - 0.05));
+    });
+    const setRate = () => videos.forEach((video) => {
+      video.defaultPlaybackRate = state.rate;
+      video.playbackRate = state.rate;
+    });
+    setRate();
+    for (const video of videos) {
+      video.addEventListener("timeupdate", show);
+      for (const type of ["play", "pause", "ended"]) video.addEventListener(type, label);
+    }
+    play.addEventListener("click", () => {
+      if (playing()) {
+        videos.forEach((video) => video.pause());
+        label();
+        return;
+      }
+      seek(finished() ? 0 : clock());
+      for (const video of videos) {
+        const started = video.play?.();
+        if (started?.catch) started.catch(() => label());
+      }
+      label();
+    });
+    scrub.addEventListener("input", () => {
+      seek(Number(scrub.value) / 1000 * length);
+      show();
+    });
+    $(".sync-speed", bar).addEventListener("click", (event) => {
+      const button = event.target.closest("[data-rate]");
+      if (!button) return;
+      state.rate = Number(button.dataset.rate);
+      setRate();
+      $$("[data-rate]", bar).forEach((item) => item.setAttribute("aria-checked", String(Number(item.dataset.rate) === state.rate)));
+    });
+  }
+
   function selectExample(id, focus = false) {
     const example = state.examples.find((item) => item.id === id);
     if (!example) return;
@@ -131,13 +211,24 @@
     const personas = example.personas.slice(0, 2);
     $("#rollout-pair").innerHTML = personas.map((persona, index) => rolloutCase(example, persona, index)).join("");
     const ready = personas.filter((persona) => safeUrl(persona.video)).length;
+    const source = $("#rollout-source");
+    if (source) {
+      const recording = example.recording;
+      source.hidden = !recording;
+      source.dataset.kind = recording?.kind ?? "";
+      source.textContent = !recording ? "" : recording.kind === "model"
+        ? "Model rollout · " + (recording.label ?? recording.model)
+        : (recording.label ?? "Scripted demonstration");
+    }
+    wireSync(example);
     $(".video-status").innerHTML = "<i></i> " + (ready === 2 ? "Paired videos available" : ready === 1 ? "1 of 2 videos available" : "Videos coming soon");
     const recordingNote = $("#rollout-recording-note");
     if (recordingNote) {
       recordingNote.textContent = "";
       if (example.recording && ready) {
-        const label = example.recording.model === "gpt-6-astra" ? "Astra" : example.recording.model;
-        recordingNote.textContent = label + " · complete recorded episodes · 1× simulation playback; inference waits omitted.";
+        const recording = example.recording;
+        const label = recording.label ?? (recording.model === "gpt-6-astra" ? "Astra" : recording.model);
+        recordingNote.textContent = label + " · " + (recording.playback ?? "complete recorded episodes · 1× simulation playback; inference waits omitted.");
         if (example.recording.recordedTaskId !== example.id) {
           recordingNote.textContent += " Recorded as Task " + example.recording.recordedTaskId + "; now Task " + example.id + ".";
         }
@@ -300,7 +391,8 @@
       [state.tasks, state.examples] = await Promise.all(responses.map((response) => response.json()));
       if (state.tasks.length !== 100 || state.tasks.reduce((sum, task) => sum + task.personaCount, 0) !== 217) throw new Error("Catalog does not match the release");
       renderTasks();
-      selectExample(18);
+      renderRolloutTabs();
+      selectExample(state.examples.find((example) => example.recording)?.id ?? 18);
       return true;
     } catch {
       $("#task-count").textContent = "The interactive catalog is unavailable.";

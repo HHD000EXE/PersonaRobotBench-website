@@ -48,10 +48,15 @@
     "videoLabel": "Astra simulation rollout · complete recorded episode",
     "imageKind": "static_initial_scene",
     "recording": {
+      "source": "astra-task-demos",
+      "label": "Astra",
+      "kind": "model",
       "model": "gpt-6-astra",
       "recordedTaskId": 18,
-      "provenance": "data/rollout-provenance.json"
-    }
+      "provenance": "data/rollout-provenance.json",
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted."
+    },
+    "tabLabel": "Drink selection"
   },
   {
     "id": 51,
@@ -118,10 +123,15 @@
     "videoLabel": "Astra simulation rollout · complete recorded episode",
     "imageKind": "static_initial_scene",
     "recording": {
+      "source": "astra-task-demos",
+      "label": "Astra",
+      "kind": "model",
       "model": "gpt-6-astra",
       "recordedTaskId": 110,
-      "provenance": "data/rollout-provenance.json"
-    }
+      "provenance": "data/rollout-provenance.json",
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted."
+    },
+    "tabLabel": "Pressing style"
   },
   {
     "id": 68,
@@ -172,10 +182,15 @@
     "videoLabel": "Astra simulation rollout · complete recorded episode",
     "imageKind": "static_initial_scene",
     "recording": {
+      "source": "astra-task-demos",
+      "label": "Astra",
+      "kind": "model",
       "model": "gpt-6-astra",
       "recordedTaskId": 68,
-      "provenance": "data/rollout-provenance.json"
-    }
+      "provenance": "data/rollout-provenance.json",
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted."
+    },
+    "tabLabel": "Transfer method"
   },
   {
     "id": 87,
@@ -197,14 +212,18 @@
         "name": "Painter A",
         "description": "I prefer gentle music at a low listening volume of 30%.",
         "preferences": {},
-        "video": null
+        "video": "assets/rollouts/task087-A.mp4",
+        "videoPoster": "assets/rollouts/task087-A.webp",
+        "videoDurationSeconds": 12.0
       },
       {
         "id": "B",
         "name": "Painter B",
         "description": "I prefer heavy metal at a higher listening volume of 70%.",
         "preferences": {},
-        "video": null
+        "video": "assets/rollouts/task087-B.mp4",
+        "videoPoster": "assets/rollouts/task087-B.webp",
+        "videoDurationSeconds": 12.0
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/painter_speaker_volume/README.md",
@@ -215,8 +234,17 @@
     "poster": "assets/task-scenes/task-087.webp",
     "posterAlt": "Static initial simulation scene for speaker volume.",
     "video": null,
-    "videoLabel": "Simulation rollout · coming soon",
-    "imageKind": "static_initial_scene"
+    "videoLabel": "Scripted reference controller · complete recorded episode",
+    "imageKind": "static_initial_scene",
+    "tabLabel": "Volume level",
+    "recording": {
+      "source": "task87-scripted-reference",
+      "label": "Scripted reference controller",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 87,
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 32,
