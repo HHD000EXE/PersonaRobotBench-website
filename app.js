@@ -4,7 +4,8 @@
 
   const FEATURED = [18, 51, 68, 87, 32, 91];
   const PAGE_SIZE = 6;
-  const RATES = [1, 2, 4];
+  const RATES = [1, 2, 4, 8];
+  const SKIP_SECONDS = 5;
   const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, activeExample: 18, rate: 1 };
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
@@ -115,14 +116,14 @@
     const recorded = state.examples.filter((example) => example.recording);
     if (!recorded.length) return;
     // A tile per recorded pair: a real frame from persona A's recording (or the
-    // initial scene), the pair's label and a dot for a model or a scripted run.
-    // Model recordings carry an on-screen overlay, so their tiles use the scene.
+    // initial scene) and the pair's label. Model recordings carry an on-screen
+    // overlay, so their tiles use the scene.
     $(".rollout-tabs").innerHTML = recorded.map((example) => {
       const model = example.recording.kind === "model";
       const thumbnail = (model ? null : safeUrl(example.personas[0]?.videoPoster)) ?? safeUrl(example.poster);
       return '<button type="button" role="tab" id="example-tab-' + example.id + '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-example="' +
-        example.id + '" data-kind="' + (model ? "model" : "scripted") + '">' + (thumbnail ? '<img src="' + escape(thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
-        '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span><span class="visually-hidden">, ' + (model ? "model rollout" : "scripted demonstration") + '</span></button>';
+        example.id + '">' + (thumbnail ? '<img src="' + escape(thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
+        '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span></button>';
     }).join("");
     $(".rollout-tabs").classList.add("rollout-tiles");
   }
@@ -143,7 +144,9 @@
     const pauseLabel = '<span aria-hidden="true">❚❚</span> Pause both';
     bar.hidden = false;
     bar.innerHTML = '<button type="button" class="sync-play">' + playLabel + '</button>' +
+      '<button type="button" class="sync-skip" data-skip="-' + SKIP_SECONDS + '" aria-label="Back ' + SKIP_SECONDS + ' seconds">−' + SKIP_SECONDS + ' s</button>' +
       '<input class="sync-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Position in both recordings">' +
+      '<button type="button" class="sync-skip" data-skip="' + SKIP_SECONDS + '" aria-label="Forward ' + SKIP_SECONDS + ' seconds">+' + SKIP_SECONDS + ' s</button>' +
       '<span class="sync-time mono">0.0 / ' + length.toFixed(1) + ' s</span>' +
       '<div class="sync-speed" role="radiogroup" aria-label="Playback speed for both recordings">' +
       RATES.map((rate) => '<button type="button" role="radio" data-rate="' + rate + '" aria-checked="' + (rate === state.rate) + '">' + rate + '×</button>').join("") + '</div>';
@@ -185,10 +188,22 @@
       }
       label();
     });
+    const jump = (seconds) => {
+      seek(Math.min(length, Math.max(0, clock() + seconds)));
+      show();
+    };
     scrub.addEventListener("input", () => {
       seek(Number(scrub.value) / 1000 * length);
       show();
     });
+    // Arrow keys on the bar move both recordings by the skip step, not 1/1000 of the clip.
+    scrub.addEventListener("keydown", (event) => {
+      const step = { ArrowLeft: -SKIP_SECONDS, ArrowDown: -SKIP_SECONDS, ArrowRight: SKIP_SECONDS, ArrowUp: SKIP_SECONDS }[event.key];
+      if (step === undefined) return;
+      event.preventDefault();
+      jump(step);
+    });
+    $$(".sync-skip", bar).forEach((button) => button.addEventListener("click", () => jump(Number(button.dataset.skip))));
     $(".sync-speed", bar).addEventListener("click", (event) => {
       const button = event.target.closest("[data-rate]");
       if (!button) return;
@@ -217,15 +232,6 @@
     const personas = example.personas.slice(0, 2);
     $("#rollout-pair").innerHTML = personas.map((persona, index) => rolloutCase(example, persona, index)).join("");
     const ready = personas.filter((persona) => safeUrl(persona.video)).length;
-    const source = $("#rollout-source");
-    if (source) {
-      const recording = example.recording;
-      source.hidden = !recording;
-      source.dataset.kind = recording?.kind ?? "";
-      source.textContent = !recording ? "" : recording.kind === "model"
-        ? "Model rollout · " + (recording.label ?? recording.model)
-        : (recording.label ?? "Scripted demonstration");
-    }
     wireSync(example);
     // Only missing videos need a status; a complete pair speaks for itself.
     $(".video-status").hidden = ready === 2;
@@ -234,9 +240,8 @@
     if (recordingNote) {
       recordingNote.textContent = "";
       if (example.recording && ready) {
-        const recording = example.recording;
-        const label = recording.label ?? (recording.model === "gpt-6-astra" ? "Astra" : recording.model);
-        recordingNote.textContent = label + " · " + (recording.playback ?? "complete recorded episodes · 1× simulation playback; inference waits omitted.");
+        const playback = example.recording.playback ?? "complete recorded episodes · 1× simulation playback; inference waits omitted.";
+        recordingNote.textContent = playback.charAt(0).toUpperCase() + playback.slice(1);
         if (example.recording.recordedTaskId !== example.id) {
           recordingNote.textContent += " Recorded as Task " + example.recording.recordedTaskId + "; now Task " + example.id + ".";
         }

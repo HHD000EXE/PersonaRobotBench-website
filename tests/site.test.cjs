@@ -249,9 +249,10 @@ test('shipped examples provide complete paired recordings with distinct real-fra
       count++;
     }
     assert.ok(ctx.$('.video-status').textContent.includes('Paired videos available'));
-    assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith(example.recording.label + ' · '));
+    assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith('Complete recorded episode'));
     assert.ok(ctx.$('#rollout-recording-note').textContent.includes('1× simulation playback'));
-    assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Astra'), example.recording.kind === 'model');
+    // The page shows no source labels (model or scripted); sources stay in the provenance file.
+    assert.equal(/Astra|Scripted|Model rollout/.test(ctx.$('#rollout-recording-note').textContent), false);
     assert.equal(ctx.$('#rollout-recording-note').textContent.includes('inference waits omitted'), example.recording.kind === 'model');
     assert.equal(ctx.$('#rollout-recording-note a').href, 'https://benchmark.test/data/rollout-provenance.json');
     assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Recorded as Task 110; now Task 51.'), taskId === 51);
@@ -260,7 +261,7 @@ test('shipped examples provide complete paired recordings with distinct real-fra
   ctx.window.close();
 });
 
-test('rollout tabs are built from recorded examples and label each source', async () => {
+test('rollout tabs are built from recorded examples without source labels', async () => {
   const ctx = await boot({ examples: shippedExamples });
   const tabs = ctx.$$('.rollout-tabs [role="tab"]');
   const recorded = shippedExamples.filter((item) => item.recording);
@@ -271,17 +272,14 @@ test('rollout tabs are built from recorded examples and label each source', asyn
     const model = example.recording.kind === 'model';
     // Model recordings carry an overlay, so their tiles show the clean initial scene.
     assert.equal(tab.querySelector('img').getAttribute('src'), 'https://benchmark.test/' + (model ? example.poster : example.personas[0].videoPoster));
-    assert.equal(tab.dataset.kind, model ? 'model' : 'scripted');
-    assert.equal(tab.querySelector('.visually-hidden').textContent, model ? ', model rollout' : ', scripted demonstration');
+    assert.equal(tab.dataset.kind, undefined);
+    assert.equal(tab.textContent, example.tabLabel ?? example.shortTitle);
   }
   assert.equal(tabs[0].getAttribute('aria-selected'), 'true');
-  assert.equal(ctx.$('#rollout-source').hidden, false);
-  assert.equal(ctx.$('#rollout-source').dataset.kind, 'model');
-  assert.equal(ctx.$('#rollout-source').textContent, 'Model rollout · Astra');
+  assert.equal(ctx.$('#rollout-source'), null);
+  assert.equal(ctx.$('.rollout-legend'), null);
   ctx.$('[data-example="87"]').click();
-  assert.equal(ctx.$('#rollout-source').dataset.kind, 'scripted');
-  assert.equal(ctx.$('#rollout-source').textContent, 'Scripted reference controller');
-  assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith('Scripted reference controller · '));
+  assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith('Complete recorded episode'));
   ctx.window.close();
 });
 
@@ -316,6 +314,18 @@ test('synchronized controls play, scrub and speed up both personas on one clock'
   scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
   assert.ok(Math.abs(a.currentTime - 96.85) < 0.06);
   assert.ok(Math.abs(b.currentTime - 92.75) < 0.001, 'the shorter recording holds its last frame');
+  scrub.value = '500';
+  scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+  assert.ok(Math.abs(a.currentTime - 48.45) < 0.06 && Math.abs(b.currentTime - 48.45) < 0.06, 'dragging to the middle moves both');
+  ctx.$('.sync-skip[data-skip="5"]').click();
+  assert.ok(Math.abs(a.currentTime - 53.45) < 0.06 && Math.abs(b.currentTime - 53.45) < 0.06);
+  ctx.$('.sync-skip[data-skip="-5"]').click();
+  ctx.$('.sync-skip[data-skip="-5"]').click();
+  assert.ok(Math.abs(a.currentTime - 43.45) < 0.06 && Math.abs(b.currentTime - 43.45) < 0.06);
+  scrub.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
+  assert.ok(Math.abs(a.currentTime - 48.45) < 0.06, 'arrow keys skip by the same step');
+  ctx.$('[data-rate="8"]').click();
+  assert.equal(a.playbackRate, 8);
   ctx.$('[data-rate="4"]').click();
   assert.equal(a.playbackRate, 4);
   assert.equal(b.playbackRate, 4);
