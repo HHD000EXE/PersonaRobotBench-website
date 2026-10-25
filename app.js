@@ -262,3 +262,113 @@
 
   window.prbReady = start();
 })();
+
+// Progressive enhancement: content remains visible without observer support.
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('research-reveal');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.section-heading, .concept-panel, .pipeline, .getting-started').forEach(element => revealObserver.observe(element));
+}
+
+(() => {
+  const toggle = document.querySelector('#scene-toggle');
+  if (!toggle) return;
+  const reset = document.querySelector('#scene-reset');
+  const viewport = document.querySelector('#scene-viewport');
+  const host = document.querySelector('#scene-model-host');
+  const status = document.querySelector('#scene-status');
+  const initialOrbit = '25deg 70deg 4.1m';
+  const initialTarget = '0m 0.85m 0m';
+  let viewer, loading = false, ready = false, timeout;
+  function showStatic() {
+    viewport.classList.remove('is-3d');
+    toggle.setAttribute('aria-pressed', 'false');
+    toggle.querySelector('span').textContent = 'Explore in 3D';
+    reset.disabled = true;
+    if (viewer) viewer.setAttribute('aria-hidden', 'true');
+  }
+  function showModel() {
+    viewport.classList.add('is-3d');
+    toggle.setAttribute('aria-pressed', 'true');
+    toggle.querySelector('span').textContent = 'Show image';
+    viewer.removeAttribute('aria-hidden');
+    reset.disabled = false;
+    status.textContent = 'Drag to orbit · scroll / pinch to zoom';
+  }
+  function fail() {
+    clearTimeout(timeout);
+    loading = false;
+    ready = false;
+    toggle.disabled = false;
+    showStatic();
+    viewer?.remove();
+    viewer = null;
+    status.textContent = '3D unavailable. Image retained; click to retry.';
+  }
+  toggle.addEventListener('click', async () => {
+    if (loading) return;
+    if (ready) {
+      if (viewport.classList.contains('is-3d')) {
+        showStatic();
+        status.textContent = 'Static scene preview';
+      } else showModel();
+      return;
+    }
+    loading = true;
+    toggle.disabled = true;
+    status.textContent = 'Loading 3D scene…';
+    timeout = setTimeout(fail, 45000);
+    try {
+      if (!customElements.get('model-viewer')) {
+        await new Promise((resolve, reject) => {
+          let script = document.querySelector('#model-viewer-library');
+          if (script) script.remove();
+          script = document.createElement('script');
+          script.id = 'model-viewer-library';
+          script.type = 'module';
+          script.src = 'assets/vendor/model-viewer.min.js';
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.append(script);
+        });
+      }
+      // The timeout may have restored the image during a slow library request.
+      if (!loading) return;
+      viewer = document.createElement('model-viewer');
+      const attrs = {
+        src: 'assets/models/shared-desk.glb',
+        alt: 'Scene 001: original shared desk initial scene and Unitree G1. Drag or use arrow keys to orbit; scroll, pinch or Page Up and Page Down to zoom.',
+        'camera-controls': '', 'touch-action': 'pan-y',
+        'camera-orbit': initialOrbit, 'camera-target': initialTarget,
+        'min-camera-orbit': 'auto 20deg 1.2m', 'max-camera-orbit': 'auto 85deg 9m',
+        'field-of-view': '45deg', 'shadow-intensity': '0.85',
+        'environment-image': 'assets/models/scene-environment.hdr', exposure: '1.15', 'tone-mapping': 'aces',
+        'interaction-prompt': 'none', 'disable-pan': '', loading: 'eager',
+        'aria-hidden': 'true'
+      };
+      Object.entries(attrs).forEach(([key, value]) => viewer.setAttribute(key, value));
+      viewer.addEventListener('load', () => {
+        clearTimeout(timeout);
+        loading = false;
+        ready = true;
+        toggle.disabled = false;
+        showModel();
+      }, { once: true });
+      viewer.addEventListener('error', fail, { once: true });
+      host.append(viewer);
+    } catch { fail(); }
+  });
+  reset.addEventListener('click', () => {
+    if (!ready) return;
+    viewer.setAttribute('camera-orbit', initialOrbit);
+    viewer.setAttribute('camera-target', initialTarget);
+    viewer.setAttribute('field-of-view', '45deg');
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) viewer.jumpCameraToGoal?.();
+    status.textContent = 'View reset · drag to orbit · scroll to zoom';
+  });
+})();

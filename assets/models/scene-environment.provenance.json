@@ -1,0 +1,9 @@
+{
+  "sourceRepository": "HHD000EXE/PersonaRobotBench",
+  "sourceRevision": "26cc1ccc3fd97bbcb834b550af11af0d2b1284ff",
+  "sourcePath": "home_backgrounds/textures/hd/residential_garden_4k.hdr",
+  "sourceSha256": "367b27a182951d1fdbcc809cdc4df3d04ea3e3dfd46baf7245e8b031bd9e3d28",
+  "conversion": "OpenCV INTER_AREA resize to 1024x512, linear HDR preserved",
+  "outputSha256": "27fdc1d2ffee46478beaa032af32a84e3891ac9b4222b9d890230998d1be9b90",
+  "license": "Poly Haven CC0; see texture-sources.json"
+}

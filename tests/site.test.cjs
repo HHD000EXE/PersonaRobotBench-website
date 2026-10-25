@@ -260,3 +260,44 @@ test('fetch failures leave repository links and clear fallback state', async () 
   assert.equal(ctx.$('#rollout-pair a').href, 'https://github.com/HHD000EXE/PersonaRobotBench-website/tree/website/assets/rollouts');
   ctx.window.close();
 });
+
+test('3D scene loads only on request, switches to image and resets camera', async () => {
+  const c = await boot();
+  assert.equal(c.$('model-viewer'), null);
+  assert.equal(c.$('#model-viewer-library'), null);
+  c.window.customElements.define('model-viewer', class extends c.window.HTMLElement {});
+  c.$('#scene-toggle').click();
+  const model = c.$('model-viewer');
+  assert.equal(model.getAttribute('src'), 'assets/models/shared-desk.glb');
+  model.dispatchEvent(new c.window.Event('load'));
+  assert.equal(c.$('#scene-toggle').getAttribute('aria-pressed'), 'true');
+  assert.equal(c.$('#scene-reset').disabled, false);
+  model.setAttribute('camera-orbit', '90deg 70deg 3m');
+  c.$('#scene-reset').click();
+  assert.equal(model.getAttribute('camera-orbit'), '25deg 70deg 4.1m');
+  c.$('#scene-toggle').click();
+  assert.equal(c.$('#scene-toggle').getAttribute('aria-pressed'), 'false');
+  assert.equal(c.$('#scene-reset').disabled, true);
+  assert.equal(model.getAttribute('aria-hidden'), 'true');
+  c.$('#scene-toggle').click();
+  assert.equal(c.$('model-viewer'), model);
+  assert.equal(c.$('#scene-viewport').classList.contains('is-3d'), true);
+  c.dom.window.close();
+});
+
+test('3D model and library failures preserve image and permit retry', async () => {
+  const c = await boot();
+  c.$('#scene-toggle').click();
+  c.$('#model-viewer-library').dispatchEvent(new c.window.Event('error'));
+  await Promise.resolve(); await Promise.resolve();
+  assert.equal(c.$('#scene-toggle').disabled, false);
+  assert.match(c.$('#scene-status').textContent, /unavailable/);
+  c.window.customElements.define('model-viewer', class extends c.window.HTMLElement {});
+  c.$('#scene-toggle').click();
+  c.$('model-viewer').dispatchEvent(new c.window.Event('error'));
+  assert.equal(c.$('model-viewer'), null);
+  assert.equal(c.$('#scene-viewport').classList.contains('is-3d'), false);
+  assert.equal(c.$('#scene-toggle').disabled, false);
+  assert.ok(c.$('.hero-scene'));
+  c.dom.window.close();
+});

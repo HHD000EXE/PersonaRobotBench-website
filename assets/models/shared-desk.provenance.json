@@ -1,0 +1,106 @@
+{
+  "sourceRepository": "HHD000EXE/PersonaRobotBench",
+  "sourceRevision": "26cc1ccc3fd97bbcb834b550af11af0d2b1284ff",
+  "entryLayer": "home_backgrounds/shared_desk_home_initial.usda",
+  "role": "Static initial-scene viewing adapter; not a simulation, trajectory, policy rollout or evidence of success.",
+  "conversions": [
+    "Composed default USD pose, original object transforms retained",
+    "Z-up meters to glTF Y-up meters: (x,y,z) -> (x,z,-y)",
+    "Polygon fan triangulation; procedural primitives tessellated",
+    "Robot render meshes above 3000 triangles simplified by 80%; poses and transforms unchanged; not suitable for measurement",
+    "Diffuse textures resized to maximum 1024 pixels; MDL diffuse/metallic/roughness mapped to glTF PBR; no physics",
+    "24-sample deterministic static ambient-occlusion baked into COLOR_0; room faces subdivided without changing surface shape",
+    "Invisible, proxy, guide and collision geometry excluded; rendering ground plane omitted in favor of authored room floor"
+  ],
+  "geometryCounts": {
+    "Cube": 158,
+    "Sphere": 8,
+    "Cylinder": 3,
+    "Mesh": 60
+  },
+  "boundsYUpMeters": [
+    [
+      -3.200000047683716,
+      -0.05000000037252903,
+      -2.0
+    ],
+    [
+      3.200000047683716,
+      2.7200000286102295,
+      3.0999999046325684
+    ]
+  ],
+  "sourceTextures": {
+    "home_backgrounds/textures/hd/wood_floor_diff_4k.jpg": "366789dbb28a4d6b6a8d3dad51eb8930444d6aa26dce418624b12b5bf1d0c46b",
+    "home_backgrounds/textures/symmetrical_garden.jpg": "a9bf6d316aba398be8d1e53338f94f66793523243c6493ab51f9fc6e057ac5f2",
+    "home_backgrounds/textures/hd/kitchen_wood_diff_4k.jpg": "093337816adfc57c9d996460fb56aac77636a519bbdbf057194bfaf2825c80f7"
+  },
+  "sourceLayers": [
+    {
+      "path": "home_backgrounds/shared_desk_home_initial.usda",
+      "sha256": "69332d911a7c1aa608d9b681896db079c9eb78747b8517328b070edb0517f2a4"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/g1_29dof_with_hand_rev_1_0_base.usd",
+      "sha256": "6fcaca1f97069e4ead1f63569233bf5b77047224dfc6f2987972a3a271a213d1"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/g1_29dof_with_hand_rev_1_0_physics.usd",
+      "sha256": "a5dd8e61a634043a65e90251eec4a3c7f25d84a999fa02a3bf3ec6fd67d4df67"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/g1_left_hand_three_finger_hand_physics_left.usd",
+      "sha256": "ad7d74e9f9c799905403facd0854a6ede226f214d180347589ef22ed554ff558"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/g1_right_hand_three_finger_hand_physics_right.usd",
+      "sha256": "60ef3566eda5e4498ee32db3118d8604d53d719777e7c775e61eccceccbf0080"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_finger_hand_base_left.usd",
+      "sha256": "ccb6aca64eacdc7385b8cbb18ce55ce8f4d056d6d8c132f349026a87d0e0d776"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_finger_hand_base_right.usd",
+      "sha256": "cac840e4351a1243aabed94970ec0c0e4ef688c8d4f13f6035da29a5fa2397a3"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_finger_hand_physics_left.usd",
+      "sha256": "ee231ebe0300341fa87b83a3e685654a0832eeb4041d0a70ce66b34a2e78893b"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_finger_hand_physics_right.usd",
+      "sha256": "d0625204ac01a876d7e89388f87181b341b2af75dc1cccd21d87ba629c57e535"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_fingers_left_hand.usd",
+      "sha256": "39ffa37b47a0f7ee24457a58a7a8408b4ca28192a602a8d1f1414bfae985d3c9"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_fingers_left_hand_robot.usd",
+      "sha256": "eeb7e1ddbd839aa34c724f3ec69c377e69018d872837e0235ac2d5f093078d4e"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_fingers_right_hand.usd",
+      "sha256": "8d98822225508f0a78ff7335a71c8346411e813339018b878b8e7247213af0dc"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/configuration/three_finger_hand/three_fingers_right_hand_robot.usd",
+      "sha256": "75988c25bf31159262f108d3b613e010b582f82edcfd98e570c60b9eb489a42e"
+    },
+    {
+      "path": "tasks/shared_desk/assets/vendor/Isaac/Robots/Unitree/G1/g1.usd",
+      "sha256": "bff994f15502116ff404ac35a5d4305c783f044a29daff4d36f2bb5af12cadff"
+    },
+    {
+      "path": "tasks/shared_desk/scenes/shared_desk.usda",
+      "sha256": "7a8e54ac76678c7181e6a5ab4dfc4eb7c26141219726590f88932de88131c95c"
+    },
+    {
+      "path": "tasks/shared_desk/scenes/shared_desk_g1.usda",
+      "sha256": "4a11130d48ee29a7b3b3b6a3d3f2b61dae54a6b48675439999fed105e49335bf"
+    }
+  ],
+  "outputSha256": "956a60bcba83bb79203baf741a1f112b3fbef0fafca8c185375263099195dac8",
+  "bytes": 8746452
+}
