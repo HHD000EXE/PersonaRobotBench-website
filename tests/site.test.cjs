@@ -348,7 +348,7 @@ test('3D model and library failures preserve image and permit retry', async () =
 });
 
 
-test('leaderboard ranks only within each scoring criterion and shows settings and coverage', async () => {
+test('leaderboard ranks only within each scoring criterion without a settings panel', async () => {
   const ctx = await boot();
   assert.equal(ctx.leaderboardReady, true);
   assert.equal(ctx.$$('.leaderboard-board').length, 2);
@@ -358,8 +358,8 @@ test('leaderboard ranks only within each scoring criterion and shows settings an
   assert.match(ctx.$('.leaderboard-board').textContent, /77.7%/);
   assert.match(ctx.$('.leaderboard-board').textContent, /Not reported/);
   assert.match(ctx.$('.leaderboard-board').textContent, /Goal, process and fidelity must pass/);
-  assert.match(ctx.$('.leaderboard-board').textContent, /3 trials \/ persona/);
-  assert.match(ctx.$('.leaderboard-board').textContent, /100 tasks · 217 cases/);
+  assert.equal(ctx.$('.leaderboard-protocols'), null);
+  assert.doesNotMatch(ctx.$('#leaderboard-boards').textContent, /Evaluation settings & coverage/);
   assert.match(ctx.$('#leaderboard-status').textContent, /2026-10-25/);
   assert.ok(ctx.$('figure.leaderboard-chart figcaption'));
   assert.ok(ctx.$('.leaderboard-bars[role="list"]'));
@@ -401,10 +401,10 @@ test('invalid leaderboard scores fail visibly without publishing a misleading ch
   ctx.window.close();
 });
 
-test('leaderboard text is escaped before rendering source-authored notes', async () => {
+test('leaderboard policy labels and board descriptions are escaped before rendering', async () => {
   const injected = structuredClone(leaderboardFixture);
   injected.boards[0].rows[0].policy = '<img src=x onerror=alert(1)>';
-  injected.boards[0].notes = ['<script>alert(1)</script>'];
+  injected.boards[0].description = '<script>alert(1)</script>';
   const ctx = await boot({ leaderboard: injected });
   assert.equal(ctx.leaderboardReady, true);
   assert.equal(ctx.$('#leaderboard-boards img'), null);
@@ -415,7 +415,7 @@ test('leaderboard text is escaped before rendering source-authored notes', async
 });
 
 
-test('published policy snapshot renders its reported scores and settings without special Astra labeling', async () => {
+test('published policy snapshot renders reported scores without settings panels or special Astra labeling', async () => {
   const ctx = await boot({ leaderboard: shippedLeaderboard });
   assert.equal(ctx.leaderboardReady, true);
   assert.equal(ctx.$$('.leaderboard-board').length, shippedLeaderboard.boards.length);
@@ -428,12 +428,8 @@ test('published policy snapshot renders its reported scores and settings without
       assert.equal(actual[i].querySelector('.leaderboard-policy').textContent, row.policy);
       assert.equal(actual[i].querySelector('.leaderboard-score').textContent, row.scorePercent === null ? 'Not reported' : row.scorePercent.toFixed(1) + '%');
       assert.ok(actual[i].textContent.includes(row.variant));
-      const settings = section.querySelectorAll('.leaderboard-protocol')[i];
-      assert.ok(settings.textContent.includes(row.policy));
-      assert.ok(settings.textContent.includes(row.variant));
-      assert.ok(settings.textContent.includes(row.coverage));
-      assert.ok(settings.textContent.includes(row.protocol));
     }
+    assert.equal(section.querySelector('.leaderboard-protocols'), null);
   }
   const astra = ctx.$('[data-policy="astra-high"]');
   assert.equal(astra.querySelector('.leaderboard-policy').textContent, 'Astra');
@@ -469,7 +465,7 @@ test('bar lengths share a zero-based scale and pending policies have no quantita
   const pending = ctx.$('[data-policy="gemini4"]');
   assert.equal(pending.querySelector('.leaderboard-bar-lane'), null);
   assert.equal(pending.querySelector('.leaderboard-score').textContent, 'Not reported');
-  assert.ok(ctx.$('details.leaderboard-protocols > summary'));
+  assert.equal(ctx.$('details.leaderboard-protocols > summary'), null);
   ctx.window.close();
 });
 

@@ -271,12 +271,10 @@
         '</span><span class="leaderboard-variant">' + escape(row.variant) + '</span></div>' + (row.scorePercent === null
           ? '<span class="leaderboard-score leaderboard-unreported">Not reported</span>'
           : '<div class="leaderboard-bar-lane" aria-hidden="true"><span class="leaderboard-bar-fill" style="width:' + (row.scorePercent / axisMax * 100).toFixed(3) + '%"></span></div><span class="leaderboard-score">' + row.scorePercent.toFixed(1) + '<span>%</span></span>') + '</li>').join("");
-      const protocols = rows.map((row) => '<div class="leaderboard-protocol"><h4>' + escape(row.policy) + ' <span>' + escape(row.variant) + '</span></h4><p class="leaderboard-coverage">Scored / planned episodes: ' + escape(row.coverage) + '</p><p>' + escape(row.protocol) + '</p>' +
-        (row.notes ? '<p>' + escape(row.notes) + '</p>' : '') + '</div>').join("");
       return '<section class="leaderboard-board" aria-labelledby="' + titleId + '"><div class="leaderboard-board-heading"><h3 id="' + titleId + '">' + escape(board.title) +
         '</h3><p>' + escape(board.description) + '</p></div><figure class="leaderboard-chart" aria-labelledby="' + captionId + '" data-axis-max="' + axisMax + '" style="--grid-step:' + (tickStep / axisMax * 100).toFixed(3) + '%"><figcaption id="' + captionId + '">' + escape(board.metric) +
         '<span class="visually-hidden">. Scale: 0 to ' + axisMax + ' percent.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
-        '</ol></figure><details class="leaderboard-protocols"><summary>Evaluation settings &amp; coverage</summary><div class="leaderboard-protocol-list">' + protocols + '</div>' + (board.notes?.length ? '<div class="leaderboard-notes">' + board.notes.map((note) => '<p>' + escape(note) + '</p>').join("") + '</div>' : '') + '</details></section>';
+        '</ol></figure></section>';
     }).join("");
     $("#leaderboard-status").textContent = "Results snapshot" + (data.updated ? " · " + data.updated : "") + " · criteria and source provenance included in the download";
   }
