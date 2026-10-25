@@ -352,17 +352,17 @@ test('leaderboard ranks only within each scoring criterion and shows settings an
   const ctx = await boot();
   assert.equal(ctx.leaderboardReady, true);
   assert.equal(ctx.$$('.leaderboard-board').length, 2);
-  assert.deepEqual(ctx.$$('.leaderboard-board')[0].querySelectorAll('tbody tr').length, 3);
-  assert.deepEqual(ctx.$$('.leaderboard-board:first-child tbody tr').map((row) => row.dataset.policy), ['second', 'first', 'pending']);
-  assert.equal(ctx.$$('.leaderboard-board')[1].querySelector('tbody tr').dataset.policy, 'goal-policy');
+  assert.deepEqual(ctx.$$('.leaderboard-board')[0].querySelectorAll('.leaderboard-bars > li').length, 3);
+  assert.deepEqual(ctx.$$('.leaderboard-board:first-child .leaderboard-bars > li').map((row) => row.dataset.policy), ['second', 'first', 'pending']);
+  assert.equal(ctx.$$('.leaderboard-board')[1].querySelector('.leaderboard-bars > li').dataset.policy, 'goal-policy');
   assert.match(ctx.$('.leaderboard-board').textContent, /77.7%/);
   assert.match(ctx.$('.leaderboard-board').textContent, /Not reported/);
   assert.match(ctx.$('.leaderboard-board').textContent, /Goal, process and fidelity must pass/);
   assert.match(ctx.$('.leaderboard-board').textContent, /3 trials \/ persona/);
   assert.match(ctx.$('.leaderboard-board').textContent, /100 tasks · 217 cases/);
   assert.match(ctx.$('#leaderboard-status').textContent, /2026-10-25/);
-  assert.ok(ctx.$('.leaderboard-table caption'));
-  assert.ok(ctx.$('.leaderboard-table th[scope="row"]'));
+  assert.ok(ctx.$('figure.leaderboard-chart figcaption'));
+  assert.ok(ctx.$('.leaderboard-bars[role="list"]'));
   assert.equal(ctx.$('#leaderboard a[download]').getAttribute('href'), 'data/leaderboard.json');
   ctx.window.close();
 });
@@ -391,12 +391,12 @@ test('catalog failure does not suppress available leaderboard results', async ()
   ctx.window.close();
 });
 
-test('invalid leaderboard scores fail visibly without publishing a misleading table', async () => {
+test('invalid leaderboard scores fail visibly without publishing a misleading chart', async () => {
   const invalid = structuredClone(leaderboardFixture);
   invalid.boards[0].rows[0].scorePercent = 120;
   const ctx = await boot({ leaderboard: invalid });
   assert.equal(ctx.leaderboardReady, false);
-  assert.equal(ctx.$$('.leaderboard-table').length, 0);
+  assert.equal(ctx.$$('.leaderboard-chart').length, 0);
   assert.equal(ctx.ready, true);
   ctx.window.close();
 });
@@ -422,13 +422,17 @@ test('published policy snapshot renders its reported scores and settings without
   for (const [index, board] of shippedLeaderboard.boards.entries()) {
     const section = ctx.$$('.leaderboard-board')[index];
     const expected = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
-    const actual = [...section.querySelectorAll('tbody tr')];
+    const actual = [...section.querySelectorAll('.leaderboard-bars > li')];
     assert.deepEqual(actual.map((row) => row.dataset.policy), expected.map((row) => row.id));
     for (const [i, row] of expected.entries()) {
       assert.equal(actual[i].querySelector('.leaderboard-policy').textContent, row.policy);
       assert.equal(actual[i].querySelector('.leaderboard-score').textContent, row.scorePercent === null ? 'Not reported' : row.scorePercent.toFixed(1) + '%');
       assert.ok(actual[i].textContent.includes(row.variant));
-      assert.ok(actual[i].textContent.includes(row.coverage));
+      const settings = section.querySelectorAll('.leaderboard-protocol')[i];
+      assert.ok(settings.textContent.includes(row.policy));
+      assert.ok(settings.textContent.includes(row.variant));
+      assert.ok(settings.textContent.includes(row.coverage));
+      assert.ok(settings.textContent.includes(row.protocol));
     }
   }
   const astra = ctx.$('[data-policy="astra-high"]');
@@ -436,4 +440,49 @@ test('published policy snapshot renders its reported scores and settings without
   assert.doesNotMatch(astra.textContent, /author.reported|not independently|not recomputed|unverified/i);
   assert.equal(ctx.$('#leaderboard a[href="data/leaderboard-results.json"]').hasAttribute('download'), true);
   ctx.window.close();
+});
+
+
+test('leaderboard appears between the hero and section 01, with navigation in page order', async () => {
+  const ctx = await boot();
+  const sections = [...ctx.$('main').children].filter((node) => node.tagName === 'SECTION');
+  assert.ok(sections[0].classList.contains('hero'));
+  assert.equal(sections[1].id, 'leaderboard');
+  assert.equal(sections[2].id, 'overview');
+  assert.match(ctx.$('#overview .eyebrow').textContent, /^01 /);
+  assert.equal(ctx.$('#leaderboard .eyebrow').textContent, 'POLICY RESULTS');
+  assert.match(ctx.$('#resources .eyebrow').textContent, /^05 /);
+  for (const nav of ctx.$$('.desktop-nav, .mobile-nav')) assert.equal(nav.querySelector('a').getAttribute('href'), '#leaderboard');
+  ctx.window.close();
+});
+
+test('bar lengths share a zero-based scale and pending policies have no quantitative bar', async () => {
+  const ctx = await boot({ leaderboard: shippedLeaderboard });
+  const chart = ctx.$('.leaderboard-chart');
+  assert.equal(chart.dataset.axisMax, '40');
+  const ticks = [...chart.querySelectorAll('.leaderboard-axis-track > span')];
+  assert.deepEqual(ticks.map((tick) => tick.textContent), ['0%', '10%', '20%', '30%', '40%']);
+  assert.match(chart.querySelector('figcaption').textContent, /Scale: 0 to 40 percent/);
+  const high = ctx.$('[data-policy="astra-high"]');
+  assert.equal(high.querySelector('.leaderboard-bar-fill').style.width, '83%');
+  assert.equal(high.querySelector('.leaderboard-score').textContent, '33.2%');
+  const pending = ctx.$('[data-policy="gemini4"]');
+  assert.equal(pending.querySelector('.leaderboard-bar-lane'), null);
+  assert.equal(pending.querySelector('.leaderboard-score').textContent, 'Not reported');
+  assert.ok(ctx.$('details.leaderboard-protocols > summary'));
+  ctx.window.close();
+});
+
+test('bar scales remain finite for zero, pending and 100 percent scores', async () => {
+  for (const scores of [[0, null, 0], [null, null, null], [0, null, 100]]) {
+    const data = structuredClone(leaderboardFixture);
+    data.boards = [data.boards[0]];
+    data.boards[0].rows.forEach((row, i) => { row.scorePercent = scores[i]; });
+    const ctx = await boot({ leaderboard: data });
+    assert.equal(ctx.leaderboardReady, true);
+    assert.equal(ctx.$('.leaderboard-chart').dataset.axisMax, scores.includes(100) ? '100' : '10');
+    assert.equal(ctx.$$('.leaderboard-bar-fill').length, scores.filter((score) => score !== null).length);
+    for (const bar of ctx.$$('.leaderboard-bar-fill')) assert.ok(['0%', '100%'].includes(bar.style.width));
+    ctx.window.close();
+  }
 });

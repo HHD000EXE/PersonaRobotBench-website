@@ -258,15 +258,25 @@
     $("#leaderboard-description").textContent = data.description || "Reported policy evaluations, with scoring criteria and coverage shown alongside each result.";
     $("#leaderboard-boards").innerHTML = data.boards.map((board, index) => {
       const rows = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
+      const maximum = Math.max(0, ...rows.filter((row) => row.scorePercent !== null).map((row) => row.scorePercent));
+      const axisMax = Math.max(10, Math.ceil(maximum / 10) * 10);
+      const tickStep = axisMax <= 10 ? 2 : axisMax <= 20 ? 5 : axisMax <= 50 ? 10 : 20;
+      const ticks = [];
+      for (let tick = 0; tick < axisMax; tick += tickStep) ticks.push(tick);
+      ticks.push(axisMax);
       const titleId = "leaderboard-board-" + index;
+      const captionId = titleId + "-metric";
+      const tickMarkup = ticks.map((tick) => '<span style="left:' + (tick / axisMax * 100).toFixed(3) + '%">' + tick + '%</span>').join("");
+      const chartRows = rows.map((row) => '<li class="leaderboard-chart-row' + (row.scorePercent === null ? ' is-pending' : '') + '" data-policy="' + escape(row.id) + '"><div class="leaderboard-chart-label"><span class="leaderboard-policy">' + escape(row.policy) +
+        '</span><span class="leaderboard-variant">' + escape(row.variant) + '</span></div>' + (row.scorePercent === null
+          ? '<span class="leaderboard-score leaderboard-unreported">Not reported</span>'
+          : '<div class="leaderboard-bar-lane" aria-hidden="true"><span class="leaderboard-bar-fill" style="width:' + (row.scorePercent / axisMax * 100).toFixed(3) + '%"></span></div><span class="leaderboard-score">' + row.scorePercent.toFixed(1) + '<span>%</span></span>') + '</li>').join("");
+      const protocols = rows.map((row) => '<div class="leaderboard-protocol"><h4>' + escape(row.policy) + ' <span>' + escape(row.variant) + '</span></h4><p class="leaderboard-coverage">Scored / planned episodes: ' + escape(row.coverage) + '</p><p>' + escape(row.protocol) + '</p>' +
+        (row.notes ? '<p>' + escape(row.notes) + '</p>' : '') + '</div>').join("");
       return '<section class="leaderboard-board" aria-labelledby="' + titleId + '"><div class="leaderboard-board-heading"><h3 id="' + titleId + '">' + escape(board.title) +
-        '</h3><p>' + escape(board.description) + '</p></div><div class="leaderboard-table-scroll" role="region" aria-labelledby="' + titleId + '" tabindex="0"><table class="leaderboard-table"><caption class="visually-hidden">' + escape(board.title) +
-        ' — ' + escape(board.metric) + '</caption><thead><tr><th scope="col">Policy</th><th scope="col">' + escape(board.metric) + '</th><th scope="col">Setting</th><th scope="col">Evaluation coverage</th></tr></thead><tbody>' +
-        rows.map((row) => '<tr data-policy="' + escape(row.id) + '"><th scope="row"><span class="leaderboard-policy">' + escape(row.policy) +
-          '</span>' + (row.notes ? '<span class="leaderboard-row-note">' + escape(row.notes) + '</span>' : '') + '</th><td class="leaderboard-score">' +
-          (row.scorePercent === null ? '<span class="leaderboard-unreported">Not reported</span>' : row.scorePercent.toFixed(1) + '<span>%</span>') +
-          '</td><td><span>' + escape(row.variant) + '</span><span class="leaderboard-row-note">' + escape(row.protocol) + '</span></td><td>' + escape(row.coverage) + '</td></tr>').join("") +
-        '</tbody></table></div>' + (board.notes?.length ? '<div class="leaderboard-notes">' + board.notes.map((note) => '<p>' + escape(note) + '</p>').join("") + '</div>' : '') + '</section>';
+        '</h3><p>' + escape(board.description) + '</p></div><figure class="leaderboard-chart" aria-labelledby="' + captionId + '" data-axis-max="' + axisMax + '" style="--grid-step:' + (tickStep / axisMax * 100).toFixed(3) + '%"><figcaption id="' + captionId + '">' + escape(board.metric) +
+        '<span class="visually-hidden">. Scale: 0 to ' + axisMax + ' percent.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
+        '</ol></figure><details class="leaderboard-protocols"><summary>Evaluation settings &amp; coverage</summary><div class="leaderboard-protocol-list">' + protocols + '</div>' + (board.notes?.length ? '<div class="leaderboard-notes">' + board.notes.map((note) => '<p>' + escape(note) + '</p>').join("") + '</div>' : '') + '</details></section>';
     }).join("");
     $("#leaderboard-status").textContent = "Results snapshot" + (data.updated ? " · " + data.updated : "") + " · criteria and source provenance included in the download";
   }
