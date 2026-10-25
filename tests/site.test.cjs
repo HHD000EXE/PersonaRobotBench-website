@@ -129,7 +129,7 @@ test('all 100 task cards and dialogs use their own initial scene preview', async
     assert.match(task.preview.image, /^assets\/task-scenes\/task-\d{3}\.webp$/);
     assert.equal(button.querySelector('img').src, 'https://benchmark.test/' + task.preview.image);
     assert.equal(button.querySelector('img').alt, task.preview.alt);
-    assert.equal(button.querySelector('.task-preview-label').textContent, 'INITIAL SCENE');
+    assert.equal(button.querySelector('.task-preview-label'), null, 'cards carry no rollout-like badge');
     imagePaths.add(task.preview.image);
     button.click();
     assert.equal(ctx.$('.dialog-cover img').src, 'https://benchmark.test/' + task.preview.image);
@@ -137,6 +137,7 @@ test('all 100 task cards and dialogs use their own initial scene preview', async
     ctx.$('.dialog-close').click();
   }
   assert.equal(imagePaths.size, 100);
+  assert.match(ctx.$('.task-footer p').textContent, /starting scene, not a rollout/);
   ctx.window.close();
 });
 
@@ -267,8 +268,11 @@ test('rollout tabs are built from recorded examples and label each source', asyn
   assert.deepEqual(tabs.slice(0, 4).map((tab) => tab.querySelector('span').textContent), ['Drink selection', 'Pressing style', 'Transfer method', 'Volume level']);
   for (const [index, tab] of tabs.entries()) {
     const example = recorded[index];
-    assert.equal(tab.querySelector('img').getAttribute('src'), 'https://benchmark.test/' + example.personas[0].videoPoster);
-    assert.ok(tab.querySelector('small').textContent.endsWith(example.recording.kind === 'model' ? 'Model rollout' : 'Scripted'));
+    const model = example.recording.kind === 'model';
+    // Model recordings carry an overlay, so their tiles show the clean initial scene.
+    assert.equal(tab.querySelector('img').getAttribute('src'), 'https://benchmark.test/' + (model ? example.poster : example.personas[0].videoPoster));
+    assert.equal(tab.dataset.kind, model ? 'model' : 'scripted');
+    assert.equal(tab.querySelector('.visually-hidden').textContent, model ? ', model rollout' : ', scripted demonstration');
   }
   assert.equal(tabs[0].getAttribute('aria-selected'), 'true');
   assert.equal(ctx.$('#rollout-source').hidden, false);
@@ -436,7 +440,7 @@ test('leaderboard ranks only within each scoring criterion without a settings pa
   assert.match(ctx.$('.leaderboard-board').textContent, /Goal, process and fidelity must pass/);
   assert.equal(ctx.$('.leaderboard-protocols'), null);
   assert.doesNotMatch(ctx.$('#leaderboard-boards').textContent, /Evaluation settings & coverage/);
-  assert.match(ctx.$('#leaderboard-status').textContent, /2026-10-25/);
+  assert.equal(ctx.$('#leaderboard-status').textContent, 'Results as of 2026-10-25');
   assert.ok(ctx.$('figure.leaderboard-chart figcaption'));
   assert.ok(ctx.$('.leaderboard-bars[role="list"]'));
   assert.equal(ctx.$('#leaderboard a[download]'), null);
@@ -517,15 +521,13 @@ test('published policy snapshot renders reported scores without settings panels 
 });
 
 
-test('leaderboard appears between the hero and section 01, with navigation in page order', async () => {
+test('leaderboard appears between the hero and the overview, with navigation in page order', async () => {
   const ctx = await boot();
   const sections = [...ctx.$('main').children].filter((node) => node.tagName === 'SECTION');
   assert.ok(sections[0].classList.contains('hero'));
   assert.equal(sections[1].id, 'leaderboard');
   assert.equal(sections[2].id, 'overview');
-  assert.match(ctx.$('#overview .eyebrow').textContent, /^01 /);
-  assert.equal(ctx.$('#leaderboard .eyebrow').textContent, 'POLICY RESULTS');
-  assert.match(ctx.$('#resources .eyebrow').textContent, /^05 /);
+  assert.equal(ctx.$$('.eyebrow').length, 0, 'section headings carry no numbered micro-labels');
   for (const nav of ctx.$$('.desktop-nav, .mobile-nav')) assert.equal(nav.querySelector('a').getAttribute('href'), '#leaderboard');
   ctx.window.close();
 });

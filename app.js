@@ -47,10 +47,8 @@
       : schematic(task.id);
     const dots = task.personaIds.map((id, index) => '<span class="persona-pill ' + (index % 2 ? "persona-b-color" : "persona-a-color") + '">' + escape(id) + '</span>').join("");
     return '<article class="task-card"><button class="task-card-button" type="button" data-task="' + task.id + '" aria-label="View Task ' + task.id + ': ' + escape(titleFor(task)) + ', ' + task.personaCount + ' persona cases"><div class="task-image">' + figure +
-      '<span class="task-number">TASK ' + padded(task.id) + '</span><span class="task-preview-label">' + (poster ? "INITIAL SCENE" : "TASK SPECIFICATION") +
-      '</span></div><div class="task-card-body"><div class="task-card-heading"><h3>' + escape(titleFor(task)) + '</h3><span class="task-card-arrow" aria-hidden="true">↗</span></div><p>“' + escape(task.instruction) +
-      '”</p><div class="task-card-footer"><span class="category">' + escape(task.category) + '</span><span class="persona-dots" aria-label="' + task.personaCount + ' persona cases">' + dots + '<span>' +
-      task.personaCount + ' cases</span></span></div></div></button></article>';
+      '<span class="task-number">TASK ' + padded(task.id) + '</span></div><div class="task-card-body"><div class="task-card-heading"><h3>' + escape(titleFor(task)) + '</h3><span class="task-card-arrow" aria-hidden="true">↗</span></div><p>“' + escape(task.instruction) +
+      '”</p><div class="task-card-footer"><span class="category">' + escape(task.category) + '</span><span class="persona-dots" aria-label="' + task.personaCount + ' persona cases">' + dots + '</span></div></div></button></article>';
   }
 
   function renderTasks() {
@@ -109,22 +107,22 @@
       : '<div class="video-placeholder" role="img" aria-label="Video placeholder for Task ' + example.id + " persona " + escape(persona.id) +
         '"><img src="' + escape(example.poster) + '" alt="" loading="lazy" width="960" height="600"><span class="video-placeholder-label">PERSONA ' + escape(persona.id) +
         ' / SIMULATION ROLLOUT</span><div class="placeholder-center"><span class="play-outline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 4 13 8-13 8Z"/></svg></span><strong>Rollout video</strong><p>COMING SOON</p></div><span class="placeholder-corner" aria-hidden="true">PRB / ' + padded(example.id) + " / " + escape(persona.id) + '</span></div>';
-    return '<div class="rollout-case">' + visual + '<div class="rollout-case-caption"><span class="persona-avatar">' + escape(persona.id) +
-      '</span><div><span class="mono small-label">PERSONA ' + escape(persona.id) + '</span><p>' + escape(persona.description) + '</p></div></div></div>';
+    return '<div class="rollout-case">' + visual + '<div class="rollout-case-caption"><span class="persona-avatar"><span class="visually-hidden">Persona </span>' + escape(persona.id) +
+      '</span><p>' + escape(persona.description) + '</p></div></div>';
   }
 
   function renderRolloutTabs() {
     const recorded = state.examples.filter((example) => example.recording);
     if (!recorded.length) return;
     // A tile per recorded pair: a real frame from persona A's recording (or the
-    // initial scene), the pair's label and whether a model or a script acted.
-    $(".rollout-tabs").innerHTML = recorded.map((example, index) => {
-      const thumbnail = safeUrl(example.personas[0]?.videoPoster) ?? safeUrl(example.poster);
-      const kind = example.recording.kind === "model" ? "Model rollout" : "Scripted";
+    // initial scene), the pair's label and a dot for a model or a scripted run.
+    // Model recordings carry an on-screen overlay, so their tiles use the scene.
+    $(".rollout-tabs").innerHTML = recorded.map((example) => {
+      const model = example.recording.kind === "model";
+      const thumbnail = (model ? null : safeUrl(example.personas[0]?.videoPoster)) ?? safeUrl(example.poster);
       return '<button type="button" role="tab" id="example-tab-' + example.id + '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-example="' +
-        example.id + '">' + (thumbnail ? '<img src="' + escape(thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
-        '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span><small class="mono">' + String(index + 1).padStart(2, "0") + " · TASK " +
-        padded(example.id) + " · " + kind + '</small></button>';
+        example.id + '" data-kind="' + (model ? "model" : "scripted") + '">' + (thumbnail ? '<img src="' + escape(thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
+        '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span><span class="visually-hidden">, ' + (model ? "model rollout" : "scripted demonstration") + '</span></button>';
     }).join("");
     $(".rollout-tabs").classList.add("rollout-tiles");
   }
@@ -214,7 +212,7 @@
       if (selected && focus) tab.focus();
     });
     $("#rollout-panel").setAttribute("aria-labelledby", "example-tab-" + id);
-    $("#rollout-id").textContent = "TASK " + padded(id) + " · " + example.shortTitle.toUpperCase();
+    $("#rollout-id").textContent = "Task " + padded(id) + " · " + example.shortTitle;
     $("#rollout-instruction").textContent = "“" + example.instruction + "”";
     const personas = example.personas.slice(0, 2);
     $("#rollout-pair").innerHTML = personas.map((persona, index) => rolloutCase(example, persona, index)).join("");
@@ -229,6 +227,8 @@
         : (recording.label ?? "Scripted demonstration");
     }
     wireSync(example);
+    // Only missing videos need a status; a complete pair speaks for itself.
+    $(".video-status").hidden = ready === 2;
     $(".video-status").innerHTML = "<i></i> " + (ready === 2 ? "Paired videos available" : ready === 1 ? "1 of 2 videos available" : "Videos coming soon");
     const recordingNote = $("#rollout-recording-note");
     if (recordingNote) {
@@ -354,7 +354,8 @@
         }
       }
     }
-    $("#leaderboard-description").textContent = data.description || "Reported policy evaluations, with scoring criteria and coverage shown alongside each result.";
+    const description = $("#leaderboard-description");
+    if (description) description.textContent = data.description || "Reported policy evaluations, with scoring criteria and coverage shown alongside each result.";
     $("#leaderboard-boards").innerHTML = data.boards.map((board, index) => {
       const rows = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
       const maximum = Math.max(0, ...rows.filter((row) => row.scorePercent !== null).map((row) => row.scorePercent));
@@ -375,7 +376,7 @@
         '<span class="visually-hidden">. Scale: 0 to ' + axisMax + ' percent.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
         '</ol></figure></section>';
     }).join("");
-    $("#leaderboard-status").textContent = "Results snapshot" + (data.updated ? " · " + data.updated : "");
+    $("#leaderboard-status").textContent = data.updated ? "Results as of " + data.updated : "";
   }
 
   async function loadLeaderboard() {
