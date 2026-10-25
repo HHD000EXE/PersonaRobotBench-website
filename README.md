@@ -111,3 +111,18 @@ it explicitly when needed. Do not merge the website branch into benchmark `main`
 
 This website has no backend, analytics, model calls or simulator processes.
 Keep API keys, credentials, local outputs and runtime files outside this repository.
+
+
+## Interactive initial scene
+
+Scene 001 includes an opt-in 3D view: select **Explore in 3D**, drag to orbit,
+scroll or pinch to zoom, and select **Reset view** to restore the camera.
+**Show image** restores the original render. The original image remains available
+without WebGL or if loading fails. The model and lighting load only on request.
+
+The initial USD scene is converted to glTF with original object transforms,
+source-derived PBR materials, compressed diffuse textures, baked ambient
+occlusion and the source HDR environment. It is a static visualization, not an
+Isaac Sim execution or a task score. See `assets/models/README.md` and the
+provenance receipts for export limitations, source hashes and licenses.
+Google model-viewer 4.4.0 is bundled locally; the viewer requires no CDN.

@@ -168,6 +168,23 @@ def verify(root: Path) -> dict[str, int | str]:
                 assert receipt["durationSeconds"] > 0 and receipt["frames"] > 0, "Empty recording"
                 if receipt.get("fastStart") and video_file and video_file.suffix.lower() == ".mp4":
                     assert fast_start(video_file), "Video does not have fast-start metadata"
+    # The opt-in 3D viewer must remain self-contained in the deployment.
+    model_dir = root / "assets/models"
+    for name in ("assets/models/shared-desk.glb", "assets/models/shared-desk.provenance.json",
+                 "assets/models/scene-environment.hdr", "assets/models/scene-environment.provenance.json",
+                 "assets/models/texture-sources.json", "assets/vendor/model-viewer.min.js",
+                 "assets/vendor/LICENSE.model-viewer", "assets/vendor/LICENSE.unitree"):
+        local_reference(name, root)
+    for model, receipt in (("shared-desk.glb", "shared-desk.provenance.json"),
+                           ("scene-environment.hdr", "scene-environment.provenance.json")):
+        record = json.loads((model_dir / receipt).read_text(encoding="utf-8"))
+        assert hashlib.sha256((model_dir / model).read_bytes()).hexdigest() == record["outputSha256"], model
+    glb = (model_dir / "shared-desk.glb").read_bytes()
+    assert glb[:4] == b"glTF" and int.from_bytes(glb[8:12], "little") == len(glb), "Invalid GLB"
+    gltf = json.loads(glb[20:20 + int.from_bytes(glb[12:16], "little")])
+    assert not gltf.get("animations"), "Initial scene must not contain authored motion"
+    assert all("COLOR_0" in primitive["attributes"] for mesh in gltf["meshes"] for primitive in mesh["primitives"]), "Missing baked shading"
+    assert any(material.get("pbrMetallicRoughness", {}).get("metallicFactor", 0) > .9 for material in gltf["materials"]), "Missing source metal material"
     return {"status": "passed", "tasks": len(tasks), "persona_cases": 217, "examples": len(examples), "recordings": len(recordings), "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 
