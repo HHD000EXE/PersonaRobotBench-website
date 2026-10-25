@@ -75,12 +75,12 @@
   ],
   "provenance": {
     "paperRepository": "HHD000EXE/PersonaRobotBench-Papaer",
-    "paperCommit": "2822a8ebb378afcc87199389af5470ace65f3d24",
+    "paperCommit": "3812e1427da2054e8526c58ec5bf7fe6cc5a6842",
     "paperVisibility": "private",
     "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
-    "paperFigureSha256": "6e5dff1b3b7c24963ed8f87ee253b516ed413c604336adc5932c40c6efa60678",
+    "paperFigureSha256": "68d82335308c655e03afb72e04adc6708f199b029ccc5ea98cbabb95471793d4",
     "paperText": "CoRL Late Breaking Results/main.tex",
-    "paperFigureUrl": "https://github.com/HHD000EXE/PersonaRobotBench-Papaer/blob/2822a8ebb378afcc87199389af5470ace65f3d24/CoRL%20Late%20Breaking%20Results/figures/policy_leaderboard.pdf",
+    "paperFigureUrl": "https://github.com/HHD000EXE/PersonaRobotBench-Papaer/blob/3812e1427da2054e8526c58ec5bf7fe6cc5a6842/CoRL%20Late%20Breaking%20Results/figures/policy_leaderboard.pdf",
     "evidenceSnapshot": "Derived counts are included in the public downloadable data; access to the private paper source is not required to inspect these counts.",
     "sourceMethod": "All displayed point estimates follow the latest paper figure. Five archived strict report files were SHA-256-verified, and their success counts and task-balanced means were independently recomputed as archived evidence. This archive check does not independently recompute the current paper's revised Astra high point.",
     "rawSourceHashes": {
