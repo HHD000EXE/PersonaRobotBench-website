@@ -6,7 +6,7 @@
   const PAGE_SIZE = 6;
   const RATES = [1, 2, 4, 8];
   const SKIP_SECONDS = 5;
-  const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, activeExample: 18, rate: 1 };
+  const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, activeExample: 1, rate: 1 };
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
   const escape = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
@@ -408,7 +408,7 @@
       if (state.tasks.length !== 100 || state.tasks.reduce((sum, task) => sum + task.personaCount, 0) !== 217) throw new Error("Catalog does not match the release");
       renderTasks();
       renderRolloutTabs();
-      selectExample(state.examples.find((example) => example.recording)?.id ?? 18);
+      selectExample(state.examples.find((example) => example.recording)?.id ?? 1);
       return true;
     } catch {
       $("#task-count").textContent = "The interactive catalog is unavailable.";

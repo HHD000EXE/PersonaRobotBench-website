@@ -1,5 +1,67 @@
 [
   {
+    "id": 1,
+    "folder": "shared_desk",
+    "title": "Shared Desk Configuration",
+    "instruction": "Set up my desk for work.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/config/personas.json",
+    "shortTitle": "Shared desk",
+    "contrast": "Mouse on the left or the right?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-001.webp",
+    "posterAlt": "Task 001 — Shared Desk Configuration: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I prefer the mouse on the left side of the keyboard, the notebook on the right, and the coffee mug away from electronics.",
+        "preferences": {
+          "mouse_side": "left",
+          "notebook_side": "right",
+          "mug_placement": "away_from_electronics"
+        },
+        "video": "assets/rollouts/task001-A.mp4",
+        "videoPoster": "assets/rollouts/task001-A.webp",
+        "videoDurationSeconds": 82.2
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer the mouse on the right side of the keyboard, the notebook on the left, and the coffee mug near the upper-right corner of the desk.",
+        "preferences": {
+          "mouse_side": "right",
+          "notebook_side": "left",
+          "mug_placement": "upper_right_corner"
+        },
+        "video": "assets/rollouts/task001-B.mp4",
+        "videoPoster": "assets/rollouts/task001-B.webp",
+        "videoDurationSeconds": 47.8
+      }
+    ],
+    "tabLabel": "Desk layout",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 1,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
     "id": 18,
     "folder": "beverage_selection",
     "title": "Personalized Beverage Selection",
@@ -451,68 +513,6 @@
       "kind": "scripted",
       "playback": "complete recorded episodes · 1× simulation playback.",
       "recordedTaskId": 19,
-      "provenance": "data/rollout-provenance.json"
-    }
-  },
-  {
-    "id": 1,
-    "folder": "shared_desk",
-    "title": "Shared Desk Configuration",
-    "instruction": "Set up my desk for work.",
-    "personaCount": 2,
-    "personaIds": [
-      "A",
-      "B"
-    ],
-    "category": "Workspace",
-    "tags": [
-      "Workspace"
-    ],
-    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/config/personas.json",
-    "shortTitle": "Shared desk",
-    "contrast": "Mouse on the left or the right?",
-    "dimension": "Spatial arrangement",
-    "poster": "assets/task-scenes/task-001.webp",
-    "posterAlt": "Task 001 — Shared Desk Configuration: static initial scene with furnished room background.",
-    "video": null,
-    "imageKind": "static_initial_scene",
-    "personas": [
-      {
-        "id": "A",
-        "name": "User A",
-        "description": "I prefer the mouse on the left side of the keyboard, the notebook on the right, and the coffee mug away from electronics.",
-        "preferences": {
-          "mouse_side": "left",
-          "notebook_side": "right",
-          "mug_placement": "away_from_electronics"
-        },
-        "video": "assets/rollouts/task001-A.mp4",
-        "videoPoster": "assets/rollouts/task001-A.webp",
-        "videoDurationSeconds": 82.2
-      },
-      {
-        "id": "B",
-        "name": "User B",
-        "description": "I prefer the mouse on the right side of the keyboard, the notebook on the left, and the coffee mug near the upper-right corner of the desk.",
-        "preferences": {
-          "mouse_side": "right",
-          "notebook_side": "left",
-          "mug_placement": "upper_right_corner"
-        },
-        "video": "assets/rollouts/task001-B.mp4",
-        "videoPoster": "assets/rollouts/task001-B.webp",
-        "videoDurationSeconds": 47.8
-      }
-    ],
-    "tabLabel": "Desk layout",
-    "videoLabel": "Scripted expert · complete recorded episode",
-    "recording": {
-      "source": "prb-scripted-expert-physics",
-      "label": "Scripted expert",
-      "kind": "scripted",
-      "playback": "complete recorded episodes · 1× simulation playback.",
-      "recordedTaskId": 1,
       "provenance": "data/rollout-provenance.json"
     }
   },

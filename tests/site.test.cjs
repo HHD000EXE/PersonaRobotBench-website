@@ -164,7 +164,8 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
   const recorded = examples.filter((item) => item.recording);
   assert.equal(tabs.style.getPropertyValue('--tile-columns'), String(Math.ceil(recorded.length / 2)));
   const last = String(recorded.at(-1).id);
-  for (const [key, expected] of [['ArrowRight', '51'], ['End', last], ['Home', '18'], ['ArrowLeft', last]]) {
+  const [first, second] = recorded.map((item) => String(item.id));
+  for (const [key, expected] of [['ArrowRight', second], ['End', last], ['Home', first], ['ArrowLeft', last]]) {
     tabs.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key, bubbles: true }));
     const selected = ctx.$('[role="tab"][aria-selected="true"]');
     assert.equal(selected.dataset.example, expected);
@@ -229,7 +230,7 @@ test('shipped examples provide complete paired recordings with distinct real-fra
   const ctx = await boot({ examples: shippedExamples });
   let count = 0;
   const recorded = shippedExamples.filter((item) => item.recording).map((item) => item.id);
-  assert.deepEqual(recorded.slice(0, 4), [18, 51, 68, 87]);
+  assert.deepEqual(recorded.slice(0, 4), [1, 18, 51, 68]);
   for (const taskId of recorded) {
     ctx.$('[data-example="' + taskId + '"]').click();
     const example = shippedExamples.find((item) => item.id === taskId);
@@ -268,7 +269,7 @@ test('rollout tabs are built from recorded examples without source labels', asyn
   const tabs = ctx.$$('.rollout-tabs [role="tab"]');
   const recorded = shippedExamples.filter((item) => item.recording);
   assert.deepEqual(tabs.map((tab) => tab.dataset.example), recorded.map((item) => String(item.id)));
-  assert.deepEqual(tabs.slice(0, 4).map((tab) => tab.querySelector('span').textContent), ['Drink selection', 'Pressing style', 'Transfer method', 'Volume level']);
+  assert.deepEqual(tabs.slice(0, 4).map((tab) => tab.querySelector('span').textContent), ['Desk layout', 'Drink selection', 'Pressing style', 'Transfer method']);
   for (const [index, tab] of tabs.entries()) {
     const example = recorded[index];
     const model = example.recording.kind === 'model';
@@ -298,6 +299,7 @@ function fakeMedia(video, duration) {
 
 test('synchronized controls play, scrub and speed up both personas on one clock', async () => {
   const ctx = await boot({ examples: shippedExamples });
+  ctx.$('[data-example="18"]').click();  // the clock values below use Task 18's recordings
   const bar = ctx.$('#rollout-sync');
   assert.equal(bar.hidden, false);
   const [a, b] = ctx.$$('#rollout-pair video');
