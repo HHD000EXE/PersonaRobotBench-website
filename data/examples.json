@@ -1101,5 +1101,133 @@
     "video": null,
     "videoLabel": "Simulation rollout · coming soon",
     "imageKind": "static_initial_scene"
+  },
+  {
+    "id": 9,
+    "folder": "dining_table",
+    "title": "Dining Table Setup",
+    "instruction": "Set the table for me.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/dining_table/config/personas.json",
+    "shortTitle": "Dining table",
+    "contrast": "Chopsticks or a fork and knife?",
+    "dimension": "Object choice",
+    "poster": "assets/task-scenes/task-009.webp",
+    "posterAlt": "Task 009 — Dining Table Setup: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A uses chopsticks and a spoon with the drink on the right.",
+        "preferences": {
+          "utensils": [
+            "chopsticks",
+            "spoon"
+          ],
+          "drink_side": "right"
+        },
+        "video": "assets/rollouts/task009-A.mp4",
+        "videoPoster": "assets/rollouts/task009-A.webp",
+        "videoDurationSeconds": 124.66666666666667
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B uses a fork and knife with the drink on the left.",
+        "preferences": {
+          "utensils": [
+            "fork",
+            "knife"
+          ],
+          "drink_side": "left"
+        },
+        "video": "assets/rollouts/task009-B.mp4",
+        "videoPoster": "assets/rollouts/task009-B.webp",
+        "videoDurationSeconds": 60.93333333333333
+      }
+    ],
+    "tabLabel": "Place setting",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 9,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 57,
+    "folder": "plant_arrangement",
+    "title": "Personalized Plant Arrangement",
+    "instruction": "Arrange my plants.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/plant_arrangement/config/personas.json",
+    "shortTitle": "Plant arrangement",
+    "contrast": "Cactus on the windowsill or the plant stand?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-057.webp",
+    "posterAlt": "Task 057 — Personalized Plant Arrangement: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the cactus on the windowsill, the fern on the plant stand, and the watering can on the windowsill to the left of the cactus.",
+        "preferences": {
+          "cactus": "windowsill",
+          "fern": "plant_stand",
+          "watering_can": "windowsill_left_of_cactus"
+        },
+        "video": "assets/rollouts/task057-A.mp4",
+        "videoPoster": "assets/rollouts/task057-A.webp",
+        "videoDurationSeconds": 56.333333333333336
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the cactus on the plant stand, the fern on the windowsill, and the watering can on the low stool beside the plant stand.",
+        "preferences": {
+          "cactus": "plant_stand",
+          "fern": "windowsill",
+          "watering_can": "low_stool"
+        },
+        "video": "assets/rollouts/task057-B.mp4",
+        "videoPoster": "assets/rollouts/task057-B.webp",
+        "videoDurationSeconds": 61.53333333333333
+      }
+    ],
+    "tabLabel": "Plant spots",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 57,
+      "provenance": "data/rollout-provenance.json"
+    }
   }
 ]
