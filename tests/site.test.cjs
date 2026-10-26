@@ -162,7 +162,8 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
   assert.equal(ctx.$$('video').length, 0);
   const tabs = ctx.$('.rollout-tabs');
   const recorded = examples.filter((item) => item.recording);
-  assert.equal(tabs.style.getPropertyValue('--tile-columns'), String(Math.ceil(recorded.length / 2)));
+  const rows = Math.ceil(recorded.length / 10);
+  assert.equal(tabs.style.getPropertyValue('--tile-columns'), String(Math.ceil(recorded.length / rows)));
   const last = String(recorded.at(-1).id);
   const [first, second] = recorded.map((item) => String(item.id));
   for (const [key, expected] of [['ArrowRight', second], ['End', last], ['Home', first], ['ArrowLeft', last]]) {

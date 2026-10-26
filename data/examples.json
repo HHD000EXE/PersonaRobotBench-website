@@ -1229,5 +1229,125 @@
       "recordedTaskId": 57,
       "provenance": "data/rollout-provenance.json"
     }
+  },
+  {
+    "id": 46,
+    "folder": "wine_bottle",
+    "title": "Personalized Wine Bottle Storage",
+    "instruction": "Store the wine bottle.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wine_bottle/config/personas.json",
+    "shortTitle": "Wine bottle",
+    "contrast": "Lying in the rack or upright on the shelf?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-046.webp",
+    "posterAlt": "Task 046 — Personalized Wine Bottle Storage: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Store the wine bottle lying on its side in the wine rack.",
+        "preferences": {
+          "wine_storage": "rack_lying"
+        },
+        "video": "assets/rollouts/task046-A.mp4",
+        "videoPoster": "assets/rollouts/task046-A.webp",
+        "videoDurationSeconds": 19.133333333333333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Store the wine bottle standing upright on the shelf.",
+        "preferences": {
+          "wine_storage": "shelf_upright"
+        },
+        "video": "assets/rollouts/task046-B.mp4",
+        "videoPoster": "assets/rollouts/task046-B.webp",
+        "videoDurationSeconds": 14.866666666666667
+      }
+    ],
+    "tabLabel": "Wine storage",
+    "videoLabel": "Scripted expert (kinematic) · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-kinematic",
+      "label": "Scripted expert (kinematic)",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 46,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 16,
+    "folder": "drawer_organizer",
+    "title": "Personalized Drawer Organizer",
+    "instruction": "Set up my drawer organizer.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_organizer/config/personas.json",
+    "shortTitle": "Drawer organizer",
+    "contrast": "Shared compartments or one per item?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-016.webp",
+    "posterAlt": "Task 016 — Personalized Drawer Organizer: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "Yanru · shared compartments",
+        "description": "Larger shared compartments.",
+        "preferences": {
+          "divider_layout": "parallel",
+          "organization": "group_similar_items",
+          "priority": "larger shared compartments"
+        },
+        "video": "assets/rollouts/task016-A.mp4",
+        "videoPoster": "assets/rollouts/task016-A.webp",
+        "videoDurationSeconds": 151.13333333333333
+      },
+      {
+        "id": "B",
+        "name": "Yanru · individual compartments",
+        "description": "A dedicated space for every item.",
+        "preferences": {
+          "divider_layout": "crossed",
+          "organization": "one_item_per_compartment",
+          "priority": "a dedicated space for every item"
+        },
+        "video": "assets/rollouts/task016-B.mp4",
+        "videoPoster": "assets/rollouts/task016-B.webp",
+        "videoDurationSeconds": 154.66666666666666
+      }
+    ],
+    "tabLabel": "Drawer dividers",
+    "videoLabel": "Scripted expert (kinematic) · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-kinematic",
+      "label": "Scripted expert (kinematic)",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 16,
+      "provenance": "data/rollout-provenance.json"
+    }
   }
 ]
