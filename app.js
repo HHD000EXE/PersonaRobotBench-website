@@ -126,6 +126,8 @@
         '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span></button>';
     }).join("");
     $(".rollout-tabs").classList.add("rollout-tiles");
+    // Wide screens lay the tiles out in two full rows.
+    $(".rollout-tabs").style.setProperty("--tile-columns", String(Math.ceil(recorded.length / 2)));
   }
 
   // One control drives both personas on a shared simulation clock: the shorter

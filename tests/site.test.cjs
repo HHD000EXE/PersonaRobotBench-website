@@ -161,7 +161,9 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
   assert.equal(ctx.$$('.video-placeholder').length, 2);
   assert.equal(ctx.$$('video').length, 0);
   const tabs = ctx.$('.rollout-tabs');
-  const last = String(examples.filter((item) => item.recording).at(-1).id);
+  const recorded = examples.filter((item) => item.recording);
+  assert.equal(tabs.style.getPropertyValue('--tile-columns'), String(Math.ceil(recorded.length / 2)));
+  const last = String(recorded.at(-1).id);
   for (const [key, expected] of [['ArrowRight', '51'], ['End', last], ['Home', '18'], ['ArrowLeft', last]]) {
     tabs.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key, bubbles: true }));
     const selected = ctx.$('[role="tab"][aria-selected="true"]');
