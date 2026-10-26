@@ -247,6 +247,758 @@
     }
   },
   {
+    "id": 17,
+    "folder": "breakfast_preparation",
+    "title": "Personalized Breakfast Selection",
+    "instruction": "Get me something for breakfast.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/config/personas.json",
+    "shortTitle": "Breakfast selection",
+    "contrast": "A muffin or a cookie?",
+    "dimension": "Object choice",
+    "poster": "assets/task-scenes/task-017.webp",
+    "posterAlt": "Task 017 — Personalized Breakfast Selection: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I like a soft, sweet muffin for breakfast.",
+        "preferences": {
+          "food": "muffin"
+        },
+        "video": "assets/rollouts/task017-A.mp4",
+        "videoPoster": "assets/rollouts/task017-A.webp",
+        "videoDurationSeconds": 37.7
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer a chocolate-chip cookie for breakfast.",
+        "preferences": {
+          "food": "cookie"
+        },
+        "video": "assets/rollouts/task017-B.mp4",
+        "videoPoster": "assets/rollouts/task017-B.webp",
+        "videoDurationSeconds": 40.7
+      }
+    ],
+    "tabLabel": "Breakfast choice",
+    "videoLabel": "Scripted reference controller · complete recorded episode",
+    "recording": {
+      "source": "task-records-17-19",
+      "label": "Scripted reference controller",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 17,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 2,
+    "folder": "glass_organization",
+    "title": "Personalized Household Glass Organization",
+    "instruction": "Put away the glass.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/glass_organization/config/personas.json",
+    "shortTitle": "Glass organization",
+    "contrast": "Closed cabinet or open rack?",
+    "dimension": "Storage location",
+    "poster": "assets/task-scenes/task-002.webp",
+    "posterAlt": "Task 002 — Personalized Household Glass Organization: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put drinking glasses in the cabinet.",
+        "preferences": {
+          "glass_storage": "cabinet"
+        },
+        "video": "assets/rollouts/task002-A.mp4",
+        "videoPoster": "assets/rollouts/task002-A.webp",
+        "videoDurationSeconds": 29.733333333333334
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put drinking glasses on the open rack.",
+        "preferences": {
+          "glass_storage": "rack"
+        },
+        "video": "assets/rollouts/task002-B.mp4",
+        "videoPoster": "assets/rollouts/task002-B.webp",
+        "videoDurationSeconds": 17.666666666666668
+      }
+    ],
+    "tabLabel": "Glass storage",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 2,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 19,
+    "folder": "product_photography",
+    "title": "Personalized Camera Viewpoint",
+    "instruction": "Pick up the camera and frame the product for a photo.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/config/personas.json",
+    "shortTitle": "Camera viewpoint",
+    "contrast": "A high angle from afar or a low angle up close?",
+    "dimension": "Viewpoint",
+    "poster": "assets/task-scenes/task-019.webp",
+    "posterAlt": "Task 019 — Personalized Camera Viewpoint: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Use a high angle from farther away.",
+        "preferences": {
+          "viewpoint": "high_far",
+          "distance_m": [
+            0.5,
+            0.65
+          ],
+          "elevation_deg": [
+            45,
+            65
+          ]
+        },
+        "video": "assets/rollouts/task019-A.mp4",
+        "videoPoster": "assets/rollouts/task019-A.webp",
+        "videoDurationSeconds": 42.9
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use a low angle from nearby.",
+        "preferences": {
+          "viewpoint": "low_near",
+          "distance_m": [
+            0.2,
+            0.32
+          ],
+          "elevation_deg": [
+            5,
+            25
+          ]
+        },
+        "video": "assets/rollouts/task019-B.mp4",
+        "videoPoster": "assets/rollouts/task019-B.webp",
+        "videoDurationSeconds": 38.5
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Photograph the product from directly overhead.",
+        "preferences": {
+          "viewpoint": "overhead",
+          "distance_m": [
+            0.18,
+            0.3
+          ],
+          "elevation_deg": [
+            85,
+            90
+          ]
+        },
+        "video": null
+      }
+    ],
+    "tabLabel": "Camera viewpoint",
+    "videoLabel": "Scripted reference controller · complete recorded episode",
+    "recording": {
+      "source": "task-records-17-19",
+      "label": "Scripted reference controller",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 19,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 1,
+    "folder": "shared_desk",
+    "title": "Shared Desk Configuration",
+    "instruction": "Set up my desk for work.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/shared_desk/config/personas.json",
+    "shortTitle": "Shared desk",
+    "contrast": "Mouse on the left or the right?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-001.webp",
+    "posterAlt": "Task 001 — Shared Desk Configuration: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I prefer the mouse on the left side of the keyboard, the notebook on the right, and the coffee mug away from electronics.",
+        "preferences": {
+          "mouse_side": "left",
+          "notebook_side": "right",
+          "mug_placement": "away_from_electronics"
+        },
+        "video": "assets/rollouts/task001-A.mp4",
+        "videoPoster": "assets/rollouts/task001-A.webp",
+        "videoDurationSeconds": 82.2
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I prefer the mouse on the right side of the keyboard, the notebook on the left, and the coffee mug near the upper-right corner of the desk.",
+        "preferences": {
+          "mouse_side": "right",
+          "notebook_side": "left",
+          "mug_placement": "upper_right_corner"
+        },
+        "video": "assets/rollouts/task001-B.mp4",
+        "videoPoster": "assets/rollouts/task001-B.webp",
+        "videoDurationSeconds": 47.8
+      }
+    ],
+    "tabLabel": "Desk layout",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 1,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 11,
+    "folder": "mug_handover",
+    "title": "Personalized Handover",
+    "instruction": "Hand me the mug.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Assistance",
+    "tags": [
+      "Assistance"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mug_handover/config/personas.json",
+    "shortTitle": "Mug handover",
+    "contrast": "Handed over on the left or the right?",
+    "dimension": "Handover",
+    "poster": "assets/task-scenes/task-011.webp",
+    "posterAlt": "Task 011 — Personalized Handover: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A requests the mug on the left with handle left.",
+        "preferences": {
+          "side": "left",
+          "handle": "left"
+        },
+        "video": "assets/rollouts/task011-A.mp4",
+        "videoPoster": "assets/rollouts/task011-A.webp",
+        "videoDurationSeconds": 30.0
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B requests it on the right with handle right. Receiving pads stand in for human hands.",
+        "preferences": {
+          "side": "right",
+          "handle": "right"
+        },
+        "video": "assets/rollouts/task011-B.mp4",
+        "videoPoster": "assets/rollouts/task011-B.webp",
+        "videoDurationSeconds": 15.133333333333333
+      }
+    ],
+    "tabLabel": "Handover side",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 11,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 10,
+    "folder": "bedside_table",
+    "title": "Bedside Table Setup",
+    "instruction": "Set up my bedside table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/bedside_table/config/personas.json",
+    "shortTitle": "Bedside table",
+    "contrast": "Phone on the left or the right?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-010.webp",
+    "posterAlt": "Task 010 — Bedside Table Setup: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "A puts phone left, water by the bed, glasses beside phone.",
+        "preferences": {
+          "phone_side": "left",
+          "water_distance": "near",
+          "glasses": "beside_phone"
+        },
+        "video": "assets/rollouts/task010-A.mp4",
+        "videoPoster": "assets/rollouts/task010-A.webp",
+        "videoDurationSeconds": 75.8
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "B puts phone right, water away from bed, glasses inside their case.",
+        "preferences": {
+          "phone_side": "right",
+          "water_distance": "far",
+          "glasses": "inside_case"
+        },
+        "video": "assets/rollouts/task010-B.mp4",
+        "videoPoster": "assets/rollouts/task010-B.webp",
+        "videoDurationSeconds": 41.46666666666667
+      }
+    ],
+    "tabLabel": "Bedside layout",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 10,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 5,
+    "folder": "coffee_station",
+    "title": "Personalized Coffee Station Setup",
+    "instruction": "Set up my coffee station.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/coffee_station/config/personas.json",
+    "shortTitle": "Coffee station",
+    "contrast": "Mug next to the machine or farther away?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-005.webp",
+    "posterAlt": "Task 005 — Personalized Coffee Station Setup: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Mug next to the coffee machine; sugar to the left of the mug; spoon beside the sugar.",
+        "preferences": {
+          "mug_distance": "near",
+          "sugar_side": "left",
+          "spoon_neighbor": "sugar"
+        },
+        "video": "assets/rollouts/task005-A.mp4",
+        "videoPoster": "assets/rollouts/task005-A.webp",
+        "videoDurationSeconds": 54.666666666666664
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Mug farther from the coffee machine; sugar to the right of the mug; spoon next to the mug.",
+        "preferences": {
+          "mug_distance": "far",
+          "sugar_side": "right",
+          "spoon_neighbor": "mug"
+        },
+        "video": "assets/rollouts/task005-B.mp4",
+        "videoPoster": "assets/rollouts/task005-B.webp",
+        "videoDurationSeconds": 45.53333333333333
+      }
+    ],
+    "tabLabel": "Station layout",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 5,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 4,
+    "folder": "travel_packing",
+    "title": "Personalized Traveling Assistant",
+    "instruction": "Pack my bag.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Household",
+    "tags": [
+      "Household"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/travel_packing/config/personas.json",
+    "shortTitle": "Travel packing",
+    "contrast": "Clothes first or everyday essentials?",
+    "dimension": "Object choice",
+    "poster": "assets/task-scenes/task-004.webp",
+    "posterAlt": "Task 004 — Personalized Traveling Assistant: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Prioritize a variety of outfits: pack the shirt, pants, and jacket.",
+        "preferences": {
+          "packing_priority": "outfit_variety",
+          "required_items": [
+            "shirt",
+            "pants",
+            "jacket"
+          ]
+        },
+        "video": "assets/rollouts/task004-A.mp4",
+        "videoPoster": "assets/rollouts/task004-A.webp",
+        "videoDurationSeconds": 90.93333333333334
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Prioritize everyday essentials: pack the wallet, charger, and toiletries.",
+        "preferences": {
+          "packing_priority": "everyday_essentials",
+          "required_items": [
+            "wallet",
+            "charger",
+            "toiletries"
+          ]
+        },
+        "video": "assets/rollouts/task004-B.mp4",
+        "videoPoster": "assets/rollouts/task004-B.webp",
+        "videoDurationSeconds": 52.86666666666667
+      }
+    ],
+    "tabLabel": "Packing priority",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 4,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 37,
+    "folder": "ergonomic_part_delivery",
+    "title": "Ergonomic Part Delivery",
+    "instruction": "Put the part on the table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/ergonomic_part_delivery/config/personas.json",
+    "shortTitle": "Ergonomic delivery",
+    "contrast": "On the raised stand or at the front edge?",
+    "dimension": "Ergonomics",
+    "poster": "assets/task-scenes/task-037.webp",
+    "posterAlt": "Task 037 — Ergonomic Part Delivery: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I am tall: place the heavy part on the raised stand near the back.",
+        "preferences": "I am tall: place the heavy part on the raised stand near the back.",
+        "video": "assets/rollouts/task037-A.mp4",
+        "videoPoster": "assets/rollouts/task037-A.webp",
+        "videoDurationSeconds": 33.53333333333333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am tired or shorter: place the heavy part near the front edge at normal table height.",
+        "preferences": "I am tired or shorter: place the heavy part near the front edge at normal table height.",
+        "video": "assets/rollouts/task037-B.mp4",
+        "videoPoster": "assets/rollouts/task037-B.webp",
+        "videoDurationSeconds": 25.866666666666667
+      }
+    ],
+    "tabLabel": "Delivery height",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 37,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 39,
+    "folder": "cnc_unloading",
+    "title": "CNC Part Unloading",
+    "instruction": "Take the part out.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/cnc_unloading/config/personas.json",
+    "shortTitle": "CNC unloading",
+    "contrast": "Inspection table or transport box?",
+    "dimension": "Workflow role",
+    "poster": "assets/task-scenes/task-039.webp",
+    "posterAlt": "Task 039 — CNC Part Unloading: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I am a quality inspector: handle the finished part carefully and place it on the clean illuminated inspection table.",
+        "preferences": "I am a quality inspector: handle the finished part carefully and place it on the clean illuminated inspection table.",
+        "video": "assets/rollouts/task039-A.mp4",
+        "videoPoster": "assets/rollouts/task039-A.webp",
+        "videoDurationSeconds": 20.4
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I work in assembly: place the finished part directly in the transport box.",
+        "preferences": "I work in assembly: place the finished part directly in the transport box.",
+        "video": "assets/rollouts/task039-B.mp4",
+        "videoPoster": "assets/rollouts/task039-B.webp",
+        "videoDurationSeconds": 26.133333333333333
+      }
+    ],
+    "tabLabel": "Part destination",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 39,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 52,
+    "folder": "drawer_selection",
+    "title": "Personalized Drawer Selection",
+    "instruction": "Open my drawer.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drawer_selection/config/personas.json",
+    "shortTitle": "Drawer selection",
+    "contrast": "Top drawer or bottom drawer?",
+    "dimension": "Object choice",
+    "poster": "assets/task-scenes/task-052.webp",
+    "posterAlt": "Task 052 — Personalized Drawer Selection: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Open the top drawer; leave the bottom drawer closed.",
+        "preferences": {
+          "drawer": "top"
+        },
+        "video": "assets/rollouts/task052-A.mp4",
+        "videoPoster": "assets/rollouts/task052-A.webp",
+        "videoDurationSeconds": 15.8
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Open the bottom drawer; leave the top drawer closed.",
+        "preferences": {
+          "drawer": "bottom"
+        },
+        "video": "assets/rollouts/task052-B.mp4",
+        "videoPoster": "assets/rollouts/task052-B.webp",
+        "videoDurationSeconds": 10.133333333333333
+      }
+    ],
+    "tabLabel": "Drawer choice",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 52,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 70,
+    "folder": "jar_sorting",
+    "title": "Personalized Jar Sorting",
+    "instruction": "Sort my jars into the two trays.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/jar_sorting/config/personas.json",
+    "shortTitle": "Jar sorting",
+    "contrast": "Sort by colour or by shape?",
+    "dimension": "Accessibility",
+    "poster": "assets/task-scenes/task-070.webp",
+    "posterAlt": "Task 070 — Personalized Jar Sorting: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I sort by colour: stand the red jars upright in the left tray and the green jars upright in the right tray.",
+        "preferences": {
+          "color_vision": "typical",
+          "sorting_rule": "by_color",
+          "left_tray": "red",
+          "right_tray": "green"
+        },
+        "video": "assets/rollouts/task070-A.mp4",
+        "videoPoster": "assets/rollouts/task070-A.webp",
+        "videoDurationSeconds": 68.8
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am red-green colour-blind, so I sort by shape: stand the round jars upright in the left tray and the square jars upright in the right tray.",
+        "preferences": {
+          "color_vision": "red_green_colour_blind",
+          "sorting_rule": "by_shape",
+          "left_tray": "round",
+          "right_tray": "square"
+        },
+        "video": "assets/rollouts/task070-B.mp4",
+        "videoPoster": "assets/rollouts/task070-B.webp",
+        "videoDurationSeconds": 68.8
+      }
+    ],
+    "tabLabel": "Sorting rule",
+    "videoLabel": "Scripted expert · complete recorded episode",
+    "recording": {
+      "source": "prb-scripted-expert-physics",
+      "label": "Scripted expert",
+      "kind": "scripted",
+      "playback": "complete recorded episodes · 1× simulation playback.",
+      "recordedTaskId": 70,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
     "id": 32,
     "folder": "greeting",
     "title": "Greeting",
@@ -349,155 +1101,5 @@
     "video": null,
     "videoLabel": "Simulation rollout · coming soon",
     "imageKind": "static_initial_scene"
-  },
-  {
-    "id": 17,
-    "folder": "breakfast_preparation",
-    "title": "Personalized Breakfast Selection",
-    "instruction": "Get me something for breakfast.",
-    "personaCount": 2,
-    "personaIds": [
-      "A",
-      "B"
-    ],
-    "category": "Food & dining",
-    "tags": [
-      "Food & dining"
-    ],
-    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/breakfast_preparation/config/personas.json",
-    "shortTitle": "Breakfast selection",
-    "contrast": "A muffin or a cookie?",
-    "dimension": "Object choice",
-    "poster": "assets/task-scenes/task-017.webp",
-    "posterAlt": "Task 017 — Personalized Breakfast Selection: static initial scene with furnished room background.",
-    "video": null,
-    "imageKind": "static_initial_scene",
-    "personas": [
-      {
-        "id": "A",
-        "name": "User A",
-        "description": "I like a soft, sweet muffin for breakfast.",
-        "preferences": {
-          "food": "muffin"
-        },
-        "video": "assets/rollouts/task017-A.mp4",
-        "videoPoster": "assets/rollouts/task017-A.webp",
-        "videoDurationSeconds": 37.7
-      },
-      {
-        "id": "B",
-        "name": "User B",
-        "description": "I prefer a chocolate-chip cookie for breakfast.",
-        "preferences": {
-          "food": "cookie"
-        },
-        "video": "assets/rollouts/task017-B.mp4",
-        "videoPoster": "assets/rollouts/task017-B.webp",
-        "videoDurationSeconds": 40.7
-      }
-    ],
-    "tabLabel": "Breakfast choice",
-    "videoLabel": "Scripted reference controller · complete recorded episode",
-    "recording": {
-      "source": "task-records-17-19",
-      "label": "Scripted reference controller",
-      "kind": "scripted",
-      "playback": "complete recorded episodes · 1× simulation playback.",
-      "recordedTaskId": 17,
-      "provenance": "data/rollout-provenance.json"
-    }
-  },
-  {
-    "id": 19,
-    "folder": "product_photography",
-    "title": "Personalized Camera Viewpoint",
-    "instruction": "Pick up the camera and frame the product for a photo.",
-    "personaCount": 3,
-    "personaIds": [
-      "A",
-      "B",
-      "C"
-    ],
-    "category": "Social & creative",
-    "tags": [
-      "Social & creative"
-    ],
-    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/product_photography/config/personas.json",
-    "shortTitle": "Camera viewpoint",
-    "contrast": "A high angle from afar or a low angle up close?",
-    "dimension": "Viewpoint",
-    "poster": "assets/task-scenes/task-019.webp",
-    "posterAlt": "Task 019 — Personalized Camera Viewpoint: static initial scene with furnished room background.",
-    "video": null,
-    "imageKind": "static_initial_scene",
-    "personas": [
-      {
-        "id": "A",
-        "name": "User A",
-        "description": "Use a high angle from farther away.",
-        "preferences": {
-          "viewpoint": "high_far",
-          "distance_m": [
-            0.5,
-            0.65
-          ],
-          "elevation_deg": [
-            45,
-            65
-          ]
-        },
-        "video": "assets/rollouts/task019-A.mp4",
-        "videoPoster": "assets/rollouts/task019-A.webp",
-        "videoDurationSeconds": 42.9
-      },
-      {
-        "id": "B",
-        "name": "User B",
-        "description": "Use a low angle from nearby.",
-        "preferences": {
-          "viewpoint": "low_near",
-          "distance_m": [
-            0.2,
-            0.32
-          ],
-          "elevation_deg": [
-            5,
-            25
-          ]
-        },
-        "video": "assets/rollouts/task019-B.mp4",
-        "videoPoster": "assets/rollouts/task019-B.webp",
-        "videoDurationSeconds": 38.5
-      },
-      {
-        "id": "C",
-        "name": "User C",
-        "description": "Photograph the product from directly overhead.",
-        "preferences": {
-          "viewpoint": "overhead",
-          "distance_m": [
-            0.18,
-            0.3
-          ],
-          "elevation_deg": [
-            85,
-            90
-          ]
-        },
-        "video": null
-      }
-    ],
-    "tabLabel": "Camera viewpoint",
-    "videoLabel": "Scripted reference controller · complete recorded episode",
-    "recording": {
-      "source": "task-records-17-19",
-      "label": "Scripted reference controller",
-      "kind": "scripted",
-      "playback": "complete recorded episodes · 1× simulation playback.",
-      "recordedTaskId": 19,
-      "provenance": "data/rollout-provenance.json"
-    }
   }
 ]
