@@ -559,3 +559,12 @@ h2{font-size:36px;line-height:1.2;letter-spacing:-.04em}
 .leaderboard-axis-track span{font-size:11px}
 .stats-strip p{font-size:12px}
 .task-footer>p{font-size:12px}
+
+/* The benchmark concept starts from the persona and keeps the physical goal fixed. */
+.persona-concept{margin:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#f8faff}
+.persona-concept-art{display:block;line-height:0}
+.persona-concept-art img{display:block;width:100%;height:auto}
+.persona-concept figcaption{margin:0;padding:20px 26px;border-top:1px solid var(--line);background:#fff;color:var(--muted);font-size:13px;line-height:1.85;text-wrap:pretty}
+.persona-concept figcaption strong{color:var(--ink);font-weight:650}
+@media(max-width:1000px){.persona-concept-art{max-width:680px;margin-inline:auto}}
+@media(max-width:720px){.persona-concept{border-radius:6px}.persona-concept figcaption{padding:17px 18px;font-size:12px;line-height:1.8}}

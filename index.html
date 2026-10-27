@@ -54,8 +54,14 @@
       <noscript><p>Enable JavaScript to view the policy leaderboard.</p></noscript>
     </section>
     <section id="overview" class="overview section-pad wrap" aria-labelledby="overview-title">
-      <div class="section-heading"><div><h2 id="overview-title">One task, multiple valid outcomes.</h2><p>“Bring me a drink” is one task.<br>What makes it right depends on who's asking.</p></div></div>
-      <div class="concept-panel"><div class="concept-request"><h3>“Get me something<br>to drink.”</h3></div><div class="concept-branches"><div class="branch-card branch-a"><div class="branch-top"><span class="case-label">A</span></div><h3>Sugar-free<br>sparkling water.</h3></div><div class="branch-card branch-b"><div class="branch-top"><span class="case-label">B</span></div><h3>Orange<br>juice.</h3></div></div></div>
+      <div class="section-heading"><div><h2 id="overview-title">Success depends on who the robot is helping.</h2><p>Same task. Same robot. Same policy.<br>Different personas can require different ways of completing it.</p></div></div>
+      <figure class="persona-concept" aria-labelledby="overview-title" aria-describedby="persona-concept-caption">
+        <picture class="persona-concept-art">
+          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg" width="600" height="1190">
+          <img src="assets/persona-concept.svg" width="1200" height="700" loading="lazy" decoding="async" alt="Persona-first evaluation: two supplied task preferences condition the same robot policy. For Task 68, persona A requires lifting and carrying a container, while persona B requires sliding it on the table. Both reach the same target, but each motion meets only its intended persona's requirement.">
+        </picture>
+        <figcaption id="persona-concept-caption"><strong>Reaching the goal is only part of success.</strong> Task 68 keeps the start and target fixed: one persona requires a carry, the other a table-supported slide. PersonaRobotBench checks whether the execution meets the intended persona's requirements. These are schematic desired behaviors, not policy rollout results.</figcaption>
+      </figure>
       <div class="preference-types"><span class="preference-label">Preferences can change</span><span><i class="type-dot orange"></i> What to choose</span><span><i class="type-dot green"></i> Where to put it</span><span><i class="type-dot blue"></i> How to perform it</span><span><i class="type-dot gold"></i> In what order</span></div>
     </section>
     <section id="tasks" class="task-section section-pad" aria-labelledby="tasks-title"><div class="wrap">
