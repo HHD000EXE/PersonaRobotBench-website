@@ -159,7 +159,7 @@ test('task dialog displays every authored persona and closes with Escape', async
 test('rollout pairs are explicit placeholders and keyboard tabs work', async () => {
   const ctx = await boot();
   assert.equal(ctx.$$('.video-placeholder').length, 2);
-  assert.equal(ctx.$$('video').length, 0);
+  assert.equal(ctx.$$('#rollout-pair video').length, 0);
   const tabs = ctx.$('.rollout-tabs');
   const recorded = examples.filter((item) => item.recording);
   const rows = Math.ceil(recorded.length / 10);
@@ -183,9 +183,9 @@ test('filled HTTPS and relative video slots render accessible native controls', 
   filled[0].personas[0].video = 'https://videos.example.test/a.mp4';
   filled[0].personas[1].video = 'videos/b.mp4';
   const ctx = await boot({ examples: filled });
-  assert.equal(ctx.$$('video[controls][playsinline]').length, 2);
+  assert.equal(ctx.$$('#rollout-pair video[controls][playsinline]').length, 2);
   assert.equal(ctx.$$('.video-placeholder').length, 0);
-  assert.equal(ctx.$('video source').src, 'https://videos.example.test/a.mp4');
+  assert.equal(ctx.$('#rollout-pair video source').src, 'https://videos.example.test/a.mp4');
   assert.ok(ctx.$('.video-status').textContent.includes('Paired videos available'));
   ctx.window.close();
 });
@@ -194,7 +194,7 @@ test('one filled video slot reports partial availability', async () => {
   const filled = structuredClone(examples);
   filled[0].personas[0].video = 'https://videos.example.test/a.mp4';
   const ctx = await boot({ examples: filled });
-  assert.equal(ctx.$$('video').length, 1);
+  assert.equal(ctx.$$('#rollout-pair video').length, 1);
   assert.equal(ctx.$$('.video-placeholder').length, 1);
   assert.ok(ctx.$('.video-status').textContent.includes('1 of 2 videos available'));
   ctx.window.close();
@@ -215,7 +215,7 @@ test('GitHub Pages project subpaths preserve catalog, image, font CSS, script an
   const script = new URL(ctx.$('script[src^="app.js"]').src);
   assert.equal(script.origin, new URL(base).origin);
   assert.equal(script.pathname, new URL('app.js', base).pathname);
-  assert.equal(ctx.$('video source').src, base + 'assets/rollouts/task18-A.mp4');
+  assert.equal(ctx.$('#rollout-pair video source').src, base + 'assets/rollouts/task18-A.mp4');
   ctx.$('[data-example="68"]').click();
   assert.equal(ctx.$('.video-placeholder img').src, base + 'assets/task-scenes/task-068.webp');
   ctx.window.close();
@@ -226,7 +226,7 @@ test('unsafe video protocols never become source elements', async () => {
     const filled = structuredClone(examples);
     filled[0].personas[0].video = protocol;
     const ctx = await boot({ examples: filled });
-    assert.equal(ctx.$$('video').length, 0);
+    assert.equal(ctx.$$('#rollout-pair video').length, 0);
     assert.equal(ctx.$$('.video-placeholder').length, 2);
     ctx.window.close();
   }
@@ -241,7 +241,7 @@ test('shipped examples preserve every authored slot and available recording with
   for (const taskId of recorded) {
     ctx.$('[data-example="' + taskId + '"]').click();
     const example = shippedExamples.find((item) => item.id === taskId);
-    const videos = ctx.$$('video');
+    const videos = ctx.$$('#rollout-pair video');
     const available = example.personas.filter((persona) => persona.video);
     assert.equal(ctx.$$('.rollout-case').length, example.personas.length);
     slots += ctx.$$('.rollout-case').length;
@@ -363,11 +363,11 @@ test('synchronized controls stay hidden until at least two videos exist', async 
 
 test('switching rollout tabs pauses outgoing playback without autoplaying incoming videos', async () => {
   const ctx = await boot({ examples: shippedExamples });
-  const outgoing = ctx.$$('video');
+  const outgoing = ctx.$$('#rollout-pair video');
   for (const video of outgoing) Object.defineProperty(video, 'paused', { value: false });
   ctx.$('[data-example="51"]').click();
   assert.deepEqual(ctx.pausedVideos, outgoing);
-  assert.ok(ctx.$$('video').every((video) => video.autoplay === false));
+  assert.ok(ctx.$$('#rollout-pair video').every((video) => video.autoplay === false));
   assert.ok(outgoing.every((video) => !video.isConnected));
   ctx.window.close();
 });

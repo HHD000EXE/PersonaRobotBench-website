@@ -1,0 +1,142 @@
+{
+  "source_folder": "https://drive.google.com/drive/folders/1JcZCrnuAFSjXhJh2m2s4zu4C_caIalKI",
+  "scope": "Four team-supplied simulation recordings, not raw human input videos or a new evaluation. MP4 bytes are unchanged from Drive.",
+  "media": [
+    {
+      "file": "177_board_shared_personaA.web.mp4",
+      "drive_id": "1WI1j9bMmKXfrStT88oIYtgilE67I9zUY",
+      "source_url": "https://drive.google.com/file/d/1WI1j9bMmKXfrStT88oIYtgilE67I9zUY/view",
+      "bytes": 1117409,
+      "sha256": "9b9b9ba57bfc6e3cfecb636911d7cb0cb35061740e97c293626103eca68edea4",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "avg_frame_rate": "24/1"
+          }
+        ],
+        "format": {
+          "duration": "54.167000"
+        }
+      },
+      "asset": "assets/v2d/177_board_shared_personaA.web.mp4",
+      "poster": "assets/v2d/177_board_shared_personaA.web.png",
+      "poster_time_seconds": 8,
+      "poster_sha256": "7dd4776cbe2f5369a2674ae37c881e2e84528c8adf6c1dab38bb742132ef517a"
+    },
+    {
+      "file": "177_board_shared_personaB.web.mp4",
+      "drive_id": "1hKtjCcFc-cybM2LroR6mGTJ67YszL3YJ",
+      "source_url": "https://drive.google.com/file/d/1hKtjCcFc-cybM2LroR6mGTJ67YszL3YJ/view",
+      "bytes": 843311,
+      "sha256": "9ec900fa4f97eb3e07958d0cf8dfed01f4d8b57b121e56952c70e813e53371f8",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "avg_frame_rate": "24/1"
+          }
+        ],
+        "format": {
+          "duration": "38.792000"
+        }
+      },
+      "asset": "assets/v2d/177_board_shared_personaB.web.mp4",
+      "poster": "assets/v2d/177_board_shared_personaB.web.png",
+      "poster_time_seconds": 8,
+      "poster_sha256": "7b9d8bd30ca2a56ca0d4f93bb5e29be8eeb4c308d053cd2ce4f21b2eb6ed5925"
+    },
+    {
+      "file": "319computerv2_astra_described_01.web.mp4",
+      "drive_id": "1oDfUQgJRUkspRgG8zLKTt-sViknby3EP",
+      "source_url": "https://drive.google.com/file/d/1oDfUQgJRUkspRgG8zLKTt-sViknby3EP/view",
+      "bytes": 1160931,
+      "sha256": "e6d5b8904e0025437ed74cdb9a7c8c53e9c76bcda46ca0e7358dc61d9f3eef62",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "avg_frame_rate": "24/1"
+          }
+        ],
+        "format": {
+          "duration": "20.500000"
+        }
+      },
+      "asset": "assets/v2d/319computerv2_astra_described_01.web.mp4",
+      "poster": "assets/v2d/319computerv2_astra_described_01.web.png",
+      "poster_time_seconds": 4,
+      "poster_sha256": "1d044f34b5c149592b9d2cb0ab7acace20f6a71279570002ec45bf60b1f717f0"
+    },
+    {
+      "file": "369many_astra_described_01.web.mp4",
+      "drive_id": "1hYQBTDi6e31NDOUineyOy35tlk-jGbAX",
+      "source_url": "https://drive.google.com/file/d/1hYQBTDi6e31NDOUineyOy35tlk-jGbAX/view",
+      "bytes": 430328,
+      "sha256": "79b2b7997b8a6aa0ea8dc3e3de9ff3e8906551b43599c3c83ac7ed63c6fb252f",
+      "probe": {
+        "programs": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "avg_frame_rate": "24/1"
+          }
+        ],
+        "format": {
+          "duration": "6.125000"
+        }
+      },
+      "asset": "assets/v2d/369many_astra_described_01.web.mp4",
+      "poster": "assets/v2d/369many_astra_described_01.web.png",
+      "poster_time_seconds": 4,
+      "poster_sha256": "27c7483af12e65bb4bf1526592344f7446000c3a0e7f0d8c0fdafd519331a8af"
+    }
+  ],
+  "source_metadata_commit": "623d7345e6b65297a92e551d0a768ea5ed3f04bc",
+  "source_metadata_paths": [
+    "manifests/actionsense.json",
+    "manifests/wlasl.json",
+    "scripts/v2d_autonomous_policy.py",
+    "docs/board_shared_pair.md"
+  ],
+  "source_identities": {
+    "177": {
+      "dataset": "ActionSense",
+      "sample_id": "S04_split1_label008",
+      "subject_id": "S04",
+      "personas": "A/B are authored benchmark constraints, not source participant preferences"
+    },
+    "319": {
+      "dataset": "WLASL",
+      "sample_id": "12316",
+      "signer_id": 4,
+      "gloss": "computer",
+      "variation_id": 2,
+      "explicit_persona": {}
+    },
+    "369": {
+      "dataset": "WLASL",
+      "sample_id": "34824",
+      "signer_id": 38,
+      "gloss": "many",
+      "variation_id": 0,
+      "explicit_persona": {}
+    }
+  },
+  "evaluation_scope": "No new trials were run. These supplied recordings do not establish task, semantic or persona success rates."
+}
