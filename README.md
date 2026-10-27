@@ -9,14 +9,19 @@ The public research website for the **100-task / 217-persona** benchmark.
 
 This public repository contains the website, its complete task catalog,
 100 task-specific scene previews, and the policy leaderboard. The homepage
-includes 20 recorded A/B persona pairs (40 videos): Astra model rollouts for
+includes 30 recorded A/B persona pairs (60 videos): Astra model rollouts for
 Tasks 18, 51 and 68; scripted reference episodes for Tasks 17, 19 and 87;
 walking scripted-expert episodes for Tasks 1, 2, 4, 5, 9, 10, 11, 37, 39, 52, 57
 and 70; and kinematic scripted-expert episodes (no contact dynamics) for Tasks 16
-and 46. Task 1 is shown first.
+and 46. New Astra high-reasoning demonstrations cover Tasks 25, 30, 40, 50, 85,
+86, 88, 90, 95 and 98. Task 1 is shown first.
 Controller sources are recorded in the provenance data. At 1×, videos follow
 simulation time, with Astra inference waits omitted. These selected
 demonstrations are separate from the benchmark success-rate evaluations.
+The new high-reasoning demos use a 180-second simulation allowance and native
+success checks. Their videos replay measured poses sampled at 15 Hz and held
+at 30 fps; provenance describes the privileged skill interface, assisted control,
+renderer, retained source-artifact hashes and timing.
 See [recording provenance](data/rollout-provenance.json) for source hashes,
 recording context and the historical Task 110 → Task 51 mapping.
 
