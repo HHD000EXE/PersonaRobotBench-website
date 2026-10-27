@@ -1,6 +1,6 @@
 {
   "schema": "personarobotbench.website-leaderboard/1",
-  "updated": "2026-10-25",
+  "updated": "2026-10-27",
   "title": "Policy leaderboard",
   "description": "Reported performance of the evaluated persona-conditioned policy configurations.",
   "boards": [
@@ -8,7 +8,7 @@
       "id": "strict",
       "title": "Strict-success leaderboard",
       "metric": "Task-balanced strict success (%)",
-      "description": "100 tasks \u00b7 217 authored persona cases \u00b7 privileged state and goals \u00b7 assisted skills \u00b7 no RGB",
+      "description": "100 tasks · 217 authored persona cases · privileged state and goals · assisted skills · no RGB",
       "notes": [
         "Success requires the native persona goal, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error.",
         "Trials are averaged within observed personas, personas within each task, and all 100 tasks equally. Infrastructure outcomes remain unscored.",
@@ -22,34 +22,43 @@
           "variant": "High reasoning",
           "scorePercent": 33.2,
           "coverage": "651 / 651",
-          "protocol": "High reasoning \u00b7 3 trials/persona \u00b7 seeds 100\u2013102 \u00b7 Codex CLI \u00b7 64 assisted actions",
+          "protocol": "High reasoning · 3 trials/persona · seeds 100–102 · Codex CLI · 64 assisted actions",
           "notes": "Three trials per persona, 651 scored episodes. The study includes disclosed recovery continuations and selected simulator repairs."
         },
         {
           "id": "opus-api-high",
           "policy": "Opus 5.5",
-          "variant": "API \u00b7 high effort",
+          "variant": "API · high effort",
           "scorePercent": 31.9,
           "coverage": "2,050 / 2,170",
-          "protocol": "High effort \u00b7 10 trials/persona \u00b7 seeds 100\u2013109 \u00b7 Messages API \u00b7 up to 10 decisions / 64 skills",
+          "protocol": "High effort · 10 trials/persona · seeds 100–109 · Messages API · up to 10 decisions / 64 skills",
           "notes": "682 strict successes / 2,050 scored; 120 infrastructure slots are unscored. Three personas have no scored trials and are excluded from observed means."
         },
         {
           "id": "opus-cli-high",
           "policy": "Opus 5.5",
-          "variant": "CLI \u00b7 high effort",
+          "variant": "CLI · high effort",
           "scorePercent": 31.2,
           "coverage": "2,138 / 2,170",
-          "protocol": "High effort \u00b7 10 trials/persona \u00b7 seeds 100\u2013109 \u00b7 Claude Code \u00b7 tools disabled \u00b7 up to 10 decisions / 64 skills",
+          "protocol": "High effort · 10 trials/persona · seeds 100–109 · Claude Code · tools disabled · up to 10 decisions / 64 skills",
           "notes": "668 strict successes / 2,138 scored; 32 infrastructure slots are unscored. All 217 personas have at least one scored trial."
+        },
+        {
+          "id": "gemini4",
+          "policy": "Gemini 4",
+          "variant": "Medium reasoning",
+          "scorePercent": 30.4,
+          "coverage": "100-task paper figure",
+          "protocol": "Medium reasoning · 10 trials/persona · privileged state and goals · 64 assisted actions · no RGB",
+          "notes": "Task-balanced strict success from the current CoRL paper figure, using the shared privileged assisted skill interface."
         },
         {
           "id": "astra-medium",
           "policy": "Astra",
-          "variant": "Medium reasoning \u00b7 pilot",
+          "variant": "Medium reasoning · pilot",
           "scorePercent": 27.3,
           "coverage": "217 / 217",
-          "protocol": "Medium reasoning \u00b7 1 trial/persona \u00b7 seed 100 \u00b7 Codex CLI \u00b7 64 assisted actions",
+          "protocol": "Medium reasoning · 1 trial/persona · seed 100 · Codex CLI · 64 assisted actions",
           "notes": "59 strict successes / 217 scored. Separate single-seed pilot with disclosed runtime recovery and a launch-budget exception."
         },
         {
@@ -58,31 +67,21 @@
           "variant": "High effort",
           "scorePercent": 14.9,
           "coverage": "2,170 / 2,170",
-          "protocol": "High effort \u00b7 10 trials/persona \u00b7 seeds 100\u2013109 \u00b7 Responses-compatible API \u00b7 5 requests / 64 skills \u00b7 150 simulated seconds",
+          "protocol": "High effort · 10 trials/persona · seeds 100–109 · Responses-compatible API · 5 requests / 64 skills · 150 simulated seconds",
           "notes": "318 strict successes / 2,170 scored. The 1,099 policy errors count as failures; scored coverage does not imply simulator completion."
-        },
-        {
-          "id": "gemini4",
-          "policy": "Gemini 4",
-          "variant": "Medium reasoning \u00b7 report pending",
-          "scorePercent": null,
-          "coverage": "Report pending",
-          "protocol": "Medium reasoning \u00b7 10 trials/persona planned \u00b7 external planner \u00b7 trial report pending",
-          "notes": "The latest strict-success paper leaderboard awaits the trial report. Its pending entry is not a 0% score."
         }
       ]
     }
   ],
   "provenance": {
     "paperRepository": "HHD000EXE/PersonaRobotBench-Papaer",
-    "paperCommit": "3812e1427da2054e8526c58ec5bf7fe6cc5a6842",
+    "paperCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
     "paperVisibility": "private",
     "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
-    "paperFigureSha256": "68d82335308c655e03afb72e04adc6708f199b029ccc5ea98cbabb95471793d4",
+    "paperFigureSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
     "paperText": "CoRL Late Breaking Results/main.tex",
-    "paperFigureUrl": "https://github.com/HHD000EXE/PersonaRobotBench-Papaer/blob/3812e1427da2054e8526c58ec5bf7fe6cc5a6842/CoRL%20Late%20Breaking%20Results/figures/policy_leaderboard.pdf",
     "evidenceSnapshot": "Derived counts are included in the public downloadable data; access to the private paper source is not required to inspect these counts.",
-    "sourceMethod": "All displayed point estimates follow the latest paper figure. Five archived strict report files were SHA-256-verified, and their success counts and task-balanced means were independently recomputed as archived evidence. This archive check does not independently recompute the current paper's revised Astra high point.",
+    "sourceMethod": "Displayed point estimates follow the current CoRL paper figure imported from Overleaf. Five archived strict report files were SHA-256-verified and their success counts and task-balanced means independently recomputed as archived evidence. Those archive checks do not independently recompute the paper's revised Astra high or Gemini points; no matching current Gemini trial-count bundle is included.",
     "rawSourceHashes": {
       "Opus 5.5 (API; high)": "d3e76274c60cab5b2f16fa44c13ccd2f332a5e2ef8e02c9efe0ed65a30f1eee5",
       "Opus 5.5 (CLI; high)": "a33f61c4c65b69b3b9559569f771c379053025dabdd11313c1bd746a49b217ec",
@@ -144,10 +143,12 @@
         "scored": null,
         "planned": 2170,
         "observedPersonas": null,
-        "status": "pending"
+        "status": "paper_snapshot",
+        "trialsPerPersona": 10
       }
     ],
     "resultsUrl": "data/leaderboard-results.json",
-    "sourceDescription": "Latest CoRL paper strict-success leaderboard. The paper repository is private; the public downloadable result snapshot provides derived counts and provenance."
+    "sourceDescription": "Current CoRL paper strict-success leaderboard, including Gemini 4 at 30.4%. The private source is identified by its immutable revision and figure hash; archived trial counts retain their own provenance.",
+    "overleafImportCommit": "900d67282cb2833ce9185b69b9f213c2cb6589a8"
   }
 }

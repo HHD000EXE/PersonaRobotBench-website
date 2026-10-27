@@ -87,6 +87,21 @@ def verify_leaderboard(root: Path, tasks: list[dict]) -> int:
             assert config["taskBalancedSuccessPercent"] is None
             assert next(row for row in rows if row["id"] == config["id"])["scorePercent"] is None
             continue
+        if config["status"] == "paper_snapshot":
+            # This figure-only point has no matching trial-count bundle. Bind
+            # it to the inspected paper asset rather than inventing counts.
+            assert config["id"] == "gemini4"
+            display = next(row for row in rows if row["id"] == config["id"])
+            assert config["taskBalancedSuccessPercent"] == display["scorePercent"] == 30.4
+            assert config["sourceCommit"] == data["provenance"]["paperCommit"] == "e2293166876ea2410f0d3a82fe5513e5df71feaf"
+            assert config["sourceFigure"] == data["provenance"]["paperFigure"] == "CoRL Late Breaking Results/figures/policy_leaderboard.pdf"
+            assert config["sourceSha256"] == data["provenance"]["paperFigureSha256"] == evidence["source"]["paperFigureSha256"] == "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e"
+            assert all(config[key] is None for key in ("taskBalancedRateExact", "strictSuccesses", "scored", "observedPersonas", "ci95Percent"))
+            assert config["personaCounts"] == [] and config["currentTrialCountsVerified"] is False
+            assert config["planned"] == 2170 and config["trialsPerPersona"] == 10
+            assert config["reasoningEffort"] == "medium"
+            continue
+        assert config["status"] in {"verified_strict", "archived_strict"}, "Unknown leaderboard evidence status"
         counts = config["personaCounts"]
         assert len(counts) == len(expected_cases) == 217
         assert {(item["task"], item["persona"]) for item in counts} == expected_cases

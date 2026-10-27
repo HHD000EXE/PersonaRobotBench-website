@@ -1,6 +1,6 @@
 {
   "schema": "personarobotbench.website-leaderboard-results/1",
-  "updated": "2026-10-25",
+  "updated": "2026-10-27",
   "tasks": 100,
   "personaCases": 217,
   "metric": "Native persona-goal success, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error. Scored policy errors fail.",
@@ -8,17 +8,18 @@
   "missingData": "Infrastructure errors remain unscored. Three entirely unobserved Opus API personas are excluded from the conditional task means; all 100 tasks have some observed data.",
   "source": {
     "paperRepository": "HHD000EXE/PersonaRobotBench-Papaer",
-    "paperCommit": "3812e1427da2054e8526c58ec5bf7fe6cc5a6842",
+    "paperCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
     "paperVisibility": "private",
     "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
-    "paperFigureSha256": "68d82335308c655e03afb72e04adc6708f199b029ccc5ea98cbabb95471793d4",
-    "paperFigureUrl": "https://github.com/HHD000EXE/PersonaRobotBench-Papaer/blob/3812e1427da2054e8526c58ec5bf7fe6cc5a6842/CoRL%20Late%20Breaking%20Results/figures/policy_leaderboard.pdf",
-    "sourceMethod": "All displayed point estimates follow the latest paper figure. Five archived strict report files were SHA-256-verified, and their success counts and task-balanced means were independently recomputed as archived evidence. This archive check does not independently recompute the current paper's revised Astra high point."
+    "paperFigureSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
+    "sourceMethod": "Displayed point estimates follow the current CoRL paper figure imported from Overleaf. Five archived strict report files were SHA-256-verified and their success counts and task-balanced means independently recomputed as archived evidence. Those archive checks do not independently recompute the paper's revised Astra high or Gemini points; no matching current Gemini trial-count bundle is included.",
+    "overleafImportCommit": "900d67282cb2833ce9185b69b9f213c2cb6589a8"
   },
   "notes": [
     "The current paper author-reported Astra high point is33.2%. Its archived strict trial records below yield30.1667% task-balanced success; this archival row does not validate or recompute the revised point.",
     "Per-persona counts permit independent reproduction of the archived means. Pooled successes / scored is a different weighting and does not define the displayed task-balanced metric.",
-    "No illustrative interval is exposed as a confidence interval. Fable has no reported result and is not assigned a score."
+    "No illustrative interval is exposed as a confidence interval. Fable has no reported result and is not assigned a score.",
+    "The current CoRL Gemini point is 30.4%; its source is the Overleaf-imported figure. The older arXiv aggregate of 26.2% and 2,168/2,170 coverage is retained only as a historical paper reference, not as current-point trial evidence."
   ],
   "configurations": [
     {
@@ -7729,13 +7730,36 @@
     {
       "id": "gemini4",
       "policy": "Gemini 4",
-      "status": "pending",
-      "taskBalancedSuccessPercent": null,
+      "status": "paper_snapshot",
+      "taskBalancedSuccessPercent": 30.4,
       "taskBalancedRateExact": null,
       "strictSuccesses": null,
       "scored": null,
       "planned": 2170,
-      "personaCounts": []
+      "personaCounts": [],
+      "observedPersonas": null,
+      "trialsPerPersona": 10,
+      "reasoningEffort": "medium",
+      "sourceSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
+      "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
+      "sourceFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+      "currentTrialCountsVerified": false,
+      "ci95Percent": null,
+      "note": "The current CoRL figure reports 30.4%. Its underlying current trial counts and numerical confidence interval are not available in this website archive; no counts are inferred from the plotted percentage.",
+      "historicalPaperResult": {
+        "status": "historical_paper_aggregate",
+        "taskBalancedSuccessPercent": 26.2,
+        "scored": 2168,
+        "planned": 2170,
+        "ci95Percent": [
+          19.8,
+          33.1
+        ],
+        "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
+        "sourceText": "MatrAIx arxiv/main.tex",
+        "sourceTextSha256": "21cf6d3028dfb6f30c4c23f111642cf5b8549c7afe0371f13da92268fe52e2a7",
+        "note": "This older arXiv aggregate is a separate paper statistic. Its coverage and interval do not establish or reproduce the current CoRL figure point of 30.4%."
+      }
     }
   ]
 }

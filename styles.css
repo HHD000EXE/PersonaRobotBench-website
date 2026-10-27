@@ -597,3 +597,9 @@ h2{font-size:36px;line-height:1.2;letter-spacing:-.04em}
 .benchmark-story .persona-concept figcaption{padding:19px 24px}
 @media(max-width:860px){.overview-context{grid-template-columns:1fr;padding:20px;gap:22px}.overview-environment{max-width:580px;width:100%;margin-inline:auto}.overview-context-copy h3,.overview-context-copy>p:not(.environment-label){max-width:none}.context-comparison>div{grid-template-columns:145px minmax(0,1fr)}}
 @media(max-width:720px){.hero{padding-top:32px}.hero-inner{padding-bottom:24px}.stats-strip{padding-block:20px}.overview.section-pad{padding-top:27px;padding-bottom:30px}.overview-context{padding:15px;gap:19px}.overview-context-copy h3{font-size:21px}.overview-context-copy>p:not(.environment-label){font-size:13px}.context-comparison>div{grid-template-columns:1fr;gap:3px}.context-comparison{gap:10px}.context-comparison dt,.context-comparison dd{font-size:12px}.benchmark-story .persona-concept figcaption{padding:16px}}
+/* Keep every authored rollout visible: three across, four in two rows. */
+@media(min-width:721px){
+  .rollout-pair[data-persona-count="1"]{grid-template-columns:minmax(0,1fr)}
+  .rollout-pair[data-persona-count="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rollout-pair[data-persona-count="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
