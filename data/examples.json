@@ -1018,14 +1018,18 @@
         "name": "User A",
         "description": "Use the overhead view with the page centered on the viewing mat; leave the specimen on its source tray.",
         "preferences": "Use the overhead view with the page centered on the viewing mat; leave the specimen on its source tray.",
-        "video": null
+        "video": "assets/rollouts/task025-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task025-A-walking.webp",
+        "videoDurationSeconds": 36.1
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Use the oblique camera view with the specimen centered on the mat; leave the page on its source tray.",
         "preferences": "Use the oblique camera view with the specimen centered on the mat; leave the page on its source tray.",
-        "video": null
+        "video": "assets/rollouts/task025-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task025-B-walking.webp",
+        "videoDurationSeconds": 39.5
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/README.md",
@@ -1038,7 +1042,17 @@
     "posterAlt": "Task 025 — Document Camera Work Surface: static initial scene with the task’s native worksite.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 25,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 30,
@@ -1060,14 +1074,18 @@
         "name": "User A",
         "description": "Put the blue-banded 12, 14 and 16 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the orange-banded 22, 24 and 26 mm sockets at their original positions; my small fasteners use the smaller set.",
         "preferences": "Put the blue-banded 12, 14 and 16 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the orange-banded 22, 24 and 26 mm sockets at their original positions; my small fasteners use the smaller set.",
-        "video": null
+        "video": "assets/rollouts/task030-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task030-A-walking.webp",
+        "videoDurationSeconds": 79.7
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Put the orange-banded 22, 24 and 26 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the blue-banded 12, 14 and 16 mm sockets at their original positions; my large fasteners use the larger set.",
         "preferences": "Put the orange-banded 22, 24 and 26 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the blue-banded 12, 14 and 16 mm sockets at their original positions; my large fasteners use the larger set.",
-        "video": null
+        "video": "assets/rollouts/task030-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task030-B-walking.webp",
+        "videoDurationSeconds": 78.4
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/README.md",
@@ -1080,7 +1098,17 @@
     "posterAlt": "Task 030 — Personalized Socket Set Preparation: static initial scene with the task’s native worksite.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 30,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 40,
@@ -1102,14 +1130,18 @@
         "name": "User A",
         "description": "Store fruits on the upper shelf and drinks on the lower shelf; keep my frequently used apple and water near the front.",
         "preferences": "Store fruits on the upper shelf and drinks on the lower shelf; keep my frequently used apple and water near the front.",
-        "video": null
+        "video": "assets/rollouts/task040-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task040-A-walking.webp",
+        "videoDurationSeconds": 138.966667
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Store fruits on the lower shelf and drinks on the upper shelf; group both snacks together at the front.",
         "preferences": "Store fruits on the lower shelf and drinks on the upper shelf; group both snacks together at the front.",
-        "video": null
+        "video": "assets/rollouts/task040-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task040-B-walking.webp",
+        "videoDurationSeconds": 143.266667
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/README.md",
@@ -1122,7 +1154,17 @@
     "posterAlt": "Task 040 — Personalized Fridge Organization: static initial scene with furnished room background.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 40,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 50,
@@ -1146,7 +1188,9 @@
         "preferences": {
           "lamp_brightness_percent": 30
         },
-        "video": null
+        "video": "assets/rollouts/task050-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task050-A-walking.webp",
+        "videoDurationSeconds": 14.966667
       },
       {
         "id": "B",
@@ -1155,7 +1199,9 @@
         "preferences": {
           "lamp_brightness_percent": 100
         },
-        "video": null
+        "video": "assets/rollouts/task050-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task050-B-walking.webp",
+        "videoDurationSeconds": 43.466667
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lamp_dimmer/README.md",
@@ -1168,7 +1214,17 @@
     "posterAlt": "Task 050 — Personalized Lamp Dimmer Setting: static initial scene with furnished room background.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 50,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 85,
@@ -1190,14 +1246,18 @@
         "name": "User A",
         "description": "Set my auxiliary table to the low 0.68 m preset and keep the wood block supported.",
         "preferences": "Set my auxiliary table to the low 0.68 m preset and keep the wood block supported.",
-        "video": null
+        "video": "assets/rollouts/task085-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task085-A-walking.webp",
+        "videoDurationSeconds": 18.833333
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Set my auxiliary table to the high 1.04 m preset and keep the wood block supported.",
         "preferences": "Set my auxiliary table to the high 1.04 m preset and keep the wood block supported.",
-        "video": null
+        "video": "assets/rollouts/task085-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task085-B-walking.webp",
+        "videoDurationSeconds": 16.1
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/auxiliary_table/README.md",
@@ -1210,7 +1270,17 @@
     "posterAlt": "Task 085 — Personalized Woodworking Auxiliary Table Height: static initial scene with the task’s native worksite.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 85,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 86,
@@ -1232,14 +1302,18 @@
         "name": "User A",
         "description": "Put the wrench flat at the marked pickup point with its handle pointing left.",
         "preferences": "Put the wrench flat at the marked pickup point with its handle pointing left.",
-        "video": null
+        "video": "assets/rollouts/task086-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task086-A-walking.webp",
+        "videoDurationSeconds": 39.2
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Put the wrench flat at the same pickup point with its handle pointing right.",
         "preferences": "Put the wrench flat at the same pickup point with its handle pointing right.",
-        "video": null
+        "video": "assets/rollouts/task086-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task086-B-walking.webp",
+        "videoDurationSeconds": 52.8
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/wrench_orientation/README.md",
@@ -1252,7 +1326,17 @@
     "posterAlt": "Task 086 — Personalized Maintenance Wrench Orientation: static initial scene with the task’s native worksite.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 86,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 88,
@@ -1284,7 +1368,9 @@
             "fork"
           ]
         },
-        "video": null
+        "video": "assets/rollouts/task088-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task088-A-walking.webp",
+        "videoDurationSeconds": 105.3
       },
       {
         "id": "B",
@@ -1301,7 +1387,9 @@
             "fork"
           ]
         },
-        "video": null
+        "video": "assets/rollouts/task088-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task088-B-walking.webp",
+        "videoDurationSeconds": 121.233333
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/table_clearing/README.md",
@@ -1314,7 +1402,17 @@
     "posterAlt": "Task 088 — Personalized Table Clearing Order: static initial scene with furnished room background.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 88,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 90,
@@ -1339,7 +1437,9 @@
           "water_bottle": "upright on the coaster on the side table",
           "approach": "come around to the front right, in view whenever closer than 1 m"
         },
-        "video": null
+        "video": "assets/rollouts/task090-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task090-A-walking.webp",
+        "videoDurationSeconds": 40.1
       },
       {
         "id": "B",
@@ -1349,7 +1449,9 @@
           "water_bottle": "upright on the coaster on the side table",
           "approach": "stay behind the shoulder line the whole time, place from behind on the right"
         },
-        "video": null
+        "video": "assets/rollouts/task090-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task090-B-walking.webp",
+        "videoDurationSeconds": 24.033333
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/approach_side/README.md",
@@ -1362,7 +1464,17 @@
     "posterAlt": "Task 090 — Personalized Approach Side: static initial scene with furnished room background.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 90,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 95,
@@ -1384,14 +1496,18 @@
         "name": "User A",
         "description": "Set the mirror low and tilt it upward for my seated grooming position.",
         "preferences": "Set the mirror low and tilt it upward for my seated grooming position.",
-        "video": null
+        "video": "assets/rollouts/task095-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task095-A-walking.webp",
+        "videoDurationSeconds": 54.866667
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Raise the mirror and keep it vertical for my standing grooming position.",
         "preferences": "Raise the mirror and keep it vertical for my standing grooming position.",
-        "video": null
+        "video": "assets/rollouts/task095-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task095-B-walking.webp",
+        "videoDurationSeconds": 75.066667
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mirror_adjustment/README.md",
@@ -1404,7 +1520,17 @@
     "posterAlt": "Task 095 — Adjustable Vanity Mirror: static initial scene with furnished room background.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 95,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 98,
@@ -1426,14 +1552,18 @@
         "name": "User A",
         "description": "Open only the right wing; keep the left wing folded upright to save space.",
         "preferences": "Open only the right wing; keep the left wing folded upright to save space.",
-        "video": null
+        "video": "assets/rollouts/task098-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task098-A-walking.webp",
+        "videoDurationSeconds": 25.566667
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Open both wings horizontally for a large laundry load.",
         "preferences": "Open both wings horizontally for a large laundry load.",
-        "video": null
+        "video": "assets/rollouts/task098-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task098-B-walking.webp",
+        "videoDurationSeconds": 26.966667
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/laundry_airer_setup/README.md",
@@ -1446,7 +1576,17 @@
     "posterAlt": "Task 098 — Folding Drying Rack: static initial scene with furnished room background.",
     "video": null,
     "imageKind": "static_initial_scene",
-    "videoLabel": "Astra high rollout · complete recorded episode"
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 98,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 91,
@@ -1765,14 +1905,18 @@
         "name": "User A",
         "description": "Place the sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to zero degrees so the blue front connector faces me. I inspect the connector face.",
         "preferences": "Place the sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to zero degrees so the blue front connector faces me. I inspect the connector face.",
-        "video": null
+        "video": "assets/rollouts/task034-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task034-A-walking.webp",
+        "videoDurationSeconds": 28.466667
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Place the same sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to minus 90 degrees so the orange side fins face me. I inspect the side cooling feature.",
         "preferences": "Place the same sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to minus 90 degrees so the orange side fins face me. I inspect the side cooling feature.",
-        "video": null
+        "video": "assets/rollouts/task034-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task034-B-walking.webp",
+        "videoDurationSeconds": 66.6
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/README.md",
@@ -1791,7 +1935,17 @@
     "posterAlt": "Task 034 — Personalized Inspection Turntable Setup: static initial scene with the task’s native worksite.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 34,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 89,
@@ -1813,14 +1967,18 @@
         "name": "User A",
         "description": "Put the wireless slide remote and cue cards in the kit; leave the laser pointer and notebook in their source positions.",
         "preferences": "Put the wireless slide remote and cue cards in the kit; leave the laser pointer and notebook in their source positions.",
-        "video": null
+        "video": "assets/rollouts/task089-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task089-A-walking.webp",
+        "videoDurationSeconds": 55.8
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Put the laser pointer and notebook in the kit; leave the slide remote and cue cards in their source positions.",
         "preferences": "Put the laser pointer and notebook in the kit; leave the slide remote and cue cards in their source positions.",
-        "video": null
+        "video": "assets/rollouts/task089-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task089-B-walking.webp",
+        "videoDurationSeconds": 31.366667
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/README.md",
@@ -1839,7 +1997,17 @@
     "posterAlt": "Task 089 — Presentation Tool Kit: static initial scene with the task’s native worksite.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 89,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 32,
@@ -1934,21 +2102,27 @@
         "name": "User A",
         "description": "Face the screen directly toward my seated position with a slight upward tilt.",
         "preferences": "Face the screen directly toward my seated position with a slight upward tilt.",
-        "video": null
+        "video": "assets/rollouts/task100-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task100-A-walking.webp",
+        "videoDurationSeconds": 40.7
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Turn the screen toward the collaborator on my right, keeping a slight upward tilt.",
         "preferences": "Turn the screen toward the collaborator on my right, keeping a slight upward tilt.",
-        "video": null
+        "video": "assets/rollouts/task100-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task100-B-walking.webp",
+        "videoDurationSeconds": 58.2
       },
       {
         "id": "C",
         "name": "User C",
         "description": "Face the screen forward and tilt it farther upward for my standing review.",
         "preferences": "Face the screen forward and tilt it farther upward for my standing review.",
-        "video": null
+        "video": "assets/rollouts/task100-C-walking.mp4",
+        "videoPoster": "assets/rollouts/task100-C-walking.webp",
+        "videoDurationSeconds": 39.533333
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/README.md",
@@ -1967,7 +2141,17 @@
     "posterAlt": "Task 100 — Articulated Monitor Viewing: static initial scene with furnished room background.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 100,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 14,
@@ -1993,7 +2177,9 @@
         "preferences": {
           "arrangement": "A"
         },
-        "video": null
+        "video": "assets/rollouts/task014-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task014-A-walking.webp",
+        "videoDurationSeconds": 46.766667
       },
       {
         "id": "B",
@@ -2002,7 +2188,9 @@
         "preferences": {
           "arrangement": "B"
         },
-        "video": null
+        "video": "assets/rollouts/task014-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task014-B-walking.webp",
+        "videoDurationSeconds": 60.133333
       },
       {
         "id": "C",
@@ -2011,7 +2199,9 @@
         "preferences": {
           "arrangement": "C"
         },
-        "video": null
+        "video": "assets/rollouts/task014-C-walking.mp4",
+        "videoPoster": "assets/rollouts/task014-C-walking.webp",
+        "videoDurationSeconds": 57.8
       },
       {
         "id": "D",
@@ -2020,7 +2210,9 @@
         "preferences": {
           "arrangement": "D"
         },
-        "video": null
+        "video": "assets/rollouts/task014-D-walking.mp4",
+        "videoPoster": "assets/rollouts/task014-D-walking.webp",
+        "videoDurationSeconds": 54.233333
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/README.md",
@@ -2039,7 +2231,17 @@
     "posterAlt": "Task 014 — Personalized Whiteboard Reset: static initial scene with the task’s native worksite.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 14,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 33,
@@ -2061,14 +2263,18 @@
         "name": "User A",
         "description": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
         "preferences": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
-        "video": null
+        "video": "assets/rollouts/task033-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task033-A-walking.webp",
+        "videoDurationSeconds": 91.933333
       },
       {
         "id": "B",
         "name": "User B",
         "description": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
         "preferences": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
-        "video": null
+        "video": "assets/rollouts/task033-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task033-B-walking.webp",
+        "videoDurationSeconds": 65.5
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/README.md",
@@ -2087,7 +2293,17 @@
     "posterAlt": "Task 033 — Personalized Drill Press Setup: static initial scene with the task’s native worksite.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 33,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 3,
@@ -2179,7 +2395,9 @@
           "magazine": "flat_at_right_end",
           "parcel": "cubby"
         },
-        "video": null
+        "video": "assets/rollouts/task059-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task059-A-walking.webp",
+        "videoDurationSeconds": 70.733333
       },
       {
         "id": "B",
@@ -2190,7 +2408,9 @@
           "magazine": "on_top_of_letters_in_tray",
           "parcel": "right_end_of_table"
         },
-        "video": null
+        "video": "assets/rollouts/task059-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task059-B-walking.webp",
+        "videoDurationSeconds": 79.8
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/README.md",
@@ -2209,7 +2429,17 @@
     "posterAlt": "Task 059 — Personalized Mail Sorting: static initial scene with furnished room background.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 59,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 83,
@@ -2231,14 +2461,18 @@
         "name": "User A",
         "description": "Put the carpenter's pencil and straight ruler in the tray; leave the marker and square at their original positions.",
         "preferences": "Put the carpenter's pencil and straight ruler in the tray; leave the marker and square at their original positions.",
-        "video": null
+        "video": "assets/rollouts/task083-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task083-A-walking.webp",
+        "videoDurationSeconds": 59.366667
       },
       {
         "id": "B",
         "name": "User B",
         "description": "Put the marker and carpenter's square in the tray; leave the pencil and ruler at their original positions.",
         "preferences": "Put the marker and carpenter's square in the tray; leave the pencil and ruler at their original positions.",
-        "video": null
+        "video": "assets/rollouts/task083-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task083-B-walking.webp",
+        "videoDurationSeconds": 53.033333
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/README.md",
@@ -2257,7 +2491,17 @@
     "posterAlt": "Task 083 — Personalized Carpenter Marking Tool Preparation: static initial scene with the task’s native worksite.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 83,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   },
   {
     "id": 84,
@@ -2279,14 +2523,18 @@
         "name": "User A",
         "description": "My hardhat size is S: put the S hardhat in the pickup tray and leave L where it started.",
         "preferences": "My hardhat size is S: put the S hardhat in the pickup tray and leave L where it started.",
-        "video": null
+        "video": "assets/rollouts/task084-A-walking.mp4",
+        "videoPoster": "assets/rollouts/task084-A-walking.webp",
+        "videoDurationSeconds": 27.033333
       },
       {
         "id": "B",
         "name": "User B",
         "description": "My hardhat size is L: put the L hardhat in the pickup tray and leave S where it started.",
         "preferences": "My hardhat size is L: put the L hardhat in the pickup tray and leave S where it started.",
-        "video": null
+        "video": "assets/rollouts/task084-B-walking.mp4",
+        "videoPoster": "assets/rollouts/task084-B-walking.webp",
+        "videoDurationSeconds": 32.266667
       }
     ],
     "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/README.md",
@@ -2305,6 +2553,16 @@
     "posterAlt": "Task 084 — Personalized Construction Worker Hardhat Selection: static initial scene with the task’s native worksite.",
     "imageKind": "static_initial_scene",
     "video": null,
-    "videoLabel": "Astra high · complete recorded episode"
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-display-gait",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 84,
+      "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
   }
 ]

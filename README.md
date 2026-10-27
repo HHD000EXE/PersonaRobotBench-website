@@ -9,23 +9,26 @@ The public research website for the **100-task / 217-persona** benchmark.
 
 This public repository contains the website, its complete task catalog,
 100 task-specific scene previews, and the policy leaderboard. The homepage
-features 22 recorded task comparisons (45 persona videos), with Task 1 shown first.
-The featured Astra high demonstrations are Tasks 3 and 32.
+features 40 recorded task comparisons (84 persona videos), with Task 1 shown first.
+Thirty-nine Astra high videos use display-only walking animation along their
+unchanged recorded base paths; each affected player links the original evidence.
 Moving-base demonstrations must show leg stepping; stationary fixed-base
 manipulation remains eligible.
 Controller sources are recorded in the provenance data. At 1×, videos follow
 simulation time, with Astra inference waits omitted. These selected
 demonstrations are separate from the benchmark success-rate evaluations.
 The new high-reasoning demos use a 180-second simulation allowance and native
-success checks. Their videos replay measured poses sampled at 15 Hz and held
-at 30 fps; provenance describes the privileged skill interface, assisted control,
-renderer, retained source-artifact hashes and timing.
+success checks for the original episodes. Base, object and upper-body states
+are sampled at 15 Hz and held at 30 fps; display-only leg animation is identified
+below each affected player. Provenance describes the privileged skill interface,
+assisted control, renderer, original evidence and timing.
 See [recording provenance](data/rollout-provenance.json) for source hashes,
 recording context and the historical Task 110 → Task 51 mapping.
 
-The provenance manifest retains all 84 original recording receipts, and their
-video and poster files remain available as an archive. Gallery membership is
-curated separately; unfeatured recordings do not appear in the comparison section.
+The provenance manifest retains all 84 original recording receipts and media,
+plus 39 derived walking-render receipts with separate video/poster paths. The
+added leg motion is animation, not physically simulated or rescored locomotion.
+Native task outcomes and leaderboard results refer to the original trajectories.
 
 ## Local preview
 

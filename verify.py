@@ -175,6 +175,78 @@ def verify_recorded_pose_receipt(item: dict, source: dict, recording: dict) -> N
     public_values(source)
 
 
+def verify_display_gait_receipt(item: dict, source: dict, recording: dict,
+                                originals: dict, sources: dict) -> None:
+    """Verify a display-only leg render against its unchanged native recording."""
+    assert item["schema"] == "personarobotbench.display-gait-render/1"
+    assert item["captureMode"] == "display_gait_replay"
+    assert item["source"] == recording["source"] == "astra-high-display-gait"
+    assert source["kind"] == "model_rollout" and recording["kind"] == "model"
+    assert recording["playback"] == "Recorded task trajectory with display-only walking animation; physics not rerun."
+    key = (item["taskId"], item["persona"])
+    original = originals[key]
+    parent = item["originalRecording"]
+    canonical = json.dumps(original, sort_keys=True, separators=(",", ":"),
+                           ensure_ascii=False, allow_nan=False).encode()
+    assert parent["recordSha256"] == hashlib.sha256(canonical).hexdigest(), "Original recording binding differs"
+    assert parent["video"] == original["video"] and parent["source"] == original["source"]
+    assert original["source"] in source["parentSources"]
+    assert original["captureMode"] == "recorded_pose_replay"
+    verify_recorded_pose_receipt(original, sources[original["source"]], {
+        "kind": "model", "model": original["model"], "reasoningEffort": original["reasoningEffort"]})
+    for field in ("sourceEpisodeSha256", "sourceReportSha256", "sourceStatusSha256"):
+        assert parent[field] == original[field], field
+    assert parent["nativeEvaluationReusedUnchanged"] is True
+    assert parent["animatedTrajectoryScored"] is False
+    assert "nativeScores" not in item and "nativeRescorePassed" not in item, "Animation must not impersonate a native trial"
+    for field in ("model", "reasoningEffort"):
+        assert item[field] == source[field] == recording[field] == original[field]
+    assert item["recordedTaskId"] == original["recordedTaskId"] == recording["recordedTaskId"]
+    assert item["video"] != original["video"] and item["poster"] != original["poster"]
+    assert item["completeRecordedEpisode"] is True and item["modelObservationVideo"] is False
+    assert item["newModelCallsDuringRender"] == item["physicsStepsDuringRender"] == 0
+    assert item["frames"] == original["frames"] and item["fps"] == original["fps"]
+    assert abs(item["durationSeconds"] - original["durationSeconds"]) < 1e-6
+    assert abs(item["durationSeconds"] - item["frames"] / item["fps"]) < 1e-6
+    assert item["renderedSamples"] == original["renderedSamples"]
+    assert item["renderSampleHz"] == original["renderSampleHz"]
+    preserved = item["measuredStatePreserved"]
+    assert set(preserved) == {"basePoses", "nonLegJointAngles", "objectPoses", "passiveFixtures"}
+    assert all(value is True for value in preserved.values())
+    gait = item["displayGait"]
+    legs = {f"{side}_{joint}_joint" for side in ("left", "right")
+            for joint in ("hip_pitch", "hip_roll", "hip_yaw", "knee", "ankle_pitch", "ankle_roll")}
+    assert len(gait["animatedJointNames"]) == 12 and set(gait["animatedJointNames"]) == legs
+    assert gait["displayOnly"] is True and gait["dynamicallySimulatedWalking"] is False
+    assert gait["balanceControllerEvaluated"] is False
+    assert gait["chunkIndependentPhase"] is True
+    camera = item["cameraPresentation"]
+    assert camera["schema"] == "prb.static_walking_camera_presentation/1"
+    assert camera["task_id"] == item["taskId"] and camera["per_frame_tracking"] is False
+    assert 1 <= camera["fov_widen_factor"] <= 3
+    assert all(camera[key] is True for key in ("session_layer_only", "camera_position_and_orientation_unchanged",
+                                              "same_for_all_task_personas", "source_usd_unchanged"))
+    assert camera["settings_sha256"] == item["rendererSourceHashes"]["camera_presentation.json"]
+    for field in ("gaitCacheSha256", "gaitImplementationSha256", "renderFreezeManifestSha256",
+                  "sourceExportReceiptSha256", "sourceFrameManifestSha256"):
+        assert re.fullmatch(r"[0-9a-f]{64}", item[field]), field
+    assert item["rendererSourceHashes"] and all(
+        re.fullmatch(r"[0-9a-f]{64}", value) for value in item["rendererSourceHashes"].values())
+    def public_values(value):
+        if isinstance(value, dict):
+            for key, child in value.items():
+                public_values(key)
+                public_values(child)
+        elif isinstance(value, list):
+            for child in value:
+                public_values(child)
+        elif isinstance(value, str):
+            assert not value.startswith(("/home/", "/Users/", "file:", "http://127.0.0.1", "http://localhost")), "Private path in display evidence"
+            assert not re.match(r"^[A-Za-z]:[\\/]", value), "Private path in display evidence"
+    public_values(item)
+    public_values(source)
+
+
 def verify(root: Path) -> dict[str, int | str]:
     root = root.resolve()
     tasks = json.loads((root / "data/tasks.json").read_text())
@@ -245,12 +317,23 @@ def verify(root: Path) -> dict[str, int | str]:
     # simulator is needed to verify that videos and recording posters are intact.
     provenance_path = root / "data/rollout-provenance.json"
     recordings = []
+    variants = []
     if provenance_path.exists():
         provenance = json.loads(provenance_path.read_text())
         assert provenance["schema"] == "personarobotbench.website-rollouts/1", "Unknown rollout provenance schema"
         recordings = provenance["recordings"]
         records = {(item["taskId"], item["persona"]): item for item in recordings}
         assert len(records) == len(recordings), "Duplicate rollout receipt"
+        variants = provenance.get("renderVariants", [])
+        variant_keys = set()
+        media_records = {(item["taskId"], item["persona"], item["video"]): item for item in recordings}
+        for item in variants:
+            key = (item["taskId"], item["persona"], item["video"])
+            assert key not in media_records and (item["taskId"], item["persona"]) in records, "Duplicate or unbound display variant"
+            assert item.get("captureMode") == "display_gait_replay", "Unknown display variant capture mode"
+            media_records[key] = item
+            variant_keys.add(key)
+        featured_variants = set()
         expected = {(task_id, persona) for task_id in (18, 51, 68, 87) for persona in ("A", "B")}
         assert expected <= records.keys(), "Missing featured A/B recording receipt"
         # Every receipt names the source that recorded it (a model rollout or a
@@ -295,8 +378,12 @@ def verify(root: Path) -> dict[str, int | str]:
             for persona in example["personas"]:
                 if not persona.get("video"):
                     continue
-                receipt = records[(example["id"], persona["id"])]
-                if receipt.get("captureMode") == "recorded_pose_replay":
+                media_key = (example["id"], persona["id"], persona["video"])
+                receipt = media_records[media_key]
+                if media_key in variant_keys:
+                    verify_display_gait_receipt(receipt, sources[receipt["source"]], example["recording"], records, sources)
+                    featured_variants.add(media_key)
+                elif receipt.get("captureMode") == "recorded_pose_replay":
                     verify_recorded_pose_receipt(receipt, sources[receipt["source"]], example["recording"])
                 assert receipt["video"] == persona["video"], "Video URL differs from receipt"
                 assert receipt["poster"] == persona["videoPoster"], "Poster URL differs from receipt"
@@ -318,6 +405,7 @@ def verify(root: Path) -> dict[str, int | str]:
                 assert receipt["durationSeconds"] > 0 and receipt["frames"] > 0, "Empty recording"
                 if receipt.get("fastStart") and video_file and video_file.suffix.lower() == ".mp4":
                     assert fast_start(video_file), "Video does not have fast-start metadata"
+        assert featured_variants == variant_keys, "Unverified or unfeatured display variant"
     # The opt-in 3D viewer must remain self-contained in the deployment.
     model_dir = root / "assets/models"
     for name in ("assets/models/shared-desk.glb", "assets/models/shared-desk.provenance.json",
@@ -339,7 +427,7 @@ def verify(root: Path) -> dict[str, int | str]:
     policy_count = verify_leaderboard(root, tasks)
     return {"status": "passed", "tasks": len(tasks), "persona_cases": 217,
             "task_previews": preview_count, "policy_configurations": policy_count,
-            "examples": len(examples), "recordings": len(recordings),
+            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants),
             "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 

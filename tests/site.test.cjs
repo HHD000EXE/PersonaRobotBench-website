@@ -264,11 +264,18 @@ test('shipped examples preserve every authored slot and available recording with
     const status = available.length < example.personas.length ? available.length + ' of ' + example.personas.length + ' videos available'
       : available.length === 2 ? 'Paired videos available' : 'All ' + available.length + ' videos available';
     assert.ok(ctx.$('.video-status').textContent.includes(status));
-    assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith('Complete recorded episode'));
-    assert.ok(ctx.$('#rollout-recording-note').textContent.includes('1× simulation playback'));
+    const recordingNote = ctx.$('#rollout-recording-note').textContent;
+    if (example.recording.source === 'astra-high-display-gait') {
+      const playback = 'Recorded task trajectory with display-only walking animation; physics not rerun.';
+      assert.equal(example.recording.playback, playback);
+      assert.equal(recordingNote, playback + ' Recording details');
+    } else {
+      assert.ok(recordingNote.startsWith('Complete recorded episode'));
+      assert.ok(recordingNote.includes('1× simulation playback'));
+      assert.equal(recordingNote.includes('inference waits omitted'), example.recording.kind === 'model');
+    }
     // The page shows no source labels (model or scripted); sources stay in the provenance file.
-    assert.equal(/Astra|Scripted|Model rollout/.test(ctx.$('#rollout-recording-note').textContent), false);
-    assert.equal(ctx.$('#rollout-recording-note').textContent.includes('inference waits omitted'), example.recording.kind === 'model');
+    assert.equal(/Astra|Scripted|Model rollout/.test(recordingNote), false);
     assert.equal(ctx.$('#rollout-recording-note a').href, 'https://benchmark.test/data/rollout-provenance.json');
     assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Recorded as Task 110; now Task 51.'), taskId === 51);
   }
@@ -720,4 +727,58 @@ test('a single available recording in a larger group keeps synchronization contr
   assert.equal(ctx.$('#rollout-sync').hidden, true);
   assert.equal(ctx.$('.sync-play'), null);
   ctx.window.close();
+});
+
+test('walking replay variants disclose display-only leg animation below the player', async () => {
+  const example = shippedExamples.find((item) => item.recording?.source === 'astra-high-display-gait');
+  assert.ok(example, 'The walking release needs a featured display-gait comparison');
+  const ctx = await boot({ examples: shippedExamples });
+  ctx.$('[data-example="' + example.id + '"]').click();
+  assert.match(ctx.$('#rollout-recording-note').textContent, /display-only walking animation; physics not rerun/);
+  assert.equal(ctx.$$('#rollout-pair video').length, example.personas.length);
+  for (const video of ctx.$$('#rollout-pair video')) assert.match(video.querySelector('source').getAttribute('src'), /-walking(?:-[a-z0-9]+)*\.mp4$/);
+  assert.equal(ctx.$('#rollout-recording-note a').href, new URL('data/rollout-provenance.json', ctx.window.location.href).href);
+  ctx.window.close();
+});
+
+test('walking provenance rejects forged native results and physical walking claims', () => {
+  const program = String.raw`
+import copy,json,runpy
+from pathlib import Path
+root=Path.cwd()
+scope=runpy.run_path(str(root/'verify.py'))
+data=json.loads((root/'data/rollout-provenance.json').read_text())
+originals={(x['taskId'],x['persona']):x for x in data['recordings']}
+item=next(x for x in data['renderVariants'] if x['source']=='astra-high-display-gait')
+example=next(x for x in json.loads((root/'data/examples.json').read_text()) if x['id']==item['taskId'])
+source=data['sources'][item['source']]
+verify=scope['verify_display_gait_receipt']
+verify(item,source,example['recording'],originals,data['sources'])
+def refused(mutator):
+    row,src,rec,parents,sources=copy.deepcopy((item,source,example['recording'],originals,data['sources']))
+    mutator(row,src,rec,parents,sources)
+    try:verify(row,src,rec,parents,sources)
+    except (AssertionError,KeyError):return
+    raise AssertionError('Tampered walking evidence was accepted')
+refused(lambda row,*_:row.update(captureMode='recorded_pose_replay'))
+refused(lambda row,*_:row.update(nativeScores={'strict_success':True}))
+refused(lambda row,*_:row['displayGait'].update(dynamicallySimulatedWalking=True))
+refused(lambda row,*_:row['displayGait'].update(balanceControllerEvaluated=True))
+refused(lambda row,*_:row['displayGait'].update(chunkIndependentPhase=False))
+refused(lambda row,*_:row['measuredStatePreserved'].update(nonLegJointAngles=False))
+refused(lambda row,*_:row['originalRecording'].update(animatedTrajectoryScored=True))
+refused(lambda row,*_:row['originalRecording'].update(recordSha256='0'*64))
+refused(lambda row,*_:row.update(frames=row['frames']+1))
+refused(lambda row,src,rec,*_:rec.update(playback='Walking was physically simulated'))
+refused(lambda row,*_:row.update(localEvidence='/home/private/evidence'))
+def native_failure(row,src,rec,parents,sources):
+    import hashlib
+    original=parents[(row['taskId'],row['persona'])]
+    original['nativeScores']['strict_success']=False
+    row['originalRecording']['recordSha256']=hashlib.sha256(json.dumps(original,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()).hexdigest()
+refused(native_failure)
+print('One actual variant and12 tamper guards passed')
+`;
+  const checked = require('node:child_process').spawnSync('python3', ['-c', program], { cwd: root, encoding: 'utf8' });
+  assert.equal(checked.status, 0, checked.stdout + checked.stderr);
 });
