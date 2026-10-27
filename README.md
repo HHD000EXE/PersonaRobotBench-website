@@ -100,7 +100,7 @@ this source repository small.
 | --- | --- |
 | `index.html` | Page copy, sections, links and evaluation context |
 | `styles.css` | Responsive layout and typography |
-| `assets/persona-concept.svg`, `assets/persona-concept-mobile.svg` | Original persona-first concept figure, with a separate phone layout |
+| `assets/persona-concept.svg`, `assets/persona-concept-mobile.svg` | User profile → preference inference → robot action concept figure, with a separate phone layout |
 | `app.js` | Search, category filters, task details, tabs and video playback |
 | `data/tasks.json` | All 100 task descriptions and 217 task-local persona cases |
 | `assets/task-scenes/` | One current initial-scene preview for every task |
