@@ -209,6 +209,9 @@ test('GitHub Pages project subpaths preserve catalog, image, font CSS, script an
   assert.deepEqual(ctx.requests, [base + 'data/tasks.json', base + 'data/examples.json', base + 'data/leaderboard.json']);
   assert.equal(ctx.$('.hero-scene').src, base + 'assets/hero-scene.webp');
   assert.equal(ctx.$('link[href="assets/fonts/fonts.css"]').href, base + 'assets/fonts/fonts.css');
+  const stylesheet = new URL(ctx.$('link[rel="stylesheet"][href^="styles.css"]').href);
+  assert.equal(stylesheet.origin, new URL(base).origin);
+  assert.equal(stylesheet.pathname, new URL('styles.css', base).pathname);
   assert.equal(ctx.$('script[src="app.js"]').src, base + 'app.js');
   assert.equal(ctx.$('video source').src, base + 'assets/rollouts/task18-A.mp4');
   ctx.$('[data-example="68"]').click();
