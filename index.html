@@ -112,20 +112,113 @@ bash open_task.sh --task 18</code></pre><p id="copy-status" aria-live="polite"><
       <nav class="v2d-section-nav" aria-label="V2D section navigation"><a href="#v2d-construction">01 Construction</a><a href="#v2d-datasets">02 Datasets</a><a href="#v2d-persona">03 Persona</a><a href="#v2d-demos">Robot videos</a></nav>
       </div>
       <div class="v2d-details-track">
-<section id="v2d-construction" class="v2d-section"><div class="v2d-wrap"><div class="v2d-section-head"><div><p class="v2d-eyebrow">01 / Data construction</p><h3>Reconstruct what is missing.<br>Keep the annotations we already have.</h3><p>“Video → Isaac” is a pipeline with distinct motion, scene and control stages. Released 3D annotations can bypass video reconstruction.</p></div></div><div class="v2d-legend"><span class="v2d-pill v2d-ready">Existing ingestion / adapter components</span><span class="v2d-pill v2d-partial">Scene and interaction work varies by sample</span><span class="v2d-pill v2d-planned">Learned style conditioning is a development plan</span></div><figure class="v2d-construction" style="margin:0"><div class="v2d-diagram-bar"><strong>Human data → robot task construction</strong><span class="v2d-muted">RGB · native 3D · skeleton</span></div><div class="v2d-diagram-scroll" tabindex="0" aria-label="Pipeline diagram; scroll horizontally on small screens"><svg class="v2d-architecture" viewBox="0 0 1170 610" role="img" aria-labelledby="v2d-architecture-title v2d-architecture-desc"><title id="v2d-architecture-title">Data construction: three motion routes, scene completion and robot validation</title><desc id="v2d-architecture-desc">Released human data branch into RGB reconstruction, direct 3D motion and skeleton fitting. Motion and calibrated scene assets are retargeted and assembled in Isaac. Validation failures return to scene and controller repair. User metadata and independent history take a separate conditioning path. Reconstructed reference actions remain evaluator evidence.</desc><defs><marker id="v2d-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#6e877b" stroke-width="1.5"/></marker></defs>
-<g fill="none" stroke="#8da195" stroke-width="1.6" marker-end="url(#v2d-arrow)"><path d="M216 161H239V86H258"/><path d="M216 161H258"/><path d="M216 161H239V246H258"/><path d="M492 86H520V170H545"/><path d="M492 161H545"/><path d="M492 246H520V170H545"/><path d="M787 170H825"/><path d="M1050 170H1122V332H1073"/><path d="M947 378V415H685V378"/><path d="M568 332H518V195H545"/><path d="M216 161H232V446H258"/><path d="M216 161H232V543H258"/><path d="M528 446H554"/><path d="M828 456H812V236H938V215"/></g>
-<rect x="25" y="109" width="190" height="104" rx="13" fill="#1b2625"/><text x="43" y="137" fill="#b4cdbc" font-size="11" letter-spacing="1">RELEASED INPUTS</text><text x="43" y="166" fill="white" font-size="18" font-weight="bold">Human data</text><text x="43" y="189" fill="#d4ddd7" font-size="13">Original IDs + annotations</text>
-<g font-size="14"><rect x="259" y="46" width="234" height="79" rx="11" fill="#fbede5" stroke="#edd0bf"/><text x="276" y="71" fill="#b94825" font-size="11" font-weight="bold">A · RGB / VIDEO</text><text x="276" y="94" fill="#1b2625" font-weight="bold">Segment → reconstruct motion</text><text x="276" y="113" fill="#626e68" font-size="12">Body, hands, objects when observable</text>
-<rect x="259" y="134" width="234" height="62" rx="11" fill="#e5eee7" stroke="#c8d9cd"/><text x="276" y="157" fill="#246859" font-size="11" font-weight="bold">B · RELEASED HUMAN + OBJECT 3D</text><text x="276" y="179" fill="#1b2625" font-weight="bold">Load motion + object states</text>
-<rect x="259" y="207" width="234" height="79" rx="11" fill="#eef3f9" stroke="#c7d4e3"/><text x="276" y="232" fill="#355f88" font-size="11" font-weight="bold">C · SMPL / SKELETON</text><text x="276" y="255" fill="#1b2625" font-weight="bold">Normalize → body fitting</text><text x="276" y="275" fill="#626e68" font-size="12">No object reconstruction required</text></g>
-<rect x="546" y="125" width="240" height="86" rx="13" fill="white" stroke="#cad6cd"/><text x="563" y="151" fill="#246859" font-size="11" font-weight="bold">ROBOTIC GROUNDING</text><text x="563" y="177" fill="#1b2625" font-size="18" font-weight="bold">Retarget to robot</text><text x="563" y="198" fill="#626e68" font-size="12">Joint limits, timing, contact intent</text>
-<rect x="826" y="125" width="224" height="86" rx="13" fill="#e5eee7" stroke="#b7cfc0"/><text x="844" y="151" fill="#246859" font-size="11" font-weight="bold">ISAAC ASSEMBLY</text><text x="844" y="177" fill="#1b2625" font-size="18" font-weight="bold">Robot + task scene</text><text x="844" y="198" fill="#626e68" font-size="12">Load assets, controllers and sensors</text>
-<rect x="824" y="289" width="248" height="89" rx="13" fill="white" stroke="#cad6cd"/><text x="842" y="315" fill="#246859" font-size="11" font-weight="bold">QUALITY GATE · PER SAMPLE</text><text x="842" y="339" fill="#1b2625" font-size="17" font-weight="bold">Replay + physical checks</text><text x="842" y="360" fill="#626e68" font-size="12">Fit · visibility · collision · contact</text>
-<rect x="569" y="289" width="230" height="89" rx="13" fill="#fbede5" stroke="#edd0bf"/><text x="587" y="315" fill="#b94825" font-size="11" font-weight="bold">IF A CHECK FAILS</text><text x="587" y="339" fill="#1b2625" font-size="17" font-weight="bold">Repair, version and rerun</text><text x="587" y="360" fill="#626e68" font-size="12">Assets · alignment · physics · control</text><text x="826" y="405" fill="#626e68" font-size="11">Failed check → repair loop</text>
-<rect x="259" y="409" width="269" height="74" rx="11" fill="white" stroke="#cad6cd"/><text x="276" y="434" fill="#1b2625" font-size="15" font-weight="bold">Scene geometry + alignment</text><text x="276" y="456" fill="#626e68" font-size="12">Camera, scale, supports, task objects</text><text x="276" y="473" fill="#626e68" font-size="12">Released / reconstructed / authored</text>
-<rect x="555" y="429" width="273" height="54" rx="11" fill="white" stroke="#cad6cd"/><text x="572" y="451" fill="#1b2625" font-size="15" font-weight="bold">Physical scene completion</text><text x="572" y="472" fill="#626e68" font-size="12">Collision geometry, joints, mass and friction</text>
-<rect x="259" y="515" width="791" height="56" rx="11" fill="#eef3f9" stroke="#b6c7da" stroke-dasharray="5 4"/><text x="276" y="540" fill="#355f88" font-size="13" font-weight="bold">SEPARATE CONDITIONING PATH</text><text x="519" y="540" fill="#1b2625" font-size="14">User metadata + independent history → user representation</text><text x="276" y="560" fill="#626e68" font-size="12">Target motion and goal annotations remain evaluation evidence; identity is not itself a persona constraint.</text>
-<text x="26" y="308" fill="#626e68" font-size="12">V2D stays an</text><text x="26" y="327" fill="#626e68" font-size="12">external dependency.</text><text x="26" y="354" fill="#626e68" font-size="12">Reuse the shortest</text><text x="26" y="373" fill="#626e68" font-size="12">valid route.</text></svg></div><figcaption class="v2d-diagram-foot">A motion replay is one construction milestone. A complete task also needs usable scene assets, robot control and an executable success contract. Diagram shows the intended workflow; it does not claim every sample has passed every stage.<br><strong>External NVIDIA V2D modules:</strong> <code>video_ingestion_agent/</code> → <code>reconstruction/</code> → <code>robotic_grounding/</code>. Native 3D and skeleton inputs skip unnecessary stages; PersonaRobotBench adds adapters and task evaluation.</figcaption></figure>
+<section id="v2d-construction" class="v2d-section"><div class="v2d-wrap"><div class="v2d-section-head"><div><p class="v2d-eyebrow">01 / Data construction</p><h3>Reconstruct what is missing.<br>Keep the annotations we already have.</h3><p>“Video → Isaac” is a pipeline with distinct motion, scene and control stages. Released 3D annotations can bypass video reconstruction.</p></div></div><div class="v2d-legend"><span class="v2d-pill v2d-ready">Existing ingestion / adapter components</span><span class="v2d-pill v2d-partial">Scene and interaction work varies by sample</span><span class="v2d-pill v2d-planned">Learned style conditioning is a development plan</span></div><figure class="v2d-construction" style="margin:0"><div class="v2d-diagram-bar"><strong>Human data → robot task construction</strong><span class="v2d-muted">Green: construction · Orange dashed: repair · Blue: conditioning</span></div><div class="v2d-diagram-scroll" tabindex="0" aria-label="Pipeline diagram; scroll horizontally on small screens"><svg xmlns="http://www.w3.org/2000/svg" class="v2d-architecture" viewBox="0 0 1240 770" role="img" aria-labelledby="v2d-architecture-title v2d-architecture-desc">
+<title id="v2d-architecture-title">Video-to-Data: three inputs, one construction path, separate persona conditioning</title>
+<desc id="v2d-architecture-desc">RGB video, released human-object 3D and skeleton inputs merge into robot retargeting. Robot motion and scene assets enter Isaac assembly. Replay checks either accept the constructed replay or send failures to repair; the dashed return updates the affected construction components. A separate bottom lane carries user evidence to a representation, a conditioned policy and robot actions. Reference motion is reserved for evaluation.</desc>
+<defs>
+<marker id="v2d-arrow-flow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="m1 1 6 3-6 3" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="v2d-arrow-repair" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="m1 1 6 3-6 3" fill="none" stroke="#b65a32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<marker id="v2d-arrow-persona" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="m1 1 6 3-6 3" fill="none" stroke="#416a92" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<symbol id="v2d-icon-video" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 6 3-6 3Z"/></g></symbol>
+<symbol id="v2d-icon-cube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5v10l-9 5-9-5V7Z M3 7l9 5 9-5M12 12v10M7.5 4.5l9 5"/></g></symbol>
+<symbol id="v2d-icon-body" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2.5"/><path d="M12 7v7M4 10l8-2 8 2M12 14l-6 8M12 14l6 8"/></g></symbol>
+<symbol id="v2d-icon-robot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16M8 22v-5l-3-5 4-6M10 6l7 4M17 13v5M14 18h6M14 18l-2 3M20 18l2 3"/><circle cx="9" cy="4" r="2"/><circle cx="18" cy="11" r="2.5"/><circle cx="6" cy="13" r="2"/></g></symbol>
+<symbol id="v2d-icon-scene" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V5l9-3 9 3v15M3 5l9 4 9-4M12 9v4M6 14h12M7 14v6M17 14v6"/><rect x="9" y="10" width="6" height="4" rx="1"/></g></symbol>
+<symbol id="v2d-icon-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6Z m-5 9 3 3 7-7"/></g></symbol>
+<symbol id="v2d-icon-assets" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12v9M19 12v9M8 7h8M9 7v5M15 7v5"/><rect x="9" y="2" width="6" height="5" rx="1"/></g></symbol>
+<symbol id="v2d-icon-repair" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3a6 6 0 0 0-7 7L2 15a3 3 0 0 0 4 4l5-5a6 6 0 0 0 7-7l-4 4-3-3Z"/><path d="m17 16 5 5M18 15l-3 3"/></g></symbol>
+<symbol id="v2d-icon-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 22v-3a7 7 0 0 1 14 0v3M18 5h4M18 10h4M18 15h4"/></g></symbol>
+<symbol id="v2d-icon-profile" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2" width="18" height="20" rx="3"/><path d="M7 7h10M7 12h10M7 17h6"/></g></symbol>
+<symbol id="v2d-icon-policy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4 m-9-6 4 3-4 3"/></g></symbol>
+<symbol id="v2d-icon-action" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V3M5 3h14l-4 5 4 5H5 M9 19l3 3 6-7"/></g></symbol>
+</defs><g font-family="Inter, Arial, Helvetica, sans-serif">
+<rect x="338" y="100" width="574" height="414" rx="20" fill="#f5f8f4" stroke="#dce6dd" />
+<text x="360" y="130" fill="#54705e" font-size="11" font-weight="650" letter-spacing="1.2">TASK CONSTRUCTION</text>
+<text x="24" y="74" fill="#627168" font-size="11" font-weight="650" letter-spacing="1">CHOOSE THE AVAILABLE INPUT</text>
+<path class="v2d-flow-edge" data-kind="flow" d="M284 148H312V380H284" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="v2d-flow-edge" data-kind="flow" d="M284 264H352" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-flow)"/>
+<circle cx="312" cy="264" r="3.5" fill="#416858"/>
+<path class="v2d-flow-edge" data-kind="flow" d="M598 264H646" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-flow)"/>
+<path class="v2d-flow-edge" data-kind="flow" d="M892 264H960" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-flow)"/>
+<path class="v2d-flow-edge" data-kind="flow" d="M772 370V326" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-flow)"/>
+<text x="784" y="351" fill="#627168" font-size="11" font-weight="400" >scene assets</text>
+<path class="v2d-flow-edge" data-kind="flow" d="M1091 208V170" fill="none" stroke="#416858" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-flow)"/>
+<text x="1104" y="192" fill="#246859" font-size="11" font-weight="400" >pass</text>
+<path class="v2d-flow-edge" data-kind="repair" d="M1091 320V364" fill="none" stroke="#b65a32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-repair)" stroke-dasharray="6 5"/>
+<text x="1104" y="349" fill="#a64c28" font-size="11" font-weight="400" >fail</text>
+<path class="v2d-flow-edge" data-kind="repair" d="M1216 430H1230V44H632V94" fill="none" stroke="#b65a32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-repair)" stroke-dasharray="6 5"/>
+<text x="884" y="31" fill="#a64c28" font-size="11" font-weight="650" letter-spacing=".8">REPAIR &amp; RERUN</text>
+<rect x="24" y="100" width="260" height="96" rx="14" fill="#fcf0e9" stroke="#d8e2da" />
+<use href="#v2d-icon-video" x="40" y="118" width="27" height="27" color="#a9502f" aria-hidden="true"/>
+<text x="82" y="126" fill="#a9502f" font-size="10" font-weight="650" letter-spacing=".8">A · VIDEO</text>
+<text x="82" y="149" fill="#1b3029" font-size="15" font-weight="650" >RGB demonstrations</text>
+<text x="82" y="172" fill="#627168" font-size="11.5" font-weight="400" >Segment → estimate motion</text>
+<rect x="24" y="216" width="260" height="96" rx="14" fill="#eaf2ec" stroke="#d8e2da" />
+<use href="#v2d-icon-cube" x="40" y="234" width="27" height="27" color="#246859" aria-hidden="true"/>
+<text x="82" y="242" fill="#246859" font-size="10" font-weight="650" letter-spacing=".8">B · NATIVE 3D</text>
+<text x="82" y="265" fill="#1b3029" font-size="15" font-weight="650" >Human + object motion</text>
+<text x="82" y="288" fill="#627168" font-size="11.5" font-weight="400" >Load released annotations</text>
+<rect x="24" y="332" width="260" height="96" rx="14" fill="#edf3f9" stroke="#d8e2da" />
+<use href="#v2d-icon-body" x="40" y="350" width="27" height="27" color="#416a92" aria-hidden="true"/>
+<text x="82" y="358" fill="#416a92" font-size="10" font-weight="650" letter-spacing=".8">C · BODY MOTION</text>
+<text x="82" y="381" fill="#1b3029" font-size="15" font-weight="650" >SMPL / skeleton</text>
+<text x="82" y="404" fill="#627168" font-size="11.5" font-weight="400" >Normalize → fit the body</text>
+<rect x="358" y="208" width="240" height="112" rx="14" fill="#fff" stroke="#d8e2da" />
+<use href="#v2d-icon-robot" x="376" y="225" width="28" height="28" color="#246859" aria-hidden="true"/>
+<text x="416" y="244" fill="#1b3029" font-size="16" font-weight="650" >Retarget motion</text>
+<text x="376" y="277" fill="#627168" font-size="12" font-weight="400" >Robot joints + morphology</text>
+<text x="376" y="298" fill="#627168" font-size="11.5" font-weight="400" >Preserve timing and contact intent</text>
+<rect x="652" y="208" width="240" height="112" rx="14" fill="#fff" stroke="#d8e2da" />
+<use href="#v2d-icon-scene" x="670" y="225" width="28" height="28" color="#246859" aria-hidden="true"/>
+<text x="710" y="244" fill="#1b3029" font-size="16" font-weight="650" >Build Isaac scene</text>
+<text x="670" y="277" fill="#627168" font-size="12" font-weight="400" >Robot + task environment</text>
+<text x="670" y="298" fill="#627168" font-size="11.5" font-weight="400" >Controllers, sensors and assets</text>
+<rect x="966" y="208" width="250" height="112" rx="14" fill="#fff" stroke="#d8e2da" />
+<use href="#v2d-icon-check" x="984" y="225" width="28" height="28" color="#246859" aria-hidden="true"/>
+<text x="1024" y="244" fill="#1b3029" font-size="16" font-weight="650" >Validate replay</text>
+<text x="984" y="277" fill="#627168" font-size="12" font-weight="400" >Fit, collision and contact</text>
+<text x="984" y="298" fill="#627168" font-size="11.5" font-weight="400" >Check the observed motion</text>
+<rect x="652" y="370" width="240" height="120" rx="14" fill="#fff" stroke="#d8e2da" />
+<use href="#v2d-icon-assets" x="670" y="388" width="28" height="28" color="#246859" aria-hidden="true"/>
+<text x="710" y="407" fill="#1b3029" font-size="16" font-weight="650" >Scene + physics</text>
+<text x="670" y="438" fill="#627168" font-size="12" font-weight="400" >Camera · supports · objects</text>
+<text x="670" y="459" fill="#627168" font-size="11.5" font-weight="400" >Collision · joints · mass · friction</text>
+<text x="670" y="479" fill="#627168" font-size="10.5" font-weight="400" >Released / reconstructed / authored</text>
+<rect x="966" y="370" width="250" height="120" rx="14" fill="#fcf0e9" stroke="#edd4c6" />
+<use href="#v2d-icon-repair" x="984" y="388" width="28" height="28" color="#a9502f" aria-hidden="true"/>
+<text x="1024" y="407" fill="#763d28" font-size="16" font-weight="650" >Repair components</text>
+<text x="984" y="438" fill="#627168" font-size="11.5" font-weight="400" >Motion · alignment · assets · control</text>
+<text x="984" y="461" fill="#627168" font-size="11.5" font-weight="400" >Version the change; rerun checks.</text>
+<rect x="966" y="100" width="250" height="64" rx="12" fill="#eaf2ec" stroke="#ccddd0" />
+<use href="#v2d-icon-check" x="983" y="118" width="24" height="24" color="#246859" aria-hidden="true"/>
+<text x="1020" y="127" fill="#24563e" font-size="15" font-weight="650" >Replay validated</text>
+<text x="1020" y="148" fill="#627168" font-size="11" font-weight="400" >A construction milestone</text>
+<text x="358" y="395" fill="#54705e" font-size="12" font-weight="600" >Keep source IDs and timing.</text>
+<text x="358" y="420" fill="#627168" font-size="11.5" font-weight="400" >Reuse existing 3D when available.</text>
+<text x="358" y="445" fill="#627168" font-size="11.5" font-weight="400" >V2D remains an external pipeline.</text>
+<rect x="24" y="548" width="1192" height="174" rx="18" fill="#eff4f9" stroke="#d9e3ee" />
+<text x="44" y="578" fill="#416a92" font-size="11" font-weight="650" letter-spacing="1">SEPARATE PATH · USER CONDITIONING</text>
+<rect x="44" y="602" width="234" height="88" rx="12" fill="#fff" stroke="#d6e0eb" />
+<use href="#v2d-icon-user" x="59" y="622" width="26" height="26" color="#416a92" aria-hidden="true"/>
+<text x="96" y="633" fill="#294760" font-size="14" font-weight="650" >User evidence</text>
+<text x="59" y="666" fill="#627168" font-size="11.5" font-weight="400" >ID + attributes + history</text>
+<rect x="350" y="602" width="234" height="88" rx="12" fill="#fff" stroke="#d6e0eb" />
+<use href="#v2d-icon-profile" x="365" y="622" width="26" height="26" color="#416a92" aria-hidden="true"/>
+<text x="402" y="633" fill="#294760" font-size="14" font-weight="650" >User representation</text>
+<text x="365" y="666" fill="#627168" font-size="11.5" font-weight="400" >Explicit profile / history features</text>
+<rect x="656" y="602" width="234" height="88" rx="12" fill="#fff" stroke="#d6e0eb" />
+<use href="#v2d-icon-policy" x="671" y="622" width="26" height="26" color="#416a92" aria-hidden="true"/>
+<text x="708" y="633" fill="#294760" font-size="14" font-weight="650" >Conditioned policy</text>
+<text x="671" y="666" fill="#627168" font-size="11.5" font-weight="400" >Profile + task + observations</text>
+<rect x="962" y="602" width="234" height="88" rx="12" fill="#fff" stroke="#d6e0eb" />
+<use href="#v2d-icon-action" x="977" y="622" width="26" height="26" color="#416a92" aria-hidden="true"/>
+<text x="1014" y="633" fill="#294760" font-size="14" font-weight="650" >Robot actions</text>
+<text x="977" y="666" fill="#627168" font-size="11.5" font-weight="400" >Check task + persona criteria</text>
+<path class="v2d-flow-edge" data-kind="persona" d="M278 646H344" fill="none" stroke="#416a92" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-persona)"/>
+<path class="v2d-flow-edge" data-kind="persona" d="M584 646H650" fill="none" stroke="#416a92" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-persona)"/>
+<path class="v2d-flow-edge" data-kind="persona" d="M890 646H956" fill="none" stroke="#416a92" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#v2d-arrow-persona)"/>
+<text x="44" y="751" fill="#627168" font-size="12" font-weight="400" >Held-out target motion stays with the evaluator. Learning persistent style remains a planned experiment.</text>
+</g></svg></div><p class="v2d-diagram-hint">Scroll horizontally to follow the full diagram →</p><figcaption class="v2d-diagram-foot">A motion replay is one construction milestone. A complete task also needs usable scene assets, robot control and an executable success contract. Diagram shows the intended workflow; it does not claim every sample has passed every stage.<br><strong>External NVIDIA V2D modules:</strong> <code>video_ingestion_agent/</code> → <code>reconstruction/</code> → <code>robotic_grounding/</code>. Native 3D and skeleton inputs skip unnecessary stages; PersonaRobotBench adds adapters and task evaluation.</figcaption></figure>
 <div class="v2d-three"><article class="v2d-card"><span class="v2d-num">01 — RECOVER & ALIGN</span><h4>Motion and scene evidence</h4><p>Check the clip, identity and action label. Reuse released motion; otherwise estimate visible body, hands and relevant objects. Align time, scale, camera and world coordinates.</p></article><article class="v2d-card"><span class="v2d-num">02 — COMPLETE & RETARGET</span><h4>A functional task scene</h4><p>Add required supports, object articulation, collision geometry and robot controllers. Retarget with joint and morphology limits. Mark inferred or authored surfaces explicitly.</p></article><article class="v2d-card"><span class="v2d-num">03 — REPAIR & VALIDATE</span><h4>Close concrete failure cases</h4><p>Inspect overlays and replay, repair bad fits or contacts, and rerun checks. Keep before/after evidence. Freeze task and persona criteria before the final policy evaluation.</p></article></div><div class="v2d-note v2d-orange" style="margin-top:22px"><strong>Background ≠ interactive environment.</strong> A rendered backdrop or completed image cannot support a robot. Tables, containers and tools need geometry and physics. Unseen regions remain model-inferred or benchmark-authored rather than recovered ground truth.</div></div></section>
       </div>
       <section id="v2d-demos" class="wrap v2d-demo-section" aria-labelledby="v2d-demos-title">

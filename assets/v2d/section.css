@@ -145,3 +145,12 @@
 #v2d .v2d-details-track { border-top: 1px solid var(--line); scroll-margin-top: 24px; }
 #v2d .v2d-details-track h3, #v2d .v2d-details-track h4 { font-weight: 700; }
 #v2d .v2d-details-track .v2d-section:first-child { border-top: 1px solid var(--line); }
+
+/* Diagram refresh: keep labels readable, with contained horizontal scroll on phones. */
+#v2d .v2d-details-track .v2d-architecture { width: 100%; min-width: 1080px; height: auto; }
+#v2d .v2d-details-track .v2d-diagram-bar { flex-wrap: wrap; row-gap: 6px; }
+#v2d .v2d-details-track .v2d-diagram-scroll { padding: 16px 16px 8px; }
+#v2d .v2d-details-track .v2d-diagram-hint { display: none; }
+@media (max-width: 1120px) {
+  #v2d .v2d-details-track .v2d-diagram-hint { display: block; margin: 0; padding: 4px 16px 12px; font-size: 11px; color: var(--green); }
+}
