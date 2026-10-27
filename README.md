@@ -8,10 +8,11 @@ The public research website for the **100-task / 217-persona** benchmark.
 - **Benchmark:** [HHD000EXE/PersonaRobotBench](https://github.com/HHD000EXE/PersonaRobotBench), currently private. Its code and linked technical guides require repository access.
 
 This public repository contains the website, its complete task catalog,
-100 task-specific scene previews, and the policy leaderboard. The homepage includes 40 recorded task comparisons (84 persona videos), preserving all
-existing model and scripted demonstrations and every authored persona slot.
-The latest Astra high batch covers Tasks 34, 89, 32, 100, 14, 33, 3, 59, 83, 84.
-Task 1 is shown first.
+100 task-specific scene previews, and the policy leaderboard. The homepage
+features 22 recorded task comparisons (45 persona videos), with Task 1 shown first.
+The featured Astra high demonstrations are Tasks 3 and 32.
+Moving-base demonstrations must show leg stepping; stationary fixed-base
+manipulation remains eligible.
 Controller sources are recorded in the provenance data. At 1×, videos follow
 simulation time, with Astra inference waits omitted. These selected
 demonstrations are separate from the benchmark success-rate evaluations.
@@ -21,6 +22,10 @@ at 30 fps; provenance describes the privileged skill interface, assisted control
 renderer, retained source-artifact hashes and timing.
 See [recording provenance](data/rollout-provenance.json) for source hashes,
 recording context and the historical Task 110 → Task 51 mapping.
+
+The provenance manifest retains all 84 original recording receipts, and their
+video and poster files remain available as an archive. Gallery membership is
+curated separately; unfeatured recordings do not appear in the comparison section.
 
 ## Local preview
 
