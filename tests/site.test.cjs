@@ -173,7 +173,7 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
     assert.equal(selected.tabIndex, 0);
     assert.equal(ctx.document.activeElement, selected);
     assert.equal(ctx.$('#rollout-panel').getAttribute('aria-labelledby'), selected.id);
-    assert.equal(ctx.$$('.video-placeholder').length, 2);
+    assert.equal(ctx.$$('.video-placeholder').length, recorded.find((item) => String(item.id) === expected).personas.length);
   }
   ctx.window.close();
 });
@@ -212,7 +212,9 @@ test('GitHub Pages project subpaths preserve catalog, image, font CSS, script an
   const stylesheet = new URL(ctx.$('link[rel="stylesheet"][href^="styles.css"]').href);
   assert.equal(stylesheet.origin, new URL(base).origin);
   assert.equal(stylesheet.pathname, new URL('styles.css', base).pathname);
-  assert.equal(ctx.$('script[src="app.js"]').src, base + 'app.js');
+  const script = new URL(ctx.$('script[src^="app.js"]').src);
+  assert.equal(script.origin, new URL(base).origin);
+  assert.equal(script.pathname, new URL('app.js', base).pathname);
   assert.equal(ctx.$('video source').src, base + 'assets/rollouts/task18-A.mp4');
   ctx.$('[data-example="68"]').click();
   assert.equal(ctx.$('.video-placeholder img').src, base + 'assets/task-scenes/task-068.webp');
@@ -230,19 +232,23 @@ test('unsafe video protocols never become source elements', async () => {
   }
 });
 
-test('shipped examples provide complete paired recordings with distinct real-frame posters', async () => {
+test('shipped examples preserve every authored slot and available recording with real-frame posters', async () => {
   const ctx = await boot({ examples: shippedExamples });
   let count = 0;
+  let slots = 0;
   const recorded = shippedExamples.filter((item) => item.recording).map((item) => item.id);
   assert.deepEqual(recorded.slice(0, 4), [1, 18, 51, 68]);
   for (const taskId of recorded) {
     ctx.$('[data-example="' + taskId + '"]').click();
     const example = shippedExamples.find((item) => item.id === taskId);
     const videos = ctx.$$('video');
-    assert.equal(videos.length, 2);
-    assert.equal(ctx.$$('.video-placeholder').length, 0);
+    const available = example.personas.filter((persona) => persona.video);
+    assert.equal(ctx.$$('.rollout-case').length, example.personas.length);
+    slots += ctx.$$('.rollout-case').length;
+    assert.equal(videos.length, available.length);
+    assert.equal(ctx.$$('.video-placeholder').length, example.personas.length - available.length);
     for (const [index, video] of videos.entries()) {
-      const persona = example.personas[index];
+      const persona = available[index];
       assert.equal(video.querySelector('source').getAttribute('src'), 'https://benchmark.test/' + persona.video);
       assert.equal(video.querySelector('source').getAttribute('type'), 'video/mp4');
       assert.equal(video.poster, 'https://benchmark.test/' + persona.videoPoster);
@@ -255,7 +261,9 @@ test('shipped examples provide complete paired recordings with distinct real-fra
       assert.ok(persona.videoDurationSeconds > 0);
       count++;
     }
-    assert.ok(ctx.$('.video-status').textContent.includes('Paired videos available'));
+    const status = available.length < example.personas.length ? available.length + ' of ' + example.personas.length + ' videos available'
+      : available.length === 2 ? 'Paired videos available' : 'All ' + available.length + ' videos available';
+    assert.ok(ctx.$('.video-status').textContent.includes(status));
     assert.ok(ctx.$('#rollout-recording-note').textContent.startsWith('Complete recorded episode'));
     assert.ok(ctx.$('#rollout-recording-note').textContent.includes('1× simulation playback'));
     // The page shows no source labels (model or scripted); sources stay in the provenance file.
@@ -264,7 +272,8 @@ test('shipped examples provide complete paired recordings with distinct real-fra
     assert.equal(ctx.$('#rollout-recording-note a').href, 'https://benchmark.test/data/rollout-provenance.json');
     assert.equal(ctx.$('#rollout-recording-note').textContent.includes('Recorded as Task 110; now Task 51.'), taskId === 51);
   }
-  assert.equal(count, recorded.length * 2);
+  assert.equal(slots, shippedExamples.filter((item) => item.recording).reduce((total, item) => total + item.personas.length, 0));
+  assert.equal(count, shippedExamples.filter((item) => item.recording).reduce((total, item) => total + item.personas.filter((persona) => persona.video).length, 0));
   ctx.window.close();
 });
 
@@ -345,7 +354,7 @@ test('synchronized controls play, scrub and speed up both personas on one clock'
   ctx.window.close();
 });
 
-test('synchronized controls stay hidden until both videos exist', async () => {
+test('synchronized controls stay hidden until at least two videos exist', async () => {
   const ctx = await boot();
   assert.equal(ctx.$('#rollout-sync').hidden, true);
   assert.equal(ctx.$$('.sync-play').length, 0);
@@ -585,4 +594,127 @@ test('bar scales remain finite for zero, pending and 100 percent scores', async 
     for (const bar of ctx.$$('.leaderboard-bar-fill')) assert.ok(['0%', '100%'].includes(bar.style.width));
     ctx.window.close();
   }
+});
+
+// Multi-persona fixtures exercise the UI without publishing synthetic rollouts.
+function multiPersonaExample(count, id) {
+  const fixture = structuredClone(shippedExamples.find((item) => item.recording));
+  const templates = fixture.personas;
+  fixture.id = id;
+  fixture.shortTitle = count + ' persona test fixture';
+  fixture.recording.recordedTaskId = id;
+  fixture.personas = Array.from({ length: count }, (_, index) => ({
+    ...templates[index % templates.length], id: String.fromCharCode(65 + index),
+    description: 'Distinct fixture persona ' + String.fromCharCode(65 + index),
+    video: 'fixture/task-' + id + '-' + index + '.mp4',
+    videoDurationSeconds: [120, 80, 100, 60][index]
+  }));
+  return fixture;
+}
+
+for (const count of [3, 4]) {
+  test(count + ' authored persona videos render without omission and share playback controls', async () => {
+    const fixture = multiPersonaExample(count, count === 3 ? 32 : 14);
+    const ctx = await boot({ examples: [fixture, ...shippedExamples.filter((item) => item.id !== fixture.id)] });
+    const videos = ctx.$$('#rollout-pair video');
+    assert.equal(videos.length, count);
+    assert.equal(ctx.$$('.rollout-case').length, count);
+    assert.equal(ctx.$('#rollout-pair').dataset.personaCount, String(count));
+    assert.equal(ctx.$('#rollout-pair').getAttribute('role'), 'group');
+    assert.equal(ctx.$('#rollout-pair').getAttribute('aria-label'), count + ' persona recordings');
+    assert.equal(ctx.$('.video-status').hidden, true);
+    assert.equal(ctx.$('.video-status').textContent.trim(), 'All ' + count + ' videos available');
+    assert.equal(ctx.$('#rollout-sync').hidden, false);
+    for (const [index, video] of videos.entries()) {
+      const persona = fixture.personas[index];
+      assert.ok(video.getAttribute('aria-label').includes('persona ' + persona.id));
+      assert.equal(video.querySelector('source').src, 'https://benchmark.test/' + persona.video);
+      assert.ok(ctx.$$('.rollout-case-caption')[index].textContent.includes(persona.description));
+      fakeMedia(video, persona.videoDurationSeconds);
+    }
+    assert.equal(ctx.$('.sync-play').textContent.trim(), '▶ Play all ' + count + ' together');
+    assert.equal(ctx.$('.sync-scrub').getAttribute('aria-label'), 'Position in all ' + count + ' recordings');
+    assert.equal(ctx.$('.sync-speed').getAttribute('aria-label'), 'Playback speed for all ' + count + ' recordings');
+    videos[0].currentTime = 10;
+    ctx.$('.sync-play').click();
+    assert.ok(videos.every((video) => !video.paused && video.currentTime === 10));
+    assert.ok(ctx.$('.sync-play').textContent.includes('Pause all ' + count));
+    ctx.$('[data-rate="4"]').click();
+    assert.ok(videos.every((video) => video.playbackRate === 4 && video.defaultPlaybackRate === 4));
+    ctx.$('.sync-play').click();
+    assert.ok(videos.every((video) => video.paused));
+    const scrub = ctx.$('.sync-scrub');
+    scrub.value = '500';
+    scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+    for (const [index, video] of videos.entries()) {
+      assert.ok(Math.abs(video.currentTime - Math.min(60, fixture.personas[index].videoDurationSeconds - .05)) < .001);
+    }
+    // At a late shared time, completed shorter clips stay paused on their end
+    // frames while the long recording continues; rewinding resumes them all.
+    scrub.value = '900';
+    scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+    ctx.$('.sync-play').click();
+    assert.equal(videos[0].paused, false);
+    for (let index = 1; index < count; index++) {
+      assert.equal(videos[index].paused, true);
+      assert.ok(Math.abs(videos[index].currentTime - (fixture.personas[index].videoDurationSeconds - .05)) < .001);
+    }
+    scrub.value = '250';
+    scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+    assert.ok(videos.every((video) => !video.paused && video.currentTime === 30));
+    ctx.$('.sync-play').click();
+    assert.ok(videos.every((video) => video.paused));
+    scrub.value = '1000';
+    scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+    assert.ok(videos.every((video, index) => Math.abs(video.currentTime - (fixture.personas[index].videoDurationSeconds - .05)) < .001));
+    ctx.$('.sync-play').click();
+    assert.ok(videos.every((video) => !video.paused && video.currentTime === 0), 'completed group restarts together');
+    ctx.$('[data-example="18"]').click();
+    assert.ok(videos.every((video) => video.paused && !video.isConnected));
+    assert.equal(ctx.$$('#rollout-pair video').length, 2);
+    assert.equal(ctx.$('#rollout-pair').dataset.personaCount, '2');
+    assert.equal(ctx.$('.sync-play').textContent.trim(), '▶ Play both together');
+    assert.equal(ctx.$('.sync-scrub').getAttribute('aria-label'), 'Position in both recordings');
+    assert.ok(ctx.$$('#rollout-pair video').every((video) => video.playbackRate === 4));
+    assert.ok(ctx.$('.sync-time').textContent.startsWith('0.0 / '));
+    assert.equal(ctx.$('.sync-scrub').value, '0');
+    ctx.$('[data-example="' + fixture.id + '"]').click();
+    assert.equal(ctx.$$('#rollout-pair video').length, count);
+    assert.equal(ctx.$('#rollout-pair').dataset.personaCount, String(count));
+    assert.ok(ctx.$('.sync-play').textContent.includes('all ' + count));
+    assert.ok(ctx.$$('#rollout-pair video').every((video) => video.playbackRate === 4));
+    ctx.window.close();
+  });
+}
+
+test('partial four-persona groups retain every slot and synchronize available recordings only', async () => {
+  const fixture = multiPersonaExample(4, 14);
+  fixture.personas[1].video = null;
+  fixture.personas[3].video = null;
+  const ctx = await boot({ examples: [fixture] });
+  assert.equal(ctx.$$('.rollout-case').length, 4);
+  assert.equal(ctx.$$('#rollout-pair video').length, 2);
+  assert.equal(ctx.$$('.video-placeholder').length, 2);
+  assert.equal(ctx.$('.video-status').hidden, false);
+  assert.equal(ctx.$('.video-status').textContent.trim(), '2 of 4 videos available');
+  assert.equal(ctx.$('#rollout-sync').hidden, false);
+  assert.ok(ctx.$('.sync-play').textContent.includes('both'));
+  const videos = ctx.$$('#rollout-pair video');
+  fakeMedia(videos[0], 120); fakeMedia(videos[1], 100);
+  ctx.$('.sync-scrub').value = '500';
+  ctx.$('.sync-scrub').dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+  assert.ok(videos.every((video) => video.currentTime === 60));
+  ctx.window.close();
+});
+
+test('a single available recording in a larger group keeps synchronization controls hidden', async () => {
+  const fixture = multiPersonaExample(3, 32);
+  fixture.personas[1].video = null;
+  fixture.personas[2].video = null;
+  const ctx = await boot({ examples: [fixture] });
+  assert.equal(ctx.$$('.rollout-case').length, 3);
+  assert.equal(ctx.$('.video-status').textContent.trim(), '1 of 3 videos available');
+  assert.equal(ctx.$('#rollout-sync').hidden, true);
+  assert.equal(ctx.$('.sync-play'), null);
+  ctx.window.close();
 });

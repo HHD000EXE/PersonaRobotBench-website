@@ -1589,61 +1589,6 @@
     }
   },
   {
-    "id": 32,
-    "folder": "greeting",
-    "title": "Greeting",
-    "instruction": "Greet me.",
-    "personaCount": 3,
-    "personaIds": [
-      "A",
-      "B",
-      "C"
-    ],
-    "category": "Social & creative",
-    "tags": [
-      "Social & creative"
-    ],
-    "personas": [
-      {
-        "id": "A",
-        "name": "User A",
-        "description": "Greet me with a wave.",
-        "preferences": {
-          "style": "wave"
-        },
-        "video": null
-      },
-      {
-        "id": "B",
-        "name": "User B",
-        "description": "Greet me with a salute.",
-        "preferences": {
-          "style": "salute"
-        },
-        "video": null
-      },
-      {
-        "id": "C",
-        "name": "User C",
-        "description": "Greet me with a hand-over-heart gesture.",
-        "preferences": {
-          "style": "heart"
-        },
-        "video": null
-      }
-    ],
-    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/README.md",
-    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/config/personas.json",
-    "shortTitle": "Greeting",
-    "contrast": "A wave, a salute, or a hand over the heart?",
-    "dimension": "Social preference",
-    "poster": "assets/task-scenes/task-032.webp",
-    "posterAlt": "Static initial simulation scene for greeting.",
-    "video": null,
-    "videoLabel": "Simulation rollout · coming soon",
-    "imageKind": "static_initial_scene"
-  },
-  {
     "id": 91,
     "folder": "cabinet_closing",
     "title": "Personalized Cabinet Closing",
@@ -1937,6 +1882,686 @@
       "kind": "scripted",
       "playback": "complete recorded episodes · 1× simulation playback.",
       "recordedTaskId": 16,
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 34,
+    "folder": "inspection_turntable_setup",
+    "title": "Personalized Inspection Turntable Setup",
+    "instruction": "Present the part on the inspection turntable.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Place the sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to zero degrees so the blue front connector faces me. I inspect the connector face.",
+        "preferences": "Place the sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to zero degrees so the blue front connector faces me. I inspect the connector face.",
+        "video": "assets/rollouts/task034-A.mp4",
+        "videoPoster": "assets/rollouts/task034-A.webp",
+        "videoDurationSeconds": 28.466667
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Place the same sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to minus 90 degrees so the orange side fins face me. I inspect the side cooling feature.",
+        "preferences": "Place the same sensor housing upright at the centre of the turntable, align it with the turntable index, and set the index to minus 90 degrees so the orange side fins face me. I inspect the side cooling feature.",
+        "video": "assets/rollouts/task034-B.mp4",
+        "videoPoster": "assets/rollouts/task034-B.webp",
+        "videoDurationSeconds": 66.6
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/inspection_turntable_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-034.webp",
+      "alt": "Task 034 — Personalized Inspection Turntable Setup: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Inspection Turntable Setup",
+    "tabLabel": "Inspection Turntable Setup",
+    "poster": "assets/task-scenes/task-034.webp",
+    "posterAlt": "Task 034 — Personalized Inspection Turntable Setup: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 34,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 89,
+    "folder": "presentation_kit_preparation",
+    "title": "Presentation Tool Kit",
+    "instruction": "Prepare my presentation kit.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the wireless slide remote and cue cards in the kit; leave the laser pointer and notebook in their source positions.",
+        "preferences": "Put the wireless slide remote and cue cards in the kit; leave the laser pointer and notebook in their source positions.",
+        "video": "assets/rollouts/task089-A.mp4",
+        "videoPoster": "assets/rollouts/task089-A.webp",
+        "videoDurationSeconds": 55.8
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the laser pointer and notebook in the kit; leave the slide remote and cue cards in their source positions.",
+        "preferences": "Put the laser pointer and notebook in the kit; leave the slide remote and cue cards in their source positions.",
+        "video": "assets/rollouts/task089-B.mp4",
+        "videoPoster": "assets/rollouts/task089-B.webp",
+        "videoDurationSeconds": 31.366667
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/presentation_kit_preparation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-089.webp",
+      "alt": "Task 089 — Presentation Tool Kit: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Presentation Tool Kit",
+    "tabLabel": "Presentation Tool Kit",
+    "poster": "assets/task-scenes/task-089.webp",
+    "posterAlt": "Task 089 — Presentation Tool Kit: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 89,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 32,
+    "folder": "greeting",
+    "title": "Greeting",
+    "instruction": "Greet me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Social & creative",
+    "tags": [
+      "Social & creative"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Greet me with a wave.",
+        "preferences": {
+          "style": "wave"
+        },
+        "video": "assets/rollouts/task032-A.mp4",
+        "videoPoster": "assets/rollouts/task032-A.webp",
+        "videoDurationSeconds": 11.633333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Greet me with a salute.",
+        "preferences": {
+          "style": "salute"
+        },
+        "video": "assets/rollouts/task032-B.mp4",
+        "videoPoster": "assets/rollouts/task032-B.webp",
+        "videoDurationSeconds": 6.833333
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Greet me with a hand-over-heart gesture.",
+        "preferences": {
+          "style": "heart"
+        },
+        "video": "assets/rollouts/task032-C.mp4",
+        "videoPoster": "assets/rollouts/task032-C.webp",
+        "videoDurationSeconds": 6.833333
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/greeting/config/personas.json",
+    "shortTitle": "Greeting",
+    "contrast": "A wave, a salute, or a hand over the heart?",
+    "dimension": "Social preference",
+    "poster": "assets/task-scenes/task-032.webp",
+    "posterAlt": "Task 032 — Greeting: static initial scene with furnished room background.",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "imageKind": "static_initial_scene",
+    "tabLabel": "Greeting",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 32,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 100,
+    "folder": "monitor_adjustment",
+    "title": "Articulated Monitor Viewing",
+    "instruction": "Position the monitor for me.",
+    "personaCount": 3,
+    "personaIds": [
+      "A",
+      "B",
+      "C"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Face the screen directly toward my seated position with a slight upward tilt.",
+        "preferences": "Face the screen directly toward my seated position with a slight upward tilt.",
+        "video": "assets/rollouts/task100-A.mp4",
+        "videoPoster": "assets/rollouts/task100-A.webp",
+        "videoDurationSeconds": 40.7
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Turn the screen toward the collaborator on my right, keeping a slight upward tilt.",
+        "preferences": "Turn the screen toward the collaborator on my right, keeping a slight upward tilt.",
+        "video": "assets/rollouts/task100-B.mp4",
+        "videoPoster": "assets/rollouts/task100-B.webp",
+        "videoDurationSeconds": 58.2
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Face the screen forward and tilt it farther upward for my standing review.",
+        "preferences": "Face the screen forward and tilt it farther upward for my standing review.",
+        "video": "assets/rollouts/task100-C.mp4",
+        "videoPoster": "assets/rollouts/task100-C.webp",
+        "videoDurationSeconds": 39.533333
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/monitor_adjustment/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-100.webp",
+      "alt": "Task 100 — Articulated Monitor Viewing: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Articulated Monitor Viewing",
+    "tabLabel": "Articulated Monitor Viewing",
+    "poster": "assets/task-scenes/task-100.webp",
+    "posterAlt": "Task 100 — Articulated Monitor Viewing: static initial scene with furnished room background.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 100,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 14,
+    "folder": "whiteboard_reset",
+    "title": "Personalized Whiteboard Reset",
+    "instruction": "Prepare the board for the next meeting.",
+    "personaCount": 4,
+    "personaIds": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Preserve action items.",
+        "preferences": {
+          "arrangement": "A"
+        },
+        "video": "assets/rollouts/task014-A.mp4",
+        "videoPoster": "assets/rollouts/task014-A.webp",
+        "videoDurationSeconds": 46.766667
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Preserve the diagram.",
+        "preferences": {
+          "arrangement": "B"
+        },
+        "video": "assets/rollouts/task014-B.mp4",
+        "videoPoster": "assets/rollouts/task014-B.webp",
+        "videoDurationSeconds": 60.133333
+      },
+      {
+        "id": "C",
+        "name": "User C",
+        "description": "Preserve the schedule.",
+        "preferences": {
+          "arrangement": "C"
+        },
+        "video": "assets/rollouts/task014-C.mp4",
+        "videoPoster": "assets/rollouts/task014-C.webp",
+        "videoDurationSeconds": 57.8
+      },
+      {
+        "id": "D",
+        "name": "User D",
+        "description": "Preserve brainstorming notes.",
+        "preferences": {
+          "arrangement": "D"
+        },
+        "video": "assets/rollouts/task014-D.mp4",
+        "videoPoster": "assets/rollouts/task014-D.webp",
+        "videoDurationSeconds": 54.233333
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/whiteboard_reset/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-014.webp",
+      "alt": "Task 014 — Personalized Whiteboard Reset: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Whiteboard Reset",
+    "tabLabel": "Whiteboard Reset",
+    "poster": "assets/task-scenes/task-014.webp",
+    "posterAlt": "Task 014 — Personalized Whiteboard Reset: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 14,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 33,
+    "folder": "drill_press_setup",
+    "title": "Personalized Drill Press Setup",
+    "instruction": "Prepare the drill press.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "preferences": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "video": "assets/rollouts/task033-A.mp4",
+        "videoPoster": "assets/rollouts/task033-A.webp",
+        "videoDurationSeconds": 91.933333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "preferences": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "video": "assets/rollouts/task033-B.mp4",
+        "videoPoster": "assets/rollouts/task033-B.webp",
+        "videoDurationSeconds": 65.5
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-033.webp",
+      "alt": "Task 033 — Personalized Drill Press Setup: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Drill Press Setup",
+    "tabLabel": "Drill Press Setup",
+    "poster": "assets/task-scenes/task-033.webp",
+    "posterAlt": "Task 033 — Personalized Drill Press Setup: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 33,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 3,
+    "folder": "lift_table",
+    "title": "Personalized Lift Table Setup",
+    "instruction": "Set up the lift table.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "I am 1.55 m tall and prefer the lift table at 0.72 m.",
+        "preferences": {
+          "table_surface_height_m": 0.72
+        },
+        "video": "assets/rollouts/task003-A.mp4",
+        "videoPoster": "assets/rollouts/task003-A.webp",
+        "videoDurationSeconds": 7.133333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "I am 1.90 m tall and prefer the lift table at 1.08 m.",
+        "preferences": {
+          "table_surface_height_m": 1.08
+        },
+        "video": "assets/rollouts/task003-B.mp4",
+        "videoPoster": "assets/rollouts/task003-B.webp",
+        "videoDurationSeconds": 5.433333
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/lift_table/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-003.webp",
+      "alt": "Task 003 — Personalized Lift Table Setup: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Lift Table Setup",
+    "tabLabel": "Lift Table Setup",
+    "poster": "assets/task-scenes/task-003.webp",
+    "posterAlt": "Task 003 — Personalized Lift Table Setup: static initial scene with furnished room background.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 3,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 59,
+    "folder": "mail_sorting",
+    "title": "Personalized Mail Sorting",
+    "instruction": "Sort my mail.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put both letters in the letter tray, lay the magazine flat on the right end of the console table, and put the parcel in the wall cubby.",
+        "preferences": {
+          "letters": "letter_tray",
+          "magazine": "flat_at_right_end",
+          "parcel": "cubby"
+        },
+        "video": "assets/rollouts/task059-A.mp4",
+        "videoPoster": "assets/rollouts/task059-A.webp",
+        "videoDurationSeconds": 70.733333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Stack both letters in the letter tray with the magazine on top of them, and leave the parcel on the right end of the table.",
+        "preferences": {
+          "letters": "letter_tray",
+          "magazine": "on_top_of_letters_in_tray",
+          "parcel": "right_end_of_table"
+        },
+        "video": "assets/rollouts/task059-B.mp4",
+        "videoPoster": "assets/rollouts/task059-B.webp",
+        "videoDurationSeconds": 79.8
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/mail_sorting/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-059.webp",
+      "alt": "Task 059 — Personalized Mail Sorting: static initial scene with furnished room background.",
+      "width": 960,
+      "height": 540,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Mail Sorting",
+    "tabLabel": "Mail Sorting",
+    "poster": "assets/task-scenes/task-059.webp",
+    "posterAlt": "Task 059 — Personalized Mail Sorting: static initial scene with furnished room background.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 59,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 83,
+    "folder": "marking_tool_preparation",
+    "title": "Personalized Carpenter Marking Tool Preparation",
+    "instruction": "Prepare my marking tools.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the carpenter's pencil and straight ruler in the tray; leave the marker and square at their original positions.",
+        "preferences": "Put the carpenter's pencil and straight ruler in the tray; leave the marker and square at their original positions.",
+        "video": "assets/rollouts/task083-A.mp4",
+        "videoPoster": "assets/rollouts/task083-A.webp",
+        "videoDurationSeconds": 59.366667
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the marker and carpenter's square in the tray; leave the pencil and ruler at their original positions.",
+        "preferences": "Put the marker and carpenter's square in the tray; leave the pencil and ruler at their original positions.",
+        "video": "assets/rollouts/task083-B.mp4",
+        "videoPoster": "assets/rollouts/task083-B.webp",
+        "videoDurationSeconds": 53.033333
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/marking_tool_preparation/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-083.webp",
+      "alt": "Task 083 — Personalized Carpenter Marking Tool Preparation: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Carpenter Marking Tool Preparation",
+    "tabLabel": "Carpenter Marking Tool Preparation",
+    "poster": "assets/task-scenes/task-083.webp",
+    "posterAlt": "Task 083 — Personalized Carpenter Marking Tool Preparation: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 83,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 84,
+    "folder": "hardhat_selection",
+    "title": "Personalized Construction Worker Hardhat Selection",
+    "instruction": "Bring me my hardhat.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "My hardhat size is S: put the S hardhat in the pickup tray and leave L where it started.",
+        "preferences": "My hardhat size is S: put the S hardhat in the pickup tray and leave L where it started.",
+        "video": "assets/rollouts/task084-A.mp4",
+        "videoPoster": "assets/rollouts/task084-A.webp",
+        "videoDurationSeconds": 27.033333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "My hardhat size is L: put the L hardhat in the pickup tray and leave S where it started.",
+        "preferences": "My hardhat size is L: put the L hardhat in the pickup tray and leave S where it started.",
+        "video": "assets/rollouts/task084-B.mp4",
+        "videoPoster": "assets/rollouts/task084-B.webp",
+        "videoDurationSeconds": 32.266667
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/hardhat_selection/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-084.webp",
+      "alt": "Task 084 — Personalized Construction Worker Hardhat Selection: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Construction Worker Hardhat Selection",
+    "tabLabel": "Construction Worker Hardhat Selection",
+    "poster": "assets/task-scenes/task-084.webp",
+    "posterAlt": "Task 084 — Personalized Construction Worker Hardhat Selection: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-selected-180s-new20",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 84,
+      "playback": "complete recorded episodes · 1× simulation playback; inference waits omitted.",
       "provenance": "data/rollout-provenance.json"
     }
   }

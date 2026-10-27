@@ -131,43 +131,58 @@
     $(".rollout-tabs").style.setProperty("--tile-columns", String(Math.ceil(recorded.length / rows)));
   }
 
-  // One control drives both personas on a shared simulation clock: the shorter
+  // One control drives every available persona on a shared simulation clock: a shorter
   // recording holds its last frame while the longer one finishes.
   function wireSync(example) {
     const bar = $("#rollout-sync");
     if (!bar) return;
     const videos = $$("video", $("#rollout-pair"));
-    if (videos.length !== 2) {
+    if (videos.length < 2) {
       bar.hidden = true;
       bar.innerHTML = "";
       return;
     }
-    const length = Math.max(0, ...example.personas.slice(0, 2).map((persona) => persona.videoDurationSeconds || 0));
-    const playLabel = '<span aria-hidden="true">▶</span> Play A and B together';
-    const pauseLabel = '<span aria-hidden="true">❚❚</span> Pause both';
+    const recorded = example.personas.filter((persona) => safeUrl(persona.video));
+    const duration = (video, index) => Number.isFinite(video.duration) && video.duration > 0
+      ? video.duration : recorded[index].videoDurationSeconds || 0;
+    const length = () => Math.max(0, ...videos.map(duration));
+    const group = videos.length === 2 ? "both" : "all " + videos.length;
+    const playLabel = '<span aria-hidden="true">▶</span> Play ' + group + ' together';
+    const pauseLabel = '<span aria-hidden="true">❚❚</span> Pause ' + group;
     bar.hidden = false;
     bar.innerHTML = '<button type="button" class="sync-play">' + playLabel + '</button>' +
       '<button type="button" class="sync-skip" data-skip="-' + SKIP_SECONDS + '" aria-label="Back ' + SKIP_SECONDS + ' seconds">−' + SKIP_SECONDS + ' s</button>' +
-      '<input class="sync-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Position in both recordings">' +
+      '<input class="sync-scrub" type="range" min="0" max="1000" step="1" value="0" aria-label="Position in ' + group + ' recordings">' +
       '<button type="button" class="sync-skip" data-skip="' + SKIP_SECONDS + '" aria-label="Forward ' + SKIP_SECONDS + ' seconds">+' + SKIP_SECONDS + ' s</button>' +
-      '<span class="sync-time mono">0.0 / ' + length.toFixed(1) + ' s</span>' +
-      '<div class="sync-speed" role="radiogroup" aria-label="Playback speed for both recordings">' +
+      '<span class="sync-time mono">0.0 / ' + length().toFixed(1) + ' s</span>' +
+      '<div class="sync-speed" role="radiogroup" aria-label="Playback speed for ' + group + ' recordings">' +
       RATES.map((rate) => '<button type="button" role="radio" data-rate="' + rate + '" aria-checked="' + (rate === state.rate) + '">' + rate + '×</button>').join("") + '</div>';
     const play = $(".sync-play", bar);
     const scrub = $(".sync-scrub", bar);
     const time = $(".sync-time", bar);
     const clock = () => Math.max(0, ...videos.map((video) => video.currentTime || 0));
     const playing = () => videos.some((video) => !video.paused && !video.ended);
-    const finished = () => videos.every((video) => video.ended || (video.duration > 0 && video.currentTime >= video.duration - 0.05));
+    const atEnd = (video, index) => video.ended || (duration(video, index) > 0 && video.currentTime >= duration(video, index) - 0.05);
+    const finished = () => videos.every(atEnd);
+    const start = (video) => {
+      const started = video.play?.();
+      if (started?.catch) started.catch(() => label());
+    };
     const show = () => {
       const now = clock();
-      scrub.value = String(length ? Math.round(now / length * 1000) : 0);
-      time.textContent = now.toFixed(1) + " / " + length.toFixed(1) + " s";
+      scrub.value = String(length() ? Math.round(now / length() * 1000) : 0);
+      time.textContent = now.toFixed(1) + " / " + length().toFixed(1) + " s";
     };
     const label = () => { play.innerHTML = playing() ? pauseLabel : playLabel; };
-    const seek = (seconds) => videos.forEach((video) => {
-      const end = Number.isFinite(video.duration) && video.duration > 0 ? video.duration : length;
+    const seek = (seconds, resume = playing()) => videos.forEach((video, index) => {
+      const end = duration(video, index) || length();
       video.currentTime = Math.min(seconds, Math.max(0, end - 0.05));
+      // A finished short clip stays on its last frame until the shared clock
+      // returns to its range. Seeking backward during playback resumes it.
+      if (resume) {
+        if (atEnd(video, index)) video.pause();
+        else start(video);
+      }
     });
     const setRate = () => videos.forEach((video) => {
       video.defaultPlaybackRate = state.rate;
@@ -176,6 +191,7 @@
     setRate();
     for (const video of videos) {
       video.addEventListener("timeupdate", show);
+      video.addEventListener("loadedmetadata", show);
       for (const type of ["play", "pause", "ended"]) video.addEventListener(type, label);
     }
     play.addEventListener("click", () => {
@@ -184,22 +200,22 @@
         label();
         return;
       }
-      seek(finished() ? 0 : clock());
-      for (const video of videos) {
-        const started = video.play?.();
-        if (started?.catch) started.catch(() => label());
-      }
+      seek(finished() ? 0 : clock(), false);
+      videos.forEach((video, index) => {
+        if (atEnd(video, index)) video.pause();
+        else start(video);
+      });
       label();
     });
     const jump = (seconds) => {
-      seek(Math.min(length, Math.max(0, clock() + seconds)));
+      seek(Math.min(length(), Math.max(0, clock() + seconds)));
       show();
     };
     scrub.addEventListener("input", () => {
-      seek(Number(scrub.value) / 1000 * length);
+      seek(Number(scrub.value) / 1000 * length());
       show();
     });
-    // Arrow keys on the bar move both recordings by the skip step, not 1/1000 of the clip.
+    // Arrow keys on the bar move all available recordings by the skip step, not 1/1000 of the clip.
     scrub.addEventListener("keydown", (event) => {
       const step = { ArrowLeft: -SKIP_SECONDS, ArrowDown: -SKIP_SECONDS, ArrowRight: SKIP_SECONDS, ArrowUp: SKIP_SECONDS }[event.key];
       if (step === undefined) return;
@@ -232,13 +248,19 @@
     $("#rollout-panel").setAttribute("aria-labelledby", "example-tab-" + id);
     $("#rollout-id").textContent = "Task " + padded(id) + " · " + example.shortTitle;
     $("#rollout-instruction").textContent = "“" + example.instruction + "”";
-    const personas = example.personas.slice(0, 2);
+    const personas = example.personas;
+    $("#rollout-pair").dataset.personaCount = String(personas.length);
+    $("#rollout-pair").setAttribute("role", "group");
+    $("#rollout-pair").setAttribute("aria-label", personas.length + " persona recordings");
     $("#rollout-pair").innerHTML = personas.map((persona, index) => rolloutCase(example, persona, index)).join("");
     const ready = personas.filter((persona) => safeUrl(persona.video)).length;
     wireSync(example);
-    // Only missing videos need a status; a complete pair speaks for itself.
-    $(".video-status").hidden = ready === 2;
-    $(".video-status").innerHTML = "<i></i> " + (ready === 2 ? "Paired videos available" : ready === 1 ? "1 of 2 videos available" : "Videos coming soon");
+    // Only missing videos need a status; complete recordings speak for themselves.
+    $(".video-status").hidden = ready > 0 && ready === personas.length;
+    const availability = ready === personas.length && ready > 0
+      ? (ready === 2 ? "Paired videos available" : ready === 1 ? "Video available" : "All " + ready + " videos available")
+      : ready ? ready + " of " + personas.length + " videos available" : "Videos coming soon";
+    $(".video-status").innerHTML = "<i></i> " + availability;
     const recordingNote = $("#rollout-recording-note");
     if (recordingNote) {
       recordingNote.textContent = "";
@@ -389,7 +411,7 @@
 
   async function loadLeaderboard() {
     try {
-      const response = await fetch("data/leaderboard.json");
+      const response = await fetch("data/leaderboard.json", { cache: "no-cache" });
       if (!response.ok) throw new Error("Leaderboard unavailable");
       renderLeaderboard(await response.json());
       return true;
@@ -403,7 +425,7 @@
   async function start() {
     wireInteractions();
     try {
-      const responses = await Promise.all([fetch("data/tasks.json"), fetch("data/examples.json")]);
+      const responses = await Promise.all([fetch("data/tasks.json", { cache: "no-cache" }), fetch("data/examples.json", { cache: "no-cache" })]);
       if (responses.some((response) => !response.ok)) throw new Error("Catalog unavailable");
       [state.tasks, state.examples] = await Promise.all(responses.map((response) => response.json()));
       if (state.tasks.length !== 100 || state.tasks.reduce((sum, task) => sum + task.personaCount, 0) !== 217) throw new Error("Catalog does not match the release");
