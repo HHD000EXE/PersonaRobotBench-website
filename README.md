@@ -101,6 +101,7 @@ this source repository small.
 | `index.html` | Page copy, sections, links and evaluation context |
 | `styles.css` | Responsive layout and typography |
 | `assets/persona-concept.svg`, `assets/persona-concept-mobile.svg` | User profile → preference inference → robot action concept figure, with a separate phone layout |
+| `tools/build_concept_figure.py` | Rebuild both concept figures from a symmetric grid and the shared Task 1 initial layout |
 | `app.js` | Search, category filters, task details, tabs and video playback |
 | `data/tasks.json` | All 100 task descriptions and 217 task-local persona cases |
 | `assets/task-scenes/` | One current initial-scene preview for every task |
@@ -127,6 +128,11 @@ initial-scene illustrations. The original `data/build_assets.py` bootstrap
 exporter refuses to overwrite this complete preview catalog.
 
 Normal website edits and deployments do not need the private benchmark checkout.
+
+To edit the overview concept, update `tools/build_concept_figure.py` and run
+`python3 tools/build_concept_figure.py`. Both SVG layouts share one grid-based
+source; all Before views reuse the same initial-desk symbol. No simulator or
+additional Python packages are needed.
 
 ## Policy leaderboard
 
