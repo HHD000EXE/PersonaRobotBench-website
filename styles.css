@@ -568,3 +568,32 @@ h2{font-size:36px;line-height:1.2;letter-spacing:-.04em}
 .persona-concept figcaption strong{color:var(--ink);font-weight:650}
 @media(max-width:1000px){.persona-concept-art{max-width:680px;margin-inline:auto}}
 @media(max-width:720px){.persona-concept{border-radius:6px}.persona-concept figcaption{padding:17px 18px;font-size:12px;line-height:1.8}}
+
+/* The environment and policy concept form one introduction before the results. */
+.hero{padding-top:45px}
+.hero-inner{gap:0;padding-bottom:26px}
+.stats-strip{padding-block:22px}
+.overview.section-pad{padding-top:34px;padding-bottom:42px}
+.overview .section-heading{margin-bottom:25px}
+.overview .section-heading>div>p{max-width:850px}
+.benchmark-story{overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff}
+.overview-context{display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:center;padding:24px;background:#f7f9fc}
+.overview-environment{min-width:0}
+.overview-environment .scene-frame{position:relative;inset:auto;transform:none;margin:0;border-radius:6px;box-shadow:none}
+.overview-environment .scene-viewport .hero-scene{display:block;width:100%;height:auto;max-height:none;aspect-ratio:16/9;object-fit:contain}
+.overview-environment .scene-toolbar{flex-wrap:wrap;gap:9px;padding:10px 12px}
+.overview-environment .scene-view-buttons{flex-wrap:wrap;flex-shrink:1;align-items:center;gap:7px}
+.overview-environment .scene-toolbar button{font-size:11px;padding:8px 10px}
+.overview-environment #scene-status{font-family:var(--body);font-size:11px;text-align:left}
+.overview-environment .scene-model-link{font-size:11px}
+.environment-label{color:var(--orange);font-size:12px;font-weight:600;margin:0 0 12px}
+.overview-context-copy h3{font-size:23px;line-height:1.35;letter-spacing:-.025em;max-width:440px}
+.overview-context-copy>p:not(.environment-label){font-size:14px;line-height:1.85;color:var(--muted);margin-top:13px;max-width:530px}
+.context-comparison{display:grid;gap:11px;margin:19px 0 0}
+.context-comparison>div{display:grid;grid-template-columns:148px minmax(0,1fr);gap:12px}
+.context-comparison dt{font-size:12px;line-height:1.7;font-weight:600;color:var(--ink)}
+.context-comparison dd{font-size:12px;line-height:1.7;color:var(--muted);margin:0}
+.benchmark-story .persona-concept{border:0;border-top:1px solid var(--line);border-radius:0}
+.benchmark-story .persona-concept figcaption{padding:19px 24px}
+@media(max-width:860px){.overview-context{grid-template-columns:1fr;padding:20px;gap:22px}.overview-environment{max-width:580px;width:100%;margin-inline:auto}.overview-context-copy h3,.overview-context-copy>p:not(.environment-label){max-width:none}.context-comparison>div{grid-template-columns:145px minmax(0,1fr)}}
+@media(max-width:720px){.hero{padding-top:32px}.hero-inner{padding-bottom:24px}.stats-strip{padding-block:20px}.overview.section-pad{padding-top:27px;padding-bottom:30px}.overview-context{padding:15px;gap:19px}.overview-context-copy h3{font-size:21px}.overview-context-copy>p:not(.environment-label){font-size:13px}.context-comparison>div{grid-template-columns:1fr;gap:3px}.context-comparison{gap:10px}.context-comparison dt,.context-comparison dd{font-size:12px}.benchmark-story .persona-concept figcaption{padding:16px}}

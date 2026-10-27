@@ -20,11 +20,11 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <a href="#" class="brand" aria-label="PersonaRobotBench home"><svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 16h9m0 0 8-9h5m-13 9 8 9h5"/><rect x="2" y="12" width="8" height="8" rx="1"/><circle cx="25" cy="7" r="4"/><circle cx="25" cy="25" r="4"/></svg><span>Persona<span class="brand-light">RobotBench</span></span></a>
-    <nav class="desktop-nav" aria-label="Main navigation"><a href="#leaderboard">Leaderboard</a><a href="#overview">Overview</a><a href="#tasks">Tasks</a><a href="#rollouts">Rollouts</a><a href="#evaluation">Evaluation</a></nav>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#overview">Overview</a><a href="#leaderboard">Leaderboard</a><a href="#tasks">Tasks</a><a href="#rollouts">Rollouts</a><a href="#evaluation">Evaluation</a></nav>
     <a class="nav-github" aria-label="Contribute to the website on GitHub" href="https://github.com/HHD000EXE/PersonaRobotBench-website" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1 1.93 1.76 3.23.79.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15A10.72 10.72 0 0 1 12 6.08c.95 0 1.9.13 2.8.38 2.13-1.45 3.07-1.15 3.07-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.61 5.24-5.1 5.52.4.35.76 1.02.76 2.06v3.24c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg><span>GitHub</span><span aria-hidden="true">↗</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation"><span></span><span></span></button>
   </header>
-  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="#leaderboard">Leaderboard</a><a href="#overview">Overview</a><a href="#tasks">Explore tasks</a><a href="#rollouts">Rollouts</a><a href="#evaluation">Evaluation</a><a href="#resources">Get started</a></nav>
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden><a href="#overview">Overview</a><a href="#leaderboard">Leaderboard</a><a href="#tasks">Explore tasks</a><a href="#rollouts">Rollouts</a><a href="#evaluation">Evaluation</a><a href="#resources">Get started</a></nav>
   <main id="main">
     <section class="hero section-grid" aria-labelledby="hero-title">
       <div class="hero-inner wrap">
@@ -32,37 +32,47 @@
           
           
           <h1 id="hero-title">PersonaRobotBench</h1>
-          <p class="hero-description">A benchmark for personalized robot behavior: <strong>100 tasks and 217 persona cases.</strong> The same scene and request can have a different right answer for each person.</p>
+          <p class="hero-description">A benchmark for personal robot agents: <strong>100 tasks and 217 persona cases.</strong> The same instruction calls for behavior tailored to the user’s profile.</p>
           <div class="hero-actions"><a class="button button-dark" href="#tasks">Explore the dataset <span aria-hidden="true">↗</span></a><a class="button button-plain" href="https://github.com/HHD000EXE/PersonaRobotBench/tree/main/docs" target="_blank" rel="noopener noreferrer">Read the docs <span aria-hidden="true">→</span></a></div>
           
         </div>
-        <div class="hero-visual" aria-label="Unitree G1 simulation scene with two desk-setup preferences">
-          
-          <div class="scene-frame"><div class="scene-viewport" id="scene-viewport"><img class="hero-scene" src="assets/hero-scene.webp" alt="Unitree G1 robot in an authored furnished simulation environment" fetchpriority="high" width="1600" height="900"><div id="scene-model-host"></div></div><div class="scene-toolbar"><div class="scene-view-buttons"><button id="scene-toggle" type="button" aria-pressed="false" aria-controls="scene-model-host"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Explore in 3D</span></button><button id="scene-reset" type="button" disabled>Reset view</button><a class="scene-model-link" href="assets/models/shared-desk.provenance.json" target="_blank" rel="noopener">Model details</a></div><span id="scene-status" role="status">3D view · about 10 MB</span></div></div>
-          <div class="request-note"><p>“Set up my desk for work.”</p></div>
-          <div class="persona-note persona-a"><span class="persona-avatar">A</span><div><p>Mouse on the left.<br>Notebook on the right.</p></div></div>
-          <div class="persona-note persona-b"><span class="persona-avatar">B</span><div><p>Mouse on the right.<br>Notebook on the left.</p></div></div>
-          
-        </div>
+
       </div>
       <div class="stats-strip wrap"><div><strong>100</strong><p>task environments</p></div><div><strong>217</strong><p>authored persona cases</p></div><div><strong>G1</strong><p>Unitree humanoid platform</p></div><div><strong>Isaac Sim</strong><p>physics-based evaluation</p></div></div>
+    </section>
+    <section id="overview" class="overview section-pad wrap" aria-labelledby="overview-title">
+      <div class="section-heading"><div><h2 id="overview-title">From user profiles to robot behavior.</h2><p>One robot policy must connect the user’s profile with the instruction and physical scene, infer the preferences that matter, and act on them.</p></div></div>
+      <div class="benchmark-story">
+        <div class="overview-context">
+          <div class="overview-environment" aria-label="Task 1 shared desk environment with optional 3D exploration">
+            <div class="scene-frame"><div class="scene-viewport" id="scene-viewport"><img class="hero-scene" src="assets/hero-scene.webp" alt="Unitree G1 robot in an authored furnished simulation environment" fetchpriority="high" width="1600" height="900"><div id="scene-model-host"></div></div><div class="scene-toolbar"><div class="scene-view-buttons"><button id="scene-toggle" type="button" aria-pressed="false" aria-controls="scene-model-host"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Explore in 3D</span></button><button id="scene-reset" type="button" disabled>Reset view</button><a class="scene-model-link" href="assets/models/shared-desk.provenance.json" target="_blank" rel="noopener">Model details</a></div><span id="scene-status" role="status">3D view · about 10 MB</span></div></div>
+          </div>
+          <div class="overview-context-copy">
+            <p class="environment-label">Task 1 · Shared physical environment</p>
+            <h3>Understand the person behind the instruction.</h3>
+            <p>Both users give exactly the same instruction. The policy uses the profile and the desk environment to work out what this task means for each person.</p>
+            <dl class="context-comparison">
+              <div><dt>Held the same</dt><dd>Instruction, starting scene, robot and policy</dd></div>
+              <div><dt>Varies by user</dt><dd>Profile: dominant hand</dd></div>
+              <div><dt>Inferred by the policy</dt><dd>For computer work, prioritize mouse access on the dominant-hand side.</dd></div>
+            </dl>
+          </div>
+        </div>
+      <figure class="persona-concept" aria-labelledby="overview-title" aria-describedby="persona-concept-caption">
+        <picture class="persona-concept-art">
+          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=dominant-v4" width="600" height="1760">
+          <img src="assets/persona-concept.svg?v=dominant-v4" width="1200" height="840" loading="lazy" decoding="async" alt="Two users have left- and right-dominant hands and give an identical instruction to set up a desk for work. Inside one shared robot policy, the profiles, instruction and scene inform task-persona inference, planning and execution. Before-and-after desk views show prioritized mouse access on the dominant-hand side, with object labels in the illustration. The keyboard and monitor remain fixed; held-out preferences are used only for evaluation.">
+        </picture>
+        <figcaption id="persona-concept-caption"><strong>Identical instruction, user-dependent execution.</strong> The profiles state only the users’ dominant hands. In the computer-work context, the same robot policy infers the task-relevant preference, prioritizes mouse access on that side, and plans the arrangement. Paper-notebook placement illustrates keeping the remaining workspace clear. Both “Before” views share Task 1's initial layout; the keyboard and monitor stay fixed. The mug is omitted. Held-out user preferences are reserved for evaluation.</figcaption>
+      </figure>
+      </div>
+      <div class="preference-types"><span class="preference-label">Preferences can change</span><span><i class="type-dot orange"></i> What to choose</span><span><i class="type-dot green"></i> Where to put it</span><span><i class="type-dot blue"></i> How to perform it</span><span><i class="type-dot gold"></i> In what order</span></div>
     </section>
     <section id="leaderboard" class="leaderboard-section section-pad wrap" aria-labelledby="leaderboard-title">
       <div class="section-heading"><div><h2 id="leaderboard-title">Policy leaderboard</h2></div></div>
       <p id="leaderboard-status" class="leaderboard-status mono" role="status">Loading evaluation results…</p>
       <div id="leaderboard-boards" class="leaderboard-boards" aria-live="polite"></div>
       <noscript><p>Enable JavaScript to view the policy leaderboard.</p></noscript>
-    </section>
-    <section id="overview" class="overview section-pad wrap" aria-labelledby="overview-title">
-      <div class="section-heading"><div><h2 id="overview-title">Personalized robots start by understanding the user.</h2><p>User profiles describe different habits and needs. The agent infers the preferences that matter for the task, then turns that understanding into robot behavior.</p></div></div>
-      <figure class="persona-concept" aria-labelledby="overview-title" aria-describedby="persona-concept-caption">
-        <picture class="persona-concept-art">
-          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=layout-v3" width="600" height="1880">
-          <img src="assets/persona-concept.svg?v=layout-v3" width="1200" height="880" loading="lazy" decoding="async" alt="Two parallel user paths begin with a profile and the instruction to set up a desk. The personal robot agent infers placement preferences, and one shared policy acts from an identical initial desk state. Before-and-after views show the mouse and paper notebook moving to opposite sides for the two users; the keyboard and monitor stay fixed. Held-out user preferences are used only for evaluation.">
-        </picture>
-        <figcaption id="persona-concept-caption"><strong>The same starting desk, arranged for different people.</strong> Each user provides a profile and an instruction. The agent infers task preferences, then a shared robot policy acts on them. Both “Before” views use Task 1's initial mouse and paper-notebook positions; the keyboard and monitor remain fixed. The example focuses on these layout changes, with the mug omitted. Evaluation compares the predicted preferences and execution with the user's held-out preferences.</figcaption>
-      </figure>
-      <div class="preference-types"><span class="preference-label">Preferences can change</span><span><i class="type-dot orange"></i> What to choose</span><span><i class="type-dot green"></i> Where to put it</span><span><i class="type-dot blue"></i> How to perform it</span><span><i class="type-dot gold"></i> In what order</span></div>
     </section>
     <section id="tasks" class="task-section section-pad" aria-labelledby="tasks-title"><div class="wrap">
       <div class="section-heading"><div><h2 id="tasks-title">Task collection</h2><p>From a morning coffee to a shared workbench.</p></div><a class="text-link" href="https://github.com/HHD000EXE/PersonaRobotBench/blob/main/docs/tasks.md" target="_blank" rel="noopener noreferrer">Full task index <span aria-hidden="true">↗</span></a></div>

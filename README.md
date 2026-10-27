@@ -134,6 +134,12 @@ To edit the overview concept, update `tools/build_concept_figure.py` and run
 source; all Before views reuse the same initial-desk symbol. No simulator or
 additional Python packages are needed.
 
+The overview appears immediately after the title and release statistics, before
+the leaderboard. Its Task 1 environment and optional 3D viewer share one panel
+with the concept figure. The illustrated profile contains only dominant hand;
+identical instructions enter one policy that infers a computer-work preference,
+plans and executes. Object labels are embedded in the desk views.
+
 ## Policy leaderboard
 
 The leaderboard follows the latest paper snapshot and displays each evaluated
