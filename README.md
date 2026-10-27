@@ -139,6 +139,9 @@ the leaderboard. Its Task 1 environment and optional 3D viewer share one panel
 with the concept figure. The illustrated profile contains only dominant hand;
 identical instructions enter one policy that infers a computer-work preference,
 plans and executes. Object labels are embedded in the desk views.
+Small robot nodes sit on the Before-to-After transitions and receive their plans
+directly from the shared policy. The two robot icons represent executions of
+the same G1 for the two user profiles.
 
 ## Policy leaderboard
 
