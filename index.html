@@ -60,13 +60,12 @@
         </div>
       <figure class="persona-concept" aria-labelledby="overview-title" aria-describedby="persona-concept-caption">
         <picture class="persona-concept-art">
-          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=execution-v5" width="600" height="1670">
-          <img src="assets/persona-concept.svg?v=execution-v5" width="1200" height="840" loading="lazy" decoding="async" alt="Two users have different dominant hands and give an identical desk-setup instruction. The shared robot policy infers a task-specific plan and connects it directly to a small robot labeled Plan and act on each Before-to-After transition. The same G1 executes both examples, placing the mouse on the dominant-hand side. The initial states are identical; the keyboard and monitor remain fixed.">
+          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=persona-v6" width="600" height="1670">
+          <img src="assets/persona-concept.svg?v=persona-v6" width="1200" height="840" loading="lazy" decoding="async" alt="Same Instruction, Different User Personas: Personalized Robot Actions. Two dominant-hand profiles share the same desk-setup instruction. One shared planner connection reaches a central junction and branches to the execution robots between Before and After. Both examples use the same G1, policy and initial state; the keyboard and monitor remain fixed. Desk views are top-down, with the user at the bottom.">
         </picture>
-        <figcaption id="persona-concept-caption"><strong>Identical instruction, user-dependent execution.</strong> The profiles state only the users’ dominant hands. In the computer-work context, the shared policy infers a plan that prioritizes mouse access on that side and sends it directly to the robot on the “Before → After” transition. Both examples use the same G1 and initial desk layout. Paper-notebook placement illustrates clearing the workspace; the keyboard and monitor stay fixed, and the mug is omitted. Held-out user preferences are reserved for evaluation.</figcaption>
+        <figcaption id="persona-concept-caption"><strong>Same instruction, different user personas.</strong> The shared policy infers a task-specific persona from the profile, instruction and scene, then sends its plan to robot execution. Both examples use the same G1 and initial desk layout; the keyboard and monitor remain fixed. Evaluation uses held-out user preferences. Across tasks, persona preferences can affect <strong>what to choose</strong>, <strong>where to place objects</strong>, <strong>how to execute</strong>, and <strong>the order of actions</strong>.</figcaption>
       </figure>
       </div>
-      <div class="preference-types"><span class="preference-label">Preferences can change</span><span><i class="type-dot orange"></i> What to choose</span><span><i class="type-dot green"></i> Where to put it</span><span><i class="type-dot blue"></i> How to perform it</span><span><i class="type-dot gold"></i> In what order</span></div>
     </section>
     <section id="leaderboard" class="leaderboard-section section-pad wrap" aria-labelledby="leaderboard-title">
       <div class="section-heading"><div><h2 id="leaderboard-title">Policy leaderboard</h2></div></div>
