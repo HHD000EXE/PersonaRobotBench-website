@@ -536,14 +536,20 @@ test('published policy snapshot renders reported scores without settings panels 
 });
 
 
-test('leaderboard appears between the hero and the overview, with navigation in page order', async () => {
+test('the environment and policy concept introduce the benchmark before results, with navigation in page order', async () => {
   const ctx = await boot();
   const sections = [...ctx.$('main').children].filter((node) => node.tagName === 'SECTION');
   assert.ok(sections[0].classList.contains('hero'));
-  assert.equal(sections[1].id, 'leaderboard');
-  assert.equal(sections[2].id, 'overview');
+  assert.equal(sections[1].id, 'overview');
+  assert.equal(sections[2].id, 'leaderboard');
+  assert.ok(ctx.$('#overview .overview-environment #scene-viewport'));
+  assert.ok(ctx.$('#overview .benchmark-story .persona-concept'));
+  assert.equal(ctx.$('.hero .persona-note, .hero .request-note'), null);
   assert.equal(ctx.$$('.eyebrow').length, 0, 'section headings carry no numbered micro-labels');
-  for (const nav of ctx.$$('.desktop-nav, .mobile-nav')) assert.equal(nav.querySelector('a').getAttribute('href'), '#leaderboard');
+  for (const nav of ctx.$$('.desktop-nav, .mobile-nav')) {
+    assert.equal(nav.querySelector('a').getAttribute('href'), '#overview');
+    assert.equal(nav.querySelectorAll('a')[1].getAttribute('href'), '#leaderboard');
+  }
   ctx.window.close();
 });
 
