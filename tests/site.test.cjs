@@ -59,9 +59,16 @@ function input(context, value) {
   context.$('#task-search').dispatchEvent(new context.window.Event('input', { bubbles: true }));
 }
 
+function assertNoGitHubLinks(ctx) {
+  for (const link of ctx.$$('a[href]')) {
+    assert.equal(/(^|\.)github\.com$/i.test(new URL(link.href).hostname), false, link.href);
+  }
+}
+
 test('release catalog boots with six featured cards and correct total', async () => {
   const ctx = await boot();
   assert.equal(ctx.ready, true);
+  assertNoGitHubLinks(ctx);
   assert.equal(tasks.length, 100);
   assert.equal(tasks.reduce((sum, task) => sum + task.personaCount, 0), 217);
   assert.equal(ctx.$$('.task-card').length, 6);
@@ -134,6 +141,7 @@ test('all 100 task cards and dialogs use their own initial scene preview', async
     button.click();
     assert.equal(ctx.$('.dialog-cover img').src, 'https://benchmark.test/' + task.preview.image);
     assert.equal(ctx.$('.dialog-cover img').alt, task.preview.alt);
+    assertNoGitHubLinks(ctx);
     ctx.$('.dialog-close').click();
   }
   assert.equal(imagePaths.size, 100);
@@ -149,7 +157,8 @@ test('task dialog displays every authored persona and closes with Escape', async
   const task = tasks.find((task) => task.id === 32);
   assert.equal(ctx.$$('.dialog-persona').length, task.personaCount);
   for (const persona of task.personas) assert.ok(ctx.$('#task-dialog-content').textContent.includes(persona.description));
-  assert.equal(ctx.$('#task-dialog-content a').href, task.sourceUrl);
+  assert.equal(ctx.$('#task-dialog-content a'), null);
+  assertNoGitHubLinks(ctx);
   ctx.document.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
   assert.equal(ctx.$('#task-dialog').hasAttribute('open'), false);
   assert.equal(ctx.document.body.classList.contains('dialog-open'), false);
@@ -390,33 +399,14 @@ test('mobile menu toggles and navigation closes it', async () => {
   ctx.window.close();
 });
 
-test('copy button writes exact quick-start commands to clipboard', async () => {
-  const ctx = await boot();
-  let copied;
-  Object.defineProperty(ctx.window.navigator, 'clipboard', { value: { writeText: async (text) => { copied = text; } } });
-  ctx.$('#copy-code').click();
-  await new Promise((resolve) => setImmediate(resolve));
-  assert.equal(copied, ctx.$('#quickstart-code').textContent.trim());
-  assert.equal(ctx.$('#copy-status').textContent, 'Commands copied.');
-  ctx.window.close();
-});
-
-test('copy fallback selects commands when clipboard API is unavailable', async () => {
-  const ctx = await boot();
-  ctx.$('#copy-code').click();
-  await new Promise((resolve) => setImmediate(resolve));
-  assert.equal(ctx.window.getSelection().toString(), ctx.$('#quickstart-code').textContent);
-  assert.ok(ctx.$('#copy-status').textContent.includes('Commands selected'));
-  ctx.window.close();
-});
-
-test('fetch failures leave repository links and clear fallback state', async () => {
+test('fetch failures show clear recovery copy without repository links', async () => {
   const ctx = await boot({ fetchError: true });
   assert.equal(ctx.ready, false);
   assert.ok(ctx.$('#task-count').textContent.includes('unavailable'));
-  assert.equal(ctx.$('#task-grid a').href, 'https://github.com/HHD000EXE/PersonaRobotBench-website/blob/website/data/tasks.json');
-  assert.ok(ctx.$('#rollout-pair').textContent.includes('Recorded rollouts are unavailable'));
-  assert.equal(ctx.$('#rollout-pair a').href, 'https://github.com/HHD000EXE/PersonaRobotBench-website/tree/website/assets/rollouts');
+  assert.ok(ctx.$('#rollout-pair').textContent.includes('Task rollouts are temporarily unavailable'));
+  assert.equal(ctx.$('#task-grid a'), null);
+  assert.equal(ctx.$('#rollout-pair a'), null);
+  assertNoGitHubLinks(ctx);
   ctx.window.close();
 });
 
@@ -749,8 +739,8 @@ root=Path.cwd()
 scope=runpy.run_path(str(root/'verify.py'))
 data=json.loads((root/'data/rollout-provenance.json').read_text())
 originals={(x['taskId'],x['persona']):x for x in data['recordings']}
-item=next(x for x in data['renderVariants'] if x['source']=='astra-high-display-gait')
-example=next(x for x in json.loads((root/'data/examples.json').read_text()) if x['id']==item['taskId'])
+example=next(x for x in json.loads((root/'data/examples.json').read_text()) if x.get('recording',{}).get('source')=='astra-high-display-gait')
+item=next(x for x in data['renderVariants'] if x['source']=='astra-high-display-gait' and x['taskId']==example['id'])
 source=data['sources'][item['source']]
 verify=scope['verify_display_gait_receipt']
 verify(item,source,example['recording'],originals,data['sources'])
@@ -808,5 +798,26 @@ test('V2D keeps its workflow visible and supporting material expandable', async 
   assert.equal(disclosure.open, true);
   assert.equal(ctx.$$('#v2d-more video').length, 4);
   assert.equal(ctx.$$('#rollout-pair video').length, 2);
+  ctx.window.close();
+});
+
+
+test('the curated task rollout gallery omits withdrawn demos and private-repository entry points', async () => {
+  const ctx = await boot({ examples: shippedExamples });
+  const withdrawn = new Set([25, 33, 30, 40, 2, 10, 52, 50, 88, 90, 9, 32, 3]);
+  assert.equal(shippedExamples.length, 28);
+  assert.equal(shippedExamples.filter(example => example.recording).length, 27);
+  assert.equal(shippedExamples.reduce((total, example) => total + example.personas.filter(persona => persona.video).length, 0), 57);
+  for (const example of shippedExamples) assert.equal(withdrawn.has(example.id), false);
+  for (const tab of ctx.$$('.rollout-tabs [role="tab"]')) assert.equal(withdrawn.has(Number(tab.dataset.example)), false);
+  assert.equal(ctx.$('#rollouts-title').textContent, 'Task rollout gallery');
+  assert.match(ctx.$('.hero-actions a').textContent, /Explore the task gallery/);
+  assert.equal(ctx.$('.hero-actions a').getAttribute('href'), '#tasks');
+  assert.equal(ctx.$('#evaluation'), null);
+  assert.equal(ctx.$('#resources'), null);
+  assert.equal(ctx.$('#copy-code'), null);
+  assert.equal(ctx.$('a[href="#evaluation"]'), null);
+  assert.equal(ctx.$('a[href="#resources"]'), null);
+  assertNoGitHubLinks(ctx);
   ctx.window.close();
 });

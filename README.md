@@ -5,13 +5,15 @@ The public research website for the **100-task / 217-persona** benchmark.
 - **Live website:** https://hhd000exe.github.io/PersonaRobotBench-website/
 - **Contribute:** fork this repository and open a pull request targeting **`website`**.
 - **Contribution guide:** [CONTRIBUTING.md](CONTRIBUTING.md)
-- **Benchmark:** [HHD000EXE/PersonaRobotBench](https://github.com/HHD000EXE/PersonaRobotBench), currently private. Its code and linked technical guides require repository access.
+The benchmark repositories are currently private. The public site does not link to their code or documentation.
 
 This public repository contains the website, its complete task catalog,
 100 task-specific scene previews, and the policy leaderboard. The homepage
-features 40 recorded task comparisons (84 persona videos), with Task 1 shown first.
-Thirty-nine Astra high videos use display-only walking animation along their
-unchanged recorded base paths; each affected player links the original evidence.
+features 27 curated task rollout groups (57 persona videos), with Task 1 shown first.
+Twenty-five featured Astra high videos use display-only walking animation along
+their unchanged recorded base paths; each affected player links the original evidence.
+Astra inference rollouts and scripted reference demonstrations retain their source labels.
+Unfeatured recordings remain archived; all 100 tasks remain in the task gallery.
 Moving-base demonstrations must show leg stepping; stationary fixed-base
 manipulation remains eligible.
 Controller sources are recorded in the provenance data. At 1×, videos follow
@@ -103,7 +105,7 @@ this source repository small.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Page copy, sections, links and evaluation context |
+| `index.html` | Page copy, public sections and navigation |
 | `styles.css` | Responsive layout and typography |
 | `assets/persona-concept.svg`, `assets/persona-concept-mobile.svg` | User profile → preference inference → robot action concept figure, with a separate phone layout |
 | `tools/build_concept_figure.py` | Rebuild both concept figures from a symmetric grid and the shared Task 1 initial layout |

@@ -84,7 +84,7 @@
         '</span><p>' + escape(persona.description) + '</p></div>').join("") +
       '</div><p class="dialog-note">These are authored, task-local persona cases. The scene image is a reference preview; it does not establish a completed policy rollout.' +
       ([20, 21].includes(task.id) ? " This imported task has documented differences and incomplete validation; consult its package notes." : "") +
-      '</p><a class="button button-dark" href="' + escape(safeUrl(task.sourceUrl) ?? "#tasks") + '" target="_blank" rel="noopener noreferrer">View task package <span aria-hidden="true">↗</span></a></div>';
+      '</p></div>';
     const dialog = $("#task-dialog");
     if (typeof dialog.showModal === "function") dialog.showModal();
     else dialog.setAttribute("open", "");
@@ -354,22 +354,7 @@
         if ($("#task-dialog").open) closeTask();
       }
     });
-    $("#copy-code").addEventListener("click", async () => {
-      const text = $("#quickstart-code").textContent.trim();
-      try {
-        if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-        await navigator.clipboard.writeText(text);
-        $("#copy-status").textContent = "Commands copied.";
-        $("#copy-code").innerHTML = 'Copied <span aria-hidden="true">✓</span>';
-      } catch {
-        const selection = window.getSelection();
-        const range = document.createRange();
-        range.selectNodeContents($("#quickstart-code"));
-        selection.removeAllRanges();
-        selection.addRange(range);
-        $("#copy-status").textContent = "Commands selected. Press Ctrl+C or ⌘C to copy.";
-      }
-    });
+
   }
 
   function renderLeaderboard(data) {
@@ -435,8 +420,8 @@
       return true;
     } catch {
       $("#task-count").textContent = "The interactive catalog is unavailable.";
-      $("#task-grid").innerHTML = '<div class="empty-state"><p>Please serve this site over HTTP, or browse the public task catalog on GitHub.</p><a class="text-link" href="https://github.com/HHD000EXE/PersonaRobotBench-website/blob/website/data/tasks.json" target="_blank" rel="noopener noreferrer">Browse the public task catalog ↗</a></div>';
-      $("#rollout-pair").innerHTML = '<div class="empty-state">Recorded rollouts are unavailable. <a href="https://github.com/HHD000EXE/PersonaRobotBench-website/tree/website/assets/rollouts" target="_blank" rel="noopener noreferrer">View or download the videos on GitHub.</a></div>';
+      $("#task-grid").innerHTML = '<div class="empty-state"><p>The task catalog is temporarily unavailable. Refresh the page to try again.</p></div>';
+      $("#rollout-pair").innerHTML = '<div class="empty-state">Task rollouts are temporarily unavailable. Refresh the page to try again.</div>';
       return false;
     }
   }

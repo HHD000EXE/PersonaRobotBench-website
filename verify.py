@@ -372,6 +372,23 @@ def verify(root: Path) -> dict[str, int | str]:
                     stream.seek(start + length)
             return False
 
+        def verify_media_assets(receipt: dict) -> None:
+            """Check published and archived media against their immutable receipts."""
+            local_reference(receipt["video"], root)
+            local_reference(receipt["poster"], root)
+            video_parts = urlsplit(receipt["video"])
+            video_file = None
+            if not video_parts.scheme and not video_parts.netloc:
+                video_file = root / unquote(video_parts.path).lstrip("/")
+                assert video_file.stat().st_size == receipt["bytes"], "Video size differs"
+                assert digest(video_file) == receipt["sha256"], "Video hash differs"
+            poster_parts = urlsplit(receipt["poster"])
+            if not poster_parts.scheme and not poster_parts.netloc:
+                assert digest(root / unquote(poster_parts.path).lstrip("/")) == receipt["posterSha256"], "Poster hash differs"
+            assert receipt["durationSeconds"] > 0 and receipt["frames"] > 0, "Empty recording"
+            if receipt.get("fastStart") and video_file and video_file.suffix.lower() == ".mp4":
+                assert fast_start(video_file), "Video does not have fast-start metadata"
+
         for example in examples:
             if not example.get("recording"):
                 continue
@@ -391,21 +408,21 @@ def verify(root: Path) -> dict[str, int | str]:
                 assert receipt["source"] == example["recording"].get("source"), "Recording source differs from receipt"
                 assert example["recording"].get("label") == sources[receipt["source"]]["label"], "Recording label differs from its source"
                 assert abs(receipt["durationSeconds"] - persona["videoDurationSeconds"]) < 0.001, "Duration differs"
-                local_reference(receipt["video"], root)
-                local_reference(receipt["poster"], root)
-                video_parts = urlsplit(receipt["video"])
-                video_file = None
-                if not video_parts.scheme and not video_parts.netloc:
-                    video_file = root / unquote(video_parts.path).lstrip("/")
-                    assert video_file.stat().st_size == receipt["bytes"], "Video size differs"
-                    assert digest(video_file) == receipt["sha256"], "Video hash differs"
-                poster_parts = urlsplit(receipt["poster"])
-                if not poster_parts.scheme and not poster_parts.netloc:
-                    assert digest(root / unquote(poster_parts.path).lstrip("/")) == receipt["posterSha256"], "Poster hash differs"
-                assert receipt["durationSeconds"] > 0 and receipt["frames"] > 0, "Empty recording"
-                if receipt.get("fastStart") and video_file and video_file.suffix.lower() == ".mp4":
-                    assert fast_start(video_file), "Video does not have fast-start metadata"
-        assert featured_variants == variant_keys, "Unverified or unfeatured display variant"
+                verify_media_assets(receipt)
+        # Gallery curation does not discard the archived render evidence. Every
+        # display variant still passes its native binding and exact media checks.
+        for media_key in variant_keys - featured_variants:
+            receipt = media_records[media_key]
+            source = sources[receipt["source"]]
+            original = records[(receipt["taskId"], receipt["persona"])]
+            recording = {
+                "source": receipt["source"], "kind": "model",
+                "model": source["model"], "reasoningEffort": source["reasoningEffort"],
+                "recordedTaskId": original["recordedTaskId"],
+                "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+            }
+            verify_display_gait_receipt(receipt, source, recording, records, sources)
+            verify_media_assets(receipt)
     # The opt-in 3D viewer must remain self-contained in the deployment.
     model_dir = root / "assets/models"
     for name in ("assets/models/shared-desk.glb", "assets/models/shared-desk.provenance.json",
