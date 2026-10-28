@@ -2,10 +2,11 @@
 """Build the concept SVGs from one grid and the Task 1 layout coordinates.
 
 No rendering dependencies are required. A/B connectors share the same geometry;
-all before views reuse one SVG symbol. Keyboard and monitor remain fixed.
+all before views reuse one SVG symbol. Only the mouse moves; other objects stay fixed.
 """
 from html import escape
 from pathlib import Path
+from textwrap import wrap
 
 ROOT = Path(__file__).resolve().parents[1]
 INK, MUTED, LINE = "#17243b", "#607087", "#dce3ed"
@@ -14,10 +15,28 @@ PALES = ("#edf3fc", "#edf5f5")
 COLORS = (BLUE, TEAL)
 FIGURE_TITLE = "Same Instruction, Different User Personas: Personalized Robot Actions."
 USER_INSTRUCTION = "“Set up my desk for work.”"
+USER_NAMES = ("Mira", "Noah")
+PROFILE_COMPONENTS = ("Background", "Living context", "Work", "Interests", "Habits")
+USER_PROFILES = (
+    (
+        "Art-history graduate; now a museum researcher.",
+        "Shares a compact apartment with a friend.",
+        "Reviews archives and edits photos on a computer.",
+        "Cycles on weekends and collects film cameras.",
+        "Sketches and jots notes with her left hand.",
+    ),
+    (
+        "Software engineer taking evening design classes.",
+        "Lives with a partner and a rescue dog.",
+        "Alternates between coding and online meetings.",
+        "Bakes bread and repairs old radios.",
+        "Annotates paper plans with his right hand.",
+    ),
+)
 INITIAL = {"mouse": (0, .06), "notebook": (-.34, .09)}
 FINAL = [
-    {"mouse": (-.32, -.12), "notebook": (.35, -.12)},
-    {"mouse": (.32, -.12), "notebook": (-.35, -.12)},
+    {**INITIAL, "mouse": (-.32, -.12)},
+    {**INITIAL, "mouse": (.32, -.12)},
 ]
 
 
@@ -25,6 +44,21 @@ def text(x, y, value, size=16, fill=INK, weight=400, anchor="start", **attrs):
     extra = " ".join(f'{k.replace("_", "-")}="{escape(str(v))}"' for k, v in attrs.items())
     return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" '
             f'font-weight="{weight}" text-anchor="{anchor}" {extra}>{escape(value)}</text>')
+
+
+def profile_components(x, y, user, size=12.5, line_height=16, columns=34,
+                       row_height=50, label_size=9.5, body_offset=17):
+    # All components look alike: the policy must select relevant information.
+    s = f'<g data-field="user-profile" data-user="{"AB"[user]}">'
+    for i, (label, value) in enumerate(zip(PROFILE_COMPONENTS, USER_PROFILES[user])):
+        yy = y + i * row_height
+        lines = wrap(value, width=columns)
+        spans = "".join(f'<tspan x="{x}" dy="{0 if j == 0 else line_height}">{escape(line)}</tspan>'
+                        for j, line in enumerate(lines))
+        s += f'<g data-component="{escape(label.lower().replace(" ", "-"))}">'
+        s += text(x, yy, label.upper(), label_size, MUTED, 600, letter_spacing=.35)
+        s += f'<text x="{x}" y="{yy+body_offset}" font-size="{size}" fill="{INK}">{spans}</text></g>'
+    return s + "</g>"
 
 
 def rect(x, y, w, h, fill="#fff", stroke=LINE, rx=10, **attrs):
@@ -115,16 +149,12 @@ def desk_symbol(name, positions, color):
     s += text(78, 13, "Monitor · fixed", 7.5, MUTED, anchor="middle")
     s += text(78, 110, "Keyboard · fixed", 7, MUTED, anchor="middle")
     mx, my = positions["mouse"]
-    nx, ny = positions["notebook"]
+    s += text(29, 36, "Notebook", 8, MUTED, anchor="middle")
     if name == "desk-before":
         s += path("M86 62 H93", MUTED, .8)
         s += text(96, 65, "Mouse", 8.5, MUTED)
-        s += text(29, 83, "Paper", 8, MUTED, anchor="middle")
-        s += text(29, 93, "notebook", 8, MUTED, anchor="middle")
     else:
         s += text(78+144*mx, 111, "Mouse", 8.5, color, 600, "middle")
-        s += text(78+144*nx, 112, "Paper", 7.5, MUTED, anchor="middle")
-        s += text(78+144*nx, 122, "notebook", 7.5, MUTED, anchor="middle")
     return s + "</g>"
 
 
@@ -146,14 +176,19 @@ def definitions():
 
 
 def document(w, h, body, mobile=False):
-    description = ("Two users provide profiles containing only a dominant-hand attribute and give the identical "
+    description = ("Conceptual workflow: two users provide profiles with personal background, living context, "
+                   "work, interests and habits, and give the identical "
                    "instruction, Set up my desk for work. One personal robot policy reads the profile, instruction "
-                   "and scene, infers a task-relevant persona that prioritizes computer use, plans and executes. "
-                   "The policy connects its inferred plan directly to a small robot on each Before-to-After transition. The robot places the mouse on the user's dominant-hand side. The paper notebook is shown "
-                   "set aside to keep the workspace clear in this illustrative arrangement. "
-                   "Both before views reuse the same Task 1 initial desk state; the keyboard and monitor stay fixed. "
-                   "Object labels are integrated into each desk view. Held-out user preferences go only to evaluation. "
-                   "This is a conceptual mouse-layout illustration, not a measured rollout result.")
+                   "and scene, selects task-relevant cues from the broader profile, infers likely preferences, "
+                   "then plans and acts. The policy connects computer-based work and hand-use habits to this "
+                   "desk instruction; relevance is not marked in the input profile. "
+                   "The profiles do not provide a persona label, target mouse placement or explicit preference list. "
+                   "Hand use during writing and sketching provides an illustrative cue for likely mouse-side preference; "
+                   "it does not guarantee that preference. The inferred plan connects to the robot on each "
+                   "Before-to-After transition. Both before views reuse the same initial desk state; "
+                   "the keyboard, monitor and notebook stay fixed. The task persona setup goes only to evaluation, "
+                   "never to the policy inputs. This conceptual Task 1 mouse-placement example does not depict "
+                   "all task goals or a measured rollout result.")
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
             'role="img" aria-labelledby="concept-title concept-desc">\n'
             f'<title id="concept-title">{escape(FIGURE_TITLE)}</title>\n'
@@ -176,70 +211,75 @@ def execution_robot(cx, cy, color, lane, scale=.38, radius=41, label_inside=Fals
 def desktop():
     s = text(28, 35, "PERSONALIZATION STARTS WITH THE USER", 11, BLUE, 700, letter_spacing=1.6)
     s += text(28, 78, FIGURE_TITLE, 32, weight=600, letter_spacing=-.7)
-    s += text(28, 109, "The shared policy infers a user-specific plan and connects it directly to robot execution.", 16, MUTED)
-    for x, title in [(28, "USER PROFILE + SAME INSTRUCTION"), (312, "SHARED ROBOT POLICY / PLANNER"),
-                     (584, "EXECUTE THE PLAN: BEFORE → AFTER")]:
-        s += text(x, 143, title, 11, MUTED, 700, letter_spacing=.4)
-    s += rect(312, 164, 236, 528, "#f7f9fc", LINE, 12, data_stage="policy")
-    s += text(430, 198, "Infer persona & plan", 18, weight=600, anchor="middle")
-    s += text(430, 223, "Profile + instruction + scene", 12, MUTED, anchor="middle")
-    s += brain(430, 417)
-    s += text(430, 466, "Plans tailored to each user", 13, MUTED, anchor="middle")
-    s += text(430, 668, "Same policy for both users", 13, MUTED, 600, "middle")
-    desk_scale = 15 / 13  # 180px desk views, centered around the execution node.
+    s += text(28, 109, "Full user profile → select task-relevant context → infer preferences → plan and act.", 16, MUTED)
+    for x, title in [(28, "FULL USER PROFILE + SAME REQUEST"), (340, "SHARED ROBOT POLICY / PLANNER"),
+                     (624, "EXECUTE THE PLAN: BEFORE → AFTER")]:
+        s += text(x, 143, title, 11, MUTED, 700, letter_spacing=.25)
+    s += rect(340, 164, 248, 796, "#f7f9fc", LINE, 12, data_stage="policy")
+    s += text(464, 198, "Task-conditioned inference", 16, weight=600, anchor="middle")
+    s += text(464, 223, "Full profile + instruction + scene", 12, MUTED, anchor="middle")
+    s += brain(464, 520)
+    s += text(464, 569, "Which context matters here?", 13, MUTED, anchor="middle")
+    s += text(464, 599, "Relevance depends on the task", 11.5, MUTED, anchor="middle")
+    s += text(464, 936, "Same policy for both users", 13, MUTED, 600, "middle")
+    desk_scale = 15 / 13  # 180px desk views; one shared initial-desk symbol.
 
-    for i, y in enumerate((164, 442)):
+    for i, y in enumerate((164, 576)):
         color, pale, letter = COLORS[i], PALES[i], "AB"[i]
-        cy = y + 125
+        cy = y + 192
         hand = ("left", "right")[i]
-        s += rect(28, y, 248, 250, "#fff", color, 12, stroke_opacity=.28)
-        s += path(f"M29 {y+18} V{y+232}", color, 3)
-        s += avatar(65, y+37, color, pale, .82)
-        s += text(96, y+41, "USER " + letter, 16, color, 700)
-        s += text(48, y+79, "DOMINANT HAND", 11, MUTED, 600, letter_spacing=.45)
-        s += text(48, y+119, hand.capitalize(), 30, color, 600)
-        s += rect(48, y+151, 208, 22, "#e9eef6", "none", 4)
-        s += text(152, y+166, "IDENTICAL INSTRUCTION", 10.5, INK, 700, "middle", letter_spacing=.3)
-        s += text(152, y+216, USER_INSTRUCTION, 16, weight=500, anchor="middle", data_field="instruction")
-        s += rect(328, cy-49, 204, 98, pale, "none", 9)
-        s += text(343, cy-24, f"{letter} · INFERRED TASK PERSONA", 9, color, 700)
-        s += text(343, cy+1, "Computer work first", 13, MUTED)
-        s += text(343, cy+29, f"Mouse → {hand} side", 15, color, 600)
-        s += rect(584, y, 588, 250, pale, "none", 12)
-        s += text(690, y+36, "Before", 14, MUTED, 600, "middle")
-        s += text(1066, y+36, "After · User " + letter, 14, color, 600, "middle")
-        s += use_desk("desk-before", 600, cy - 64*desk_scale, desk_scale)
+        s += rect(28, y, 276, 384, "#fff", color, 12, stroke_opacity=.28)
+        s += path(f"M29 {y+18} V{y+366}", color, 3)
+        s += avatar(65, y+36, color, pale, .82)
+        s += text(96, y+40, USER_NAMES[i], 16, color, 700)
+        s += profile_components(48, y+74, i)
+        s += rect(48, y+326, 236, 22, "#e9eef6", "none", 4)
+        s += text(166, y+341, "IDENTICAL INSTRUCTION", 10.5, INK, 700, "middle", letter_spacing=.3)
+        s += text(166, y+371, USER_INSTRUCTION, 16, weight=500, anchor="middle", data_field="instruction")
+
+        s += rect(356, cy-88, 216, 176, pale, "none", 9)
+        s += text(372, cy-63, USER_NAMES[i].upper() + " · SELECT RELEVANT CUES", 9, color, 700)
+        s += text(372, cy-39, "Computer work + hand-use habits", 11.5, INK)
+        s += arrow(464, cy-25, 464, cy-10, color, "arrow"+letter,
+                   data_connector="context-preference", data_lane=letter)
+        s += text(372, cy+12, "INFER TASK PREFERENCE", 9, color, 700)
+        s += text(372, cy+36, f"Likely {hand}-hand mouse use", 12, MUTED)
+        s += text(372, cy+66, f"Plan: mouse → {hand} side", 15, color, 600)
+
+        s += rect(624, y, 548, 384, pale, "none", 12)
+        s += text(730, y+44, "Before", 14, MUTED, 600, "middle")
+        s += text(1066, y+44, "After · " + USER_NAMES[i], 14, color, 600, "middle")
+        s += use_desk("desk-before", 640, cy - 64*desk_scale, desk_scale)
         s += use_desk("desk-after-" + str(i), 976, cy - 64*desk_scale, desk_scale)
-        s += arrow(282, cy, 306, cy, color, "arrow"+letter,
+        s += arrow(310, cy, 334, cy, color, "arrow"+letter,
                    data_connector="profile-policy", data_lane=letter)
-        s += execution_robot(878, cy, color, letter, .28, 41, label_inside=True)
-        s += arrow(788, cy, 829, cy, MUTED, "arrowGray",
+        s += execution_robot(898, cy, color, letter, .28, 41, label_inside=True)
+        s += arrow(828, cy, 849, cy, MUTED, "arrowGray",
                    data_connector="before-execution", data_lane=letter)
-        s += arrow(927, cy, 968, cy, color, "arrow"+letter,
+        s += arrow(947, cy, 968, cy, color, "arrow"+letter,
                    data_connector="execution-after", data_lane=letter)
-        s += text(600, y+18, "Top-down · user at bottom", 9.5, MUTED)
-        s += text(1066, y+242, f"Mouse on the dominant {hand} side", 11, color, 500, "middle")
-        s += f'<circle cx="312" cy="{cy}" r="3.5" fill="{color}"/>'
-    # A single shared planner output reaches the midpoint, then splits by user.
-    s += path("M554 428 H716 H878", MUTED, 2, marker_mid="url(#arrowGray)", data_connector="planner-trunk")
-    s += '<circle cx="548" cy="428" r="3.5" fill="#607087"/>'
-    s += '<circle cx="878" cy="428" r="3.5" fill="#607087"/>'
-    for i, target_y in enumerate((338, 518)):
-        s += arrow(878, 428, 878, target_y, COLORS[i], "arrow"+"AB"[i],
+        s += text(640, y+25, "Top-down · user at bottom", 9.5, MUTED)
+        s += text(1066, y+362, f"Mouse placed on the {hand} side", 11, color, 500, "middle")
+        s += f'<circle cx="340" cy="{cy}" r="3.5" fill="{color}"/>'
+    s += path("M594 562 H746 H898", MUTED, 2, marker_mid="url(#arrowGray)", data_connector="planner-trunk")
+    s += '<circle cx="588" cy="562" r="3.5" fill="#607087"/>'
+    s += '<circle cx="898" cy="562" r="3.5" fill="#607087"/>'
+    for i, target_y in enumerate((405, 719)):
+        s += arrow(898, 562, 898, target_y, COLORS[i], "arrow"+"AB"[i],
                    data_connector="planner-execution", data_lane="AB"[i])
-    s += text(878, 713, "Same robot and policy · two user-conditioned executions", 12, MUTED, anchor="middle")
+    s += text(898, 981, "Same robot and policy · two user-conditioned executions", 12, MUTED, anchor="middle")
     for x, title, subtitle in [
-        (28, "Held-out user preferences", "Used only for evaluation"),
+        (28, "Task persona setup", "Hidden from policy · evaluation only"),
         (440, "Evaluate personalization", "Does the behavior fit this user?"),
-        (852, "Robot-side evidence", "Inferred persona + execution"),
+        (852, "Robot-side evidence", "Inferred preference + execution"),
     ]:
-        s += rect(x, 724, 320, 68, "#f7f9fc", LINE, 10)
-        s += text(x+160, 751, title, 15, weight=600, anchor="middle")
-        s += text(x+160, 774, subtitle, 12, MUTED, anchor="middle")
-    s += arrow(356, 758, 432, 758, MUTED, "arrowGray", stroke_dasharray="4 4")
-    s += arrow(844, 758, 768, 758, MUTED, "arrowGray", stroke_dasharray="4 4")
-    s += text(28, 825, "Conceptual Task 1 mouse-layout example · Keyboard and monitor remain fixed.", 11, MUTED)
-    return document(1200, 840, s)
+        s += rect(x, 992, 320, 68, "#f7f9fc", LINE, 10)
+        s += text(x+160, 1019, title, 15, weight=600, anchor="middle")
+        s += text(x+160, 1042, subtitle, 12, MUTED, anchor="middle")
+    s += arrow(356, 1026, 432, 1026, MUTED, "arrowGray", stroke_dasharray="4 4")
+    s += arrow(844, 1026, 768, 1026, MUTED, "arrowGray", stroke_dasharray="4 4")
+    s += text(28, 1093, "Conceptual mouse-placement example · Other objects stay fixed · Full Task 1 has additional goals.", 11, MUTED)
+    return document(1200, 1108, s)
 
 
 def mobile():
@@ -247,71 +287,77 @@ def mobile():
     s += text(28, 64, "Same Instruction,", 30, weight=600, letter_spacing=-.5)
     s += text(28, 100, "Different User Personas:", 30, weight=600, letter_spacing=-.5)
     s += text(28, 136, "Personalized Robot Actions.", 30, weight=600, letter_spacing=-.5)
-    s += rect(28, 156, 544, 310, "#fff", LINE, 12, data_stage="user-inputs")
+    s += rect(28, 156, 544, 648, "#fff", LINE, 12, data_stage="user-inputs")
     for i, x in enumerate((44, 326)):
-        color, pale, letter = COLORS[i], PALES[i], "AB"[i]
-        cx = x+115
-        hand = ("left", "right")[i]
-        s += rect(x, 172, 230, 146, pale, "none", 10)
+        color, pale = COLORS[i], PALES[i]
+        s += rect(x, 172, 230, 486, pale, "none", 10)
         s += avatar(x+33, 208, color, pale, .75)
-        s += text(x+66, 216, "USER " + letter, 23, color, 700)
-        s += text(x+16, 252, "DOMINANT HAND", 18, MUTED, 600)
-        s += text(x+16, 296, hand.capitalize(), 32, color, 600)
-        s += arrow(cx, 474, cx, 506, color, "arrow"+letter,
-                   data_connector="profile-policy", data_lane=letter)
-    s += rect(44, 333, 512, 117, "#f7f9fc", "none", 9)
-    s += text(300, 368, "IDENTICAL USER INSTRUCTION", 20, INK, 700, "middle")
-    s += text(300, 414, USER_INSTRUCTION, 26, INK, 500, "middle", data_field="instruction")
-    s += rect(28, 514, 544, 242, "#f7f9fc", LINE, 12, data_stage="policy")
-    s += text(300, 552, "One robot policy: infer and plan", 27, weight=600, anchor="middle")
-    s += text(300, 584, "Read profile + instruction + scene", 20, MUTED, anchor="middle")
+        s += text(x+66, 216, USER_NAMES[i], 23, color, 700)
+        s += profile_components(x+16, 250, i, size=16, line_height=20, columns=25,
+                                row_height=80, label_size=12, body_offset=22)
+    s += '<g transform="translate(0 40)">'
+    s += rect(44, 634, 512, 117, "#f7f9fc", "none", 9)
+    s += text(300, 669, "IDENTICAL USER INSTRUCTION", 20, INK, 700, "middle")
+    s += text(300, 715, USER_INSTRUCTION, 26, INK, 500, "middle", data_field="instruction")
+    for i, cx in enumerate((159, 441)):
+        s += arrow(cx, 772, cx, 804, COLORS[i], "arrow"+"AB"[i],
+                   data_connector="profile-policy", data_lane="AB"[i])
+    s += rect(28, 812, 544, 320, "#f7f9fc", LINE, 12, data_stage="policy")
+    s += text(300, 850, "Select context, infer and plan", 27, weight=600, anchor="middle")
+    s += text(300, 882, "Full profile + instruction + scene", 20, MUTED, anchor="middle")
     for i, x in enumerate((44, 326)):
         color, pale, letter = COLORS[i], PALES[i], "AB"[i]
         hand = ("left", "right")[i]
-        s += rect(x, 605, 230, 127, pale, "none", 9)
-        s += text(x+16, 635, letter + " · INFERRED PERSONA", 15.5, color, 700)
-        s += text(x+16, 672, "Computer work first", 20, MUTED)
-        s += text(x+16, 710, f"Mouse → {hand}", 26, color, 600)
+        s += rect(x, 904, 230, 204, pale, "none", 9)
+        s += text(x+16, 932, "SELECT RELEVANT CUES", 13.5, color, 700)
+        s += text(x+16, 960, "Computer work +", 17, INK)
+        s += text(x+16, 983, "hand-use habits", 17, INK)
+        s += arrow(x+115, 995, x+115, 1010, color, "arrow"+letter,
+                   data_connector="context-preference", data_lane=letter)
+        s += text(x+16, 1034, "INFER TASK PREFERENCE", 13, color, 700)
+        s += text(x+16, 1065, f"Likely {hand}-side use", 18, MUTED)
+        s += text(x+16, 1094, f"Plan: mouse → {hand}", 20, color, 600)
     for i, x in enumerate((28, 310)):
         color, pale, letter = COLORS[i], PALES[i], "AB"[i]
-        cx, hub_y = x+131, 1140
-        s += rect(x, 804, 262, 676, pale, "none", 12)
-        s += text(x+20, 842, "USER " + letter, 25, color, 700)
-        s += text(cx, 877, "Before", 24, MUTED, 600, "middle")
-        s += use_desk("desk-before", x+27, 892, 4/3)
+        cx, hub_y = x+131, 1516
+        s += rect(x, 1180, 262, 676, pale, "none", 12)
+        s += text(x+20, 1218, USER_NAMES[i], 25, color, 700)
+        s += text(cx, 1253, "Before", 24, MUTED, 600, "middle")
+        s += use_desk("desk-before", x+27, 1268, 4/3)
         s += execution_robot(cx, hub_y, color, letter, .35, 36)
-        s += arrow(cx, 1072, cx, 1096, MUTED, "arrowGray",
+        s += arrow(cx, 1448, cx, 1472, MUTED, "arrowGray",
                    data_connector="before-execution", data_lane=letter)
-        s += arrow(cx, 1184, cx, 1204, color, "arrow"+letter,
+        s += arrow(cx, 1560, cx, 1580, color, "arrow"+letter,
                    data_connector="execution-after", data_lane=letter)
         label_x = cx + (-43 if i else 43)
         label_anchor = "end" if i else "start"
-        s += text(label_x, 1118, "Plan & act", 18, INK, 600, label_anchor)
-        s += text(cx, 1233, "After", 24, color, 600, "middle")
-        s += use_desk("desk-after-"+str(i), x+27, 1250, 4/3)
-        s += text(cx, 790, "Top-down · user at bottom", 13, MUTED, 500, "middle")
-    s += path("M300 764 V952 V1140", MUTED, 2, marker_mid="url(#arrowGray)", data_connector="planner-trunk")
-    s += '<circle cx="300" cy="756" r="3.5" fill="#607087"/>'
-    s += '<circle cx="300" cy="1140" r="3.5" fill="#607087"/>'
-    s += arrow(300, 1140, 203, 1140, BLUE, "arrowA", data_connector="planner-execution", data_lane="A")
-    s += arrow(300, 1140, 397, 1140, TEAL, "arrowB", data_connector="planner-execution", data_lane="B")
-    s += text(300, 1513, "Same Unitree G1 and policy for both users", 20, MUTED, anchor="middle")
-    s += rect(28, 1542, 262, 90, "#f7f9fc", LINE, 10)
-    s += rect(340, 1542, 232, 90, "#f7f9fc", LINE, 10)
-    s += text(48, 1573, "Held-out user", 23, weight=600)
-    s += text(48, 1605, "preferences", 23, weight=600)
-    s += arrow(298, 1587, 332, 1587, MUTED, "arrowGray", stroke_dasharray="4 4")
-    s += text(456, 1574, "Evaluate", 27, weight=600, anchor="middle")
-    s += text(456, 1606, "Persona + execution", 18, MUTED, anchor="middle")
-    s += text(28, 1659, "Conceptual Task 1 desk-layout example.", 15, MUTED)
-    return document(600, 1670, s, mobile=True)
+        s += text(label_x, 1494, "Plan & act", 18, INK, 600, label_anchor)
+        s += text(cx, 1609, "After", 24, color, 600, "middle")
+        s += use_desk("desk-after-"+str(i), x+27, 1626, 4/3)
+        s += text(cx, 1166, "Top-down · user at bottom", 13, MUTED, 500, "middle")
+    s += path("M300 1140 V1328 V1516", MUTED, 2, marker_mid="url(#arrowGray)", data_connector="planner-trunk")
+    s += '<circle cx="300" cy="1132" r="3.5" fill="#607087"/>'
+    s += '<circle cx="300" cy="1516" r="3.5" fill="#607087"/>'
+    s += arrow(300, 1516, 203, 1516, BLUE, "arrowA", data_connector="planner-execution", data_lane="A")
+    s += arrow(300, 1516, 397, 1516, TEAL, "arrowB", data_connector="planner-execution", data_lane="B")
+    s += text(300, 1889, "Same Unitree G1 and policy for both users", 20, MUTED, anchor="middle")
+    s += rect(28, 1918, 262, 90, "#f7f9fc", LINE, 10)
+    s += rect(340, 1918, 232, 90, "#f7f9fc", LINE, 10)
+    s += text(48, 1949, "Task persona setup", 21, weight=600)
+    s += text(48, 1981, "Hidden from policy", 18, MUTED)
+    s += arrow(298, 1963, 332, 1963, MUTED, "arrowGray", stroke_dasharray="4 4")
+    s += text(456, 1950, "Evaluate", 27, weight=600, anchor="middle")
+    s += text(456, 1982, "Preference + execution", 18, MUTED, anchor="middle")
+    s += text(28, 2035, "Conceptual mouse example; full Task 1 has more goals.", 15, MUTED)
+    s += '</g>'
+    return document(600, 2088, s)
 
 
 def main():
     assets = ROOT / "assets"
     (assets / "persona-concept.svg").write_text(desktop(), encoding="utf-8")
     (assets / "persona-concept-mobile.svg").write_text(mobile(), encoding="utf-8")
-    print("Built desktop 1200×840 and phone 600×1670 concept SVGs.")
+    print("Built desktop 1200×1108 and phone 600×2088 concept SVGs.")
 
 
 if __name__ == "__main__":

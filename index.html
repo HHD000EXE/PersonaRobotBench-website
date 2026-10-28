@@ -54,17 +54,17 @@
             <p>Both users give exactly the same instruction. The policy uses the profile and the desk environment to work out what this task means for each person.</p>
             <dl class="context-comparison">
               <div><dt>Held the same</dt><dd>Instruction, starting scene, robot and policy</dd></div>
-              <div><dt>Varies by user</dt><dd>Profile: dominant hand</dd></div>
-              <div><dt>Inferred by the policy</dt><dd>For computer work, prioritize mouse access on the dominant-hand side.</dd></div>
+              <div><dt>Varies by user</dt><dd>Personal background, living context, work, interests and habits</dd></div>
+              <div><dt>Inferred by the policy</dt><dd>Which profile cues matter for this instruction, the likely preference, and the plan</dd></div>
             </dl>
           </div>
         </div>
       <figure class="persona-concept" aria-labelledby="overview-title" aria-describedby="persona-concept-caption">
         <picture class="persona-concept-art">
-          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=persona-v6" width="600" height="1670">
-          <img src="assets/persona-concept.svg?v=persona-v6" width="1200" height="840" loading="lazy" decoding="async" alt="Same Instruction, Different User Personas: Personalized Robot Actions. Two dominant-hand profiles share the same desk-setup instruction. One shared planner connection reaches a central junction and branches to the execution robots between Before and After. Both examples use the same G1, policy and initial state; the keyboard and monitor remain fixed. Desk views are top-down, with the user at the bottom.">
+          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=profile-components-20261028" width="600" height="2088">
+          <img src="assets/persona-concept.svg?v=profile-components-20261028" width="1200" height="1108" loading="lazy" decoding="async" alt="Same Instruction, Different User Personas: Personalized Robot Actions. Conceptual workflow: Mira and Noah each provide a profile containing background, living context, work, interests and habits. Given the same instruction and scene, one policy selects task-relevant computer-work and hand-use cues, infers likely mouse-side preferences, and plans different actions. Relevant components are not highlighted in the input. The task persona setup is reserved for evaluation in this illustration. Only the mouse moves; this is not all Task 1 goals.">
         </picture>
-        <figcaption id="persona-concept-caption"><strong>Same instruction, different user personas.</strong> The shared policy infers a task-specific persona from the profile, instruction and scene, then sends its plan to robot execution. Both examples use the same G1 and initial desk layout; the keyboard and monitor remain fixed. Evaluation uses held-out user preferences. Across tasks, persona preferences can affect <strong>what to choose</strong>, <strong>where to place objects</strong>, <strong>how to execute</strong>, and <strong>the order of actions</strong>.</figcaption>
+        <figcaption id="persona-concept-caption"><strong>Same instruction, different user personas.</strong> A profile combines personal background, living context, work, interests and habits. Given the instruction and scene, the policy must identify which information matters—for this desk example, computer work and hand-use habits—then infer a task-relevant preference and plan its actions. The useful clues are mixed with other personal context; neither persona labels nor target placements are supplied. In this conceptual workflow, the task’s persona setup is reserved for evaluation. Hand-use habits suggest a likely mouse preference rather than guaranteeing it. Only the mouse moves here; full Task 1 has additional goals. Across tasks, preferences can affect <strong>what to choose</strong>, <strong>where to place objects</strong>, <strong>how to execute</strong>, and <strong>the order of actions</strong>.</figcaption>
       </figure>
       </div>
     </section>

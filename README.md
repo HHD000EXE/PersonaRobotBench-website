@@ -144,9 +144,18 @@ additional Python packages are needed.
 
 The overview appears immediately after the title and release statistics, before
 the leaderboard. Its Task 1 environment and optional 3D viewer share one panel
-with the concept figure. The illustrated profile contains only dominant hand;
-identical instructions enter one policy that infers a computer-work preference,
-plans and executes. Object labels are embedded in the desk views.
+with the concept figure. Each user profile has five equally styled components:
+personal background, living context, work, interests and habits. Useful cues are
+mixed with other personal context; the inputs contain no persona labels or
+explicit target placements. Given the shared instruction and scene, the policy
+selects task-relevant information (here, computer work and hand-use habits), then
+infers likely preferences, plans and acts. In this illustration, the task persona
+setup is reserved for evaluation. This conceptual example illustrates mouse
+placement only; the monitor, keyboard and notebook stay fixed, and full Task 1
+has additional goals. The profiles are illustrative website copy, not a change
+to benchmark inputs or evaluation. The original figure title is preserved:
+“Same Instruction, Different User Personas: Personalized Robot Actions.”
+Object labels are embedded in the desk views.
 Small robot nodes sit on the Before-to-After transitions. A shared planner
 connection reaches a central junction and branches to the two examples. Both
 robot icons represent executions of the same G1. Instructions are single-line;
