@@ -821,6 +821,174 @@
     }
   },
   {
+    "id": 25,
+    "folder": "document_camera_setup",
+    "title": "Document Camera Work Surface",
+    "instruction": "Set up the document camera.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Use the overhead view with the page centered on the viewing mat; leave the specimen on its source tray.",
+        "preferences": "Use the overhead view with the page centered on the viewing mat; leave the specimen on its source tray.",
+        "video": "assets/rollouts/task025-A-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task025-A-background-fixed.webp",
+        "videoDurationSeconds": 36.1
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Use the oblique camera view with the specimen centered on the mat; leave the page on its source tray.",
+        "preferences": "Use the oblique camera view with the specimen centered on the mat; leave the page on its source tray.",
+        "video": "assets/rollouts/task025-B-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task025-B-background-fixed.webp",
+        "videoDurationSeconds": 39.5
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/document_camera_setup/config/personas.json",
+    "shortTitle": "Document camera",
+    "tabLabel": "Document camera",
+    "contrast": "Overhead page or oblique specimen?",
+    "dimension": "Operating configuration",
+    "poster": "assets/task-scenes/task-025.webp",
+    "posterAlt": "Task 025 — Document Camera Work Surface: static initial scene with the task’s native worksite.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-background-repair",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 25,
+      "playback": "Recorded task trajectory with display-only walking animation and repaired decorative background; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 30,
+    "folder": "socket_set_preparation",
+    "title": "Personalized Socket Set Preparation",
+    "instruction": "Prepare the socket tools.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Put the blue-banded 12, 14 and 16 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the orange-banded 22, 24 and 26 mm sockets at their original positions; my small fasteners use the smaller set.",
+        "preferences": "Put the blue-banded 12, 14 and 16 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the orange-banded 22, 24 and 26 mm sockets at their original positions; my small fasteners use the smaller set.",
+        "video": "assets/rollouts/task030-A-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task030-A-background-fixed.webp",
+        "videoDurationSeconds": 79.7
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Put the orange-banded 22, 24 and 26 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the blue-banded 12, 14 and 16 mm sockets at their original positions; my large fasteners use the larger set.",
+        "preferences": "Put the orange-banded 22, 24 and 26 mm sockets upright in the pickup tray and lay the ratchet flat behind them. Leave the blue-banded 12, 14 and 16 mm sockets at their original positions; my large fasteners use the larger set.",
+        "video": "assets/rollouts/task030-B-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task030-B-background-fixed.webp",
+        "videoDurationSeconds": 78.4
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/socket_set_preparation/config/personas.json",
+    "shortTitle": "Socket set",
+    "tabLabel": "Socket set",
+    "contrast": "Small blue sockets or large orange sockets?",
+    "dimension": "Object choice",
+    "poster": "assets/task-scenes/task-030.webp",
+    "posterAlt": "Task 030 — Personalized Socket Set Preparation: static initial scene with the task’s native worksite.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-background-repair",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 30,
+      "playback": "Recorded task trajectory with display-only walking animation and repaired decorative background; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 40,
+    "folder": "fridge_organization",
+    "title": "Personalized Fridge Organization",
+    "instruction": "Put away my groceries.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Food & dining",
+    "tags": [
+      "Food & dining"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "Store fruits on the upper shelf and drinks on the lower shelf; keep my frequently used apple and water near the front.",
+        "preferences": "Store fruits on the upper shelf and drinks on the lower shelf; keep my frequently used apple and water near the front.",
+        "video": "assets/rollouts/task040-A-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task040-A-background-fixed.webp",
+        "videoDurationSeconds": 138.966667
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "Store fruits on the lower shelf and drinks on the upper shelf; group both snacks together at the front.",
+        "preferences": "Store fruits on the lower shelf and drinks on the upper shelf; group both snacks together at the front.",
+        "video": "assets/rollouts/task040-B-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task040-B-background-fixed.webp",
+        "videoDurationSeconds": 143.266667
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/fridge_organization/config/personas.json",
+    "shortTitle": "Fridge storage",
+    "tabLabel": "Fridge storage",
+    "contrast": "Fruit above drinks, or drinks above fruit?",
+    "dimension": "Spatial arrangement",
+    "poster": "assets/task-scenes/task-040.webp",
+    "posterAlt": "Task 040 — Personalized Fridge Organization: static initial scene with furnished room background.",
+    "video": null,
+    "imageKind": "static_initial_scene",
+    "videoLabel": "Astra high rollout · complete recorded episode",
+    "recording": {
+      "source": "astra-high-background-repair",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 40,
+      "playback": "Recorded task trajectory with display-only walking animation and repaired decorative background; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
     "id": 85,
     "folder": "auxiliary_table",
     "title": "Personalized Woodworking Auxiliary Table Height",
@@ -1558,6 +1726,68 @@
       "reasoningEffort": "high",
       "recordedTaskId": 14,
       "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+      "provenance": "data/rollout-provenance.json"
+    }
+  },
+  {
+    "id": 33,
+    "folder": "drill_press_setup",
+    "title": "Personalized Drill Press Setup",
+    "instruction": "Prepare the drill press.",
+    "personaCount": 2,
+    "personaIds": [
+      "A",
+      "B"
+    ],
+    "category": "Workspace",
+    "tags": [
+      "Workspace"
+    ],
+    "personas": [
+      {
+        "id": "A",
+        "name": "User A",
+        "description": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "preferences": "For my flat-stock job, place the blue 40 mm block flat at the centre of the drill table, raise the table to 1.01 m, and leave the orange tall block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "video": "assets/rollouts/task033-A-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task033-A-background-fixed.webp",
+        "videoDurationSeconds": 91.933333
+      },
+      {
+        "id": "B",
+        "name": "User B",
+        "description": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "preferences": "For my tall-stock job, stand the orange 190 mm block upright at the centre of the drill table, lower the table to 0.86 m, and leave the blue flat block on the source counter. Keep the spindle off and leave clearance below its tip; do not drill.",
+        "video": "assets/rollouts/task033-B-background-fixed.mp4",
+        "videoPoster": "assets/rollouts/task033-B-background-fixed.webp",
+        "videoDurationSeconds": 65.5
+      }
+    ],
+    "sourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/README.md",
+    "personaSourceUrl": "https://github.com/HHD000EXE/PersonaRobotBench/blob/main/tasks/drill_press_setup/config/personas.json",
+    "preview": {
+      "image": "assets/task-scenes/task-033.webp",
+      "alt": "Task 033 — Personalized Drill Press Setup: static initial scene with the task’s native worksite.",
+      "width": 960,
+      "height": 600,
+      "kind": "static_initial_scene",
+      "provenance": "data/task-preview-provenance.json"
+    },
+    "shortTitle": "Drill Press Setup",
+    "tabLabel": "Drill Press Setup",
+    "poster": "assets/task-scenes/task-033.webp",
+    "posterAlt": "Task 033 — Personalized Drill Press Setup: static initial scene with the task’s native worksite.",
+    "imageKind": "static_initial_scene",
+    "video": null,
+    "videoLabel": "Astra high · complete recorded episode",
+    "recording": {
+      "source": "astra-high-background-repair",
+      "label": "Astra high",
+      "kind": "model",
+      "model": "gpt-6-astra",
+      "reasoningEffort": "high",
+      "recordedTaskId": 33,
+      "playback": "Recorded task trajectory with display-only walking animation and repaired decorative background; physics not rerun.",
       "provenance": "data/rollout-provenance.json"
     }
   },

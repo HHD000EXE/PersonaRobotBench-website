@@ -274,8 +274,10 @@ test('shipped examples preserve every authored slot and available recording with
       : available.length === 2 ? 'Paired videos available' : 'All ' + available.length + ' videos available';
     assert.ok(ctx.$('.video-status').textContent.includes(status));
     const recordingNote = ctx.$('#rollout-recording-note').textContent;
-    if (example.recording.source === 'astra-high-display-gait') {
-      const playback = 'Recorded task trajectory with display-only walking animation; physics not rerun.';
+    if (['astra-high-display-gait', 'astra-high-background-repair'].includes(example.recording.source)) {
+      const playback = example.recording.source === 'astra-high-background-repair'
+        ? 'Recorded task trajectory with display-only walking animation and repaired decorative background; physics not rerun.'
+        : 'Recorded task trajectory with display-only walking animation; physics not rerun.';
       assert.equal(example.recording.playback, playback);
       assert.equal(recordingNote, playback + ' Recording details');
     } else {
@@ -804,10 +806,16 @@ test('V2D keeps its workflow visible and supporting material expandable', async 
 
 test('the curated task rollout gallery omits withdrawn demos and private-repository entry points', async () => {
   const ctx = await boot({ examples: shippedExamples });
-  const withdrawn = new Set([25, 33, 30, 40, 2, 10, 52, 50, 88, 90, 9, 32, 3]);
-  assert.equal(shippedExamples.length, 28);
-  assert.equal(shippedExamples.filter(example => example.recording).length, 27);
-  assert.equal(shippedExamples.reduce((total, example) => total + example.personas.filter(persona => persona.video).length, 0), 57);
+  const withdrawn = new Set([2, 10, 52, 50, 88, 90, 9, 32, 3]);
+  assert.equal(shippedExamples.length, 32);
+  assert.equal(shippedExamples.filter(example => example.recording).length, 31);
+  assert.equal(shippedExamples.reduce((total, example) => total + example.personas.filter(persona => persona.video).length, 0), 65);
+  for (const taskId of [25, 30, 33, 40]) {
+    const example = shippedExamples.find(example => example.id === taskId);
+    assert.equal(example.recording.source, 'astra-high-background-repair');
+    assert.equal(example.personas.length, 2);
+    for (const persona of example.personas) assert.match(persona.video, /-background-fixed\.mp4$/);
+  }
   for (const example of shippedExamples) assert.equal(withdrawn.has(example.id), false);
   for (const tab of ctx.$$('.rollout-tabs [role="tab"]')) assert.equal(withdrawn.has(Number(tab.dataset.example)), false);
   assert.equal(ctx.$('#rollouts-title').textContent, 'Task rollout gallery');
@@ -820,4 +828,60 @@ test('the curated task rollout gallery omits withdrawn demos and private-reposit
   assert.equal(ctx.$('a[href="#resources"]'), null);
   assertNoGitHubLinks(ctx);
   ctx.window.close();
+});
+
+test('repaired backgrounds retain archived gait evidence and reject unreviewed scene edits', () => {
+  const program = String.raw`
+import copy,json,runpy
+from pathlib import Path
+root=Path.cwd()
+scope=runpy.run_path(str(root/'verify.py'))
+data=json.loads((root/'data/rollout-provenance.json').read_text())
+originals={(x['taskId'],x['persona']):x for x in data['recordings']}
+variants={(x['taskId'],x['persona'],x['video']):x for x in data['renderVariants']}
+examples={x['id']:x for x in json.loads((root/'data/examples.json').read_text())}
+repairs=[x for x in data['renderVariants'] if x['source']=='astra-high-background-repair']
+assert len(repairs)==8
+verify=scope['verify_background_repair_receipt']
+for item in repairs:
+    verify(item,data['sources'][item['source']],examples[item['taskId']]['recording'],originals,data['sources'],variants)
+checks=0
+def refused(task,mutator):
+    global checks
+    item=next(x for x in repairs if x['taskId']==task and x['persona']=='A')
+    row,source,recording,parents,sources,renders=copy.deepcopy((item,data['sources'][item['source']],examples[task]['recording'],originals,data['sources'],variants))
+    mutator(row,source,recording,parents,sources,renders)
+    try:verify(row,source,recording,parents,sources,renders)
+    except (AssertionError,KeyError,TypeError,ValueError):
+        checks+=1
+        return
+    raise AssertionError('Tampered background repair was accepted')
+refused(25,lambda row,*_:row.update(backgroundOnlyRepair=False))
+refused(25,lambda row,*_:row.update(upstreamA2GaitReusedUnchanged=False))
+refused(25,lambda row,*_:row.update(nativeEvaluationAppliesToOriginalRecording=False))
+refused(25,lambda row,*_:row['priorWalkingRender'].update(recordSha256='0'*64))
+refused(25,lambda row,*_:row.update(gaitCacheSha256='0'*64))
+refused(25,lambda row,*_:row['backgroundPresentation'].update(display_only=False))
+refused(25,lambda row,*_:row['backgroundPresentation'].update(source_layers_unchanged=False))
+refused(25,lambda row,*_:row['backgroundPresentation']['actions'][0].update(prim='/World/Robot'))
+refused(25,lambda row,*_:row['backgroundPresentation']['actions'][0].update(render_visibility='inherited'))
+refused(25,lambda row,*_:row['renderPresentation'].update(physics_steps=1))
+refused(25,lambda row,*_:row['backgroundPresentation'].update(privateSource='/home/private/scene.usda'))
+refused(25,lambda row,source,recording,*_:recording.update(playback='Physically rerun background and walking'))
+def changed_capture(row,source,*_):
+    row['rendererSourceHashes']['background_presentation.py']='0'*64
+    source['captureDependencies']['background_presentation.py']='0'*64
+refused(25,changed_capture)
+def changed_freeze(row,source,*_):
+    row['renderFreezeManifestSha256']='0'*64
+    source['renderFreezeManifestSha256']='0'*64
+refused(25,changed_freeze)
+refused(40,lambda row,*_:row['backgroundPresentation']['actions'][0].update(translation_world_m=[0,0,0]))
+refused(40,lambda row,*_:row['backgroundPresentation']['actions'][0].update(rotation_world_z_degrees=0))
+refused(40,lambda row,*_:row['backgroundPresentation']['actions'][0]['render_world_transform'][0].__setitem__(3,10))
+refused(40,lambda row,*_:row['backgroundPresentation']['actions'][0]['render_world_bounds'][1].__setitem__(0,3))
+print(f'Eight actual repaired variants and{checks}tamper guards passed')
+`;
+  const checked = require('node:child_process').spawnSync('python3', ['-c', program], { cwd: root, encoding: 'utf8' });
+  assert.equal(checked.status, 0, checked.stdout + checked.stderr);
 });

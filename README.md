@@ -9,10 +9,11 @@ The benchmark repositories are currently private. The public site does not link 
 
 This public repository contains the website, its complete task catalog,
 100 task-specific scene previews, and the policy leaderboard. The homepage
-features 27 curated task rollout groups (57 persona videos), with Task 1 shown first.
-Twenty-five featured Astra high videos use display-only walking animation along
+features 31 curated task rollout groups (65 persona videos), with Task 1 shown first.
+Thirty-three featured Astra high videos use display-only walking animation along
 their unchanged recorded base paths; each affected player links the original evidence.
 Astra inference rollouts and scripted reference demonstrations retain their source labels.
+Eight of the featured clips (Tasks25,30,33,40 A/B) also repair decorative background overlaps without changing robot motion, task state, camera or timing. The player caption identifies this render treatment.
 Unfeatured recordings remain archived; all 100 tasks remain in the task gallery.
 Moving-base demonstrations must show leg stepping; stationary fixed-base
 manipulation remains eligible.
@@ -28,7 +29,7 @@ See [recording provenance](data/rollout-provenance.json) for source hashes,
 recording context and the historical Task 110 → Task 51 mapping.
 
 The provenance manifest retains all 84 original recording receipts and media,
-plus 39 derived walking-render receipts with separate video/poster paths. The
+plus 39 original walking-render receipts and eight background-repair render receipts, all with separate video/poster paths. The
 added leg motion is animation, not physically simulated or rescored locomotion.
 Native task outcomes and leaderboard results refer to the original trajectories.
 

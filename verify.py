@@ -247,6 +247,131 @@ def verify_display_gait_receipt(item: dict, source: dict, recording: dict,
     public_values(source)
 
 
+def verify_background_repair_receipt(item: dict, source: dict, recording: dict,
+                                     originals: dict, sources: dict, variants: dict) -> None:
+    """Verify the reviewed scenery repair without inventing a new policy trial."""
+    source_id = "astra-high-background-repair"
+    upstream_id = "astra-high-display-gait"
+    playback = "Recorded task trajectory with display-only walking animation and repaired decorative background; physics not rerun."
+    assert item["source"] == recording["source"] == source_id
+    assert source["upstreamSource"] == upstream_id
+    assert source["playback"] == recording["playback"] == playback
+    assert item["taskId"] in {25, 30, 33, 40} and item["persona"] in {"A", "B"}
+    assert all(item[key] is True for key in ("backgroundOnlyRepair", "upstreamA2GaitReusedUnchanged",
+                                            "nativeEvaluationAppliesToOriginalRecording"))
+    # The original native/gait validator remains unchanged. Normalize only the
+    # two presentation identifiers after checking the new source above.
+    normalized_item = dict(item, source=upstream_id)
+    normalized_recording = dict(recording, source=upstream_id,
+        playback="Recorded task trajectory with display-only walking animation; physics not rerun.")
+    verify_display_gait_receipt(normalized_item, source, normalized_recording, originals, sources)
+
+    parent = item["priorWalkingRender"]
+    assert set(parent) == {"video", "sha256", "recordSha256"}
+    prior = variants[(item["taskId"], item["persona"], parent["video"])]
+    assert prior["source"] == upstream_id and prior["sha256"] == parent["sha256"]
+    canonical = json.dumps(prior, sort_keys=True, separators=(",", ":"),
+                           ensure_ascii=False, allow_nan=False).encode()
+    assert hashlib.sha256(canonical).hexdigest() == parent["recordSha256"], "Prior walking-render binding differs"
+    assert item["video"] != prior["video"] and item["poster"] != prior["poster"]
+    for key in ("originalRecording", "model", "reasoningEffort", "recordedTaskId", "frames", "fps",
+                "durationSeconds", "renderedSamples", "renderSampleHz", "measuredStatePreserved",
+                "displayGait", "gaitCacheSha256", "gaitImplementationSha256", "gaitQualityReviewSha256",
+                "cameraPresentation", "sceneRevision", "sceneSha256", "sceneLayerHashes", "sceneTextureHashes"):
+        assert item[key] == prior[key], "Background repair changed recorded motion, gait, camera or source: " + key
+    approved_capture_dependencies = {'checkpoint_pose_frames.py': '6c60db6b430dea7c408f5d825060ca56c896e87e9aca8ab47524324f66286a09', 'demo_render_common.py': '6735362968196fe7069d7b997fd0d034652f3c81c0eef0b0d52f298cc36f219c', 'storm_capture.py': 'dae6a17d532316f8cfddefdae33a0b315547a7215591bfeaf3fbe2d13f1a19b3', 'recorded_visual_state.py': '386d1294fb7d95137785214b7efcf15004f55f6a4072a313cce163fd67fd4deb', 'origin_evidence.py': '803d6f033f89fa5aa168a2432ad36e62ebd1b067cb057780dbb2b7d787fbd08b', 'replay_render_minimal.kit': 'a5dc7cc865cacb8ebf3cc1b1125bf18195a3ae895a22f8a92086a1dcd38aa9f5', 'prepare_gait.py': '1a2af392d5cf655a3deb64f887bef303ffb9d51241f5c437a9281d9206a1ab43', 'display_gait.py': '610e80985acd01a14ed8a42178e878ff6859ff02c79d33ea6f2069dc955e077b', 'camera_presentation.py': '3dbc562ad890bda509facc30e8229d63a14397aa523fe028f9533d9aef522a45', 'camera_presentation.json': 'db2d354c2a9678e736f3a9287ae7e9a9a6cb0b74d2344087ceb0f21d703e314f', 'background_presentation.py': '247162f382b46ec49df70955e027240027c0089413c775a12aa2451413e10e38', 'background_presentation.json': 'ce817d1a1acabf4f8ee9bc5958a9adc418a6a4b9958e77e08f675aa0d5288ad7', 'upstream_identity.json': 'c5a023a15662fd3c4b22a74993b23b058295c4e43f281e83c12328bf2112470c'}
+    approved_freeze = '1a0f542048a3144e10e43ffa05ebaa9a7876f87e6eaa4b5de15e7d3fa2564c41'
+    approved_policy = 'ce817d1a1acabf4f8ee9bc5958a9adc418a6a4b9958e77e08f675aa0d5288ad7'
+    assert item["rendererSourceHashes"] == source["captureDependencies"] == approved_capture_dependencies
+    assert item["renderFreezeManifestSha256"] == source["renderFreezeManifestSha256"] == approved_freeze
+    background = item["backgroundPresentation"]
+    assert background["schema"] == "prb.background_presentation/1"
+    assert background["task_id"] == item["taskId"]
+    assert background["policy_sha256"] == source["backgroundPolicySha256"] == approved_policy
+    assert background["policy_sha256"] == item["rendererSourceHashes"]["background_presentation.json"]
+    assert all(background[key] is True for key in ("session_layer_only", "display_only", "source_layers_unchanged",
+                                                  "recorded_task_motion_unchanged", "approved_A2_gait_unchanged"))
+    assert background["physics_steps"] == background["new_model_calls"] == 0
+    presentation = item["renderPresentation"]
+    assert presentation["render_revision"] == "background-repair-R1"
+    assert presentation["physics_steps"] == presentation["new_model_calls"] == 0
+
+    def vector(value, count):
+        assert isinstance(value, list) and len(value) == count
+        assert all(type(number) in (int, float) and math.isfinite(number) for number in value)
+        return value
+
+    def matrix(value):
+        assert isinstance(value, list) and len(value) == 4
+        for row in value:
+            vector(row, 4)
+        assert value[3] == [0, 0, 0, 1]
+        return value
+
+    def bounds(value):
+        assert isinstance(value, list) and len(value) == 2
+        low, high = (vector(row, 3) for row in value)
+        assert all(a <= b for a, b in zip(low, high))
+        return low, high
+
+    actions = background["actions"]
+    assert isinstance(actions, list) and actions
+    if item["taskId"] in {25, 30, 33}:
+        assert len(actions) == 1
+        action = actions[0]
+        assert action["prim"] == "/World/TaskContext" and action["kind"] == "hide"
+        assert action["source_visibility"] == "inherited" and action["render_visibility"] == "invisible"
+        matrix(action["source_world_transform"])
+        bounds(action["source_world_bounds"])
+    else:
+        groups = [
+            (["KitchenBaseBody", "KitchenBaseTop", "KitchenBaseDrawer0", "KitchenBasePull0", "KitchenBaseDrawer1",
+              "KitchenBasePull1", "KitchenBaseFoot0", "KitchenBaseFoot1"], [-0.69, -0.92, 0], [-1.56, 1.17, 0], 90),
+            (["KitchenUpperBody", "KitchenUpperDoor0", "KitchenUpperPull0", "KitchenUpperDoor2", "KitchenUpperPull2"],
+             [-0.79, -1.02, 0], [-1.56, 1.27, 0], 90),
+            (["KitchenPlantPot"] + ["KitchenPlantLeaf" + str(i) for i in range(7)],
+             [-0.69, -0.92, -0.0705], [-1.56, 1.17, 0], 90),
+            (["DiningSideboardBody", "DiningSideboardTop", "DiningSideboardDrawer0", "DiningSideboardPull0",
+              "DiningSideboardDrawer1", "DiningSideboardPull1", "DiningSideboardFoot0", "DiningSideboardFoot1"]
+             + ["StorageCanister" + suffix + str(i) for i in range(3) for suffix in ("", "Lid")]
+             + ["DiningPrintFrame", "DiningPrintMat", "DiningPrintArt", "DiningPrintArtStripe"],
+             [0.5, 0, 0], [0, 0, 0], 0),
+        ]
+        expected = {"/World/HomeSet/" + name: (delta, pivot, angle)
+                    for names, delta, pivot, angle in groups for name in names}
+        assert len(actions) == len(expected) == 39
+        assert len({action["prim"] for action in actions}) == 39
+        assert {action["prim"] for action in actions} == set(expected), "Repair edits nondecorative or unexpected geometry"
+        for action in actions:
+            assert action["kind"] == "rigid_transform"
+            delta, pivot, angle = expected[action["prim"]]
+            assert action["translation_world_m"] == delta
+            assert action["pivot_world_m"] == pivot
+            assert action["rotation_world_z_degrees"] == angle
+            before, after = matrix(action["source_world_transform"]), matrix(action["render_world_transform"])
+            rotation = ((0, -1, 0), (1, 0, 0), (0, 0, 1)) if angle == 90 else ((1, 0, 0), (0, 1, 0), (0, 0, 1))
+            for row in range(3):
+                for column in range(3):
+                    calculated = sum(rotation[row][k] * before[k][column] for k in range(3))
+                    assert math.isclose(after[row][column], calculated, abs_tol=3e-7, rel_tol=0)
+                calculated = sum(rotation[row][k] * (before[k][3] - pivot[k]) for k in range(3)) + pivot[row] + delta[row]
+                assert math.isclose(after[row][3], calculated, abs_tol=3e-7, rel_tol=0)
+            bounds(action["source_world_bounds"])
+            low, high = bounds(action["render_world_bounds"])
+            assert low[0] >= -2.55 - 1e-6 and high[0] <= 2.55 + 1e-6, "Decor leaves the room"
+
+
+def verify_render_variant(item: dict, source: dict, recording: dict,
+                          originals: dict, sources: dict, variants: dict) -> None:
+    if item["source"] == "astra-high-display-gait":
+        verify_display_gait_receipt(item, source, recording, originals, sources)
+    elif item["source"] == "astra-high-background-repair":
+        verify_background_repair_receipt(item, source, recording, originals, sources, variants)
+    else:
+        raise AssertionError("Unknown display-render source: " + item["source"])
+
+
+
 def verify(root: Path) -> dict[str, int | str]:
     root = root.resolve()
     tasks = json.loads((root / "data/tasks.json").read_text())
@@ -398,7 +523,7 @@ def verify(root: Path) -> dict[str, int | str]:
                 media_key = (example["id"], persona["id"], persona["video"])
                 receipt = media_records[media_key]
                 if media_key in variant_keys:
-                    verify_display_gait_receipt(receipt, sources[receipt["source"]], example["recording"], records, sources)
+                    verify_render_variant(receipt, sources[receipt["source"]], example["recording"], records, sources, media_records)
                     featured_variants.add(media_key)
                 elif receipt.get("captureMode") == "recorded_pose_replay":
                     verify_recorded_pose_receipt(receipt, sources[receipt["source"]], example["recording"])
@@ -419,9 +544,9 @@ def verify(root: Path) -> dict[str, int | str]:
                 "source": receipt["source"], "kind": "model",
                 "model": source["model"], "reasoningEffort": source["reasoningEffort"],
                 "recordedTaskId": original["recordedTaskId"],
-                "playback": "Recorded task trajectory with display-only walking animation; physics not rerun.",
+                "playback": source["playback"],
             }
-            verify_display_gait_receipt(receipt, source, recording, records, sources)
+            verify_render_variant(receipt, source, recording, records, sources, media_records)
             verify_media_assets(receipt)
     # The opt-in 3D viewer must remain self-contained in the deployment.
     model_dir = root / "assets/models"
