@@ -152,7 +152,8 @@ def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT,
     if manifest_path.exists():
         previous = json.loads(manifest_path.read_text())
         entries = {(e["taskId"], e["persona"]): e for e in previous["entries"]}
-        kept = set(entries) - {(int(item["task_id"]), str(item["persona"])) for item in items}
+        kept = set(entries) - {(int(item["task_id"]), str(item["persona"])) for item in items
+                               if (videos / f"task{int(item['task_id']):03}-gemini4-{item['persona']}.mp4").is_file()}
         if kept and previous.get("mediaBase") != media_base:
             raise ValueError(f"media base {media_base!r} differs from the manifest's {previous.get('mediaBase')!r} "
                              f"and {len(kept)} retained entries would keep the old one; import them all again")
@@ -168,6 +169,10 @@ def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT,
         elif entries[key] != entry:
             updated += 1
         entries[key] = entry
+    mixed = [k for k, e in entries.items() if e["video"].startswith("https://") != bool(media_base)
+             or (media_base and not e["video"].startswith(media_base + "/gemini4/"))]
+    if mixed:  # backstop: never write a manifest whose entries disagree with its media base
+        raise ValueError(f"{len(mixed)} entries do not match media base {media_base!r}; import them all again")
     manifest = {"schema": SCHEMA, "label": LABEL,
                 "description": DESCRIPTION, "seedRange": SEED_RANGE, **({"mediaBase": media_base} if media_base else {}),
                 "entries": [entries[key] for key in sorted(entries)]}
