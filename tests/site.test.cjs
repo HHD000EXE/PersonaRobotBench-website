@@ -938,3 +938,15 @@ test('Gemini 4 gallery reports an unavailable manifest without breaking the cata
   assert.equal(ctx.$$('.gemini4-group').length, 0);
   ctx.window.close();
 });
+
+test('Gemini 4 gallery escapes markup in every manifest field, including task IDs', async () => {
+  const markup = '<img src=x onerror="alert(1)">';
+  const entry = gemini4Entry(markup, markup, 'SUCCESS', [{ skillCall: markup, startSeconds: 1, full_call: markup }]);
+  Object.assign(entry, { taskKey: markup, title: markup, instruction: markup, seed: markup });
+  const ctx = await boot({ gemini4: { ...gemini4Fixture, label: markup, entries: [entry] } });
+  assert.equal(ctx.gemini4Ready, true);
+  assert.equal(ctx.$$('#gemini4 img').length, 0);
+  assert.equal(ctx.$$('#gemini4 [onerror]').length, 0);
+  assert.match(ctx.$('.gemini4-group-head .small-label').textContent, /onerror/);
+  ctx.window.close();
+});

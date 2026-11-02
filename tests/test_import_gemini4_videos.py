@@ -1,7 +1,10 @@
 """Import-script checks: python3 -m unittest discover -s tests -p 'test_*.py' (needs ffmpeg)."""
 from __future__ import annotations
 
+import codecs
+import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -10,6 +13,9 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# Internal codename, kept out of tracked text: only its rot13 form and sha256 appear here.
+CODENAME = codecs.decode("nexrabf", "rot13")
+CODENAME_SHA256 = "0f85e460e0246cfe3a90d4e8cb701afd82d60a7892af9bda1043a49412f2337c"
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT))
 import import_gemini4_videos as importer  # noqa: E402
@@ -105,6 +111,75 @@ class ImportGemini4Videos(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.run_import(self.write_selection("other.json", [other]))
 
+
+    def imported_manifest(self) -> dict:
+        self.run_import(self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")]))
+        return json.loads((self.root / importer.MANIFEST).read_text())
+
+    def write_manifest(self, manifest: dict) -> None:
+        (self.root / importer.MANIFEST).write_text(json.dumps(manifest))
+
+    def test_private_caption_text_is_rejected_by_importer_and_verify(self) -> None:
+        manifest = self.imported_manifest()
+        for text in ("Read /home/user/run/episode.json", "see /srv/data/x", "from /Volumes/me/a", "in /tmp/x",
+                     "C:\\runs\\a", "model gemini-4-argon said", f"the {CODENAME} run", f"the {CODENAME.upper()}-1 run",
+                     "Read /root/evals/episode.json", "at /private/run/episode.json", "(/workspace/evals/e.json)",
+                     "C:/runs/episode.json", "see ~/runs/e.json", "path=/srv/x/y", "Read /episode.json",
+                     "Read /my runs/episode.json", "source:/root/evals/episode.json", "in runs/evals/episode.json",
+                     "see https://example.org/a", "dir\\file", "ends with /"):
+            for key in ("full_call", "full_rationale"):
+                with self.subTest(text=text, key=key):
+                    path = self.captions / "task021-gemini4-A-master.captions.json"
+                    path.write_text(json.dumps({"episode": "x", "calls": [{"skill_call": 1, "start_s": 0, key: text}]}))
+                    with self.assertRaisesRegex(ValueError, "task021-gemini4-A"):
+                        self.run_import(self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")]))
+                    bad = json.loads(json.dumps(manifest))
+                    bad["entries"][0]["captions"] = [{"skillCall": 1, "startSeconds": 0, key: text}]
+                    self.write_manifest(bad)
+                    with self.assertRaisesRegex(AssertionError, "21.*A"):
+                        verify.verify_gemini4(self.root, self.tasks)
+
+    def test_verify_rejects_duplicate_or_out_of_range_seeds(self) -> None:
+        manifest = self.imported_manifest()
+        self.assertEqual(verify.verify_gemini4(self.root, self.tasks), 1)
+        for seeds, seed in (([100, 100, 105], 100), ([100, 110], 100), ([99, 100], 100), ([105], 99), ([105], 110)):
+            with self.subTest(seeds=seeds, seed=seed):
+                bad = json.loads(json.dumps(manifest))
+                bad["entries"][0].update(strictSuccessSeeds=seeds, seed=seed,
+                                         outcome="SUCCESS" if seed in seeds else "FAILED")
+                self.write_manifest(bad)
+                with self.assertRaises(AssertionError):
+                    verify.verify_gemini4(self.root, self.tasks)
+
+    def test_reasoning_effort_must_match_the_published_label(self) -> None:
+        high = dict(selection_item(21, "A", "SUCCESS"), reasoning_effort="high")
+        with self.assertRaisesRegex(ValueError, "task021-gemini4-A"):
+            self.run_import(self.write_selection("high.json", [high]))
+        manifest = self.imported_manifest()
+        self.assertIn("(medium)", manifest["label"])
+        manifest["entries"][0]["reasoningEffort"] = "high"
+        self.write_manifest(manifest)
+        with self.assertRaises(AssertionError):
+            verify.verify_gemini4(self.root, self.tasks)
+
+    def test_public_caption_text_with_slashes_is_accepted(self) -> None:
+        for text in ("pick up/put down the cup", "pick/place", "about 0.5 m/s", "270 degrees / 4.7124 rad",
+                     "robot ~0.74 m ahead", "only ~27s left", "ratio 3/4"):
+            with self.subTest(text=text):
+                path = self.captions / "task021-gemini4-A-master.captions.json"
+                path.write_text(json.dumps({"episode": "x", "calls": [{"skill_call": 1, "start_s": 0, "full_call": text}]}))
+                self.run_import(self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")]))
+                verify.verify_gemini4(self.root, self.tasks)
+
+    def test_tracked_files_do_not_contain_the_internal_codename(self) -> None:
+        tracked = subprocess.run(["git", "ls-files", "-z"], cwd=ROOT, check=True, capture_output=True).stdout
+        for name in tracked.decode().split("\0"):
+            path = ROOT / name
+            if not name or path.suffix in {".mp4", ".webp", ".png", ".jpg", ".gif", ".pdf"} or not path.is_file():
+                continue
+            words = set(re.findall(r"[a-z0-9]+", path.read_bytes().decode("utf-8", "ignore").lower()))
+            with self.subTest(file=name):
+                self.assertNotIn(CODENAME_SHA256, {hashlib.sha256(w.encode()).hexdigest() for w in words})
 
 if __name__ == "__main__":
     unittest.main()
