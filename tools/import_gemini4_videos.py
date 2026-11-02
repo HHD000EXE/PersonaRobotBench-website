@@ -150,7 +150,12 @@ def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT,
     manifest_path = root / MANIFEST
     entries = {}
     if manifest_path.exists():
-        entries = {(e["taskId"], e["persona"]): e for e in json.loads(manifest_path.read_text())["entries"]}
+        previous = json.loads(manifest_path.read_text())
+        entries = {(e["taskId"], e["persona"]): e for e in previous["entries"]}
+        kept = set(entries) - {(int(item["task_id"]), str(item["persona"])) for item in items}
+        if kept and previous.get("mediaBase") != media_base:
+            raise ValueError(f"media base {media_base!r} differs from the manifest's {previous.get('mediaBase')!r} "
+                             f"and {len(kept)} retained entries would keep the old one; import them all again")
     added, updated, missing = 0, 0, []
     for item in items:
         entry = entry_for(item, tasks, videos, captions, root, media_base)
