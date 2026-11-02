@@ -372,6 +372,38 @@ def verify_render_variant(item: dict, source: dict, recording: dict,
 
 
 
+def verify_gemini4(root: Path, tasks: list[dict]) -> int:
+    """Check the Gemini 4 replay gallery manifest against its local media."""
+    path = root / "data/gemini4-rollouts.json"
+    if not path.exists():
+        return 0
+    data = json.loads(path.read_text())
+    assert data["schema"] == "personarobotbench.website-gemini4-rollouts/1", "Unknown Gemini 4 gallery schema"
+    by_id = {task["id"]: task for task in tasks}
+    keys = [(item["taskId"], item["persona"]) for item in data["entries"]]
+    assert len(keys) == len(set(keys)) and keys == sorted(keys), "Gemini 4 entries must be unique and sorted"
+    for item in data["entries"]:
+        task = by_id[item["taskId"]]
+        persona = next(p for p in task["personas"] if p["id"] == item["persona"])
+        assert item["personaDescription"] == persona["description"] and item["taskFolder"] == task["folder"], keys
+        assert item["outcome"] in {"SUCCESS", "FAILED"} and item["model"] == "Gemini 4"
+        assert (item["seed"] in item["strictSuccessSeeds"]) == (item["outcome"] == "SUCCESS"), "Outcome differs from seed record"
+        assert all(100 <= seed <= 109 for seed in item["strictSuccessSeeds"])
+        for call in item["captions"]:
+            assert any(isinstance(call.get(key), str) and call[key] for key in ("full_call", "full_rationale"))
+        expected = f"assets/gemini4/task{item['taskId']:03}-{item['persona']}"
+        assert item["video"] == expected + ".mp4" and item["poster"] == expected + ".webp"
+        video, poster = root / item["video"], root / item["poster"]
+        assert video.is_file() and poster.is_file(), f"Missing Gemini 4 media: {expected}"
+        assert video.stat().st_size == item["bytes"], "Gemini 4 video size differs"
+        assert hashlib.sha256(video.read_bytes()).hexdigest() == item["sha256"], "Gemini 4 video hash differs"
+        image = poster.read_bytes()
+        assert image[:4] == b"RIFF" and image[8:12] == b"WEBP", item["poster"]
+        assert hashlib.sha256(image).hexdigest() == item["posterSha256"], "Gemini 4 poster hash differs"
+        assert item["durationSeconds"] > 0 and item["frames"] > 0
+    return len(keys)
+
+
 def verify(root: Path) -> dict[str, int | str]:
     root = root.resolve()
     tasks = json.loads((root / "data/tasks.json").read_text())
@@ -567,9 +599,10 @@ def verify(root: Path) -> dict[str, int | str]:
     assert any(material.get("pbrMetallicRoughness", {}).get("metallicFactor", 0) > .9 for material in gltf["materials"]), "Missing source metal material"
     preview_count = verify_previews(root, tasks)
     policy_count = verify_leaderboard(root, tasks)
+    gemini4_count = verify_gemini4(root, tasks)
     return {"status": "passed", "tasks": len(tasks), "persona_cases": 217,
             "task_previews": preview_count, "policy_configurations": policy_count,
-            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants),
+            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants), "gemini4_replays": gemini4_count,
             "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 
