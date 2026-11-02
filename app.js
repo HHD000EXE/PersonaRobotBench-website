@@ -407,6 +407,53 @@
     }
   }
 
+  // Gemini 4 replay gallery: one group per task, personas side by side.
+  function gemini4Case(item) {
+    const video = safeUrl(item.video);
+    const poster = safeUrl(item.poster) ?? "";
+    const success = item.outcome === "SUCCESS";
+    const seeds = Array.isArray(item.strictSuccessSeeds) ? item.strictSuccessSeeds.length : 0;
+    const captions = (Array.isArray(item.captions) ? item.captions : []).map((call) =>
+      '<div class="gemini4-caption"><span class="mono small-label">Skill call ' + escape(call.skillCall) + (call.startSeconds != null ? " · " + escape(Number(call.startSeconds).toFixed(1)) + " s" : "") + '</span>' +
+      (call.full_call ? '<pre class="gemini4-call">' + escape(call.full_call) + '</pre>' : "") +
+      (call.full_rationale ? '<p class="gemini4-rationale">' + escape(call.full_rationale) + '</p>' : "") + '</div>').join("");
+    return '<article class="gemini4-case"><div class="gemini4-case-head"><span class="persona-avatar"><span class="visually-hidden">Persona </span>' + escape(item.persona) +
+      '</span><span class="gemini4-case-label"><b>Task ' + escape(item.taskId) + ': ' + escape(item.taskKey) + ' / Persona ' + escape(item.persona) + '</b><span class="mono small-label">Seed ' + escape(item.seed) + '</span></span><span class="gemini4-badge ' + (success ? "is-success" : "is-failed") + '">' + (success ? "SUCCESS" : "FAILED") + '</span></div>' +
+      (video ? '<video class="rollout-video gemini4-video" controls playsinline preload="none" poster="' + escape(poster) + '" aria-label="Task ' + escape(item.taskId) + " persona " + escape(item.persona) + ' Gemini 4 replay"><source src="' + escape(video) + '" type="video/mp4">Your browser does not support embedded video. <a href="' + escape(video) + '">Download the replay</a>.</video>' : "") +
+      '<div class="gemini4-case-body"><p>' + escape(item.personaDescription) + '</p><p class="gemini4-seeds mono">Strict successes for this persona: ' + seeds + ' / 10 seeds</p>' +
+      (captions ? '<div class="gemini4-captions"><p class="gemini4-captions-title">Full text shortened in the video panel</p>' + captions + '</div>' : "") + '</div></article>';
+  }
+
+  function renderGemini4(data) {
+    if (!data || data.schema !== "personarobotbench.website-gemini4-rollouts/1" || !Array.isArray(data.entries)) throw new Error("Unknown gallery data");
+    const groups = new Map();
+    for (const item of data.entries) {
+      if (!groups.has(item.taskId)) groups.set(item.taskId, []);
+      groups.get(item.taskId).push(item);
+    }
+    $("#gemini4-gallery").innerHTML = [...groups.values()].map((items) => {
+      const first = items[0];
+      return '<section class="gemini4-group" aria-label="Task ' + escape(first.taskId) + ' Gemini 4 replays"><header class="gemini4-group-head"><span class="mono small-label">Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.taskKey) +
+        '</span><h3>' + escape(first.title) + '</h3><p>“' + escape(first.instruction) + '”</p><span class="gemini4-model mono">' + escape(data.label) + '</span></header><div class="gemini4-pair" style="--gemini4-columns:' + items.length + '">' +
+        items.map(gemini4Case).join("") + '</div></section>';
+    }).join("");
+    const tasks = groups.size;
+    $("#gemini4-status").textContent = data.entries.length + " recorded episode replays across " + tasks + (tasks === 1 ? " task." : " tasks.");
+  }
+
+  async function loadGemini4() {
+    if (!$("#gemini4-gallery")) return false;
+    try {
+      const response = await fetch("data/gemini4-rollouts.json", { cache: "no-cache" });
+      if (!response.ok) throw new Error("Gallery unavailable");
+      renderGemini4(await response.json());
+      return true;
+    } catch {
+      $("#gemini4-status").textContent = "The Gemini 4 rollouts are unavailable.";
+      return false;
+    }
+  }
+
   async function start() {
     wireInteractions();
     try {
@@ -428,6 +475,7 @@
 
   window.prbReady = start();
   window.prbLeaderboardReady = loadLeaderboard();
+  window.prbGemini4Ready = loadGemini4();
 })();
 
 // Progressive enhancement: content remains visible without observer support.
