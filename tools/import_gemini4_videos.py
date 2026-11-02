@@ -6,7 +6,7 @@ the recording, and merges one entry per (task, persona) into
 data/gemini4-rollouts.json. Re-running with the same or a larger selection is
 idempotent: unchanged media are not rewritten and existing entries are kept.
 
-    python3 tools/import_gemini4_videos.py SELECTION.json --videos DIR [--captions DIR]
+    python3 tools/import_gemini4_videos.py SELECTION.json --videos DIR [--captions DIR] [--media-base https://...]
 """
 from __future__ import annotations
 
@@ -100,7 +100,8 @@ def load_captions(captions_dir: Path | None, stem: str) -> list[dict]:
     return kept
 
 
-def entry_for(item: dict, tasks: dict, videos: Path, captions: Path | None, root: Path) -> dict | None:
+def entry_for(item: dict, tasks: dict, videos: Path, captions: Path | None, root: Path,
+              media_base: str | None = None) -> dict | None:
     task_id, persona = int(item["task_id"]), str(item["persona"])
     stem = f"task{task_id:03}-gemini4-{persona}"
     source = videos / f"{stem}.mp4"
@@ -118,7 +119,10 @@ def entry_for(item: dict, tasks: dict, videos: Path, captions: Path | None, root
     media.mkdir(parents=True, exist_ok=True)
     video = media / f"task{task_id:03}-{persona}.mp4"
     poster = video.with_suffix(".webp")
-    if not video.exists() or sha256(video) != sha256(source):
+    if media_base:  # the video is served from media_base; only the poster is kept in the site
+        url = f"{media_base}/gemini4/{video.name}"
+        video = source
+    elif not video.exists() or sha256(video) != sha256(source):
         shutil.copyfile(source, video)
     facts = probe(video)
     make_poster(video, poster, facts["durationSeconds"])
@@ -129,13 +133,17 @@ def entry_for(item: dict, tasks: dict, videos: Path, captions: Path | None, root
         "seed": int(item["seed"]), "outcome": item["outcome"],
         "strictSuccessSeeds": sorted(int(s) for s in item["strict_successes_s0100_s0109"]),
         "model": "Gemini 4", "reasoningEffort": item["reasoning_effort"],
-        "video": video.relative_to(root).as_posix(), "poster": poster.relative_to(root).as_posix(),
+        "video": url if media_base else video.relative_to(root).as_posix(), "poster": poster.relative_to(root).as_posix(),
         "bytes": video.stat().st_size, "sha256": sha256(video), "posterSha256": sha256(poster),
         **facts, "captions": load_captions(captions, stem),
     }
 
 
-def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT) -> dict:
+def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT, media_base: str | None = None) -> dict:
+    if media_base is not None:
+        media_base = media_base.rstrip("/")
+        if not media_base.startswith("https://"):
+            raise ValueError(f"media base must be an https URL: {media_base!r}")
     items = json.loads(selection.read_text())
     items = items["selection"] if isinstance(items, dict) else items
     tasks = {task["id"]: task for task in json.loads((root / "data/tasks.json").read_text())}
@@ -145,7 +153,7 @@ def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT)
         entries = {(e["taskId"], e["persona"]): e for e in json.loads(manifest_path.read_text())["entries"]}
     added, updated, missing = 0, 0, []
     for item in items:
-        entry = entry_for(item, tasks, videos, captions, root)
+        entry = entry_for(item, tasks, videos, captions, root, media_base)
         key = (int(item["task_id"]), str(item["persona"]))
         if entry is None:
             missing.append(f"task{key[0]:03}-{key[1]}")
@@ -156,7 +164,7 @@ def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT)
             updated += 1
         entries[key] = entry
     manifest = {"schema": SCHEMA, "label": LABEL,
-                "description": DESCRIPTION, "seedRange": SEED_RANGE,
+                "description": DESCRIPTION, "seedRange": SEED_RANGE, **({"mediaBase": media_base} if media_base else {}),
                 "entries": [entries[key] for key in sorted(entries)]}
     text = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
     if not manifest_path.exists() or manifest_path.read_text() != text:
@@ -171,8 +179,9 @@ def main() -> None:
     parser.add_argument("--videos", type=Path, required=True, help="directory with taskNNN-gemini4-P.mp4")
     parser.add_argument("--captions", type=Path, help="directory with taskNNN-gemini4-P-master.captions.json")
     parser.add_argument("--root", type=Path, default=ROOT)
+    parser.add_argument("--media-base", help="https URL serving gemini4/taskNNN-P.mp4; videos are then not copied")
     args = parser.parse_args()
-    print(json.dumps(run(args.selection, args.videos, args.captions, args.root.resolve())))
+    print(json.dumps(run(args.selection, args.videos, args.captions, args.root.resolve(), args.media_base)))
 
 
 if __name__ == "__main__":

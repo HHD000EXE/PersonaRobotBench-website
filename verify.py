@@ -379,6 +379,8 @@ def verify_gemini4(root: Path, tasks: list[dict]) -> int:
         return 0
     data = json.loads(path.read_text())
     assert data["schema"] == "personarobotbench.website-gemini4-rollouts/1", "Unknown Gemini 4 gallery schema"
+    base = data.get("mediaBase")
+    assert base is None or re.fullmatch(r"https://[^/\s\\]+(/[^\s\\]*)?", base) and not base.endswith("/"), "Bad Gemini 4 media base"
     by_id = {task["id"]: task for task in tasks}
     keys = [(item["taskId"], item["persona"]) for item in data["entries"]]
     assert len(keys) == len(set(keys)) and keys == sorted(keys), "Gemini 4 entries must be unique and sorted"
@@ -401,11 +403,17 @@ def verify_gemini4(root: Path, tasks: list[dict]) -> int:
                                 for w in re.findall(r"[a-z0-9]+", text.lower())), \
                     f"Private text in Gemini 4 caption: task {item['taskId']} persona {item['persona']} {key}"
         expected = f"assets/gemini4/task{item['taskId']:03}-{item['persona']}"
-        assert item["video"] == expected + ".mp4" and item["poster"] == expected + ".webp"
-        video, poster = root / item["video"], root / item["poster"]
-        assert video.is_file() and poster.is_file(), f"Missing Gemini 4 media: {expected}"
-        assert video.stat().st_size == item["bytes"], "Gemini 4 video size differs"
-        assert hashlib.sha256(video.read_bytes()).hexdigest() == item["sha256"], "Gemini 4 video hash differs"
+        assert item["poster"] == expected + ".webp"
+        poster = root / item["poster"]
+        assert poster.is_file(), f"Missing Gemini 4 poster: {expected}"
+        if base:  # served from the external media base; bytes and sha256 are the uploaded file's
+            assert item["video"] == f"{base}/gemini4/task{item['taskId']:03}-{item['persona']}.mp4", item["video"]
+        else:
+            assert item["video"] == expected + ".mp4"
+            video = root / item["video"]
+            assert video.is_file(), f"Missing Gemini 4 video: {expected}"
+            assert video.stat().st_size == item["bytes"], "Gemini 4 video size differs"
+            assert hashlib.sha256(video.read_bytes()).hexdigest() == item["sha256"], "Gemini 4 video hash differs"
         image = poster.read_bytes()
         assert image[:4] == b"RIFF" and image[8:12] == b"WEBP", item["poster"]
         assert hashlib.sha256(image).hexdigest() == item["posterSha256"], "Gemini 4 poster hash differs"
