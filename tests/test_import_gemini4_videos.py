@@ -118,6 +118,19 @@ class ImportGemini4Videos(unittest.TestCase):
         with self.assertRaises(ValueError):
             importer.run(pilot, self.videos, self.captions, self.root, media_base="http://media.example.org/prb")
 
+    def test_import_rejects_mixing_media_bases_with_retained_entries(self) -> None:
+        manifest = self.root / "data/gemini4-rollouts.json"
+        a = self.write_selection("a.json", [selection_item(21, "A", "SUCCESS")])
+        b = self.write_selection("b.json", [selection_item(21, "B", "FAILED", 101)])
+        for first, second in ((None, "https://media.example.org/prb"), ("https://media.example.org/prb", None),
+                              ("https://media.example.org/prb", "https://other.example.org")):
+            manifest.unlink(missing_ok=True)
+            importer.run(a, self.videos, self.captions, self.root, media_base=first)
+            before = manifest.read_text()
+            with self.assertRaises(ValueError):
+                importer.run(b, self.videos, self.captions, self.root, media_base=second)
+            self.assertEqual(manifest.read_text(), before)
+
     def test_changed_video_updates_entry_and_verify_detects_tampering(self) -> None:
         pilot = self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")])
         self.run_import(pilot)
