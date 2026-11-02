@@ -130,6 +130,16 @@ class ImportGemini4Videos(unittest.TestCase):
             with self.assertRaises(ValueError):
                 importer.run(b, self.videos, self.captions, self.root, media_base=second)
             self.assertEqual(manifest.read_text(), before)
+            source = self.videos / "task021-gemini4-A.mp4"  # selected again but its source is gone: still retained
+            moved = source.rename(source.with_suffix(".bak"))
+            try:
+                with self.assertRaises(ValueError):
+                    importer.run(self.write_selection("ab.json", [selection_item(21, "A", "SUCCESS"),
+                                                                  selection_item(21, "B", "FAILED", 101)]),
+                                 self.videos, self.captions, self.root, media_base=second)
+            finally:
+                moved.rename(source)
+            self.assertEqual(manifest.read_text(), before)
 
     def test_changed_video_updates_entry_and_verify_detects_tampering(self) -> None:
         pilot = self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")])
