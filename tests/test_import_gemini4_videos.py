@@ -92,6 +92,32 @@ class ImportGemini4Videos(unittest.TestCase):
         self.assertEqual(keys, [(21, "A"), (21, "B"), (23, "C")])
         self.assertEqual(verify.verify_gemini4(self.root, self.tasks), 3)
 
+    def test_external_media_base_links_videos_without_copying_them(self) -> None:
+        pilot = self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")])
+        importer.run(pilot, self.videos, self.captions, self.root, media_base="https://media.example.org/prb/")
+        manifest = json.loads((self.root / "data/gemini4-rollouts.json").read_text())
+        entry = manifest["entries"][0]
+        self.assertEqual(manifest["mediaBase"], "https://media.example.org/prb")
+        self.assertEqual(entry["video"], "https://media.example.org/prb/gemini4/task021-A.mp4")
+        self.assertFalse(list((self.root / "assets/gemini4").glob("*.mp4")))
+        self.assertTrue((self.root / entry["poster"]).is_file())
+        source = (self.videos / "task021-gemini4-A.mp4").read_bytes()
+        self.assertEqual((entry["bytes"], entry["sha256"]), (len(source), hashlib.sha256(source).hexdigest()))
+        self.assertEqual(verify.verify_gemini4(self.root, self.tasks), 1)
+
+    def test_verify_rejects_external_video_outside_the_https_media_base(self) -> None:
+        pilot = self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")])
+        importer.run(pilot, self.videos, self.captions, self.root, media_base="https://media.example.org/prb")
+        path = self.root / "data/gemini4-rollouts.json"
+        good = path.read_text()
+        for old, new in (("https://media.example.org/prb/gemini4/", "https://evil.example.org/gemini4/"),
+                         ("https://media.example.org/prb", "http://media.example.org/prb")):
+            path.write_text(good.replace(old, new))
+            with self.assertRaises(AssertionError):
+                verify.verify_gemini4(self.root, self.tasks)
+        with self.assertRaises(ValueError):
+            importer.run(pilot, self.videos, self.captions, self.root, media_base="http://media.example.org/prb")
+
     def test_changed_video_updates_entry_and_verify_detects_tampering(self) -> None:
         pilot = self.write_selection("pilot.json", [selection_item(21, "A", "SUCCESS")])
         self.run_import(pilot)
