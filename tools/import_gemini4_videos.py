@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -25,11 +26,26 @@ SCHEMA = "personarobotbench.website-gemini4-rollouts/1"
 POSTER_WIDTH = 960
 POSTER_SECONDS = 1.0
 SEED_RANGE = "100–109"
+REASONING_EFFORT = "medium"
+LABEL = f"Gemini 4 ({REASONING_EFFORT}) + structured skills"
 DESCRIPTION = ("Replays of recorded Gemini 4 (medium reasoning) episodes from the final merged "
                "evaluation run, using the structured skill interface. Each video replays one "
                "recorded episode; it is not a new model run, and the outcome is the native "
                "strict-success result of that episode.")
 CAPTION_KEYS = ("full_call", "full_rationale")
+# Caption text is published verbatim, so paths fail closed: a slash is allowed only as one word/word or a spaced
+# " / "; any other slash, slash chain, backslash, ~/ or internal model id is rejected.
+PRIVATE_TEXT = re.compile(r"(?<![\w\s])/|/(?![\w\s])|(?<=\w)/(?=\s)|(?<=\s)/(?=\w)|\w/\w+/|\\|~/|gemini-4-", re.IGNORECASE)
+# Internal model codenames, stored as sha256 of the lowercase word so the names stay out of public source.
+INTERNAL_WORD_SHA256 = frozenset({"0f85e460e0246cfe3a90d4e8cb701afd82d60a7892af9bda1043a49412f2337c"})
+
+
+def private_match(value: str) -> str | None:
+    found = PRIVATE_TEXT.search(value)
+    if found:
+        return found.group(0)
+    words = re.findall(r"[a-z0-9]+", value.lower())
+    return next((w for w in words if hashlib.sha256(w.encode()).hexdigest() in INTERNAL_WORD_SHA256), None)
 
 
 def sha256(path: Path) -> str:
@@ -76,6 +92,9 @@ def load_captions(captions_dir: Path | None, stem: str) -> list[dict]:
     kept = []
     for call in calls:
         text = {key: call[key] for key in CAPTION_KEYS if isinstance(call.get(key), str) and call[key].strip()}
+        for key, value in text.items():
+            if (found := private_match(value)) is not None:
+                raise ValueError(f"{stem}: skill call {call.get('skill_call')} {key} contains private text ({found!r})")
         if text:
             kept.append({"skillCall": call.get("skill_call"), "startSeconds": call.get("start_s"), **text})
     return kept
@@ -91,6 +110,8 @@ def entry_for(item: dict, tasks: dict, videos: Path, captions: Path | None, root
         raise ValueError(f"{stem}: unknown outcome {item['outcome']!r}")
     if not str(item["model"]).startswith("gemini-4"):
         raise ValueError(f"{stem}: not a Gemini 4 episode: {item['model']!r}")
+    if item["reasoning_effort"] != REASONING_EFFORT:
+        raise ValueError(f"{stem}: reasoning effort {item['reasoning_effort']!r} differs from the gallery label {LABEL!r}")
     task = tasks[task_id]
     description = next(p["description"] for p in task["personas"] if p["id"] == persona)
     media = root / MEDIA_DIR
@@ -134,7 +155,7 @@ def run(selection: Path, videos: Path, captions: Path | None, root: Path = ROOT)
         elif entries[key] != entry:
             updated += 1
         entries[key] = entry
-    manifest = {"schema": SCHEMA, "label": "Gemini 4 (medium) + structured skills",
+    manifest = {"schema": SCHEMA, "label": LABEL,
                 "description": DESCRIPTION, "seedRange": SEED_RANGE,
                 "entries": [entries[key] for key in sorted(entries)]}
     text = json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"

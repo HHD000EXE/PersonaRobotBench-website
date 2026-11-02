@@ -433,7 +433,7 @@
     }
     $("#gemini4-gallery").innerHTML = [...groups.values()].map((items) => {
       const first = items[0];
-      return '<section class="gemini4-group" aria-label="Task ' + escape(first.taskId) + ' Gemini 4 replays"><header class="gemini4-group-head"><span class="mono small-label">Task ' + padded(first.taskId) + ' · ' + escape(first.taskKey) +
+      return '<section class="gemini4-group" aria-label="Task ' + escape(first.taskId) + ' Gemini 4 replays"><header class="gemini4-group-head"><span class="mono small-label">Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.taskKey) +
         '</span><h3>' + escape(first.title) + '</h3><p>“' + escape(first.instruction) + '”</p><span class="gemini4-model mono">' + escape(data.label) + '</span></header><div class="gemini4-pair" style="--gemini4-columns:' + items.length + '">' +
         items.map(gemini4Case).join("") + '</div></section>';
     }).join("");

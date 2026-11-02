@@ -387,10 +387,19 @@ def verify_gemini4(root: Path, tasks: list[dict]) -> int:
         persona = next(p for p in task["personas"] if p["id"] == item["persona"])
         assert item["personaDescription"] == persona["description"] and item["taskFolder"] == task["folder"], keys
         assert item["outcome"] in {"SUCCESS", "FAILED"} and item["model"] == "Gemini 4"
+        assert data["label"] == f"Gemini 4 ({item['reasoningEffort']}) + structured skills", "Reasoning effort differs from the gallery label"
         assert (item["seed"] in item["strictSuccessSeeds"]) == (item["outcome"] == "SUCCESS"), "Outcome differs from seed record"
-        assert all(100 <= seed <= 109 for seed in item["strictSuccessSeeds"])
+        seeds = item["strictSuccessSeeds"]
+        assert all(type(seed) is int and 100 <= seed <= 109 for seed in seeds + [item["seed"]]), "Gemini 4 seed outside 100–109"
+        assert len(seeds) == len(set(seeds)), "Duplicate Gemini 4 success seed"
         for call in item["captions"]:
             assert any(isinstance(call.get(key), str) and call[key] for key in ("full_call", "full_rationale"))
+            for key in ("full_call", "full_rationale"):
+                text = call.get(key) or ""
+                assert not re.search(r"(?<![\w\s])/|/(?![\w\s])|(?<=\w)/(?=\s)|(?<=\s)/(?=\w)|\w/\w+/|\\|~/|gemini-4-", text, re.IGNORECASE) \
+                    and not any(hashlib.sha256(w.encode()).hexdigest() == "0f85e460e0246cfe3a90d4e8cb701afd82d60a7892af9bda1043a49412f2337c"
+                                for w in re.findall(r"[a-z0-9]+", text.lower())), \
+                    f"Private text in Gemini 4 caption: task {item['taskId']} persona {item['persona']} {key}"
         expected = f"assets/gemini4/task{item['taskId']:03}-{item['persona']}"
         assert item["video"] == expected + ".mp4" and item["poster"] == expected + ".webp"
         video, poster = root / item["video"], root / item["poster"]
