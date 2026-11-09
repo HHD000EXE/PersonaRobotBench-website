@@ -169,8 +169,8 @@ policy configuration separately. Its metric is task-balanced strict success:
 average scored trials within each observed persona, then personas within each
 task, then all 100 tasks equally. Infrastructure outcomes remain unscored.
 Coverage and trial budgets are recorded in the result data because the
-configurations use different protocols. Gemini 4 uses the current CoRL paper
-figure (30.4%); its current per-trial counts are not included in this archive.
+configurations use different protocols. Gemini 4 uses the verified CVPR Task100 rerun (32.5% strict success;
+2,170 scored trials). The archive also includes its process-preference score.
 
 Update `data/leaderboard.json` and `data/leaderboard-results.json` together when
 new results arrive. Preserve the paper revision, metric, settings, scored and

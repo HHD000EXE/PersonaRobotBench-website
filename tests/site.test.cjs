@@ -576,10 +576,10 @@ test('published Astra and Gemini bars share a zero-based scale', async () => {
   assert.equal(high.querySelector('.leaderboard-score').textContent, '33.2%');
   const gemini = ctx.$('[data-policy="gemini4"]');
   assert.ok(gemini.querySelector('.leaderboard-bar-lane'));
-  assert.equal(gemini.querySelector('.leaderboard-bar-fill').style.width, '76%');
-  assert.equal(gemini.querySelector('.leaderboard-score').textContent, '30.4%');
+  assert.equal(gemini.querySelector('.leaderboard-bar-fill').style.width, '81.25%');
+  assert.equal(gemini.querySelector('.leaderboard-score').textContent, '32.5%');
   assert.doesNotMatch(gemini.textContent, /pending|author.reported|not independently|not recomputed|unverified/i);
-  assert.deepEqual(ctx.$$('.leaderboard-bars > li').map((row) => row.dataset.policy), ['astra-high', 'opus-api-high', 'opus-cli-high', 'gemini4', 'astra-medium', 'deepseek-high']);
+  assert.deepEqual(ctx.$$('.leaderboard-bars > li').map((row) => row.dataset.policy), ['astra-high', 'gemini4', 'opus-api-high', 'opus-cli-high', 'astra-medium', 'deepseek-high']);
   assert.equal(ctx.$('details.leaderboard-protocols > summary'), null);
   ctx.window.close();
 });
