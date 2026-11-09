@@ -1,6 +1,6 @@
 {
   "schema": "personarobotbench.website-leaderboard/1",
-  "updated": "2026-10-27",
+  "updated": "2026-11-08",
   "title": "Policy leaderboard",
   "description": "Reported performance of the evaluated persona-conditioned policy configurations.",
   "boards": [
@@ -13,7 +13,7 @@
         "Success requires the native persona goal, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error.",
         "Trials are averaged within observed personas, personas within each task, and all 100 tasks equally. Infrastructure outcomes remain unscored.",
         "Trial counts, reasoning effort, budgets, harness revisions and recovery procedures differ; ordering is descriptive.",
-        "Point estimates follow the paper snapshot. Study protocols, coverage and archived count evidence are available in the downloadable results."
+        "Point estimates follow the paper snapshot or a documented rerun. Study protocols, coverage, and counts are available in the downloadable results."
       ],
       "rows": [
         {
@@ -24,6 +24,15 @@
           "coverage": "651 / 651",
           "protocol": "High reasoning · 3 trials/persona · seeds 100–102 · Codex CLI · 64 assisted actions",
           "notes": "Three trials per persona, 651 scored episodes. The study includes disclosed recovery continuations and selected simulator repairs."
+        },
+        {
+          "id": "gemini4",
+          "policy": "Gemini 4",
+          "variant": "Medium effort",
+          "scorePercent": 32.5,
+          "coverage": "2,170 / 2,170",
+          "protocol": "Medium effort · 10 trials/persona · seeds 100–109 · up to 10 requests / 64 assisted skills · privileged state and goals · no RGB",
+          "notes": "100/100 complete tasks and 217 persona cases. 700 strict successes / 2,170 scored. The downloadable results include Rule B."
         },
         {
           "id": "opus-api-high",
@@ -42,15 +51,6 @@
           "coverage": "2,138 / 2,170",
           "protocol": "High effort · 10 trials/persona · seeds 100–109 · Claude Code · tools disabled · up to 10 decisions / 64 skills",
           "notes": "668 strict successes / 2,138 scored; 32 infrastructure slots are unscored. All 217 personas have at least one scored trial."
-        },
-        {
-          "id": "gemini4",
-          "policy": "Gemini 4",
-          "variant": "Medium reasoning",
-          "scorePercent": 30.4,
-          "coverage": "100-task paper figure",
-          "protocol": "Medium reasoning · 10 trials/persona · privileged state and goals · 64 assisted actions · no RGB",
-          "notes": "Task-balanced strict success from the current CoRL paper figure, using the shared privileged assisted skill interface."
         },
         {
           "id": "astra-medium",
@@ -81,13 +81,14 @@
     "paperFigureSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
     "paperText": "CoRL Late Breaking Results/main.tex",
     "evidenceSnapshot": "Derived counts are included in the public downloadable data; access to the private paper source is not required to inspect these counts.",
-    "sourceMethod": "Displayed point estimates follow the current CoRL paper figure imported from Overleaf. Five archived strict report files were SHA-256-verified and their success counts and task-balanced means independently recomputed as archived evidence. Those archive checks do not independently recompute the paper's revised Astra high or Gemini points; no matching current Gemini trial-count bundle is included.",
+    "sourceMethod": "Gemini 4 uses the verified 100-task rerun. Other displayed point estimates retain their CoRL paper snapshot and archived trial evidence.",
     "rawSourceHashes": {
       "Opus 5.5 (API; high)": "d3e76274c60cab5b2f16fa44c13ccd2f332a5e2ef8e02c9efe0ed65a30f1eee5",
       "Opus 5.5 (CLI; high)": "a33f61c4c65b69b3b9559569f771c379053025dabdd11313c1bd746a49b217ec",
       "Astra (high)": "d2de8362288189b52debfd100e22a3e7a2db9c6d44f840b1c433c78c4b244f78",
       "Astra (medium)": "69fd9690c720945c4b5b6c0795742f8d4e2f60ddb7497403e85dbd3a80582548",
-      "DeepSeek V4.1 Flash (high)": "48180d10a87d8d82cf5fa440817022f54ad08680dd8ec3b99c5c92661659f995"
+      "DeepSeek V4.1 Flash (high)": "48180d10a87d8d82cf5fa440817022f54ad08680dd8ec3b99c5c92661659f995",
+      "Gemini 4 (medium effort)": "21c1a11a99756b7643303c32556d4ad3a4f8c30821cbde7c7594dda509665dc3"
     },
     "definition": "Native persona-goal success, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error. Scored policy errors fail.",
     "aggregation": "Mean observed trials within each observed persona, then mean observed personas within each task, then mean of all 100 tasks. This differs from pooled episode success.",
@@ -139,16 +140,17 @@
       },
       {
         "id": "gemini4",
-        "strictSuccesses": null,
-        "scored": null,
+        "strictSuccesses": 700,
+        "scored": 2170,
         "planned": 2170,
-        "observedPersonas": null,
-        "status": "paper_snapshot",
-        "trialsPerPersona": 10
+        "observedPersonas": 217,
+        "status": "verified_strict",
+        "trialsPerPersona": 10,
+        "completeTasks": 100
       }
     ],
     "resultsUrl": "data/leaderboard-results.json",
-    "sourceDescription": "Current CoRL paper strict-success leaderboard, including Gemini 4 at 30.4%. The private source is identified by its immutable revision and figure hash; archived trial counts retain their own provenance.",
+    "sourceDescription": "CoRL paper snapshot for the other configurations and the verified complete Task100 rerun for Gemini 4.",
     "overleafImportCommit": "900d67282cb2833ce9185b69b9f213c2cb6589a8"
   }
 }

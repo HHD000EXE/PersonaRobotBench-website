@@ -1,6 +1,6 @@
 {
   "schema": "personarobotbench.website-leaderboard-results/1",
-  "updated": "2026-10-27",
+  "updated": "2026-11-08",
   "tasks": 100,
   "personaCases": 217,
   "metric": "Native persona-goal success, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error. Scored policy errors fail.",
@@ -12,14 +12,14 @@
     "paperVisibility": "private",
     "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
     "paperFigureSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
-    "sourceMethod": "Displayed point estimates follow the current CoRL paper figure imported from Overleaf. Five archived strict report files were SHA-256-verified and their success counts and task-balanced means independently recomputed as archived evidence. Those archive checks do not independently recompute the paper's revised Astra high or Gemini points; no matching current Gemini trial-count bundle is included.",
+    "sourceMethod": "Gemini 4 uses the verified 100-task rerun. Other displayed point estimates retain their CoRL paper snapshot and archived trial evidence.",
     "overleafImportCommit": "900d67282cb2833ce9185b69b9f213c2cb6589a8"
   },
   "notes": [
     "The current paper author-reported Astra high point is33.2%. Its archived strict trial records below yield30.1667% task-balanced success; this archival row does not validate or recompute the revised point.",
     "Per-persona counts permit independent reproduction of the archived means. Pooled successes / scored is a different weighting and does not define the displayed task-balanced metric.",
     "No illustrative interval is exposed as a confidence interval. Fable has no reported result and is not assigned a score.",
-    "The current CoRL Gemini point is 30.4%; its source is the Overleaf-imported figure. The older arXiv aggregate of 26.2% and 2,168/2,170 coverage is retained only as a historical paper reference, not as current-point trial evidence."
+    "The Gemini 4 leaderboard score uses the verified 100-task rerun. Earlier CoRL and arXiv aggregates are retained as historical references."
   ],
   "configurations": [
     {
@@ -7730,22 +7730,1761 @@
     {
       "id": "gemini4",
       "policy": "Gemini 4",
-      "status": "paper_snapshot",
-      "taskBalancedSuccessPercent": 30.4,
-      "taskBalancedRateExact": null,
-      "strictSuccesses": null,
-      "scored": null,
+      "status": "verified_strict",
+      "taskBalancedSuccessPercent": 32.49166666666667,
+      "taskBalancedRateExact": "3899/12000",
+      "strictSuccesses": 700,
+      "scored": 2170,
       "planned": 2170,
-      "personaCounts": [],
-      "observedPersonas": null,
+      "personaCounts": [
+        {
+          "task": 1,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 1,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 5
+        },
+        {
+          "task": 2,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 2,
+          "persona": "B",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 7
+        },
+        {
+          "task": 3,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 3,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 4,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 4,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 5,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 4
+        },
+        {
+          "task": 5,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 6,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 6,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 7,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 7,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 8,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 8,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 9,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 9,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 10,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 10,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 11,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 11,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 12,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 12,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 13,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 13,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 13,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 14,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 14,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 14,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 14,
+          "persona": "D",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 15,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 5
+        },
+        {
+          "task": 15,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 16,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 16,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 17,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 17,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 18,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 18,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 19,
+          "persona": "A",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        },
+        {
+          "task": 19,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        },
+        {
+          "task": 19,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 20,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 20,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 21,
+          "persona": "A",
+          "strictSuccesses": 7,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 7
+        },
+        {
+          "task": 21,
+          "persona": "B",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 5
+        },
+        {
+          "task": 22,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 22,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 23,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 23,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 23,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 24,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 24,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 24,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 25,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 25,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 26,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 26,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 27,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 27,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 27,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 28,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 28,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 28,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 29,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 29,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 29,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 30,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 30,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 31,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 31,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 31,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 32,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 32,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 32,
+          "persona": "C",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 33,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 5
+        },
+        {
+          "task": 33,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 4
+        },
+        {
+          "task": 34,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 34,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 2
+        },
+        {
+          "task": 35,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 35,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 35,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 36,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 36,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 37,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 37,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 38,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 38,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 39,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 39,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 40,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 40,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        },
+        {
+          "task": 41,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 41,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 42,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 42,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 43,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 2
+        },
+        {
+          "task": 43,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 44,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 44,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 45,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 45,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 45,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 46,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 46,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 47,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 47,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 48,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 2
+        },
+        {
+          "task": 48,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 49,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 49,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 50,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 50,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 51,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 51,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 52,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 52,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 53,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 53,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 54,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 54,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 55,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 6
+        },
+        {
+          "task": 55,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 56,
+          "persona": "A",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        },
+        {
+          "task": 56,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 57,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 4
+        },
+        {
+          "task": 57,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 58,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 58,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 59,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 59,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 4
+        },
+        {
+          "task": 60,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 60,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 61,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 61,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 62,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 5
+        },
+        {
+          "task": 62,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 63,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 63,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 64,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 64,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 65,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 65,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 66,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 66,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 67,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 67,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 68,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 68,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 69,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 69,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 70,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 70,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        },
+        {
+          "task": 71,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 71,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 72,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 72,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 73,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 73,
+          "persona": "B",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        },
+        {
+          "task": 74,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 2
+        },
+        {
+          "task": 74,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 75,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 75,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 76,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 76,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 77,
+          "persona": "A",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 2
+        },
+        {
+          "task": 77,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 6
+        },
+        {
+          "task": 78,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 78,
+          "persona": "B",
+          "strictSuccesses": 2,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 2
+        },
+        {
+          "task": 79,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 79,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 80,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 80,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 81,
+          "persona": "A",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 4
+        },
+        {
+          "task": 81,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 82,
+          "persona": "A",
+          "strictSuccesses": 5,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 5
+        },
+        {
+          "task": 82,
+          "persona": "B",
+          "strictSuccesses": 4,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 4
+        },
+        {
+          "task": 83,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 83,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 84,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 84,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 85,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 85,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 86,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 86,
+          "persona": "B",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 87,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 87,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 88,
+          "persona": "A",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 88,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 89,
+          "persona": "A",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 89,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 90,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 90,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 91,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 91,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 92,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 92,
+          "persona": "B",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 92,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 93,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 93,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 93,
+          "persona": "C",
+          "strictSuccesses": 3,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 3
+        },
+        {
+          "task": 94,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 94,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 95,
+          "persona": "A",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 6
+        },
+        {
+          "task": 95,
+          "persona": "B",
+          "strictSuccesses": 6,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 6
+        },
+        {
+          "task": 96,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 96,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 96,
+          "persona": "C",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 97,
+          "persona": "A",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 97,
+          "persona": "B",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 98,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 98,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 99,
+          "persona": "A",
+          "strictSuccesses": 1,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 1
+        },
+        {
+          "task": 99,
+          "persona": "B",
+          "strictSuccesses": 0,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 0
+        },
+        {
+          "task": 100,
+          "persona": "A",
+          "strictSuccesses": 9,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 9
+        },
+        {
+          "task": 100,
+          "persona": "B",
+          "strictSuccesses": 10,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 10
+        },
+        {
+          "task": 100,
+          "persona": "C",
+          "strictSuccesses": 8,
+          "scored": 10,
+          "planned": 10,
+          "processPreferenceSuccesses": 8
+        }
+      ],
+      "observedPersonas": 217,
       "trialsPerPersona": 10,
       "reasoningEffort": "medium",
-      "sourceSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
-      "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
-      "sourceFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
-      "currentTrialCountsVerified": false,
-      "ci95Percent": null,
-      "note": "The current CoRL figure reports 30.4%. Its underlying current trial counts and numerical confidence interval are not available in this website archive; no counts are inferred from the plotted percentage.",
+      "sourceSha256": "21c1a11a99756b7643303c32556d4ad3a4f8c30821cbde7c7594dda509665dc3",
+      "sourceCommit": "d61915650e0afc50aec9db867675d2cc80ccaf3d",
+      "currentTrialCountsVerified": true,
+      "ci95Percent": [
+        25.3,
+        39.8
+      ],
+      "note": "Complete Task100 rerun. The reported leaderboard score uses Rule A. Rule B additionally fails explicit process preference failures and retains the Rule A outcome for missing values.",
       "historicalPaperResult": {
         "status": "historical_paper_aggregate",
         "taskBalancedSuccessPercent": 26.2,
@@ -7759,6 +9498,28 @@
         "sourceText": "MatrAIx arxiv/main.tex",
         "sourceTextSha256": "21cf6d3028dfb6f30c4c23f111642cf5b8549c7afe0371f13da92268fe52e2a7",
         "note": "This older arXiv aggregate is a separate paper statistic. Its coverage and interval do not establish or reproduce the current CoRL figure point of 30.4%."
+      },
+      "completeTasks": 100,
+      "historicalCoRLResult": {
+        "status": "paper_snapshot",
+        "taskBalancedSuccessPercent": 30.4,
+        "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
+        "sourceFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+        "sourceSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e"
+      },
+      "scoringRules": {
+        "A": {
+          "successfulTrials": 700,
+          "scoredTrials": 2170,
+          "taskBalancedRateExact": "3899/12000",
+          "taskBalancedSuccessPercent": 32.49166666666667
+        },
+        "B": {
+          "successfulTrials": 674,
+          "scoredTrials": 2170,
+          "taskBalancedRateExact": "3743/12000",
+          "taskBalancedSuccessPercent": 31.191666666666666
+        }
       }
     }
   ]
