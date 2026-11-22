@@ -554,16 +554,31 @@ test('published policy snapshot renders reported scores without settings panels 
   assert.equal(ctx.$$('.leaderboard-board').length, shippedLeaderboard.boards.length);
   for (const [index, board] of shippedLeaderboard.boards.entries()) {
     const section = ctx.$$('.leaderboard-board')[index];
-    const expected = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
+    const expected = [...board.rows].sort((a, b) => {
+      if (a.scorePercent === null) return 1;
+      if (b.scorePercent === null) return -1;
+      return (board.lowerIsBetter ? 1 : -1) * (a.scorePercent - b.scorePercent);
+    });
     const actual = [...section.querySelectorAll('.leaderboard-bars > li')];
     assert.deepEqual(actual.map((row) => row.dataset.policy), expected.map((row) => row.id));
     for (const [i, row] of expected.entries()) {
       assert.equal(actual[i].querySelector('.leaderboard-policy').textContent, row.policy);
       assert.equal(actual[i].querySelector('.leaderboard-score').textContent, row.scorePercent === null ? 'Not reported' : row.scorePercent.toFixed(1) + (board.unit || '%'));
       assert.ok(actual[i].textContent.includes(row.variant));
+      // Trial coverage is a first-class field, not download-only metadata.
+      assert.equal(actual[i].querySelector('.leaderboard-coverage').textContent, row.coverage);
     }
     assert.equal(section.querySelector('.leaderboard-protocols'), null);
+    // Every board states its own scoring and protocol caveats on the page.
+    assert.deepEqual([...section.querySelectorAll('.leaderboard-notes > ul > li')].map((li) => li.textContent), board.notes);
+    assert.equal(Boolean(section.querySelector('.leaderboard-row-notes')), board.rows.some((row) => row.notes));
+    assert.equal(Boolean(section.querySelector('.leaderboard-direction')), board.lowerIsBetter === true);
   }
+  // A recall gap is a defect: the lowest gap leads and the board says so.
+  const stage1 = ctx.$$('.leaderboard-board')[1];
+  assert.equal(stage1.querySelector('.leaderboard-bars > li .leaderboard-policy').textContent, 'Gemini 4');
+  assert.equal(stage1.querySelector('.leaderboard-direction').textContent, 'Lower is better');
+  assert.match(stage1.querySelector('.leaderboard-bars > li').dataset.policy, /gemini-stage1/);
   const astra = ctx.$('[data-policy="astra-high"]');
   assert.equal(astra.querySelector('.leaderboard-policy').textContent, 'Astra');
   assert.doesNotMatch(astra.textContent, /author.reported|not independently|not recomputed|unverified/i);

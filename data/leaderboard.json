@@ -13,7 +13,8 @@
         "Success requires the native persona goal, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error.",
         "Trials are averaged within observed personas, personas within each task, and all 100 tasks equally. Infrastructure outcomes remain unscored.",
         "Trial counts, reasoning effort, budgets, harness revisions and recovery procedures differ; ordering is descriptive.",
-        "Point estimates follow the CVPR 2027 Stage 2 table (paper commit 7bbb55c, 2026-11-17). Study protocols, coverage and archived count evidence are available in the downloadable results."
+        "Point estimates follow the CVPR 2027 Stage 2 table (paper commit 7bbb55c, 2026-11-17). Per-policy protocols, trial counts and caveats are expanded below.",
+        "At these trial counts an unclustered 95% binomial interval spans about ±1.5–3.6 percentage points, and task clustering widens it. Adjacent ranks are not separable at this sample size."
       ],
       "rows": [
         {
@@ -88,6 +89,7 @@
       "unit": "pp",
       "description": "100 tasks · 217 task-local personas · 200,000 planned decisions per model · five model families",
       "notes": [
+        "Lower is better. A smaller gap means persona recall stays even across a task's personas instead of collapsing to a task-dependent default.",
         "The gap is the mean within-task range of persona recall: higher values mean the policy falls back to stronger task-dependent defaults.",
         "Hard-tier agreement sits near the 47.25% uniform-choice reference for every model, so the informative contrast is the recall gap rather than headline accuracy.",
         "Easy-tier contextual accuracy spans 98.32–100.00%; an ideal uniform selector has zero expected population recall gap."
@@ -138,7 +140,8 @@
           "protocol": "Easy 99.99% · Hard 47.50% missing / 47.07% conflict · 100/100 tasks",
           "notes": "Gemini Carbon/CLI records the smallest hard-tier recall gap with near-perfect easy-tier filtering."
         }
-      ]
+      ],
+      "lowerIsBetter": true
     }
   ],
   "provenance": {

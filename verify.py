@@ -75,6 +75,10 @@ def verify_leaderboard(root: Path, tasks: list[dict]) -> int:
     assert len(ids) == len(set(ids)) and rows, "Duplicate or missing policy configuration"
     for board in data["boards"]:
         assert board["title"] and board["metric"] and board["description"]
+        assert isinstance(board.get("lowerIsBetter", False), bool), board["id"]
+        # A gap is a defect, so its board must sort ascending and say so.
+        if "gap" in board["metric"].lower():
+            assert board["lowerIsBetter"] is True, board["id"]
         for row in board["rows"]:
             score = row["scorePercent"]
             assert score is None or (type(score) in (int, float) and 0 <= score <= 100), row["id"]

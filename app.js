@@ -473,7 +473,14 @@
     const description = $("#leaderboard-description");
     if (description) description.textContent = data.description || "Reported policy evaluations, with scoring criteria and coverage shown alongside each result.";
     $("#leaderboard-boards").innerHTML = data.boards.map((board, index) => {
-      const rows = [...board.rows].sort((a, b) => (b.scorePercent ?? -1) - (a.scorePercent ?? -1));
+      // A recall gap is a defect: the board that reports one must sort ascending.
+      const lowerIsBetter = board.lowerIsBetter === true;
+      const direction = lowerIsBetter ? 1 : -1;
+      const rows = [...board.rows].sort((a, b) => {
+        if (a.scorePercent === null) return 1;
+        if (b.scorePercent === null) return -1;
+        return direction * (a.scorePercent - b.scorePercent);
+      });
       const maximum = Math.max(0, ...rows.filter((row) => row.scorePercent !== null).map((row) => row.scorePercent));
       const axisMax = Math.max(10, Math.ceil(maximum / 10) * 10);
       const tickStep = axisMax <= 10 ? 2 : axisMax <= 20 ? 5 : axisMax <= 50 ? 10 : 20;
@@ -485,13 +492,25 @@
       const captionId = titleId + "-metric";
       const tickMarkup = ticks.map((tick) => '<span style="left:' + (tick / axisMax * 100).toFixed(3) + '%">' + tick + escape(unit) + '</span>').join("");
       const chartRows = rows.map((row) => '<li class="leaderboard-chart-row' + (row.scorePercent === null ? ' is-pending' : '') + '" data-policy="' + escape(row.id) + '"><div class="leaderboard-chart-label"><span class="leaderboard-policy">' + escape(row.policy) +
-        '</span><span class="leaderboard-variant">' + escape(row.variant) + '</span></div>' + (row.scorePercent === null
+        '</span><span class="leaderboard-variant">' + escape(row.variant) + '</span>' +
+        (row.coverage ? '<span class="leaderboard-coverage">' + escape(row.coverage) + '</span>' : '') + '</div>' + (row.scorePercent === null
           ? '<span class="leaderboard-score leaderboard-unreported">Not reported</span>'
           : '<div class="leaderboard-bar-lane" aria-hidden="true"><span class="leaderboard-bar-fill" style="width:' + (row.scorePercent / axisMax * 100).toFixed(3) + '%"></span></div><span class="leaderboard-score">' + row.scorePercent.toFixed(1) + '<span>' + escape(unit) + '</span></span>') + '</li>').join("");
-      return '<section class="leaderboard-board" aria-labelledby="' + titleId + '"><div class="leaderboard-board-heading"><h3 id="' + titleId + '">' + escape(board.title) +
-        '</h3><p>' + escape(board.description) + '</p></div><figure class="leaderboard-chart" aria-labelledby="' + captionId + '" data-axis-max="' + axisMax + '" style="--grid-step:' + (tickStep / axisMax * 100).toFixed(3) + '%"><figcaption id="' + captionId + '">' + escape(board.metric) +
-        '<span class="visually-hidden">. Scale: 0 to ' + axisMax + (unit === "%" ? " percent" : " " + escape(unit)) + '.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
-        '</ol></figure></section>';
+      const notes = (Array.isArray(board.notes) ? board.notes : []).filter(Boolean);
+      const rowNotes = rows.filter((row) => row.notes);
+      const notesBlock = (notes.length || rowNotes.length)
+        ? '<div class="leaderboard-notes">' +
+          (notes.length ? '<ul>' + notes.map((note) => '<li>' + escape(note) + '</li>').join('') + '</ul>' : '') +
+          (rowNotes.length ? '<details class="leaderboard-row-notes"><summary>Per-policy protocol notes</summary><dl>' +
+            rowNotes.map((row) => '<dt>' + escape(row.policy) + (row.variant ? ' · ' + escape(row.variant) : '') + '</dt><dd>' + escape(row.notes) + '</dd>').join('') +
+            '</dl></details>' : '') +
+          '</div>'
+        : '';
+      const directionBadge = lowerIsBetter ? '<span class="leaderboard-direction">Lower is better</span>' : '';
+      return '<section class="leaderboard-board" aria-labelledby="' + titleId + '"><div class="leaderboard-board-heading"><div class="leaderboard-board-title"><h3 id="' + titleId + '">' + escape(board.title) +
+        '</h3>' + directionBadge + '</div><p>' + escape(board.description) + '</p></div><figure class="leaderboard-chart" aria-labelledby="' + captionId + '" data-axis-max="' + axisMax + '" style="--grid-step:' + (tickStep / axisMax * 100).toFixed(3) + '%"><figcaption id="' + captionId + '">' + escape(board.metric) +
+        '<span class="visually-hidden">. Scale: 0 to ' + axisMax + (unit === "%" ? " percent" : " " + escape(unit)) + '.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ' + (lowerIsBetter ? 'ordered by ' + escape(board.metric) + ', lowest first' : 'ranked by ' + escape(board.metric)) + '">' + chartRows +
+        '</ol></figure>' + notesBlock + '</section>';
     }).join("");
     $("#leaderboard-status").textContent = data.updated ? "Results as of " + data.updated : "";
   }
