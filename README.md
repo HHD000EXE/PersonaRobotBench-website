@@ -149,7 +149,7 @@ checks every entry's video and poster hashes. Import-script tests:
 | `data/rollout-provenance.json` | Recording sources, hashes, timing and historical task numbering |
 | `data/asset-provenance.json` | Original image sources, hashes and font sources |
 | `assets/fonts/` | Self-hosted fonts with their OFL license notices |
-| `assets/affiliations/` | Institution marks for the authors section, ordered by author superscript |
+| `assets/affiliations/` | Institution marks for the authors section, ordered by author superscript; sources in its README |
 
 Task instructions and persona descriptions follow the benchmark configurations;
 category grouping and short example headings are editorial. Images are static

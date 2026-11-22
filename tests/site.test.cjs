@@ -599,8 +599,8 @@ test('authors and affiliations name every institution with a local mark', async 
   const cells = [...authors.querySelectorAll('.authors-logos li')];
   assert.equal(cells.length, 26);
   const marks = cells.filter((li) => li.querySelector('img'));
-  assert.equal(marks.length, 22);
-  assert.equal(cells.filter((li) => li.classList.contains('is-wordmark')).length, 4);
+  assert.equal(marks.length, 21);
+  assert.equal(cells.filter((li) => li.classList.contains('is-wordmark')).length, 5);
   for (const cell of marks) {
     const img = cell.querySelector('img');
     assert.match(img.getAttribute('src'), /^assets\/affiliations\/\d{2}-[a-z0-9-]+\.webp$/);
