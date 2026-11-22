@@ -9,8 +9,8 @@ The benchmark repositories are currently private. The public site does not link 
 
 This public repository contains the website, its complete task catalog,
 100 task-specific scene previews, and the policy leaderboard. The homepage
-features 31 curated task rollout groups (65 persona videos), with Task 1 shown first.
-Thirty-three featured Astra high videos use display-only walking animation along
+features 34 curated task rollout groups (71 persona videos), with Task 1 shown first.
+Thirty-nine featured Astra high videos use display-only walking animation along
 their unchanged recorded base paths; each affected player links the original evidence.
 Astra inference rollouts and scripted reference demonstrations retain their source labels.
 Eight of the featured clips (Tasks25,30,33,40 A/B) also repair decorative background overlaps without changing robot motion, task state, camera or timing. The player caption identifies this render treatment.
