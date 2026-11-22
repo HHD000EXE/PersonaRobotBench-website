@@ -131,20 +131,17 @@
     $(".rollout-tabs").style.setProperty("--tile-columns", String(Math.ceil(recorded.length / rows)));
   }
 
-  // One control drives every available persona on a shared simulation clock: a shorter
-  // recording holds its last frame while the longer one finishes.
-  function wireSync(example) {
-    const bar = $("#rollout-sync");
+  // One control drives every available recording on a shared simulation clock: a
+  // shorter clip holds its last frame while the longer one finishes.
+  function wireSyncVideos(videos, bar, durations = []) {
     if (!bar) return;
-    const videos = $$("video", $("#rollout-pair"));
     if (videos.length < 2) {
       bar.hidden = true;
       bar.innerHTML = "";
       return;
     }
-    const recorded = example.personas.filter((persona) => safeUrl(persona.video));
     const duration = (video, index) => Number.isFinite(video.duration) && video.duration > 0
-      ? video.duration : recorded[index].videoDurationSeconds || 0;
+      ? video.duration : (durations[index] || 0);
     const length = () => Math.max(0, ...videos.map(duration));
     const group = videos.length === 2 ? "both" : "all " + videos.length;
     const playLabel = '<span aria-hidden="true">▶</span> Play ' + group + ' together';
@@ -230,6 +227,12 @@
       setRate();
       $$("[data-rate]", bar).forEach((item) => item.setAttribute("aria-checked", String(Number(item.dataset.rate) === state.rate)));
     });
+  }
+
+  function wireSync(example) {
+    const pair = $("#rollout-pair");
+    if (!pair) return;
+    wireSyncVideos($$("video", pair), $("#rollout-sync"), example.personas.map((persona) => persona.videoDurationSeconds || 0));
   }
 
   function selectExample(id, focus = false) {
@@ -425,6 +428,35 @@
       (captions ? '<div class="gemini4-captions"><p class="gemini4-captions-title">Full text shortened in the video panel</p>' + captions + '</div>' : "") + '</div></article>';
   }
 
+  function gemini4Tile(items, index) {
+    const first = items[0];
+    const poster = safeUrl(first.poster);
+    return '<button type="button" role="tab" id="gemini4-tab-' + index + '" aria-controls="gemini4-panel" aria-selected="' + (index === 0) + '" tabindex="' + (index === 0 ? 0 : -1) + '" data-gemini4-group="' + index + '">' +
+      (poster ? '<img src="' + escape(poster) + '" alt="" loading="lazy" width="160" height="100">' : "") +
+      '<span>Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.title) + '</span>' +
+      '<span class="gemini4-tile-meta mono">' + items.length + ' persona' + (items.length === 1 ? "" : "s") + '</span></button>';
+  }
+
+  function selectGemini4Group(index, focus = false) {
+    const groups = state.gemini4Groups || [];
+    const group = groups[index];
+    const panel = $("#gemini4-panel");
+    if (!group || !panel) return;
+    const first = group[0];
+    state.activeGemini4 = index;
+    $$("#gemini4-tabs [role=tab]").forEach((tab) => {
+      const selected = Number(tab.dataset.gemini4Group) === index;
+      tab.setAttribute("aria-selected", String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      if (selected && focus) tab.focus();
+    });
+    panel.setAttribute("aria-labelledby", "gemini4-tab-" + index);
+    panel.innerHTML = '<header class="gemini4-group-head"><span class="mono small-label">Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.taskKey) +
+      '</span><h3>' + escape(first.title) + '</h3><p>“' + escape(first.instruction) + '”</p><span class="gemini4-model mono">' + escape(state.gemini4Label || "") + '</span></header><div class="gemini4-pair" style="--gemini4-columns:' + group.length + '">' +
+      group.map(gemini4Case).join("") + '</div><div id="gemini4-sync" class="rollout-sync" hidden></div>';
+    wireSyncVideos($$("video", panel), $("#gemini4-sync"), group.map((item) => item.durationSeconds || 0));
+  }
+
   function renderGemini4(data) {
     if (!data || data.schema !== "personarobotbench.website-gemini4-rollouts/1" || !Array.isArray(data.entries)) throw new Error("Unknown gallery data");
     const groups = new Map();
@@ -432,12 +464,18 @@
       if (!groups.has(item.taskId)) groups.set(item.taskId, []);
       groups.get(item.taskId).push(item);
     }
-    $("#gemini4-gallery").innerHTML = [...groups.values()].map((items) => {
-      const first = items[0];
-      return '<section class="gemini4-group" aria-label="Task ' + escape(first.taskId) + ' Gemini 4 replays"><header class="gemini4-group-head"><span class="mono small-label">Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.taskKey) +
-        '</span><h3>' + escape(first.title) + '</h3><p>“' + escape(first.instruction) + '”</p><span class="gemini4-model mono">' + escape(data.label) + '</span></header><div class="gemini4-pair" style="--gemini4-columns:' + items.length + '">' +
-        items.map(gemini4Case).join("") + '</div></section>';
-    }).join("");
+    state.gemini4Groups = [...groups.values()];
+    state.gemini4Label = data.label;
+    $("#gemini4-gallery").innerHTML = '<div id="gemini4-tabs" class="gemini4-tabs" role="tablist" aria-label="Select a Gemini 4 task replay">' +
+      state.gemini4Groups.map(gemini4Tile).join("") + '</div><div id="gemini4-panel" class="gemini4-panel" role="tabpanel"></div>';
+    $$("#gemini4-tabs [role=tab]").forEach((tab) => tab.addEventListener("click", () => selectGemini4Group(Number(tab.dataset.gemini4Group))));
+    $("#gemini4-tabs").addEventListener("keydown", (event) => {
+      const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      event.preventDefault();
+      selectGemini4Group((state.activeGemini4 + step + state.gemini4Groups.length) % state.gemini4Groups.length, true);
+    });
+    selectGemini4Group(0);
     const tasks = groups.size;
     $("#gemini4-status").textContent = data.entries.length + " recorded episode replays across " + tasks + (tasks === 1 ? " task." : " tasks.");
   }
@@ -455,6 +493,53 @@
     }
   }
 
+  // Task 1 overview: choose a persona and watch that user's recorded rollout.
+  function wireOverviewPersona() {
+    const group = $("#overview-persona-switch");
+    const player = $("#overview-player");
+    const video = $("#overview-video");
+    const viewport = $("#scene-viewport");
+    const note = $("#overview-rollout-note");
+    const controls = $(".scene-view-buttons");
+    const status = $("#scene-status");
+    const example = state.examples.find((item) => item.id === 1);
+    if (!group || !player || !video || !viewport || !example) return;
+    const personas = new Map(example.personas.map((persona) => [persona.id, persona]));
+    const buttons = $$("[data-overview-view]", group);
+    const show = (view) => {
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.overviewView === view)));
+      const persona = personas.get(view);
+      const source = persona ? safeUrl(persona.video) : null;
+      if (view === "scene" || !source) {
+        if (!video.paused) video.pause();
+        video.removeAttribute("src");
+        player.hidden = true;
+        viewport.hidden = false;
+        if (controls) controls.hidden = false;
+        if (status) status.textContent = viewport.classList.contains("is-3d") ? "Drag to orbit · scroll / pinch to zoom" : "Static scene preview";
+        if (note) note.textContent = view === "scene"
+          ? "Static initial scene. Choose a persona to watch that user's recorded Task 1 rollout."
+          : "That persona recording is not available yet.";
+        return;
+      }
+      video.pause();
+      video.src = source;
+      const poster = safeUrl(persona.videoPoster);
+      if (poster) video.poster = poster; else video.removeAttribute("poster");
+      video.setAttribute("aria-label", "Task 1 persona " + view + " recorded rollout");
+      player.hidden = false;
+      viewport.hidden = true;
+      if (controls) controls.hidden = true;
+      if (status) status.textContent = "Recorded rollout · Task 1 · Persona " + view;
+      if (note) note.textContent = "Persona " + view + " — " + (persona.description || "");
+    };
+    group.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-overview-view]");
+      if (button) show(button.dataset.overviewView);
+    });
+    show("scene");
+  }
+
   async function start() {
     wireInteractions();
     try {
@@ -465,6 +550,7 @@
       renderTasks();
       renderRolloutTabs();
       selectExample(state.examples.find((example) => example.recording)?.id ?? 1);
+      wireOverviewPersona();
       return true;
     } catch {
       $("#task-count").textContent = "The interactive catalog is unavailable.";

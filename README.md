@@ -105,11 +105,11 @@ this source repository small.
 ## Gemini 4 rollouts
 
 The **Gemini 4 rollouts** section replays recorded Gemini 4 (medium reasoning)
-episodes from the final merged evaluation run, grouped by task with personas side
-by side. Each player shows the episode's native strict-success outcome
-(SUCCESS or FAILED) and, below the video, any skill-call or rationale text that
-was too long for the in-video panel. These selected replays are separate from
-the leaderboard success rate.
+episodes from the final merged evaluation run. A tile per task opens that task's
+persona replays side by side under one shared playback clock. Each player shows
+the episode's native strict-success outcome (SUCCESS or FAILED) and, below the
+video, any skill-call or rationale text that was too long for the in-video panel.
+These selected replays are separate from the leaderboard success rate.
 
 The page reads `data/gemini4-rollouts.json`; media live in `assets/gemini4/`
 (`taskNNN-P.mp4` with a WebP poster from the recording). Import or extend the

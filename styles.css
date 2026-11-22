@@ -828,3 +828,32 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;opac
 @media(max-width:760px){
   .paper-figure .paper-figure-scroll img{min-width:720px}
 }
+
+/* Task 1 overview persona switch ---------------------------- */
+.overview-switch{display:inline-flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:#f6f8f3}
+.overview-switch button{padding:7px 13px;border-radius:999px;font-size:11px;font-weight:600;color:var(--muted);background:transparent;transition:color .18s ease,background .18s ease}
+.overview-switch button:hover{color:var(--ink)}
+.overview-switch button[aria-pressed="true"]{background:linear-gradient(135deg,#17241f,#1d6a5c);color:#fff;box-shadow:0 8px 18px -12px rgba(29,106,92,.85)}
+.overview-player{background:#0d1512;line-height:0}
+.overview-player video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.overview-rollout-note{margin:0;padding:12px 15px;border-top:1px solid var(--line);background:#fff;color:var(--muted);font-size:11px;line-height:1.7}
+.scene-toolbar{flex-wrap:wrap}
+
+/* Gemini 4 gallery: task tiles and one replay panel --------- */
+.gemini4-tabs{margin-bottom:22px}
+.gemini4-tile-meta{font-size:8px;letter-spacing:.04em;color:var(--muted)}
+.gemini4-panel{border:1px solid var(--line);background:#fff;border-radius:5px;overflow:hidden}
+.gemini4-panel .rollout-sync{border-top:1px solid var(--line)}
+@media(max-width:720px){
+  .overview-switch{order:2}
+  .overview-rollout-note{font-size:10px;padding:10px 12px}
+}
+
+/* Gemini 4 task tiles (independent of the rollout gallery classes) */
+.gemini4-tabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:22px}
+.gemini4-tabs button{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:6px 6px 9px;margin:0;border:1px solid var(--line);border-radius:var(--radius);background:#fff;text-align:left;color:var(--muted)}
+.gemini4-tabs button img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:calc(var(--radius) - 2px);background:#18261f;display:block}
+.gemini4-tabs button span{font-size:11px;font-weight:600;color:var(--ink);line-height:1.4}
+.gemini4-tabs button[aria-selected="true"]{border-color:rgba(217,95,52,.55);box-shadow:0 12px 26px -18px rgba(17,27,24,.6)}
+.gemini4-tabs button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.gemini4-tabs .gemini4-tile-meta{font-size:8px;font-weight:500;color:var(--muted)}

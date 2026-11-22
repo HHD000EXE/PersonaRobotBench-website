@@ -105,7 +105,7 @@ test('all six category filters return only matching tasks', async () => {
     const expected = tasks.filter((task) => task.category === category);
     assert.equal(ctx.$$('.task-card').length, Math.min(6, expected.length));
     for (const card of ctx.$$('[data-task]')) assert.equal(tasks.find((task) => task.id === Number(card.dataset.task)).category, category);
-    assert.equal(ctx.$$('[aria-pressed="true"]').length, 1);
+    assert.equal(ctx.$$('.filter-tab[aria-pressed="true"]').length, 1);
   }
   ctx.window.close();
 });
@@ -358,14 +358,14 @@ test('synchronized controls play, scrub and speed up both personas on one clock'
   fakeMedia(a, 96.9);
   fakeMedia(b, 92.8);
   a.currentTime = 10;
-  ctx.$('.sync-play').click();
+  ctx.$('#rollout-sync .sync-play').click();
   assert.equal(a.paused, false);
   assert.equal(b.paused, false);
   assert.equal(b.currentTime, 10, 'the second persona joins the shared clock');
-  assert.ok(ctx.$('.sync-play').textContent.includes('Pause both'));
-  ctx.$('.sync-play').click();
+  assert.ok(ctx.$('#rollout-sync .sync-play').textContent.includes('Pause both'));
+  ctx.$('#rollout-sync .sync-play').click();
   assert.equal(a.paused && b.paused, true);
-  const scrub = ctx.$('.sync-scrub');
+  const scrub = ctx.$('#rollout-sync .sync-scrub');
   scrub.value = '1000';
   scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
   assert.ok(Math.abs(a.currentTime - 96.85) < 0.06);
@@ -373,10 +373,10 @@ test('synchronized controls play, scrub and speed up both personas on one clock'
   scrub.value = '500';
   scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
   assert.ok(Math.abs(a.currentTime - 48.45) < 0.06 && Math.abs(b.currentTime - 48.45) < 0.06, 'dragging to the middle moves both');
-  ctx.$('.sync-skip[data-skip="5"]').click();
+  ctx.$('#rollout-sync .sync-skip[data-skip="5"]').click();
   assert.ok(Math.abs(a.currentTime - 53.45) < 0.06 && Math.abs(b.currentTime - 53.45) < 0.06);
-  ctx.$('.sync-skip[data-skip="-5"]').click();
-  ctx.$('.sync-skip[data-skip="-5"]').click();
+  ctx.$('#rollout-sync .sync-skip[data-skip="-5"]').click();
+  ctx.$('#rollout-sync .sync-skip[data-skip="-5"]').click();
   assert.ok(Math.abs(a.currentTime - 43.45) < 0.06 && Math.abs(b.currentTime - 43.45) < 0.06);
   scrub.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }));
   assert.ok(Math.abs(a.currentTime - 48.45) < 0.06, 'arrow keys skip by the same step');
@@ -386,17 +386,17 @@ test('synchronized controls play, scrub and speed up both personas on one clock'
   assert.equal(a.playbackRate, 4);
   assert.equal(b.playbackRate, 4);
   assert.equal(ctx.$('[data-rate="4"]').getAttribute('aria-checked'), 'true');
-  assert.equal(ctx.$$('.sync-speed [aria-checked="true"]').length, 1);
+  assert.equal(ctx.$$('#rollout-sync .sync-speed [aria-checked="true"]').length, 1);
   ctx.$('[data-example="87"]').click();
   assert.deepEqual(ctx.$$('#rollout-pair video').map((video) => video.playbackRate), [4, 4], 'speed carries over to the next pair');
-  assert.ok(ctx.$('.sync-time').textContent.endsWith('/ 12.0 s'));
+  assert.ok(ctx.$('#rollout-sync .sync-time').textContent.endsWith('/ 12.0 s'));
   ctx.window.close();
 });
 
 test('synchronized controls stay hidden until at least two videos exist', async () => {
   const ctx = await boot();
   assert.equal(ctx.$('#rollout-sync').hidden, true);
-  assert.equal(ctx.$$('.sync-play').length, 0);
+  assert.equal(ctx.$$('#rollout-sync .sync-play').length, 0);
   ctx.window.close();
 });
 
@@ -585,6 +585,28 @@ test('the environment and policy concept introduce the benchmark before results,
   ctx.window.close();
 });
 
+test('Task 1 overview switches between persona A and persona B recorded rollouts', async () => {
+  const ctx = await boot({ examples: shippedExamples });
+  const buttons = ctx.$$('#overview-persona-switch [data-overview-view]');
+  assert.deepEqual(buttons.map((button) => button.dataset.overviewView), ['A', 'B', 'scene']);
+  const player = ctx.$('#overview-player');
+  const video = ctx.$('#overview-video');
+  assert.equal(player.hidden, true);
+  buttons[0].click();
+  assert.equal(buttons[0].getAttribute('aria-pressed'), 'true');
+  assert.equal(player.hidden, false);
+  assert.match(video.getAttribute('src'), /assets\/rollouts\/task001-A\.mp4$/);
+  assert.match(video.getAttribute('poster'), /assets\/rollouts\/task001-A\.webp$/);
+  assert.equal(ctx.$('#scene-viewport').hidden, true);
+  buttons[1].click();
+  assert.match(video.getAttribute('src'), /assets\/rollouts\/task001-B\.mp4$/);
+  assert.equal(buttons[1].getAttribute('aria-pressed'), 'true');
+  buttons[2].click();
+  assert.equal(player.hidden, true);
+  assert.equal(ctx.$('#scene-viewport').hidden, false);
+  ctx.window.close();
+});
+
 test('published Astra and Gemini bars share a zero-based scale', async () => {
   const ctx = await boot({ leaderboard: shippedLeaderboard });
   const chart = ctx.$('.leaderboard-chart');
@@ -655,18 +677,18 @@ for (const count of [3, 4]) {
       assert.ok(ctx.$$('.rollout-case-caption')[index].textContent.includes(persona.description));
       fakeMedia(video, persona.videoDurationSeconds);
     }
-    assert.equal(ctx.$('.sync-play').textContent.trim(), '▶ Play all ' + count + ' together');
-    assert.equal(ctx.$('.sync-scrub').getAttribute('aria-label'), 'Position in all ' + count + ' recordings');
-    assert.equal(ctx.$('.sync-speed').getAttribute('aria-label'), 'Playback speed for all ' + count + ' recordings');
+    assert.equal(ctx.$('#rollout-sync .sync-play').textContent.trim(), '▶ Play all ' + count + ' together');
+    assert.equal(ctx.$('#rollout-sync .sync-scrub').getAttribute('aria-label'), 'Position in all ' + count + ' recordings');
+    assert.equal(ctx.$('#rollout-sync .sync-speed').getAttribute('aria-label'), 'Playback speed for all ' + count + ' recordings');
     videos[0].currentTime = 10;
-    ctx.$('.sync-play').click();
+    ctx.$('#rollout-sync .sync-play').click();
     assert.ok(videos.every((video) => !video.paused && video.currentTime === 10));
-    assert.ok(ctx.$('.sync-play').textContent.includes('Pause all ' + count));
+    assert.ok(ctx.$('#rollout-sync .sync-play').textContent.includes('Pause all ' + count));
     ctx.$('[data-rate="4"]').click();
     assert.ok(videos.every((video) => video.playbackRate === 4 && video.defaultPlaybackRate === 4));
-    ctx.$('.sync-play').click();
+    ctx.$('#rollout-sync .sync-play').click();
     assert.ok(videos.every((video) => video.paused));
-    const scrub = ctx.$('.sync-scrub');
+    const scrub = ctx.$('#rollout-sync .sync-scrub');
     scrub.value = '500';
     scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
     for (const [index, video] of videos.entries()) {
@@ -676,7 +698,7 @@ for (const count of [3, 4]) {
     // frames while the long recording continues; rewinding resumes them all.
     scrub.value = '900';
     scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
-    ctx.$('.sync-play').click();
+    ctx.$('#rollout-sync .sync-play').click();
     assert.equal(videos[0].paused, false);
     for (let index = 1; index < count; index++) {
       assert.equal(videos[index].paused, true);
@@ -685,26 +707,26 @@ for (const count of [3, 4]) {
     scrub.value = '250';
     scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
     assert.ok(videos.every((video) => !video.paused && video.currentTime === 30));
-    ctx.$('.sync-play').click();
+    ctx.$('#rollout-sync .sync-play').click();
     assert.ok(videos.every((video) => video.paused));
     scrub.value = '1000';
     scrub.dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
     assert.ok(videos.every((video, index) => Math.abs(video.currentTime - (fixture.personas[index].videoDurationSeconds - .05)) < .001));
-    ctx.$('.sync-play').click();
+    ctx.$('#rollout-sync .sync-play').click();
     assert.ok(videos.every((video) => !video.paused && video.currentTime === 0), 'completed group restarts together');
     ctx.$('[data-example="18"]').click();
     assert.ok(videos.every((video) => video.paused && !video.isConnected));
     assert.equal(ctx.$$('#rollout-pair video').length, 2);
     assert.equal(ctx.$('#rollout-pair').dataset.personaCount, '2');
-    assert.equal(ctx.$('.sync-play').textContent.trim(), '▶ Play both together');
-    assert.equal(ctx.$('.sync-scrub').getAttribute('aria-label'), 'Position in both recordings');
+    assert.equal(ctx.$('#rollout-sync .sync-play').textContent.trim(), '▶ Play both together');
+    assert.equal(ctx.$('#rollout-sync .sync-scrub').getAttribute('aria-label'), 'Position in both recordings');
     assert.ok(ctx.$$('#rollout-pair video').every((video) => video.playbackRate === 4));
-    assert.ok(ctx.$('.sync-time').textContent.startsWith('0.0 / '));
-    assert.equal(ctx.$('.sync-scrub').value, '0');
+    assert.ok(ctx.$('#rollout-sync .sync-time').textContent.startsWith('0.0 / '));
+    assert.equal(ctx.$('#rollout-sync .sync-scrub').value, '0');
     ctx.$('[data-example="' + fixture.id + '"]').click();
     assert.equal(ctx.$$('#rollout-pair video').length, count);
     assert.equal(ctx.$('#rollout-pair').dataset.personaCount, String(count));
-    assert.ok(ctx.$('.sync-play').textContent.includes('all ' + count));
+    assert.ok(ctx.$('#rollout-sync .sync-play').textContent.includes('all ' + count));
     assert.ok(ctx.$$('#rollout-pair video').every((video) => video.playbackRate === 4));
     ctx.window.close();
   });
@@ -721,11 +743,11 @@ test('partial four-persona groups retain every slot and synchronize available re
   assert.equal(ctx.$('.video-status').hidden, false);
   assert.equal(ctx.$('.video-status').textContent.trim(), '2 of 4 videos available');
   assert.equal(ctx.$('#rollout-sync').hidden, false);
-  assert.ok(ctx.$('.sync-play').textContent.includes('both'));
+  assert.ok(ctx.$('#rollout-sync .sync-play').textContent.includes('both'));
   const videos = ctx.$$('#rollout-pair video');
   fakeMedia(videos[0], 120); fakeMedia(videos[1], 100);
-  ctx.$('.sync-scrub').value = '500';
-  ctx.$('.sync-scrub').dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
+  ctx.$('#rollout-sync .sync-scrub').value = '500';
+  ctx.$('#rollout-sync .sync-scrub').dispatchEvent(new ctx.window.Event('input', { bubbles: true }));
   assert.ok(videos.every((video) => video.currentTime === 60));
   ctx.window.close();
 });
@@ -738,7 +760,7 @@ test('a single available recording in a larger group keeps synchronization contr
   assert.equal(ctx.$$('.rollout-case').length, 3);
   assert.equal(ctx.$('.video-status').textContent.trim(), '1 of 3 videos available');
   assert.equal(ctx.$('#rollout-sync').hidden, true);
-  assert.equal(ctx.$('.sync-play'), null);
+  assert.equal(ctx.$('#rollout-sync .sync-play'), null);
   ctx.window.close();
 });
 
@@ -941,15 +963,16 @@ print(f'Eight actual repaired variants and{checks}tamper guards passed')
   assert.equal(checked.status, 0, checked.stdout + checked.stderr);
 });
 
-test('Gemini 4 gallery groups personas by task with outcome badges and full captions', async () => {
+test('Gemini 4 gallery selects a task tile and shows its persona replays', async () => {
   const ctx = await boot();
   assert.equal(ctx.gemini4Ready, true);
-  const groups = ctx.$$('.gemini4-group');
-  assert.equal(groups.length, 2);
-  assert.deepEqual(groups.map((group) => group.querySelectorAll('.gemini4-case').length), [2, 3]);
+  const tabs = ctx.$$('#gemini4-tabs [role=tab]');
+  assert.equal(tabs.length, 2);
+  assert.deepEqual(tabs.map((tab) => tab.getAttribute('aria-selected')), ['true', 'false']);
+  assert.equal(ctx.$$('#gemini4-panel .gemini4-case').length, 2);
   assert.deepEqual(ctx.$$('.gemini4-case-label b').map((node) => node.textContent),
-    ['Task 21: sample_key / Persona A', 'Task 21: sample_key / Persona B', 'Task 23: sample_key / Persona A', 'Task 23: sample_key / Persona B', 'Task 23: sample_key / Persona C']);
-  assert.deepEqual(ctx.$$('.gemini4-badge').map((node) => node.textContent), ['SUCCESS', 'FAILED', 'FAILED', 'FAILED', 'SUCCESS']);
+    ['Task 21: sample_key / Persona A', 'Task 21: sample_key / Persona B']);
+  assert.deepEqual(ctx.$$('.gemini4-badge').map((node) => node.textContent), ['SUCCESS', 'FAILED']);
   for (const video of ctx.$$('.gemini4-video')) {
     assert.equal(video.getAttribute('preload'), 'none');
     assert.match(video.getAttribute('poster'), /assets\/gemini4\/task0\d\d-[ABC]\.webp$/);
@@ -960,6 +983,13 @@ test('Gemini 4 gallery groups personas by task with outcome badges and full capt
   assert.equal(ctx.$('.gemini4-rationale').textContent, 'Long rationale text.');
   assert.equal(ctx.$$('.gemini4-case-body b').length, 0, 'Manifest text must be escaped');
   assert.equal(ctx.$('.gemini4-model').textContent, 'Gemini 4 (medium) + structured skills');
+  tabs[1].click();
+  assert.equal(tabs[1].getAttribute('aria-selected'), 'true');
+  assert.equal(tabs[0].getAttribute('aria-selected'), 'false');
+  assert.equal(ctx.$$('#gemini4-panel .gemini4-case').length, 3);
+  assert.deepEqual(ctx.$$('.gemini4-case-label b').map((node) => node.textContent),
+    ['Task 23: sample_key / Persona A', 'Task 23: sample_key / Persona B', 'Task 23: sample_key / Persona C']);
+  assert.deepEqual(ctx.$$('.gemini4-badge').map((node) => node.textContent), ['FAILED', 'FAILED', 'SUCCESS']);
   assert.equal(ctx.$('#gemini4-status').textContent, '5 recorded episode replays across 2 tasks.');
   ctx.window.close();
 });
@@ -969,7 +999,7 @@ test('Gemini 4 gallery reports an unavailable manifest without breaking the cata
   assert.equal(ctx.ready, true);
   assert.equal(ctx.gemini4Ready, false);
   assert.equal(ctx.$('#gemini4-status').textContent, 'The Gemini 4 rollouts are unavailable.');
-  assert.equal(ctx.$$('.gemini4-group').length, 0);
+  assert.equal(ctx.$$('#gemini4-tabs [role=tab]').length, 0);
   ctx.window.close();
 });
 
@@ -979,7 +1009,7 @@ test('Gemini 4 gallery escapes markup in every manifest field, including task ID
   Object.assign(entry, { taskKey: markup, title: markup, instruction: markup, seed: markup });
   const ctx = await boot({ gemini4: { ...gemini4Fixture, label: markup, entries: [entry] } });
   assert.equal(ctx.gemini4Ready, true);
-  assert.equal(ctx.$$('#gemini4 img').length, 0);
+  assert.equal(ctx.$$('#gemini4-panel img').length, 0);
   assert.equal(ctx.$$('#gemini4 [onerror]').length, 0);
   assert.match(ctx.$('.gemini4-group-head .small-label').textContent, /onerror/);
   ctx.window.close();

@@ -13,9 +13,9 @@
   <title>PersonaRobotBench — A Benchmark for Personalized Robotics</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/fonts.css">
-  <link rel="stylesheet" href="styles.css?v=fig1-light-lb-20261122">
+  <link rel="stylesheet" href="styles.css?v=gallery-persona-20261122">
   <link rel="stylesheet" href="assets/v2d/section.css?v=20261119c">
-  <script src="app.js?v=visual-refresh-20261122" defer></script>
+  <script src="app.js?v=gallery-persona-20261122" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -44,7 +44,8 @@
       <div class="benchmark-story">
         <div class="overview-context">
           <div class="overview-environment" aria-label="Task 1 shared desk environment with optional 3D exploration">
-            <div class="scene-frame"><div class="scene-viewport" id="scene-viewport"><img class="hero-scene" src="assets/hero-scene.webp" alt="Unitree G1 robot in an authored furnished simulation environment" fetchpriority="high" width="1600" height="900"><div id="scene-model-host"></div></div><div class="scene-toolbar"><div class="scene-view-buttons"><button id="scene-toggle" type="button" aria-pressed="false" aria-controls="scene-model-host"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Explore in 3D</span></button><button id="scene-reset" type="button" disabled>Reset view</button><a class="scene-model-link" href="assets/models/shared-desk.provenance.json" target="_blank" rel="noopener">Model details</a></div><span id="scene-status" role="status">3D view · about 10 MB</span></div></div>
+            <div class="scene-frame"><div class="scene-viewport" id="scene-viewport"><img class="hero-scene" src="assets/hero-scene.webp" alt="Unitree G1 robot in an authored furnished simulation environment" fetchpriority="high" width="1600" height="900"><div id="scene-model-host"></div></div><div class="overview-player" id="overview-player" hidden><video id="overview-video" class="overview-video" controls playsinline preload="none" aria-label="Task 1 recorded persona rollout"></video></div><div class="scene-toolbar"><div class="overview-switch" id="overview-persona-switch" role="group" aria-label="Task 1 view"><button type="button" data-overview-view="A" aria-pressed="false">Persona A</button><button type="button" data-overview-view="B" aria-pressed="false">Persona B</button><button type="button" data-overview-view="scene" aria-pressed="true">Scene</button></div><div class="scene-view-buttons"><button id="scene-toggle" type="button" aria-pressed="false" aria-controls="scene-model-host"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z M4 7.5l8 4.5 8-4.5M12 12v9"/></svg><span>Explore in 3D</span></button><button id="scene-reset" type="button" disabled>Reset view</button><a class="scene-model-link" href="assets/models/shared-desk.provenance.json" target="_blank" rel="noopener">Model details</a></div><span id="scene-status" role="status">3D view · about 10 MB</span></div></div>
+            <p class="overview-rollout-note" id="overview-rollout-note" role="status">Static initial scene. Choose a persona to watch that user's recorded Task 1 rollout.</p>
           </div>
           <div class="overview-context-copy">
             <p class="environment-label">Task 1 · Shared physical environment</p>
