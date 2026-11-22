@@ -877,3 +877,114 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;opac
   .rollout-group-head p{font-size:10px;flex-basis:100%}
   .rollout-model{font-size:8px}
 }
+
+/* ============================================================
+   Editorial refinement 2026-11-23
+   Replaces the aurora/glass treatment with a print-like surface:
+   solid ink type, one accent, hairline rules, restrained shadows.
+   ============================================================ */
+:root{
+  --paper:#f5f5ef;
+  --ink:#101714;
+  --muted:#5b6862;
+  --line:#dadfd4;
+  --green:#1c6357;
+  --orange:#c8552c;
+  --orange-pale:#f8e9df;
+  --green-pale:#e5eee8;
+}
+body{background:var(--paper)}
+
+/* Hero: flat paper, a faint engineering grid that fades out. */
+.hero{background:linear-gradient(180deg,#fbfcf7 0%,var(--paper) 58%,var(--paper) 100%)}
+.hero.section-grid{background-image:none}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(28,99,87,.085) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(28,99,87,.085) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(125% 86% at 50% 0%,#000 0%,transparent 78%);
+  mask-image:radial-gradient(125% 86% at 50% 0%,#000 0%,transparent 78%);
+}
+.hero::after{display:none}
+
+/* Type: no gradient fills. Ink, with one accent word. */
+.hero h1{background:none;color:var(--ink);-webkit-text-fill-color:currentColor;filter:none}
+.hero-emphasis{color:var(--orange);-webkit-text-fill-color:currentColor}
+.hero-description strong{background:none;color:var(--ink);-webkit-text-fill-color:currentColor;font-weight:650}
+.hero-description{max-width:600px}
+
+/* Buttons: solid instead of gradient. */
+.button-dark{background:var(--ink);box-shadow:0 14px 30px -20px rgba(16,23,20,.75),inset 0 1px 0 rgba(255,255,255,.08)}
+.button-dark:hover{background:var(--green);box-shadow:0 18px 36px -20px rgba(28,99,87,.8)}
+.button-outline{border:1px solid rgba(16,23,20,.16);background:transparent;backdrop-filter:none}
+.button-outline:hover{background:var(--white);border-color:rgba(16,23,20,.3)}
+
+/* Stats: one flat surface, editorial numerals. */
+.stats-strip{
+  margin-top:14px;padding:24px 30px 26px;gap:0;
+  border:1px solid var(--line);border-radius:16px;
+  background:var(--white);backdrop-filter:none;box-shadow:none;
+}
+.stats-strip>div+div::before{top:4%;bottom:4%;width:1px;background:var(--line)}
+.stats-strip strong{
+  display:block;background:none;color:var(--ink);-webkit-text-fill-color:currentColor;
+  font-family:var(--display);font-size:42px;font-weight:600;line-height:1.05;
+  letter-spacing:-.045em;font-variant-numeric:tabular-nums;
+}
+.stats-strip p{
+  margin-top:10px;color:var(--muted);
+  font:500 10px/1.5 var(--mono);letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* Header: quiet chrome, legible repository chip. */
+.site-header{box-shadow:0 10px 30px -26px rgba(16,23,20,.7),inset 0 1px 0 rgba(255,255,255,.9)}
+.desktop-nav a::after{background:var(--orange)}
+.github-coming-soon{
+  gap:9px;padding:9px 15px;border:1px solid var(--line);border-radius:999px;
+  background:var(--white);color:var(--ink);box-shadow:none;
+}
+.github-coming-soon svg{width:15px;height:15px;fill:var(--ink);opacity:.7}
+.github-coming-soon small{margin-top:1px;color:var(--muted);font:500 9px/1.4 var(--mono);letter-spacing:.05em;text-transform:uppercase}
+
+/* Section headings: a hairline, not a repeated gradient tick. */
+.section-heading{padding-top:28px;border-top:1px solid var(--line)}
+.section-heading h2{padding-bottom:0;letter-spacing:-.035em}
+.section-heading h2::after{display:none}
+.section-heading .eyebrow{color:var(--muted)}
+
+/* Leaderboard: measured bars, one accent for the leader. */
+.leaderboard-board{
+  border:1px solid var(--line);border-radius:16px;background:var(--white);
+  box-shadow:none;
+}
+.leaderboard-board::before{display:none}
+.leaderboard-board-heading{background:none;border-bottom:1px solid var(--line)}
+.leaderboard-bar-fill{
+  background:var(--green);border-radius:0 999px 999px 0;box-shadow:none;
+  print-color-adjust:exact;-webkit-print-color-adjust:exact;
+}
+.leaderboard-board .leaderboard-bars>li:first-child .leaderboard-bar-fill{background:var(--orange)}
+.leaderboard-board{font-variant-numeric:tabular-nums}
+
+/* Cards: hairline surfaces, lift only on intent. */
+.task-card{background:var(--white);border:1px solid var(--line);border-radius:14px;box-shadow:none}
+.task-card::after{display:none}
+.task-card:hover{transform:translateY(-3px);border-color:#c3ccbe;box-shadow:0 22px 44px -34px rgba(16,23,20,.55)}
+
+/* V2D keeps its own paper tone; align it with the page. */
+#v2d .v2d-details-track{--paper:#f5f5ef}
+
+/* Editorial refinement: small-screen pass */
+@media (max-width:720px){
+  .hero h1{font-size:clamp(26px,7.6vw,36px);letter-spacing:-.05em;white-space:nowrap;overflow-wrap:normal}
+  .stats-strip{padding:20px 20px 22px;border-radius:14px}
+  .stats-strip strong{font-size:32px;letter-spacing:-.035em}
+  .stats-strip p{font-size:9px;letter-spacing:.08em}
+  .section-heading{padding-top:22px}
+}
+@media (max-width:420px){
+  .stats-strip strong{font-size:27px}
+  .stats-strip p{font-size:8.5px}
+}
