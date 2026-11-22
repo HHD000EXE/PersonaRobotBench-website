@@ -6,7 +6,8 @@
   const PAGE_SIZE = 6;
   const RATES = [1, 2, 4, 8];
   const SKIP_SECONDS = 5;
-  const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, activeExample: 1, rate: 1 };
+  const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, rate: 1,
+    astraGroups: [], geminiGroups: [], geminiAvailable: false, rolloutGroups: [], activeGroup: null };
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
   const escape = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
@@ -98,37 +99,123 @@
     document.body.classList.remove("dialog-open");
   }
 
-  function rolloutCase(example, persona, index) {
-    const source = safeUrl(persona.video);
-    const poster = safeUrl(persona.videoPoster) ?? safeUrl(example.poster);
-    const extension = source ? new URL(source).pathname.toLowerCase().split(".").pop() : "";
-    const mime = ({ mp4: "video/mp4", webm: "video/webm" })[extension];
-    const visual = source
-      ? '<video class="rollout-video" controls playsinline preload="metadata" poster="' + escape(poster ?? "") + '" aria-label="Task ' + example.id + " persona " + escape(persona.id) + ' simulation rollout"><source src="' + escape(source) + '"' + (mime ? ' type="' + mime + '"' : '') + '>Your browser does not support embedded video. <a href="' + escape(source) + '">Download the rollout</a>.</video>'
-      : '<div class="video-placeholder" role="img" aria-label="Video placeholder for Task ' + example.id + " persona " + escape(persona.id) +
-        '"><img src="' + escape(example.poster) + '" alt="" loading="lazy" width="960" height="600"><span class="video-placeholder-label">PERSONA ' + escape(persona.id) +
-        ' / SIMULATION ROLLOUT</span><div class="placeholder-center"><span class="play-outline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 4 13 8-13 8Z"/></svg></span><strong>Rollout video</strong><p>COMING SOON</p></div><span class="placeholder-corner" aria-hidden="true">PRB / ' + padded(example.id) + " / " + escape(persona.id) + '</span></div>';
-    return '<div class="rollout-case">' + visual + '<div class="rollout-case-caption"><span class="persona-avatar"><span class="visually-hidden">Persona </span>' + escape(persona.id) +
-      '</span><p>' + escape(persona.description) + '</p></div></div>';
+  // One gallery, grouped by the policy that produced the recordings. Astra and
+  // scripted examples come from data/examples.json; Gemini 4 replays come from
+  // data/gemini4-rollouts.json. Tiles stay unlabelled; the panel names the model.
+  const RECORDING_KINDS = { model: "model rollout", scripted: "scripted reference" };
+
+  function astraGroup(example) {
+    const model = example.recording.kind === "model";
+    return {
+      key: "astra-" + example.id,
+      kind: "astra",
+      taskId: example.id,
+      title: example.title,
+      shortTitle: example.shortTitle,
+      instruction: example.instruction,
+      tabLabel: example.tabLabel ?? example.shortTitle,
+      thumbnail: (model ? null : safeUrl(example.personas[0]?.videoPoster)) ?? safeUrl(example.poster),
+      poster: example.poster,
+      modelLine: (example.recording.label || "Astra") + " · " + (RECORDING_KINDS[example.recording.kind] || "recorded episode"),
+      recording: example.recording,
+      personas: example.personas.map((persona) => ({
+        id: persona.id,
+        description: persona.description,
+        video: persona.video,
+        poster: persona.videoPoster || example.poster,
+        duration: persona.videoDurationSeconds || 0
+      }))
+    };
   }
 
-  function renderRolloutTabs() {
-    const recorded = state.examples.filter((example) => example.recording);
-    if (!recorded.length) return;
-    // A tile per recorded pair: a real frame from persona A's recording (or the
-    // initial scene) and the pair's label. Model recordings carry an on-screen
-    // overlay, so their tiles use the scene.
-    $(".rollout-tabs").innerHTML = recorded.map((example) => {
-      const model = example.recording.kind === "model";
-      const thumbnail = (model ? null : safeUrl(example.personas[0]?.videoPoster)) ?? safeUrl(example.poster);
-      return '<button type="button" role="tab" id="example-tab-' + example.id + '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-example="' +
-        example.id + '">' + (thumbnail ? '<img src="' + escape(thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
-        '<span>' + escape(example.tabLabel ?? example.shortTitle) + '</span></button>';
-    }).join("");
-    $(".rollout-tabs").classList.add("rollout-tiles");
-    // Wide screens lay the tiles out in full rows of at most ten.
-    const rows = Math.ceil(recorded.length / 10);
-    $(".rollout-tabs").style.setProperty("--tile-columns", String(Math.ceil(recorded.length / rows)));
+  function geminiGroup(items) {
+    const first = items[0];
+    return {
+      key: "gemini4-" + first.taskId,
+      kind: "gemini4",
+      taskId: first.taskId,
+      title: first.title,
+      shortTitle: first.taskKey,
+      instruction: first.instruction,
+      tabLabel: first.title,
+      thumbnail: safeUrl(first.poster),
+      poster: null,
+      modelLine: first.model + " · " + (first.reasoningEffort || "medium") + " reasoning · recorded replay",
+      recording: null,
+      personas: items.map((item) => ({
+        id: item.persona,
+        description: item.personaDescription,
+        video: item.video,
+        poster: item.poster,
+        duration: item.durationSeconds || 0,
+        outcome: item.outcome,
+        seeds: Array.isArray(item.strictSuccessSeeds) ? item.strictSuccessSeeds : [],
+        captions: Array.isArray(item.captions) ? item.captions : []
+      }))
+    };
+  }
+
+  function groupTabId(group) {
+    return (group.kind === "gemini4" ? "gemini4-tab-" : "example-tab-") + group.taskId;
+  }
+
+  function personaExtras(persona) {
+    const badge = persona.outcome
+      ? '<span class="gemini4-badge ' + (persona.outcome === "SUCCESS" ? "is-success" : "is-failed") + '">' + (persona.outcome === "SUCCESS" ? "SUCCESS" : "FAILED") + "</span>"
+      : "";
+    let body = "";
+    if (persona.seeds) body += '<p class="rollout-seeds mono">Strict successes for this persona: ' + persona.seeds.length + " / 10 seeds</p>";
+    const captions = (persona.captions || []).map((call) =>
+      '<div class="gemini4-caption"><span class="mono small-label">Skill call ' + escape(call.skillCall) + (call.startSeconds != null ? " · " + escape(Number(call.startSeconds).toFixed(1)) + " s" : "") + '</span>' +
+      (call.full_call ? '<pre class="gemini4-call">' + escape(call.full_call) + '</pre>' : "") +
+      (call.full_rationale ? '<p class="gemini4-rationale">' + escape(call.full_rationale) + "</p>" : "") + "</div>").join("");
+    if (captions) body += '<div class="gemini4-captions"><p class="gemini4-captions-title">Full text shortened in the video panel</p>' + captions + "</div>";
+    return { badge, body };
+  }
+
+  function rolloutCase(group, persona) {
+    const source = safeUrl(persona.video);
+    const poster = safeUrl(persona.poster) ?? safeUrl(group.poster);
+    const extension = source ? new URL(source).pathname.toLowerCase().split(".").pop() : "";
+    const mime = ({ mp4: "video/mp4", webm: "video/webm" })[extension];
+    const extras = personaExtras(persona);
+    const visual = source
+      ? '<video class="rollout-video" controls playsinline preload="metadata" poster="' + escape(poster ?? "") + '" aria-label="Task ' + group.taskId + " persona " + escape(persona.id) + ' recorded episode"><source src="' + escape(source) + '"' + (mime ? ' type="' + mime + '"' : '') + '>Your browser does not support embedded video. <a href="' + escape(source) + '">Download the recording</a>.</video>'
+      : '<div class="video-placeholder" role="img" aria-label="Video placeholder for Task ' + group.taskId + " persona " + escape(persona.id) +
+        '"><img src="' + escape(group.poster ?? "") + '" alt="" loading="lazy" width="960" height="600"><span class="video-placeholder-label">PERSONA ' + escape(persona.id) +
+        ' / RECORDED EPISODE</span><div class="placeholder-center"><span class="play-outline" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 4 13 8-13 8Z"/></svg></span><strong>Rollout video</strong><p>COMING SOON</p></div><span class="placeholder-corner" aria-hidden="true">PRB / ' + padded(group.taskId) + " / " + escape(persona.id) + '</span></div>';
+    return '<div class="rollout-case">' + visual +
+      '<div class="rollout-case-caption"><span class="persona-avatar"><span class="visually-hidden">Persona </span>' + escape(persona.id) + "</span>" +
+      '<div class="rollout-case-text"><p>' + escape(persona.description) + "</p>" + extras.body + "</div>" + extras.badge + "</div></div>";
+  }
+
+  function rolloutTile(group) {
+    return '<button type="button" role="tab" id="' + escape(groupTabId(group)) + '" aria-controls="rollout-panel" aria-selected="false" tabindex="-1" data-group="' + escape(group.key) + '" data-example="' + escape(group.taskId) + '">' +
+      (group.thumbnail ? '<img src="' + escape(group.thumbnail) + '" alt="" loading="lazy" width="160" height="100">' : "") +
+      '<span>' + escape(group.tabLabel) + '</span></button>';
+  }
+
+  function rolloutGroupSection(id, title, note, groups) {
+    if (!groups.length) return "";
+    // Wide screens lay each group out in full rows of at most ten tiles.
+    const rows = Math.ceil(groups.length / 10);
+    return '<section class="rollout-group" aria-labelledby="rollout-group-' + id + '">' +
+      '<header class="rollout-group-head"><h3 id="rollout-group-' + id + '">' + escape(title) + '</h3><p>' + escape(note) + '</p></header>' +
+      '<div class="rollout-tabs rollout-tiles" role="tablist" aria-label="' + escape(title) + ' recordings" style="--tile-columns:' +
+      Math.ceil(groups.length / rows) + '">' + groups.map(rolloutTile).join("") + "</div></section>";
+  }
+
+  function renderRolloutGroups() {
+    const astra = state.rolloutGroups.filter((group) => group.kind === "astra");
+    const gemini = state.rolloutGroups.filter((group) => group.kind === "gemini4");
+    const geminiNote = state.geminiAvailable
+      ? "Recorded Gemini 4 (medium reasoning) episodes from the final merged evaluation run, one tile per task."
+      : "Gemini 4 replays are unavailable right now. The Astra and scripted recordings remain available.";
+    $("#rollout-groups").innerHTML =
+      rolloutGroupSection("astra", "Astra and scripted references", "Selected development demonstrations and scripted reference controllers on benchmark tasks.", astra) +
+      (state.geminiAvailable
+        ? rolloutGroupSection("gemini4", "Gemini 4", geminiNote, gemini)
+        : '<p id="rollout-gemini-status" class="rollout-group-empty">' + escape(geminiNote) + "</p>");
   }
 
   // One control drives every available recording on a shared simulation clock: a
@@ -229,35 +316,49 @@
     });
   }
 
-  function wireSync(example) {
-    const pair = $("#rollout-pair");
-    if (!pair) return;
-    wireSyncVideos($$("video", pair), $("#rollout-sync"), example.personas.map((persona) => persona.videoDurationSeconds || 0));
+  function wireSync(group) {
+    wireSyncVideos($$("video", $("#rollout-pair")), $("#rollout-sync"), group.personas.map((persona) => persona.duration || 0));
   }
 
-  function selectExample(id, focus = false) {
-    const example = state.examples.find((item) => item.id === id);
-    if (!example) return;
+  function recordingNoteFor(group) {
+    if (group.kind === "gemini4") {
+      return "Recorded Gemini 4 episode from the final merged evaluation run (medium reasoning, seeds 100–109). SUCCESS or FAILED is the native strict-success outcome of the shown seed; these replays are separate from the leaderboard success rate.";
+    }
+    const recording = group.recording;
+    if (!recording) return "";
+    const playback = recording.playback ?? "complete recorded episodes · 1× simulation playback; inference waits omitted.";
+    let note = playback.charAt(0).toUpperCase() + playback.slice(1);
+    if (recording.recordedTaskId !== group.taskId) {
+      note += " Recorded as Task " + recording.recordedTaskId + "; now Task " + group.taskId + ".";
+    }
+    return note;
+  }
+
+  function selectGroup(key, focus = false) {
+    const group = state.rolloutGroups.find((item) => item.key === key);
+    if (!group) return;
     $$("video", $("#rollout-pair")).forEach((video) => {
       if (!video.paused) video.pause();
     });
-    state.activeExample = id;
-    $$(".rollout-tabs [role=tab]").forEach((tab) => {
-      const selected = Number(tab.dataset.example) === id;
+    state.activeGroup = key;
+    $$("#rollout-groups [role=tab]").forEach((tab) => {
+      const selected = tab.dataset.group === key;
       tab.setAttribute("aria-selected", String(selected));
       tab.tabIndex = selected ? 0 : -1;
       if (selected && focus) tab.focus();
     });
-    $("#rollout-panel").setAttribute("aria-labelledby", "example-tab-" + id);
-    $("#rollout-id").textContent = "Task " + padded(id) + " · " + example.shortTitle;
-    $("#rollout-instruction").textContent = "“" + example.instruction + "”";
-    const personas = example.personas;
+    $("#rollout-panel").setAttribute("aria-labelledby", groupTabId(group));
+    $("#rollout-id").textContent = "Task " + padded(group.taskId) + " · " + (group.shortTitle || group.title);
+    $("#rollout-instruction").textContent = "“" + group.instruction + "”";
+    const model = $("#rollout-model");
+    if (model) model.textContent = group.modelLine;
+    const personas = group.personas;
     $("#rollout-pair").dataset.personaCount = String(personas.length);
     $("#rollout-pair").setAttribute("role", "group");
     $("#rollout-pair").setAttribute("aria-label", personas.length + " persona recordings");
-    $("#rollout-pair").innerHTML = personas.map((persona, index) => rolloutCase(example, persona, index)).join("");
+    $("#rollout-pair").innerHTML = personas.map((persona) => rolloutCase(group, persona)).join("");
     const ready = personas.filter((persona) => safeUrl(persona.video)).length;
-    wireSync(example);
+    wireSync(group);
     // Only missing videos need a status; complete recordings speak for themselves.
     $(".video-status").hidden = ready > 0 && ready === personas.length;
     const availability = ready === personas.length && ready > 0
@@ -267,13 +368,9 @@
     const recordingNote = $("#rollout-recording-note");
     if (recordingNote) {
       recordingNote.textContent = "";
-      if (example.recording && ready) {
-        const playback = example.recording.playback ?? "complete recorded episodes · 1× simulation playback; inference waits omitted.";
-        recordingNote.textContent = playback.charAt(0).toUpperCase() + playback.slice(1);
-        if (example.recording.recordedTaskId !== example.id) {
-          recordingNote.textContent += " Recorded as Task " + example.recording.recordedTaskId + "; now Task " + example.id + ".";
-        }
-        const provenance = safeUrl(example.recording.provenance);
+      if (ready) {
+        recordingNote.textContent = recordingNoteFor(group);
+        const provenance = safeUrl(group.recording?.provenance);
         if (provenance) {
           const details = document.createElement("a");
           details.href = provenance;
@@ -328,21 +425,24 @@
     });
     $("#task-dialog").addEventListener("close", () => document.body.classList.remove("dialog-open"));
     $("#task-dialog").addEventListener("cancel", () => document.body.classList.remove("dialog-open"));
-    $(".rollout-tabs").addEventListener("click", (event) => {
-      const tab = event.target.closest("[data-example]");
-      if (tab) selectExample(Number(tab.dataset.example));
+    $("#rollout-groups").addEventListener("click", (event) => {
+      const tab = event.target.closest("[data-group]");
+      if (tab) selectGroup(tab.dataset.group);
     });
-    $(".rollout-tabs").addEventListener("keydown", (event) => {
-      const tabs = $$(".rollout-tabs [role=tab]");
-      const current = tabs.findIndex((tab) => Number(tab.dataset.example) === state.activeExample);
-      let next = current;
-      if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
-      else if (event.key === "ArrowLeft") next = (current + tabs.length - 1) % tabs.length;
+    $("#rollout-groups").addEventListener("keydown", (event) => {
+      const list = event.target.closest('[role="tablist"]');
+      if (!list) return;
+      const tabs = $$('[role="tab"]', list);
+      const index = tabs.indexOf(event.target.closest('[role="tab"]'));
+      if (index < 0) return;
+      let next = index;
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
       else if (event.key === "Home") next = 0;
       else if (event.key === "End") next = tabs.length - 1;
       else return;
       event.preventDefault();
-      selectExample(Number(tabs[next].dataset.example), true);
+      selectGroup(tabs[next].dataset.group, true);
     });
     $(".menu-toggle").addEventListener("click", () => setMenu($(".menu-toggle").getAttribute("aria-expanded") !== "true"));
     $$("#mobile-nav a").forEach((link) => link.addEventListener("click", () => setMenu(false)));
@@ -411,84 +511,27 @@
     }
   }
 
-  // Gemini 4 replay gallery: one group per task, personas side by side.
-  function gemini4Case(item) {
-    const video = safeUrl(item.video);
-    const poster = safeUrl(item.poster) ?? "";
-    const success = item.outcome === "SUCCESS";
-    const seeds = Array.isArray(item.strictSuccessSeeds) ? item.strictSuccessSeeds.length : 0;
-    const captions = (Array.isArray(item.captions) ? item.captions : []).map((call) =>
-      '<div class="gemini4-caption"><span class="mono small-label">Skill call ' + escape(call.skillCall) + (call.startSeconds != null ? " · " + escape(Number(call.startSeconds).toFixed(1)) + " s" : "") + '</span>' +
-      (call.full_call ? '<pre class="gemini4-call">' + escape(call.full_call) + '</pre>' : "") +
-      (call.full_rationale ? '<p class="gemini4-rationale">' + escape(call.full_rationale) + '</p>' : "") + '</div>').join("");
-    return '<article class="gemini4-case"><div class="gemini4-case-head"><span class="persona-avatar"><span class="visually-hidden">Persona </span>' + escape(item.persona) +
-      '</span><span class="gemini4-case-label"><b>Task ' + escape(item.taskId) + ': ' + escape(item.taskKey) + ' / Persona ' + escape(item.persona) + '</b><span class="mono small-label">Seed ' + escape(item.seed) + '</span></span><span class="gemini4-badge ' + (success ? "is-success" : "is-failed") + '">' + (success ? "SUCCESS" : "FAILED") + '</span></div>' +
-      (video ? '<video class="rollout-video gemini4-video" controls playsinline preload="none" poster="' + escape(poster) + '" aria-label="Task ' + escape(item.taskId) + " persona " + escape(item.persona) + ' Gemini 4 replay"><source src="' + escape(video) + '" type="video/mp4">Your browser does not support embedded video. <a href="' + escape(video) + '">Download the replay</a>.</video>' : "") +
-      '<div class="gemini4-case-body"><p>' + escape(item.personaDescription) + '</p><p class="gemini4-seeds mono">Strict successes for this persona: ' + seeds + ' / 10 seeds</p>' +
-      (captions ? '<div class="gemini4-captions"><p class="gemini4-captions-title">Full text shortened in the video panel</p>' + captions + '</div>' : "") + '</div></article>';
-  }
-
-  function gemini4Tile(items, index) {
-    const first = items[0];
-    const poster = safeUrl(first.poster);
-    return '<button type="button" role="tab" id="gemini4-tab-' + index + '" aria-controls="gemini4-panel" aria-selected="' + (index === 0) + '" tabindex="' + (index === 0 ? 0 : -1) + '" data-gemini4-group="' + index + '">' +
-      (poster ? '<img src="' + escape(poster) + '" alt="" loading="lazy" width="160" height="100">' : "") +
-      '<span>Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.title) + '</span>' +
-      '<span class="gemini4-tile-meta mono">' + items.length + ' persona' + (items.length === 1 ? "" : "s") + '</span></button>';
-  }
-
-  function selectGemini4Group(index, focus = false) {
-    const groups = state.gemini4Groups || [];
-    const group = groups[index];
-    const panel = $("#gemini4-panel");
-    if (!group || !panel) return;
-    const first = group[0];
-    state.activeGemini4 = index;
-    $$("#gemini4-tabs [role=tab]").forEach((tab) => {
-      const selected = Number(tab.dataset.gemini4Group) === index;
-      tab.setAttribute("aria-selected", String(selected));
-      tab.tabIndex = selected ? 0 : -1;
-      if (selected && focus) tab.focus();
-    });
-    panel.setAttribute("aria-labelledby", "gemini4-tab-" + index);
-    panel.innerHTML = '<header class="gemini4-group-head"><span class="mono small-label">Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.taskKey) +
-      '</span><h3>' + escape(first.title) + '</h3><p>“' + escape(first.instruction) + '”</p><span class="gemini4-model mono">' + escape(state.gemini4Label || "") + '</span></header><div class="gemini4-pair" style="--gemini4-columns:' + group.length + '">' +
-      group.map(gemini4Case).join("") + '</div><div id="gemini4-sync" class="rollout-sync" hidden></div>';
-    wireSyncVideos($$("video", panel), $("#gemini4-sync"), group.map((item) => item.durationSeconds || 0));
-  }
-
-  function renderGemini4(data) {
+  // Gemini 4 replays join the same gallery as their own group.
+  function gemini4GroupsFrom(data) {
     if (!data || data.schema !== "personarobotbench.website-gemini4-rollouts/1" || !Array.isArray(data.entries)) throw new Error("Unknown gallery data");
     const groups = new Map();
     for (const item of data.entries) {
       if (!groups.has(item.taskId)) groups.set(item.taskId, []);
       groups.get(item.taskId).push(item);
     }
-    state.gemini4Groups = [...groups.values()];
-    state.gemini4Label = data.label;
-    $("#gemini4-gallery").innerHTML = '<div id="gemini4-tabs" class="gemini4-tabs" role="tablist" aria-label="Select a Gemini 4 task replay">' +
-      state.gemini4Groups.map(gemini4Tile).join("") + '</div><div id="gemini4-panel" class="gemini4-panel" role="tabpanel"></div>';
-    $$("#gemini4-tabs [role=tab]").forEach((tab) => tab.addEventListener("click", () => selectGemini4Group(Number(tab.dataset.gemini4Group))));
-    $("#gemini4-tabs").addEventListener("keydown", (event) => {
-      const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
-      if (!step) return;
-      event.preventDefault();
-      selectGemini4Group((state.activeGemini4 + step + state.gemini4Groups.length) % state.gemini4Groups.length, true);
-    });
-    selectGemini4Group(0);
-    const tasks = groups.size;
-    $("#gemini4-status").textContent = data.entries.length + " recorded episode replays across " + tasks + (tasks === 1 ? " task." : " tasks.");
+    return [...groups.values()].map(geminiGroup);
   }
 
   async function loadGemini4() {
-    if (!$("#gemini4-gallery")) return false;
     try {
       const response = await fetch("data/gemini4-rollouts.json", { cache: "no-cache" });
       if (!response.ok) throw new Error("Gallery unavailable");
-      renderGemini4(await response.json());
+      state.geminiGroups = gemini4GroupsFrom(await response.json());
+      state.geminiAvailable = true;
       return true;
     } catch {
-      $("#gemini4-status").textContent = "The Gemini 4 rollouts are unavailable.";
+      state.geminiGroups = [];
+      state.geminiAvailable = false;
       return false;
     }
   }
@@ -548,8 +591,10 @@
       [state.tasks, state.examples] = await Promise.all(responses.map((response) => response.json()));
       if (state.tasks.length !== 100 || state.tasks.reduce((sum, task) => sum + task.personaCount, 0) !== 217) throw new Error("Catalog does not match the release");
       renderTasks();
-      renderRolloutTabs();
-      selectExample(state.examples.find((example) => example.recording)?.id ?? 1);
+      state.astraGroups = state.examples.filter((example) => example.recording).map(astraGroup);
+      state.rolloutGroups = [...state.astraGroups];
+      renderRolloutGroups();
+      if (state.rolloutGroups.length) selectGroup(state.rolloutGroups[0].key);
       wireOverviewPersona();
       return true;
     } catch {
@@ -560,9 +605,21 @@
     }
   }
 
-  window.prbReady = start();
+  async function loadGallery() {
+    const catalog = await start();
+    if (!catalog) return { catalog: false, gemini: false };
+    const gemini = await loadGemini4();
+    state.rolloutGroups = [...state.astraGroups, ...state.geminiGroups];
+    renderRolloutGroups();
+    const active = state.rolloutGroups.find((group) => group.key === state.activeGroup) || state.rolloutGroups[0];
+    if (active) selectGroup(active.key);
+    return { catalog: true, gemini };
+  }
+
+  const gallery = loadGallery();
+  window.prbReady = gallery.then((result) => result.catalog);
   window.prbLeaderboardReady = loadLeaderboard();
-  window.prbGemini4Ready = loadGemini4();
+  window.prbGemini4Ready = gallery.then((result) => result.gemini);
 })();
 
 // Progressive enhancement: content remains visible without observer support.

@@ -857,3 +857,23 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:3;opac
 .gemini4-tabs button[aria-selected="true"]{border-color:rgba(217,95,52,.55);box-shadow:0 12px 26px -18px rgba(17,27,24,.6)}
 .gemini4-tabs button:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 .gemini4-tabs .gemini4-tile-meta{font-size:8px;font-weight:500;color:var(--muted)}
+
+/* One gallery, grouped by policy ---------------------------- */
+.rollout-groups{display:grid;gap:34px}
+.rollout-group{min-width:0}
+.rollout-group-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.rollout-group-head h3{font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:-.03em}
+.rollout-group-head p{margin:0;font-size:11px;color:var(--muted);line-height:1.7;flex:1 1 320px}
+.rollout-group .rollout-tabs.rollout-tiles{margin-bottom:0}
+.rollout-group-empty{margin:0;padding:16px 18px;border:1px dashed var(--line);border-radius:var(--radius);background:#fbfcf8;font-size:11px;color:var(--muted)}
+.rollout-model{display:block;grid-column:1;font-size:9px;letter-spacing:.05em;color:var(--muted);text-transform:uppercase}
+.rollout-case-text{min-width:0;flex:1}
+.rollout-seeds{margin-top:7px;font-size:8px;letter-spacing:.03em;color:#8a927e}
+.rollout-case-caption .gemini4-badge{flex:none;align-self:flex-start}
+.rollout-case-caption .gemini4-captions{margin-top:10px}
+@media(max-width:720px){
+  .rollout-groups{gap:26px}
+  .rollout-group-head h3{font-size:18px}
+  .rollout-group-head p{font-size:10px;flex-basis:100%}
+  .rollout-model{font-size:8px}
+}

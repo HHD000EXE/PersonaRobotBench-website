@@ -67,8 +67,8 @@ built-in token; contributors do not configure deployment credentials.
 ## Add or replace rollout videos
 
 Edit `data/examples.json`. Every example with a `recording` block gets a thumbnail
-tile in the rollout section, in file order, labelled by its `tabLabel`. Set each
-persona's `video` field, for example:
+tile in the Astra and scripted group of the rollout gallery, in file order,
+labelled by its `tabLabel`. Set each persona's `video` field, for example:
 
 ~~~json
 {
@@ -104,12 +104,14 @@ this source repository small.
 
 ## Gemini 4 rollouts
 
-The **Gemini 4 rollouts** section replays recorded Gemini 4 (medium reasoning)
-episodes from the final merged evaluation run. A tile per task opens that task's
-persona replays side by side under one shared playback clock. Each player shows
-the episode's native strict-success outcome (SUCCESS or FAILED) and, below the
-video, any skill-call or rationale text that was too long for the in-video panel.
-These selected replays are separate from the leaderboard success rate.
+Recorded Gemini 4 (medium reasoning) episodes from the final merged evaluation
+run appear as their own group inside the single **Task rollout gallery**. Each
+task is one tile; opening it shows that task's persona replays side by side
+under one shared playback clock. Each player shows the episode's native
+strict-success outcome (SUCCESS or FAILED) and, below the video, any skill-call
+or rationale text that was too long for the in-video panel. Model identity is
+shown in the panel header, never on the tiles, and these selected replays are
+separate from the leaderboard success rate.
 
 The page reads `data/gemini4-rollouts.json`; media live in `assets/gemini4/`
 (`taskNNN-P.mp4` with a WebP poster from the recording). Import or extend the

@@ -190,15 +190,16 @@ test('rollout pairs are explicit placeholders and keyboard tabs work', async () 
   const ctx = await boot();
   assert.equal(ctx.$$('.video-placeholder').length, 2);
   assert.equal(ctx.$$('#rollout-pair video').length, 0);
-  const tabs = ctx.$('.rollout-tabs');
+  const tabs = ctx.$$('.rollout-tabs')[0];
   const recorded = examples.filter((item) => item.recording);
   const rows = Math.ceil(recorded.length / 10);
   assert.equal(tabs.style.getPropertyValue('--tile-columns'), String(Math.ceil(recorded.length / rows)));
   const last = String(recorded.at(-1).id);
   const [first, second] = recorded.map((item) => String(item.id));
   for (const [key, expected] of [['ArrowRight', second], ['End', last], ['Home', first], ['ArrowLeft', last]]) {
-    tabs.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key, bubbles: true }));
-    const selected = ctx.$('[role="tab"][aria-selected="true"]');
+    const current = ctx.$('#rollout-groups [role="tab"][aria-selected="true"]');
+    current.dispatchEvent(new ctx.window.KeyboardEvent('keydown', { key, bubbles: true }));
+    const selected = ctx.$('#rollout-groups [role="tab"][aria-selected="true"]');
     assert.equal(selected.dataset.example, expected);
     assert.equal(selected.tabIndex, 0);
     assert.equal(ctx.document.activeElement, selected);
@@ -316,10 +317,13 @@ test('shipped examples preserve every authored slot and available recording with
   ctx.window.close();
 });
 
-test('rollout tabs are built from recorded examples without source labels', async () => {
+test('one gallery groups Astra and Gemini tiles without model labels on the tiles', async () => {
   const ctx = await boot({ examples: shippedExamples });
-  const tabs = ctx.$$('.rollout-tabs [role="tab"]');
+  const groups = ctx.$$('.rollout-group');
+  assert.equal(groups.length, 2);
+  const tabs = [...groups[0].querySelectorAll('[role="tab"]')];
   const recorded = shippedExamples.filter((item) => item.recording);
+  assert.equal(tabs.length, recorded.length);
   assert.deepEqual(tabs.map((tab) => tab.dataset.example), recorded.map((item) => String(item.id)));
   assert.deepEqual(tabs.slice(0, 4).map((tab) => tab.querySelector('span').textContent), ['Desk layout', 'Drink selection', 'Pressing style', 'Transfer method']);
   for (const [index, tab] of tabs.entries()) {
@@ -963,54 +967,58 @@ print(f'Eight actual repaired variants and{checks}tamper guards passed')
   assert.equal(checked.status, 0, checked.stdout + checked.stderr);
 });
 
-test('Gemini 4 gallery selects a task tile and shows its persona replays', async () => {
+test('the Gemini 4 group opens a task and shows its persona replays', async () => {
   const ctx = await boot();
   assert.equal(ctx.gemini4Ready, true);
-  const tabs = ctx.$$('#gemini4-tabs [role=tab]');
+  const groups = ctx.$$('.rollout-group');
+  assert.equal(groups.length, 2);
+  const tabs = [...groups[1].querySelectorAll('[role="tab"]')];
   assert.equal(tabs.length, 2);
-  assert.deepEqual(tabs.map((tab) => tab.getAttribute('aria-selected')), ['true', 'false']);
-  assert.equal(ctx.$$('#gemini4-panel .gemini4-case').length, 2);
-  assert.deepEqual(ctx.$$('.gemini4-case-label b').map((node) => node.textContent),
-    ['Task 21: sample_key / Persona A', 'Task 21: sample_key / Persona B']);
+  assert.deepEqual(tabs.map((tab) => tab.getAttribute('aria-selected')), ['false', 'false']);
+  tabs[0].click();
+  assert.equal(tabs[0].getAttribute('aria-selected'), 'true');
+  assert.equal(ctx.$$('#rollout-groups [role="tab"][aria-selected="true"]').length, 1);
+  assert.equal(ctx.$('#rollout-panel').getAttribute('aria-labelledby'), tabs[0].id);
+  assert.equal(ctx.$$('#rollout-pair .rollout-case').length, 2);
   assert.deepEqual(ctx.$$('.gemini4-badge').map((node) => node.textContent), ['SUCCESS', 'FAILED']);
-  for (const video of ctx.$$('.gemini4-video')) {
-    assert.equal(video.getAttribute('preload'), 'none');
+  for (const video of ctx.$$('#rollout-pair video')) {
+    assert.equal(video.getAttribute('preload'), 'metadata');
     assert.match(video.getAttribute('poster'), /assets\/gemini4\/task0\d\d-[ABC]\.webp$/);
     assert.ok(video.hasAttribute('controls'));
   }
   assert.equal(ctx.$$('.gemini4-caption').length, 1);
   assert.equal(ctx.$('.gemini4-call').textContent, 'place(object=<keys>)');
   assert.equal(ctx.$('.gemini4-rationale').textContent, 'Long rationale text.');
-  assert.equal(ctx.$$('.gemini4-case-body b').length, 0, 'Manifest text must be escaped');
-  assert.equal(ctx.$('.gemini4-model').textContent, 'Gemini 4 (medium) + structured skills');
+  assert.equal(ctx.$$('#rollout-pair .gemini4-case-body b').length, 0, 'Manifest text must be escaped');
+  assert.match(ctx.$('#rollout-model').textContent, /^Gemini 4/);
+  assert.match(ctx.$('#rollout-recording-note').textContent, /final merged evaluation run/);
   tabs[1].click();
   assert.equal(tabs[1].getAttribute('aria-selected'), 'true');
   assert.equal(tabs[0].getAttribute('aria-selected'), 'false');
-  assert.equal(ctx.$$('#gemini4-panel .gemini4-case').length, 3);
-  assert.deepEqual(ctx.$$('.gemini4-case-label b').map((node) => node.textContent),
-    ['Task 23: sample_key / Persona A', 'Task 23: sample_key / Persona B', 'Task 23: sample_key / Persona C']);
+  assert.equal(ctx.$$('#rollout-pair .rollout-case').length, 3);
   assert.deepEqual(ctx.$$('.gemini4-badge').map((node) => node.textContent), ['FAILED', 'FAILED', 'SUCCESS']);
-  assert.equal(ctx.$('#gemini4-status').textContent, '5 recorded episode replays across 2 tasks.');
   ctx.window.close();
 });
 
-test('Gemini 4 gallery reports an unavailable manifest without breaking the catalog', async () => {
+test('an unavailable Gemini manifest leaves the Astra and scripted group usable', async () => {
   const ctx = await boot({ gemini4Error: true });
   assert.equal(ctx.ready, true);
   assert.equal(ctx.gemini4Ready, false);
-  assert.equal(ctx.$('#gemini4-status').textContent, 'The Gemini 4 rollouts are unavailable.');
-  assert.equal(ctx.$$('#gemini4-tabs [role=tab]').length, 0);
+  assert.equal(ctx.$$('.rollout-group').length, 1);
+  assert.match(ctx.$('#rollout-gemini-status').textContent, /unavailable/i);
+  assert.equal(ctx.$$('#rollout-groups [role="tab"]').length, examples.filter((item) => item.recording).length);
   ctx.window.close();
 });
 
-test('Gemini 4 gallery escapes markup in every manifest field, including task IDs', async () => {
+test('manifest fields are escaped before the gallery renders them', async () => {
   const markup = '<img src=x onerror="alert(1)">';
   const entry = gemini4Entry(markup, markup, 'SUCCESS', [{ skillCall: markup, startSeconds: 1, full_call: markup }]);
   Object.assign(entry, { taskKey: markup, title: markup, instruction: markup, seed: markup });
   const ctx = await boot({ gemini4: { ...gemini4Fixture, label: markup, entries: [entry] } });
   assert.equal(ctx.gemini4Ready, true);
-  assert.equal(ctx.$$('#gemini4-panel img').length, 0);
-  assert.equal(ctx.$$('#gemini4 [onerror]').length, 0);
-  assert.match(ctx.$('.gemini4-group-head .small-label').textContent, /onerror/);
+  ctx.$$('.rollout-group')[1].querySelector('[role="tab"]').click();
+  assert.equal(ctx.$$('#rollout-pair img').length, 0);
+  assert.equal(ctx.$$('#rollout-groups [onerror], #rollout-pair [onerror]').length, 0);
+  assert.match(ctx.$('#rollout-panel').textContent, /onerror/);
   ctx.window.close();
 });
