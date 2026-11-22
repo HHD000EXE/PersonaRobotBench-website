@@ -13,7 +13,7 @@
   <title>PersonaRobotBench — A Benchmark for Personalized Robotics</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/fonts.css">
-  <link rel="stylesheet" href="styles.css?v=visual-refresh-20261122">
+  <link rel="stylesheet" href="styles.css?v=fig1-light-lb-20261122">
   <link rel="stylesheet" href="assets/v2d/section.css?v=20261119c">
   <script src="app.js?v=visual-refresh-20261122" defer></script>
 </head>
@@ -57,12 +57,11 @@
             </dl>
           </div>
         </div>
-      <figure class="persona-concept" aria-labelledby="overview-title" aria-describedby="persona-concept-caption">
-        <picture class="persona-concept-art">
-          <source media="(max-width: 1000px)" srcset="assets/persona-concept-mobile.svg?v=profile-components-20261028" width="600" height="2088">
-          <img src="assets/persona-concept.svg?v=profile-components-20261028" width="1200" height="1108" loading="lazy" decoding="async" alt="Same Instruction, Different User Personas: Personalized Robot Actions. Conceptual workflow: Mira and Noah each provide a profile containing background, living context, work, interests and habits. Given the same instruction and scene, one policy selects task-relevant computer-work and hand-use cues, infers likely mouse-side preferences, and plans different actions. Relevant components are not highlighted in the input. The task persona setup is reserved for evaluation in this illustration. Only the mouse moves; this is not all Task 1 goals.">
-        </picture>
-        <figcaption id="persona-concept-caption"><strong>Same instruction, different user personas.</strong> A profile combines personal background, living context, work, interests and habits. Given the instruction and scene, the policy must identify which information matters—for this desk example, computer work and hand-use habits—then infer a task-relevant preference and plan its actions. The useful clues are mixed with other personal context; neither persona labels nor target placements are supplied. In this conceptual workflow, the task’s persona setup is reserved for evaluation. Hand-use habits suggest a likely mouse preference rather than guaranteeing it. Only the mouse moves here; full Task 1 has additional goals. Across tasks, preferences can affect <strong>what to choose</strong>, <strong>where to place objects</strong>, <strong>how to execute</strong>, and <strong>the order of actions</strong>.</figcaption>
+      <figure class="persona-concept paper-figure" aria-describedby="persona-concept-caption">
+        <div class="paper-figure-scroll" tabindex="0" role="region" aria-label="Paper Figure 1, from human diversity to persona-conditioned robot behavior">
+          <img src="assets/paper-figure-1.webp?v=paper-figure-1-20261122" width="2063" height="757" loading="lazy" decoding="async" alt="Paper Figure 1. Human diversity feeds PersonaRobotBench: 1,000 profiles with 20 dimensions are sampled from MatrAIx. Stage 1 infers a task-relevant persona from profile and human-robot interaction evidence; Stage 2 executes the shared instruction with one persona-conditioned policy. For the instruction Move the box to the goal, persona A lifts, carries and lowers the box while persona B slides it across the table on a Unitree G1.">
+        </div>
+        <figcaption id="persona-concept-caption"><strong>Figure 1.</strong> Human diversity meets the benchmark: 1,000 profiles with 20 dimensions are sampled from MatrAIx, Stage 1 recovers the task-relevant persona from profile and HRI evidence, and Stage 2 runs one shared policy that executes the same instruction differently for each persona. The example shows a Unitree G1 lifting, carrying and lowering the box for persona A and sliding it across the table for persona B. Profiles are illustrative and the HRI history is synthetic; the task persona setup is reserved for evaluation.</figcaption>
       </figure>
       </div>
     </section>

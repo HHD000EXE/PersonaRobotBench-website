@@ -134,7 +134,7 @@ checks every entry's video and poster hashes. Import-script tests:
 | --- | --- |
 | `index.html` | Page copy, public sections and navigation |
 | `styles.css` | Responsive layout and typography |
-| `assets/persona-concept.svg`, `assets/persona-concept-mobile.svg` | User profile → preference inference → robot action concept figure, with a separate phone layout |
+| `assets/paper-figure-1.webp` | Paper Figure 1: human diversity → Stage 1 persona inference → Stage 2 persona-conditioned execution, rendered from the CVPR source at 300 dpi |
 | `tools/build_concept_figure.py` | Rebuild both concept figures from a symmetric grid and the shared Task 1 initial layout |
 | `app.js` | Search, category filters, task details, tabs and video playback |
 | `data/tasks.json` | All 100 task descriptions and 217 task-local persona cases |
@@ -164,10 +164,11 @@ exporter refuses to overwrite this complete preview catalog.
 
 Normal website edits and deployments do not need the private benchmark checkout.
 
-To edit the overview concept, update `tools/build_concept_figure.py` and run
-`python3 tools/build_concept_figure.py`. Both SVG layouts share one grid-based
-source; all Before views reuse the same initial-desk symbol. No simulator or
-additional Python packages are needed.
+The overview figure is rendered from `CVPR 2027/figures/Figure1_PersonaRobotBench.pdf`
+in the paper repository (`pdftoppm -r 300`, then WebP quality 92). The earlier
+`assets/persona-concept.svg` and `persona-concept-mobile.svg` remain only as
+legacy artifacts of `tools/build_concept_figure.py`; the site no longer
+references them.
 
 The overview appears immediately after the title and release statistics, before
 the leaderboard. Its Task 1 environment and optional 3D viewer share one panel
