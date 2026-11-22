@@ -587,12 +587,38 @@ test('published policy snapshot renders reported scores without settings panels 
 });
 
 
+test('authors and affiliations name every institution with a local mark', async () => {
+  const ctx = await boot();
+  const authors = ctx.$('#authors');
+  assert.equal(authors.querySelectorAll('.authors-line sup').length, 29);
+  assert.match(authors.querySelector('.authors-line').textContent, /Haodi Hu/);
+  assert.match(authors.querySelector('.authors-count').textContent, /29 authors · 26 affiliations/);
+  const legend = [...authors.querySelectorAll('.authors-legend li')];
+  assert.equal(legend.length, 26);
+  assert.deepEqual(legend.map((li) => li.querySelector('b').textContent), Array.from({ length: 26 }, (_, i) => String(i + 1)));
+  const cells = [...authors.querySelectorAll('.authors-logos li')];
+  assert.equal(cells.length, 26);
+  const marks = cells.filter((li) => li.querySelector('img'));
+  assert.equal(marks.length, 22);
+  assert.equal(cells.filter((li) => li.classList.contains('is-wordmark')).length, 4);
+  for (const cell of marks) {
+    const img = cell.querySelector('img');
+    assert.match(img.getAttribute('src'), /^assets\/affiliations\/\d{2}-[a-z0-9-]+\.webp$/);
+    assert.ok(img.getAttribute('alt'), 'every institutional mark needs alt text');
+    assert.equal(img.getAttribute('loading'), 'lazy');
+    assert.equal(Number(img.getAttribute('height')), 72);
+    assert.ok(Number(img.getAttribute('width')) > 0);
+  }
+  ctx.window.close();
+});
+
 test('the environment and policy concept introduce the benchmark before results, with navigation in page order', async () => {
   const ctx = await boot();
   const sections = [...ctx.$('main').children].filter((node) => node.tagName === 'SECTION');
   assert.ok(sections[0].classList.contains('hero'));
-  assert.equal(sections[1].id, 'overview');
-  assert.equal(sections[2].id, 'leaderboard');
+  assert.equal(sections[1].id, 'authors');
+  assert.equal(sections[2].id, 'overview');
+  assert.equal(sections[3].id, 'leaderboard');
   assert.ok(ctx.$('#overview .overview-environment #scene-viewport'));
   assert.ok(ctx.$('#overview .benchmark-story .persona-concept'));
   assert.equal(ctx.$('.hero .persona-note, .hero .request-note'), null);
