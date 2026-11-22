@@ -7,7 +7,7 @@
   const RATES = [1, 2, 4, 8];
   const SKIP_SECONDS = 5;
   const state = { tasks: [], examples: [], category: "All", query: "", visible: PAGE_SIZE, rate: 1,
-    astraGroups: [], geminiGroups: [], geminiAvailable: false, rolloutGroups: [], activeGroup: null };
+    astraGroups: [], geminiGroups: [], geminiAvailable: false, replayGroups: [], rolloutGroups: [], activeGroup: null };
   const $ = (selector, scope = document) => scope.querySelector(selector);
   const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
   const escape = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
@@ -103,6 +103,10 @@
   // scripted examples come from data/examples.json; Gemini 4 replays come from
   // data/gemini4-rollouts.json. Tiles stay unlabelled; the panel names the model.
   const RECORDING_KINDS = { model: "model rollout", scripted: "scripted reference" };
+  // Further recorded-replay groups. Each manifest names its own gallery group, model
+  // and recording note, so another model needs a manifest here and no gallery code.
+  const MODEL_REPLAY_MANIFESTS = ["data/deepseek-rollouts.json"];
+  const MODEL_REPLAY_SCHEMA = "personarobotbench.website-model-replays/1";
 
   function astraGroup(example) {
     const model = example.recording.kind === "model";
@@ -155,8 +159,41 @@
     };
   }
 
+  function replayGroup(items, manifest) {
+    const first = items[0];
+    return {
+      key: manifest.group.id + "-" + first.taskId,
+      kind: "replay",
+      source: manifest.group.id,
+      sectionTitle: manifest.group.title,
+      taskId: first.taskId,
+      title: first.title,
+      shortTitle: first.title,
+      instruction: first.instruction,
+      tabLabel: first.title,
+      thumbnail: safeUrl(first.poster),
+      poster: null,
+      modelLine: first.model + " · " + first.reasoningEffort + " reasoning · recorded replay",
+      recording: null,
+      note: typeof manifest.note === "string" ? manifest.note : "",
+      personas: items.map((item) => ({
+        id: item.persona,
+        description: item.personaDescription,
+        video: item.video,
+        poster: item.poster,
+        duration: item.durationSeconds || 0,
+        outcome: item.outcome,
+        seeds: Array.isArray(item.strictSuccessSeeds) ? item.strictSuccessSeeds : [],
+        seed: item.seed,
+        ended: typeof item.ended === "string" ? item.ended : "",
+        captions: Array.isArray(item.captions) ? item.captions : []
+      }))
+    };
+  }
+
   function groupTabId(group) {
-    return (group.kind === "gemini4" ? "gemini4-tab-" : "example-tab-") + group.taskId;
+    const prefix = group.kind === "gemini4" ? "gemini4-tab-" : group.kind === "replay" ? group.source + "-tab-" : "example-tab-";
+    return prefix + group.taskId;
   }
 
   function personaExtras(persona) {
@@ -165,6 +202,7 @@
       : "";
     let body = "";
     if (persona.seeds) body += '<p class="rollout-seeds mono">Strict successes for this persona: ' + persona.seeds.length + " / 10 seeds</p>";
+    if (persona.ended) body += '<p class="rollout-seeds mono">Seed ' + escape(persona.seed) + " · " + escape(persona.ended) + "</p>";
     const captions = (persona.captions || []).map((call) =>
       '<div class="gemini4-caption"><span class="mono small-label">Skill call ' + escape(call.skillCall) + (call.startSeconds != null ? " · " + escape(Number(call.startSeconds).toFixed(1)) + " s" : "") + '</span>' +
       (call.full_call ? '<pre class="gemini4-call">' + escape(call.full_call) + '</pre>' : "") +
@@ -213,7 +251,11 @@
       rolloutGroupSection("astra", "Astra", astra) +
       (state.geminiAvailable
         ? rolloutGroupSection("gemini4", "Gemini 4", gemini)
-        : '<p id="rollout-gemini-status" class="rollout-group-empty">' + escape(geminiNote) + "</p>");
+        : '<p id="rollout-gemini-status" class="rollout-group-empty">' + escape(geminiNote) + "</p>") +
+      [...new Set(state.replayGroups.map((group) => group.source))].map((source) => {
+        const groups = state.replayGroups.filter((group) => group.source === source);
+        return rolloutGroupSection(source, groups[0].sectionTitle, groups);
+      }).join("");
   }
 
   // One control drives every available recording on a shared simulation clock: a
@@ -322,6 +364,7 @@
     if (group.kind === "gemini4") {
       return "Recorded Gemini 4 episode from the final merged evaluation run (medium reasoning, seeds 100–109). SUCCESS or FAILED is the native strict-success outcome of the shown seed; these replays are separate from the leaderboard success rate.";
     }
+    if (group.kind === "replay") return group.note;
     const recording = group.recording;
     if (!recording) return "";
     const playback = recording.playback ?? "complete recorded episodes · 1× simulation playback; inference waits omitted.";
@@ -539,6 +582,42 @@
     return [...groups.values()].map(geminiGroup);
   }
 
+  // A model-replay manifest is optional: one that is missing or malformed adds no group.
+  function modelReplayGroupsFrom(data) {
+    const group = data && data.group;
+    if (!data || data.schema !== MODEL_REPLAY_SCHEMA || !Array.isArray(data.entries) || !group
+      || typeof group.title !== "string" || !/^[a-z][a-z0-9-]*$/.test(group.id) || ["astra", "gemini4", "example"].includes(group.id)) {
+      throw new Error("Unknown gallery data");
+    }
+    const groups = new Map();
+    for (const item of data.entries) {
+      if (!groups.has(item.taskId)) groups.set(item.taskId, []);
+      groups.get(item.taskId).push(item);
+    }
+    return [...groups.values()].map((items) => replayGroup(items, data));
+  }
+
+  async function loadModelReplays() {
+    const loaded = await Promise.all(MODEL_REPLAY_MANIFESTS.map(async (url) => {
+      try {
+        const response = await fetch(url, { cache: "no-cache" });
+        if (!response.ok) throw new Error("Gallery unavailable");
+        return modelReplayGroupsFrom(await response.json());
+      } catch {
+        return [];
+      }
+    }));
+    // One section per group id: a later manifest cannot reuse an earlier one.
+    const seen = new Set();
+    state.replayGroups = [];
+    for (const groups of loaded) {
+      if (!groups.length || seen.has(groups[0].source)) continue;
+      seen.add(groups[0].source);
+      state.replayGroups.push(...groups);
+    }
+    return state.replayGroups.length;
+  }
+
   async function loadGemini4() {
     try {
       const response = await fetch("data/gemini4-rollouts.json", { cache: "no-cache" });
@@ -624,19 +703,21 @@
 
   async function loadGallery() {
     const catalog = await start();
-    if (!catalog) return { catalog: false, gemini: false };
+    if (!catalog) return { catalog: false, gemini: false, replays: 0 };
     const gemini = await loadGemini4();
-    state.rolloutGroups = [...state.astraGroups, ...state.geminiGroups];
+    const replays = await loadModelReplays();
+    state.rolloutGroups = [...state.astraGroups, ...state.geminiGroups, ...state.replayGroups];
     renderRolloutGroups();
     const active = state.rolloutGroups.find((group) => group.key === state.activeGroup) || state.rolloutGroups[0];
     if (active) selectGroup(active.key);
-    return { catalog: true, gemini };
+    return { catalog: true, gemini, replays };
   }
 
   const gallery = loadGallery();
   window.prbReady = gallery.then((result) => result.catalog);
   window.prbLeaderboardReady = loadLeaderboard();
   window.prbGemini4Ready = gallery.then((result) => result.gemini);
+  window.prbModelReplaysReady = gallery.then((result) => result.replays);
 })();
 
 // Progressive enhancement: content remains visible without observer support.

@@ -373,6 +373,85 @@ def verify_render_variant(item: dict, source: dict, recording: dict,
 
 
 
+MODEL_REPLAY_SCHEMA = "personarobotbench.website-model-replays/1"
+# Published replay text never carries filesystem paths or internal model identifiers.
+PRIVATE_REPLAY_TEXT = re.compile(r"(?<![\w\s])/|/(?![\w\s])|(?<=\w)/(?=\s)|(?<=\s)/(?=\w)|\w/\w+/|\\|~/", re.IGNORECASE)
+
+
+def mp4_moov_first(file: Path) -> bool:
+    """True when the MP4's index (moov) precedes its media (mdat), so playback starts while downloading."""
+    data, offset = file.read_bytes(), 0
+    while offset + 8 <= len(data):
+        size, kind = int.from_bytes(data[offset:offset + 4], "big"), data[offset + 4:offset + 8]
+        if size == 1:
+            size = int.from_bytes(data[offset + 8:offset + 16], "big")
+        if kind in (b"moov", b"mdat"):
+            return kind == b"moov"
+        if size < 8:
+            return False
+        offset += size
+    return False
+
+
+def verify_model_replays(root: Path, tasks: list[dict]) -> int:
+    """Check every model-replay gallery manifest named in app.js against the catalog and its local media."""
+    listed = re.search(r"const MODEL_REPLAY_MANIFESTS = \[([^\]]*)\];", (root / "app.js").read_text())
+    assert listed, "app.js does not list its model-replay manifests"
+    names = re.findall(r'"([^"]+)"', listed.group(1))
+    assert len(names) == len(set(names)) and all(re.fullmatch(r"data/[a-z0-9-]+\.json", name) for name in names), names
+    on_disk = []
+    for path in sorted((root / "data").glob("*.json")):
+        content = json.loads(path.read_text())
+        if isinstance(content, dict) and content.get("schema") == MODEL_REPLAY_SCHEMA:
+            on_disk.append(path.relative_to(root).as_posix())
+    assert on_disk == sorted(names), f"Model-replay manifests on disk {on_disk} differ from app.js {sorted(names)}"
+    by_id = {task["id"]: task for task in tasks}
+    group_ids, total = set(), 0
+    for name in names:
+        data = json.loads((root / name).read_text())
+        group = data["group"]
+        assert re.fullmatch(r"[a-z][a-z0-9-]*", group["id"]) and group["id"] not in {"astra", "gemini4", "example"}, group
+        assert group["id"] not in group_ids, f"Duplicate model-replay group: {group['id']}"
+        group_ids.add(group["id"])
+        assert data["mediaDir"] == f"assets/{group['id']}", data["mediaDir"]
+        first, last = data["seedRange"]
+        assert type(first) is int and type(last) is int and first <= last, data["seedRange"]
+        assert isinstance(group["title"], str) and group["title"].strip(), "Model-replay group needs a title"
+        for key in ("model", "reasoningEffort", "description", "note", "selection"):
+            assert isinstance(data[key], str) and data[key].strip(), key
+            assert not PRIVATE_REPLAY_TEXT.search(data[key]), f"Private text in {name} {key}"
+        keys = [(item["taskId"], item["persona"]) for item in data["entries"]]
+        assert keys and len(keys) == len(set(keys)) and keys == sorted(keys), f"{name}: entries must be unique and sorted"
+        for item in data["entries"]:
+            task = by_id[item["taskId"]]
+            persona = next(p for p in task["personas"] if p["id"] == item["persona"])
+            assert item["personaDescription"] == persona["description"], (name, item["taskId"], item["persona"])
+            assert (item["taskFolder"], item["title"], item["instruction"]) == (task["folder"], task["title"], task["instruction"])
+            assert item["outcome"] in {"SUCCESS", "FAILED"}
+            assert item["model"] == data["model"] and item["reasoningEffort"] == data["reasoningEffort"]
+            seeds = item["strictSuccessSeeds"]
+            assert all(type(seed) is int and first <= seed <= last for seed in seeds + [item["seed"]]), "Replay seed outside the manifest range"
+            assert len(seeds) == len(set(seeds)), "Duplicate success seed"
+            assert (item["seed"] in seeds) == (item["outcome"] == "SUCCESS"), "Outcome differs from seed record"
+            assert isinstance(item["ended"], str) and item["ended"].strip() and not PRIVATE_REPLAY_TEXT.search(item["ended"])
+            assert item.get("captions", []) == [], "Model-replay captions are not published"
+            expected = f"{data['mediaDir']}/task{item['taskId']:03}-{item['persona']}"
+            assert item["video"] == expected + ".mp4" and item["poster"] == expected + ".webp"
+            video, poster = root / item["video"], root / item["poster"]
+            assert video.is_file() and poster.is_file(), f"Missing replay media: {expected}"
+            assert video.stat().st_size == item["bytes"], "Replay video size differs"
+            assert hashlib.sha256(video.read_bytes()).hexdigest() == item["sha256"], "Replay video hash differs"
+            assert mp4_moov_first(video), f"Replay video is not fast-start: {expected}"
+            image = poster.read_bytes()
+            assert image[:4] == b"RIFF" and image[8:12] == b"WEBP", item["poster"]
+            assert hashlib.sha256(image).hexdigest() == item["posterSha256"], "Replay poster hash differs"
+            assert item["durationSeconds"] > 0 and item["frames"] > 0 and item["width"] > 0 and item["height"] > 0
+        media = {path.name for path in (root / data["mediaDir"]).iterdir()}
+        assert media == {f"task{t:03}-{p}{ext}" for t, p in keys for ext in (".mp4", ".webp")}, f"Unlisted files in {data['mediaDir']}"
+        total += len(keys)
+    return total
+
+
 def verify_gemini4(root: Path, tasks: list[dict]) -> int:
     """Check the Gemini 4 replay gallery manifest against its local media."""
     path = root / "data/gemini4-rollouts.json"
@@ -661,10 +740,11 @@ def verify(root: Path) -> dict[str, int | str]:
     preview_count = verify_previews(root, tasks)
     policy_count = verify_leaderboard(root, tasks)
     gemini4_count = verify_gemini4(root, tasks)
+    model_replay_count = verify_model_replays(root, tasks)
     v2d_count = verify_v2d(root)
     return {"status": "passed", "tasks": len(tasks), "persona_cases": 217,
             "task_previews": preview_count, "policy_configurations": policy_count,
-            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants), "gemini4_replays": gemini4_count, "v2d_videos": v2d_count,
+            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants), "gemini4_replays": gemini4_count, "model_replays": model_replay_count, "v2d_videos": v2d_count,
             "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 
 ROOT = Path(__file__).resolve().parent
@@ -26,9 +27,12 @@ def build():
     (DIST / ".nojekyll").touch()
     shutil.copytree(ROOT / "assets", DIST / "assets")
     (DIST / "data").mkdir()
+    # Model-replay manifests are the ones app.js lists, so the build and the page cannot drift apart.
+    replay_list = re.search(r"const MODEL_REPLAY_MANIFESTS = \[([^\]]*)\];", (ROOT / "app.js").read_text())
+    replay_manifests = [Path(name).name for name in re.findall(r'"([^"]+)"', replay_list.group(1))] if replay_list else []
     for name in ("tasks.json", "examples.json", "asset-provenance.json", "rollout-provenance.json",
                  "task-preview-provenance.json", "leaderboard.json", "leaderboard-results.json",
-                 "gemini4-rollouts.json"):
+                 "gemini4-rollouts.json", *replay_manifests):
         shutil.copy2(ROOT / "data" / name, DIST / "data" / name)
     tasks = json.loads((DIST / "data/tasks.json").read_text())
     if len(tasks) != 100 or sum(task["personaCount"] for task in tasks) != 217:
