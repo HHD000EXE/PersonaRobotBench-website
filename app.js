@@ -195,12 +195,12 @@
       '<span>' + escape(group.tabLabel) + '</span></button>';
   }
 
-  function rolloutGroupSection(id, title, note, groups) {
+  function rolloutGroupSection(id, title, groups) {
     if (!groups.length) return "";
     // Wide screens lay each group out in full rows of at most ten tiles.
     const rows = Math.ceil(groups.length / 10);
     return '<section class="rollout-group" aria-labelledby="rollout-group-' + id + '">' +
-      '<header class="rollout-group-head"><h3 id="rollout-group-' + id + '">' + escape(title) + '</h3><p>' + escape(note) + '</p></header>' +
+      '<header class="rollout-group-head"><h3 id="rollout-group-' + id + '">' + escape(title) + '</h3></header>' +
       '<div class="rollout-tabs rollout-tiles" role="tablist" aria-label="' + escape(title) + ' recordings" style="--tile-columns:' +
       Math.ceil(groups.length / rows) + '">' + groups.map(rolloutTile).join("") + "</div></section>";
   }
@@ -208,13 +208,11 @@
   function renderRolloutGroups() {
     const astra = state.rolloutGroups.filter((group) => group.kind === "astra");
     const gemini = state.rolloutGroups.filter((group) => group.kind === "gemini4");
-    const geminiNote = state.geminiAvailable
-      ? "Recorded Gemini 4 (medium reasoning) episodes from the final merged evaluation run, one tile per task."
-      : "Gemini 4 replays are unavailable right now. The Astra and scripted recordings remain available.";
+    const geminiNote = "Gemini 4 replays are unavailable right now. The other recordings remain available.";
     $("#rollout-groups").innerHTML =
-      rolloutGroupSection("astra", "Astra and scripted references", "Selected development demonstrations and scripted reference controllers on benchmark tasks.", astra) +
+      rolloutGroupSection("astra", "Astra", astra) +
       (state.geminiAvailable
-        ? rolloutGroupSection("gemini4", "Gemini 4", geminiNote, gemini)
+        ? rolloutGroupSection("gemini4", "Gemini 4", gemini)
         : '<p id="rollout-gemini-status" class="rollout-group-empty">' + escape(geminiNote) + "</p>");
   }
 
