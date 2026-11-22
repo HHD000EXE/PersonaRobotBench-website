@@ -822,16 +822,36 @@ print('One actual variant and12 tamper guards passed')
   assert.equal(checked.status, 0, checked.stdout + checked.stderr);
 });
 
-test('V2D keeps its workflow and robot videos visible and supporting material expandable', async () => {
+test('V2D follows the paper order: motivation, construction, evidence, diagnostic, support', async () => {
   const ctx = await boot({ examples: shippedExamples });
   const disclosure = ctx.$('#v2d-more');
   assert.equal(disclosure.open, false);
-  assert.match(disclosure.querySelector(':scope > summary').textContent, /Explore V2D details/);
-  assert.match(ctx.$('#v2d-title').textContent, /Reconstruct what is missing\.Keep the annotations we already have\./);
+  assert.match(disclosure.querySelector(':scope > summary').textContent, /How the collection is built/);
+  assert.match(ctx.$('#v2d-title').textContent, /Personalized execution from independent user histories\./);
+  // The section opens on the motivation and the collection's headline counts.
+  assert.ok(ctx.$('#v2d-intro').contains(ctx.$('#v2d-title')));
+  assert.deepEqual(ctx.$$('#v2d-intro .v2d-facts dt').map(dt => dt.textContent), ['170', '7', '49', '44', '15']);
+  // Construction keeps its pipeline figure visible; only the supporting prose collapses.
   assert.equal(ctx.$('#v2d-construction svg').closest('details'), null);
+  assert.equal(ctx.$('#v2d-pipeline-title').textContent, 'Reconstruct what is missing. Keep the annotations we already have.');
   for (const id of ['v2d-construction-details', 'v2d-datasets', 'v2d-persona', 'v2d-evaluation']) {
     assert.equal(ctx.$('#' + id).closest('details'), disclosure);
     assert.equal(ctx.$('#' + id).hidden, false);
+  }
+  // The execution diagnostic is a visible claim, not a footnote: the results table moved
+  // out of the evaluation contract and carries one row per evaluated policy.
+  const diagnostic = ctx.$('#v2d-diagnostic');
+  assert.equal(diagnostic.closest('details'), null);
+  assert.match(ctx.$('#v2d-diagnostic-title').textContent, /Task pass is not persona adherence\./);
+  assert.ok(diagnostic.querySelector('.v2d-results-table'));
+  assert.equal(diagnostic.querySelectorAll('.v2d-results-table tbody tr').length, 3);
+  assert.equal(ctx.$('#v2d-evaluation .v2d-results-table'), null);
+  assert.match(ctx.$('#v2d-evaluation .v2d-note').textContent, /^Reference replays support task construction/);
+  const order = ['v2d-intro', 'v2d-construction', 'v2d-demos', 'v2d-diagnostic', 'v2d-more']
+    .map(id => ctx.$('#' + id));
+  for (let i = 1; i < order.length; i += 1) {
+    assert.ok(order[i - 1].compareDocumentPosition(order[i]) & ctx.window.Node.DOCUMENT_POSITION_FOLLOWING,
+      'v2d blocks must follow the paper order');
   }
   // The robot videos stay visible without opening the supporting material: one tile per
   // demo (pairs first) and a single player that starts on the two-user sign pair.

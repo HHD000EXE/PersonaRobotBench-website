@@ -2,7 +2,7 @@
 #v2d { border-top: 1px solid var(--line); }
 #v2d .v2d-intro { padding-top: 88px; padding-bottom: 42px; }
 #v2d .v2d-heading { max-width: 880px; }
-#v2d .v2d-kicker { color: var(--green); margin-bottom: 18px; font: 10px/1.7 var(--mono); letter-spacing: .07em; }
+#v2d .v2d-kicker { color: var(--green); margin-bottom: 18px; font: 650 11px/1.7 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
 #v2d h2 { font-size: clamp(32px, 4vw, 52px); }
 #v2d p { font-size: 13px; line-height: 1.8; color: var(--muted); }
 #v2d .v2d-heading > p:last-child { margin-top: 20px; max-width: 740px; }
@@ -241,4 +241,23 @@
 #v2d .v2d-results-table tbody tr:hover { background: rgba(20, 184, 166, .06); }
 @media (max-width: 760px) {
   #v2d .v2d-results-table th, #v2d .v2d-results-table td { padding: 12px 14px; }
+}
+
+/* Paper-order restructure added 2026-11-23: intro facts, diagnostic, section header. */
+#v2d .v2d-intro > p { max-width: 800px; margin-top: 20px; color: var(--muted); }
+#v2d .v2d-facts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; margin: 34px 0 0; padding: 0; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+#v2d .v2d-facts > div { background: var(--white); padding: 16px 18px 17px; }
+#v2d .v2d-facts dt { margin: 0; font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.05; letter-spacing: -.035em; font-variant-numeric: tabular-nums; color: var(--ink); }
+#v2d .v2d-facts dd { margin: 6px 0 0; font-size: 11px; line-height: 1.5; color: var(--muted); }
+#v2d .v2d-demo-section h3, #v2d .v2d-diagnostic h3 { font-size: clamp(26px, 3vw, 34px); }
+#v2d .v2d-details-track #v2d-pipeline-title { font-size: clamp(26px, 3vw, 34px); }
+#v2d .v2d-diagnostic h3 { margin-top: 12px; }
+#v2d .v2d-diagnostic-lede { max-width: 800px; margin-top: 14px; }
+#v2d .v2d-diagnostic .v2d-kicker { margin-bottom: 10px; }
+@media (max-width: 900px) {
+  #v2d .v2d-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  #v2d .v2d-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #v2d .v2d-facts dt { font-size: 26px; }
 }
