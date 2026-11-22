@@ -87,19 +87,16 @@ def verify_leaderboard(root: Path, tasks: list[dict]) -> int:
             assert config["taskBalancedSuccessPercent"] is None
             assert next(row for row in rows if row["id"] == config["id"])["scorePercent"] is None
             continue
-        if config["status"] == "paper_snapshot":
-            # This figure-only point has no matching trial-count bundle. Bind
-            # it to the inspected paper asset rather than inventing counts.
-            assert config["id"] == "gemini4"
+        if config["status"] == "paper_table":
+            # Table-only point: bound to the inspected paper revision and table,
+            # with no trial-count bundle in this archive. Do not invent counts.
+            assert config["id"] in ids, config["id"]
             display = next(row for row in rows if row["id"] == config["id"])
-            assert config["taskBalancedSuccessPercent"] == display["scorePercent"] == 30.4
-            assert config["sourceCommit"] == data["provenance"]["paperCommit"] == "e2293166876ea2410f0d3a82fe5513e5df71feaf"
-            assert config["sourceFigure"] == data["provenance"]["paperFigure"] == "CoRL Late Breaking Results/figures/policy_leaderboard.pdf"
-            assert config["sourceSha256"] == data["provenance"]["paperFigureSha256"] == evidence["source"]["paperFigureSha256"] == "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e"
-            assert all(config[key] is None for key in ("taskBalancedRateExact", "strictSuccesses", "scored", "observedPersonas", "ci95Percent"))
-            assert config["personaCounts"] == [] and config["currentTrialCountsVerified"] is False
-            assert config["planned"] == 2170 and config["trialsPerPersona"] == 10
-            assert config["reasoningEffort"] == "medium"
+            assert config["displayPercent"] == display["scorePercent"], config["id"]
+            assert config["sourceCommit"] == data["provenance"]["paperCommit"]
+            assert config["sourceTable"] in data["provenance"]["paperTables"], config["id"]
+            assert config.get("personaCounts", []) == []
+            assert 0 <= config["paperPercent"] <= 100
             continue
         assert config["status"] in {"verified_strict", "archived_strict"}, "Unknown leaderboard evidence status"
         counts = config["personaCounts"]
@@ -372,6 +369,98 @@ def verify_render_variant(item: dict, source: dict, recording: dict,
 
 
 
+def verify_gemini4(root: Path, tasks: list[dict]) -> int:
+    """Check the Gemini 4 replay gallery manifest against its local media."""
+    path = root / "data/gemini4-rollouts.json"
+    if not path.exists():
+        return 0
+    data = json.loads(path.read_text())
+    assert data["schema"] == "personarobotbench.website-gemini4-rollouts/1", "Unknown Gemini 4 gallery schema"
+    base = data.get("mediaBase")
+    assert base is None or re.fullmatch(r"https://[^/\s\\]+(/[^\s\\]*)?", base) and not base.endswith("/"), "Bad Gemini 4 media base"
+    by_id = {task["id"]: task for task in tasks}
+    keys = [(item["taskId"], item["persona"]) for item in data["entries"]]
+    assert len(keys) == len(set(keys)) and keys == sorted(keys), "Gemini 4 entries must be unique and sorted"
+    for item in data["entries"]:
+        task = by_id[item["taskId"]]
+        persona = next(p for p in task["personas"] if p["id"] == item["persona"])
+        assert item["personaDescription"] == persona["description"] and item["taskFolder"] == task["folder"], keys
+        assert item["outcome"] in {"SUCCESS", "FAILED"} and item["model"] == "Gemini 4"
+        assert data["label"] == f"Gemini 4 ({item['reasoningEffort']}) + structured skills", "Reasoning effort differs from the gallery label"
+        assert (item["seed"] in item["strictSuccessSeeds"]) == (item["outcome"] == "SUCCESS"), "Outcome differs from seed record"
+        seeds = item["strictSuccessSeeds"]
+        assert all(type(seed) is int and 100 <= seed <= 109 for seed in seeds + [item["seed"]]), "Gemini 4 seed outside 100–109"
+        assert len(seeds) == len(set(seeds)), "Duplicate Gemini 4 success seed"
+        for call in item["captions"]:
+            assert any(isinstance(call.get(key), str) and call[key] for key in ("full_call", "full_rationale"))
+            for key in ("full_call", "full_rationale"):
+                text = call.get(key) or ""
+                assert not re.search(r"(?<![\w\s])/|/(?![\w\s])|(?<=\w)/(?=\s)|(?<=\s)/(?=\w)|\w/\w+/|\\|~/|gemini-4-", text, re.IGNORECASE) \
+                    and not any(hashlib.sha256(w.encode()).hexdigest() == "0f85e460e0246cfe3a90d4e8cb701afd82d60a7892af9bda1043a49412f2337c"
+                                for w in re.findall(r"[a-z0-9]+", text.lower())), \
+                    f"Private text in Gemini 4 caption: task {item['taskId']} persona {item['persona']} {key}"
+        expected = f"assets/gemini4/task{item['taskId']:03}-{item['persona']}"
+        assert item["poster"] == expected + ".webp"
+        poster = root / item["poster"]
+        assert poster.is_file(), f"Missing Gemini 4 poster: {expected}"
+        if base:  # served from the external media base; bytes and sha256 are the uploaded file's
+            assert item["video"] == f"{base}/gemini4/task{item['taskId']:03}-{item['persona']}.mp4", item["video"]
+        else:
+            assert item["video"] == expected + ".mp4"
+            video = root / item["video"]
+            assert video.is_file(), f"Missing Gemini 4 video: {expected}"
+            assert video.stat().st_size == item["bytes"], "Gemini 4 video size differs"
+            assert hashlib.sha256(video.read_bytes()).hexdigest() == item["sha256"], "Gemini 4 video hash differs"
+        image = poster.read_bytes()
+        assert image[:4] == b"RIFF" and image[8:12] == b"WEBP", item["poster"]
+        assert hashlib.sha256(image).hexdigest() == item["posterSha256"], "Gemini 4 poster hash differs"
+        assert item["durationSeconds"] > 0 and item["frames"] > 0
+    return len(keys)
+
+
+def verify_v2d(root: Path) -> int:
+    """Check the V2D robot-video tiles and player against the V2D media receipt."""
+    receipt = json.loads((root / "assets/v2d/provenance.json").read_text(encoding="utf-8"))
+    groups = [receipt["media"], receipt["repository_media"]["media"], receipt["rendered_media"]["media"]]
+    records = {item["asset"]: item for group in groups for item in group}
+    assert len(records) == sum(map(len, groups)), "Duplicate V2D media record"
+    for name in ("repository_media", "rendered_media"):
+        assert re.fullmatch(r"[0-9a-f]{40}", receipt[name]["source_commit"]), f"Bad V2D source commit: {name}"
+    page = (root / "index.html").read_text(encoding="utf-8")
+    templates = dict(re.findall(r'<template id="v2d-demo-([\w-]+)">(.*?)</template>', page, re.S))
+    tiles = re.findall(r'<button type="button" role="tab" id="v2d-tab-([\w-]+)"[^>]*data-v2d-demo="([\w-]+)"><img src="([^"]+)"', page)
+    assert tiles and all(tab == demo for tab, demo, _ in tiles), "V2D tile ids differ from their demos"
+    assert [demo for _, demo, _ in tiles] == list(templates), "V2D tiles and demo templates differ"
+    player = re.search(r'<div id="v2d-player"[^>]*aria-labelledby="v2d-tab-([\w-]+)">(.*?)</div>\n', page, re.S)
+    assert player and player.group(1) == tiles[0][0] and player.group(2) == templates[tiles[0][0]], "V2D player must start on the first demo"
+    shown = []
+    for (_, demo, thumbnail) in tiles:
+        videos = re.findall(r'<video [^>]*poster="(assets/v2d/[^"]+)"[^>]*><source src="(assets/v2d/[^"]+)" type="video/mp4">', templates[demo])
+        assert len(videos) in (1, 2) and thumbnail == videos[0][0], f"V2D tile thumbnail differs from its first poster: {demo}"
+        assert (len(videos) == 2) == ("v2d-play-both" in templates[demo]), f"V2D pair control mismatch: {demo}"
+        shown.extend(videos)
+    assert sorted(video for _, video in shown) == sorted(records), "V2D videos on the page differ from the media receipt"
+    for poster, video in shown:
+        record = records[video]
+        assert poster == record["poster"], f"V2D poster differs from the receipt: {video}"
+        data = (root / video).read_bytes()
+        assert len(data) == record["bytes"] and hashlib.sha256(data).hexdigest() == record["sha256"], f"V2D video differs: {video}"
+        assert hashlib.sha256((root / poster).read_bytes()).hexdigest() == record["poster_sha256"], f"V2D poster differs: {poster}"
+    labels = {"task": "Task", "designed_persona": "Designed persona", "source_persona": "Source persona", "physical_quality": "Physical quality"}
+    states = {"PASS": "pass", "NOT_EVALUATED": "not evaluated"}
+    for record in receipt["repository_media"]["media"]:
+        checks = record["recorded_checks"]
+        assert checks.get("task") == "PASS" and set(checks) <= set(labels), f"V2D demo checks: {record['file']}"
+        demo = next(body for body in templates.values() if record["asset"] in body)
+        assert f"CLIP {record['clip_id']}" in demo, f"V2D clip id missing: {record['clip_id']}"
+        for key, value in checks.items():
+            assert f">{labels[key]}: {states[value]}</li>" in demo, f"V2D check differs from the receipt: {record['file']} {key}"
+    for record in receipt["rendered_media"]["media"]:
+        demo = next(body for body in templates.values() if record["asset"] in body)
+        assert "v2d-checks" not in demo, "Rendered reference motions must not show checks"
+    return len(shown)
+
+
 def verify(root: Path) -> dict[str, int | str]:
     root = root.resolve()
     tasks = json.loads((root / "data/tasks.json").read_text())
@@ -567,9 +656,11 @@ def verify(root: Path) -> dict[str, int | str]:
     assert any(material.get("pbrMetallicRoughness", {}).get("metallicFactor", 0) > .9 for material in gltf["materials"]), "Missing source metal material"
     preview_count = verify_previews(root, tasks)
     policy_count = verify_leaderboard(root, tasks)
+    gemini4_count = verify_gemini4(root, tasks)
+    v2d_count = verify_v2d(root)
     return {"status": "passed", "tasks": len(tasks), "persona_cases": 217,
             "task_previews": preview_count, "policy_configurations": policy_count,
-            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants),
+            "examples": len(examples), "recordings": len(recordings), "render_variants": len(variants), "gemini4_replays": gemini4_count, "v2d_videos": v2d_count,
             "local_assets_checked": len(checked_assets), "unique_html_ids": len(page.ids)}
 
 

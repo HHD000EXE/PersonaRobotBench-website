@@ -138,5 +138,280 @@
       "explicit_persona": {}
     }
   },
-  "evaluation_scope": "No new trials were run. These supplied recordings do not establish task, semantic or persona success rates."
+  "evaluation_scope": "No new trials were run. These supplied recordings do not establish task, semantic or persona success rates.",
+  "repository_media": {
+    "source_repository": "HHD000EXE/PersonaRobotBench",
+    "source_branch": "pilot/real-human-persona",
+    "source_commit": "3ef9a6716c9e166dafd2f34f9c1139b552694516",
+    "selection": "Recorded task PASS for the run shown, and no conflicting score for the same source in the official 170-source release (manifests/v2d_release/official_v2d_wlaslq_20261114.json).",
+    "scope": "Recorded V2D robot executions copied from the source branch. MP4 bytes are unchanged from the repository blobs; posters are single frames taken at the listed times. Each entry is one recorded Astra-planned run with the checks recorded for that run. They are not the scored episodes of the official 170-source cohort and do not establish success rates.",
+    "media": [
+      {
+        "file": "clip549_epic_open_drawer.web.mp4",
+        "bytes": 594885,
+        "sha256": "795962a4bfa0e3abf2f15f16cfa329f85425b68c1d9297adcd4ca713b9513253",
+        "asset": "assets/v2d/clip549_epic_open_drawer.web.mp4",
+        "poster": "assets/v2d/clip549_epic_open_drawer.web.jpg",
+        "poster_sha256": "cd291b61089c5a5f538060706dd43603ba1eb966c782f329b46f64651ce19097",
+        "clip_id": 549,
+        "dataset": "EPIC-KITCHENS",
+        "sample_id": "P18_10_14",
+        "source_user_id": "P18",
+        "action": "open drawer",
+        "source_path": "reports/v2d_tasks/b02/replays/clip_549.mp4",
+        "source_git_blob": "2ea0167f468c46f977bf9ffbcb78868c9a0ba60f",
+        "status_sheet": "reports/v2d_tasks/clip_549.md",
+        "recorded_checks": {
+          "task": "PASS",
+          "source_persona": "NOT_EVALUATED",
+          "physical_quality": "PASS"
+        },
+        "setup": "Fixed pelvis and authored fixture.",
+        "poster_time_seconds": 12.5
+      },
+      {
+        "file": "clip551_epic_open_fridge.web.mp4",
+        "bytes": 666346,
+        "sha256": "240c45b13b0820f35ef0d2a5450e39890477ae3c80bef29a2d246dd491ee93e4",
+        "asset": "assets/v2d/clip551_epic_open_fridge.web.mp4",
+        "poster": "assets/v2d/clip551_epic_open_fridge.web.jpg",
+        "poster_sha256": "843c9ed5c6e56c246a2e39be09c0b5b52fb28e55edda075cfbcfe687c694b0bf",
+        "clip_id": 551,
+        "dataset": "EPIC-KITCHENS",
+        "sample_id": "P18_09_6",
+        "source_user_id": "P18",
+        "action": "open fridge",
+        "source_path": "reports/v2d_tasks/b02/replays/clip_551.mp4",
+        "source_git_blob": "7d15b4e20a836d165e7f19ad045612bcb6bcd32e",
+        "status_sheet": "reports/v2d_tasks/clip_551.md",
+        "recorded_checks": {
+          "task": "PASS",
+          "source_persona": "NOT_EVALUATED",
+          "physical_quality": "PASS"
+        },
+        "setup": "Fixed pelvis and authored fixture.",
+        "poster_time_seconds": 13.75
+      },
+      {
+        "file": "clip553_epic_take_plate.web.mp4",
+        "bytes": 694993,
+        "sha256": "527e70504f7a4ffc47739b8d4c1bdd88b181085fc6b7e6d8b25e19f03a535092",
+        "asset": "assets/v2d/clip553_epic_take_plate.web.mp4",
+        "poster": "assets/v2d/clip553_epic_take_plate.web.jpg",
+        "poster_sha256": "444747d12c9f46dcc8fe0634c197aebb2c76de594fa8580bbae3beb0ee835ce0",
+        "clip_id": 553,
+        "dataset": "EPIC-KITCHENS",
+        "sample_id": "P18_08_9",
+        "source_user_id": "P18",
+        "action": "take plate",
+        "source_path": "reports/v2d_tasks/b02/replays/clip_553.mp4",
+        "source_git_blob": "f68120fea71444528273bde7dd87c55fe944f186",
+        "status_sheet": "reports/v2d_tasks/clip_553.md",
+        "recorded_checks": {
+          "task": "PASS",
+          "source_persona": "NOT_EVALUATED",
+          "physical_quality": "PASS"
+        },
+        "setup": "Fixed pelvis and authored fixture.",
+        "poster_time_seconds": 21.42
+      },
+      {
+        "file": "clip557_epic_turn_on_tap.web.mp4",
+        "bytes": 596932,
+        "sha256": "ea7b29aa410a67f993aa62115d752598a6f4cbad5a4f56ef5f532b38808b2f56",
+        "asset": "assets/v2d/clip557_epic_turn_on_tap.web.mp4",
+        "poster": "assets/v2d/clip557_epic_turn_on_tap.web.jpg",
+        "poster_sha256": "af9cdc6765e30182403a6c208a5a4bd9d2df4219287d76978bf9ef4e007928b7",
+        "clip_id": 557,
+        "dataset": "EPIC-KITCHENS",
+        "sample_id": "P18_04_1",
+        "source_user_id": "P18",
+        "action": "turn-on tap",
+        "source_path": "reports/v2d_tasks/b02/replays/clip_557.mp4",
+        "source_git_blob": "1b7ae1be8032e602be1f37e782d7db66ba0a9ddc",
+        "status_sheet": "reports/v2d_tasks/clip_557.md",
+        "recorded_checks": {
+          "task": "PASS",
+          "source_persona": "NOT_EVALUATED",
+          "physical_quality": "PASS"
+        },
+        "setup": "Fixed pelvis and authored fixture; water score uses a reduced analytical model.",
+        "poster_time_seconds": 13.42
+      },
+      {
+        "file": "clip651_ntu_thumbs_up.web.mp4",
+        "bytes": 1389754,
+        "sha256": "bce373933504a516976573b40c15032fb932dd976e6d87030a99c6bf8fc54d62",
+        "asset": "assets/v2d/clip651_ntu_thumbs_up.web.mp4",
+        "poster": "assets/v2d/clip651_ntu_thumbs_up.web.jpg",
+        "poster_sha256": "e171cd05f47827ca5ff367ceb014a17538bb2af9d02dc49a62614f8f63cee2aa",
+        "clip_id": 651,
+        "dataset": "NTU RGB+D 120",
+        "sample_id": "S018C003P042R001A069",
+        "source_user_id": "P042",
+        "action": "thumb up",
+        "source_path": "reports/v2d_tasks/replays/clip_651.mp4",
+        "source_git_blob": "9fc06c6da6bcf9b2197ebb7cfcc7ff728bce47a8",
+        "status_sheet": "reports/v2d_tasks/clip_651.md",
+        "recorded_checks": {
+          "task": "PASS",
+          "source_persona": "PASS",
+          "physical_quality": "PASS"
+        },
+        "setup": "Pelvis fixed, zero gravity, self-collision disabled.",
+        "poster_time_seconds": 4.7
+      },
+      {
+        "file": "clip049_gait3d_walk_personaA.web.mp4",
+        "bytes": 177896,
+        "sha256": "664950fa83fbb0db149e9d6b3a896e35f226b9be570baf921d9981177a6436d0",
+        "asset": "assets/v2d/clip049_gait3d_walk_personaA.web.mp4",
+        "poster": "assets/v2d/clip049_gait3d_walk_personaA.web.jpg",
+        "poster_sha256": "fcfd4eba7e261650bccc108d0443ccfe54e0441b6b55c996b780a8c94329b538",
+        "clip_id": 49,
+        "dataset": "Gait3D",
+        "sample_id": "0148-camid27_videoid4-seq0",
+        "source_user_id": "0148",
+        "action": "walking",
+        "designed_persona": "A",
+        "designed_persona_instruction": "Walk at a relaxed, unhurried pace of about 80 steps per minute (within ±10).",
+        "measured_cadence_steps_per_min": 80.25,
+        "source_path": "data/isaac/gait3d_b10_stepping/0148-camid27_videoid4-seq0/49_A_attempt03/replay.mp4",
+        "source_git_blob": "b85401c6faa8a04a7f10daa58232a5071a65bb6d",
+        "verification": "data/isaac/gait3d_b10_stepping/0148-camid27_videoid4-seq0/49_A_attempt03/verification.json",
+        "recorded_checks": {
+          "task": "PASS",
+          "designed_persona": "PASS"
+        },
+        "setup": "G1 stepping harness; designed cadence persona, not source identity.",
+        "poster_time_seconds": 3.5
+      },
+      {
+        "file": "clip049_gait3d_walk_personaB.web.mp4",
+        "bytes": 138197,
+        "sha256": "79bbad2a7183f13e6e56345e7e9f751740abf6efc12c86fc8bc9fac0bc2a0584",
+        "asset": "assets/v2d/clip049_gait3d_walk_personaB.web.mp4",
+        "poster": "assets/v2d/clip049_gait3d_walk_personaB.web.jpg",
+        "poster_sha256": "16efb562009b5565daedbe2632f383dfb47d33e605eebac1c759cfb6188ae14f",
+        "clip_id": 49,
+        "dataset": "Gait3D",
+        "sample_id": "0148-camid27_videoid4-seq0",
+        "source_user_id": "0148",
+        "action": "walking",
+        "designed_persona": "B",
+        "designed_persona_instruction": "Walk at a brisk pace of about 120 steps per minute (within ±10).",
+        "measured_cadence_steps_per_min": 120.57,
+        "source_path": "data/isaac/gait3d_b10_stepping/0148-camid27_videoid4-seq0/49_B_attempt01/replay.mp4",
+        "source_git_blob": "43ae5b0bac3731a988371d6db7267686ca8baf07",
+        "verification": "data/isaac/gait3d_b10_stepping/0148-camid27_videoid4-seq0/49_B_attempt01/verification.json",
+        "recorded_checks": {
+          "task": "PASS",
+          "designed_persona": "PASS"
+        },
+        "setup": "G1 stepping harness; designed cadence persona, not source identity.",
+        "poster_time_seconds": 2.75
+      }
+    ]
+  },
+  "rendered_media": {
+    "source_repository": "HHD000EXE/PersonaRobotBench",
+    "source_branch": "pilot/real-human-persona",
+    "source_commit": "3ef9a6716c9e166dafd2f34f9c1139b552694516",
+    "renderer": "render_closeup.py (PersonaRobotBench website demo tooling; not part of the source repository)",
+    "renderer_sha256": "1d48133ac601a8ff138b97af6fcf54cdd6532e1fed4d0ebb94f13d6c53becb19",
+    "render_job": "823499",
+    "scope": "Robot reference motions retargeted from each signer's own AUTSL recording (the bundle's robot-only joint and link arrays), re-rendered in Isaac Sim 6.0 with a closer upper-body camera. Motion, timing (1x at source fps) and scene are unchanged; both signers share the same framing relative to the robot pelvis. These are references, not policy executions, and carry no task or persona result.",
+    "media": [
+      {
+        "file": "clip211_autsl_tree_signer0.web.mp4",
+        "bytes": 211706,
+        "sha256": "a0b67d98b36a27f519b14e482a6230fab0efffc4518f0d7840c5daf2537db402",
+        "asset": "assets/v2d/clip211_autsl_tree_signer0.web.mp4",
+        "poster": "assets/v2d/clip211_autsl_tree_signer0.web.jpg",
+        "poster_sha256": "945159537100d9514734135a79ed902907bcd9475979c6d517a843bfc8d767bc",
+        "clip_id": 211,
+        "dataset": "AUTSL",
+        "sample_id": "signer0_sample16",
+        "source_user_id": "signer0",
+        "action": "tree",
+        "source_motion": "examples/real_human/signing_humanoid_cohort35/samples/autsl_signer0_sample16/robot_motion.npz",
+        "source_motion_git_blob": "54e2b368151fe3fbd9998fd7bd264f58f4827f17",
+        "original_replay": "examples/real_human/signing_humanoid_cohort35/samples/autsl_signer0_sample16/replay.mp4",
+        "render": {
+          "frames": 75,
+          "fps": 30.0,
+          "resolution": [
+            960,
+            720
+          ],
+          "codec": "H.264 (libx264, crf 20)",
+          "camera": {
+            "focal_length_mm": 24.0,
+            "horizontal_aperture_mm": 20.955,
+            "eye_m": [
+              0.624,
+              -0.42,
+              0.034
+            ],
+            "aim_m": [
+              0.033,
+              1.555,
+              0.034
+            ],
+            "robot_pelvis_frame0_m": [
+              0.033,
+              1.555,
+              -0.466
+            ]
+          },
+          "poster_time_seconds": 1.43
+        }
+      },
+      {
+        "file": "clip231_autsl_tree_signer2.web.mp4",
+        "bytes": 180184,
+        "sha256": "11406ebfe236fbb257f37e75e252cfaed8577cda2e5e4c324c7d53d2f9eb392e",
+        "asset": "assets/v2d/clip231_autsl_tree_signer2.web.mp4",
+        "poster": "assets/v2d/clip231_autsl_tree_signer2.web.jpg",
+        "poster_sha256": "7ba8b0d89d182b5db21e0d3c014660d28e666125aa6c95b1106aec8593b27bb4",
+        "clip_id": 231,
+        "dataset": "AUTSL",
+        "sample_id": "signer2_sample750",
+        "source_user_id": "signer2",
+        "action": "tree",
+        "source_motion": "examples/real_human/signing_humanoid_cohort35/samples/autsl_signer2_sample750/robot_motion.npz",
+        "source_motion_git_blob": "28b637cb329a55e4ed82a2eab771df7a4ecfa72f",
+        "original_replay": "examples/real_human/signing_humanoid_cohort35/samples/autsl_signer2_sample750/replay.mp4",
+        "render": {
+          "frames": 68,
+          "fps": 30.0,
+          "resolution": [
+            960,
+            720
+          ],
+          "codec": "H.264 (libx264, crf 20)",
+          "camera": {
+            "focal_length_mm": 24.0,
+            "horizontal_aperture_mm": 20.955,
+            "eye_m": [
+              0.428,
+              -0.42,
+              -0.026
+            ],
+            "aim_m": [
+              0.038,
+              1.604,
+              -0.026
+            ],
+            "robot_pelvis_frame0_m": [
+              0.038,
+              1.604,
+              -0.526
+            ]
+          },
+          "poster_time_seconds": 1.13
+        }
+      }
+    ]
+  }
 }

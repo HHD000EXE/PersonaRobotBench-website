@@ -27,7 +27,8 @@ def build():
     shutil.copytree(ROOT / "assets", DIST / "assets")
     (DIST / "data").mkdir()
     for name in ("tasks.json", "examples.json", "asset-provenance.json", "rollout-provenance.json",
-                 "task-preview-provenance.json", "leaderboard.json", "leaderboard-results.json"):
+                 "task-preview-provenance.json", "leaderboard.json", "leaderboard-results.json",
+                 "gemini4-rollouts.json"):
         shutil.copy2(ROOT / "data" / name, DIST / "data" / name)
     tasks = json.loads((DIST / "data/tasks.json").read_text())
     if len(tasks) != 100 or sum(task["personaCount"] for task in tasks) != 217:

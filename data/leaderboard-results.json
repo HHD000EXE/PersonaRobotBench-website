@@ -1,6 +1,6 @@
 {
   "schema": "personarobotbench.website-leaderboard-results/1",
-  "updated": "2026-10-27",
+  "updated": "2026-11-17",
   "tasks": 100,
   "personaCases": 217,
   "metric": "Native persona-goal success, physical nonfixture evidence, valid and faithful execution, no timeout and no controller error. Scored policy errors fail.",
@@ -8,18 +8,25 @@
   "missingData": "Infrastructure errors remain unscored. Three entirely unobserved Opus API personas are excluded from the conditional task means; all 100 tasks have some observed data.",
   "source": {
     "paperRepository": "HHD000EXE/PersonaRobotBench-Papaer",
-    "paperCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
+    "paperCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
     "paperVisibility": "private",
-    "paperFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
-    "paperFigureSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
-    "sourceMethod": "Displayed point estimates follow the current CoRL paper figure imported from Overleaf. Five archived strict report files were SHA-256-verified and their success counts and task-balanced means independently recomputed as archived evidence. Those archive checks do not independently recompute the paper's revised Astra high or Gemini points; no matching current Gemini trial-count bundle is included.",
+    "paperText": "CVPR 2027/sections/evaluation.tex",
+    "paperTables": [
+      "CVPR 2027/sections/evaluation.tex#tab:stage2-results",
+      "CVPR 2027/sections/stage1_results_table.tex#tab:stage1-results"
+    ],
+    "archivedFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+    "archivedFigureSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
+    "sourceMethod": "Displayed point estimates follow the CVPR 2027 Stage 2 and Stage 1 tables at the named paper revision. Five archived strict report files were SHA-256-verified and their success counts and task-balanced means independently recomputed as archived evidence. Those archive checks do not independently recompute the paper's revised Astra, Gemini or Fable points; no matching current trial-count bundle is included for the table-only points.",
     "overleafImportCommit": "900d67282cb2833ce9185b69b9f213c2cb6589a8"
   },
   "notes": [
-    "The current paper author-reported Astra high point is33.2%. Its archived strict trial records below yield30.1667% task-balanced success; this archival row does not validate or recompute the revised point.",
+    "Displayed Stage 2 points follow the CVPR 2027 table at paper commit 7bbb55c (2026-11-17): Astra 30.23%, Gemini Argon 32.49%, Opus CLI 31.20%, Fable 32.89% and DeepSeek 14.85%.",
+    "The archived Astra high strict trial records below yield 30.1667% task-balanced success; the table point of 30.23% is a later author-reported revision, and this archival row does not validate or recompute it.",
     "Per-persona counts permit independent reproduction of the archived means. Pooled successes / scored is a different weighting and does not define the displayed task-balanced metric.",
-    "No illustrative interval is exposed as a confidence interval. Fable has no reported result and is not assigned a score.",
-    "The current CoRL Gemini point is 30.4%; its source is the Overleaf-imported figure. The older arXiv aggregate of 26.2% and 2,168/2,170 coverage is retained only as a historical paper reference, not as current-point trial evidence."
+    "No illustrative interval is exposed as a confidence interval. Fable 5.2 is now reported in the CVPR Stage 2 table on 651 trials (seeds 100–102) and is displayed as a table point without an archived count bundle.",
+    "The earlier CoRL figure points (Astra high 33.2%, Gemini 30.4%) and the older arXiv aggregate of 26.2% are retained only as historical paper references, not as current-point trial evidence.",
+    "Stage 1 rows display the hard-tier within-task persona recall gap, not agreement; the table's hard-tier agreement is 47.05–47.80% against a 47.25% uniform reference."
   ],
   "configurations": [
     {
@@ -4649,7 +4656,7 @@
           "planned": 3
         }
       ],
-      "currentPaperAuthorReportedPercent": 33.2,
+      "currentPaperAuthorReportedPercent": 30.23,
       "currentPaperRecomputedFromTheseRecords": false
     },
     {
@@ -7729,24 +7736,34 @@
     },
     {
       "id": "gemini4",
-      "policy": "Gemini 4",
-      "status": "paper_snapshot",
-      "taskBalancedSuccessPercent": 30.4,
-      "taskBalancedRateExact": null,
-      "strictSuccesses": null,
-      "scored": null,
-      "planned": 2170,
+      "policy": "Gemini 4 (Argon; medium)",
+      "status": "paper_table",
+      "displayPercent": 32.5,
+      "paperPercent": 32.49,
       "personaCounts": [],
-      "observedPersonas": null,
+      "planned": 2170,
+      "observedPersonas": 217,
       "trialsPerPersona": 10,
       "reasoningEffort": "medium",
-      "sourceSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
-      "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
-      "sourceFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/evaluation.tex#tab:stage2-results",
+      "ruleBPercent": 31.19,
+      "personaGapPercent": [
+        20.9,
+        19.7
+      ],
       "currentTrialCountsVerified": false,
       "ci95Percent": null,
-      "note": "The current CoRL figure reports 30.4%. Its underlying current trial counts and numerical confidence interval are not available in this website archive; no counts are inferred from the plotted percentage.",
+      "note": "The CVPR Stage 2 table reports 32.49% Rule A and 31.19% Rule B on 2,170 trials. Its per-trial counts and numerical confidence interval are not included in this website archive; no counts are inferred from the plotted percentage.",
       "historicalPaperResult": {
+        "status": "historical_paper_reference",
+        "taskBalancedSuccessPercent": 30.4,
+        "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
+        "sourceFigure": "CoRL Late Breaking Results/figures/policy_leaderboard.pdf",
+        "sourceSha256": "faed740590b96505c721989c1bdba6c2fe48e18a3727551c066a96123250a63e",
+        "note": "The earlier CoRL figure reported 30.4% for the Carbon cascade. It is retained as a historical reference and is not the current Stage 2 point."
+      },
+      "olderArxivAggregate": {
         "status": "historical_paper_aggregate",
         "taskBalancedSuccessPercent": 26.2,
         "scored": 2168,
@@ -7758,8 +7775,130 @@
         "sourceCommit": "e2293166876ea2410f0d3a82fe5513e5df71feaf",
         "sourceText": "MatrAIx arxiv/main.tex",
         "sourceTextSha256": "21cf6d3028dfb6f30c4c23f111642cf5b8549c7afe0371f13da92268fe52e2a7",
-        "note": "This older arXiv aggregate is a separate paper statistic. Its coverage and interval do not establish or reproduce the current CoRL figure point of 30.4%."
+        "note": "This older arXiv aggregate is a separate paper statistic; its coverage and interval do not establish the current Stage 2 table point."
       }
+    },
+    {
+      "id": "fable-high",
+      "policy": "Fable 5.2 (medium)",
+      "status": "paper_table",
+      "displayPercent": 32.9,
+      "paperPercent": 32.89,
+      "personaCounts": [],
+      "planned": 651,
+      "observedPersonas": 217,
+      "trialsPerPersona": 3,
+      "reasoningEffort": "medium",
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/evaluation.tex#tab:stage2-results",
+      "ruleBPercent": 31.22,
+      "personaGapPercent": [
+        19.3,
+        22.0
+      ],
+      "currentTrialCountsVerified": false,
+      "ci95Percent": null,
+      "note": "Fable 5.2 uses seeds 100–102 (651 trials) while the other execution cohorts use ten seeds per persona. Per-trial counts are not included in this archive."
+    },
+    {
+      "id": "astra-stage1",
+      "policy": "Astra (Stage 1)",
+      "status": "paper_table",
+      "displayPercent": 77.22,
+      "paperPercent": 77.22,
+      "metricKind": "hard_tier_persona_recall_gap_pp",
+      "personaCounts": [],
+      "planned": 200000,
+      "observedPersonas": 217,
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/stage1_results_table.tex#tab:stage1-results",
+      "stage1": {
+        "easyAccuracyPercent": 100.0,
+        "hardMissingPercent": 47.6,
+        "hardConflictPercent": 47.07,
+        "overallAccuracyPercent": 73.67
+      },
+      "note": "Astra combines 897 verified historical-import batches with 1,103 new Codex CLI/low batches and retains both configuration segments."
+    },
+    {
+      "id": "fable-stage1",
+      "policy": "Fable 5.2 (Stage 1)",
+      "status": "paper_table",
+      "displayPercent": 76.81,
+      "paperPercent": 76.81,
+      "metricKind": "hard_tier_persona_recall_gap_pp",
+      "personaCounts": [],
+      "planned": 200000,
+      "observedPersonas": 217,
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/stage1_results_table.tex#tab:stage1-results",
+      "stage1": {
+        "easyAccuracyPercent": 99.99,
+        "hardMissingPercent": 47.4,
+        "hardConflictPercent": 47.11,
+        "overallAccuracyPercent": 73.62
+      },
+      "note": "Fable matches the easy tier but keeps a large default-driven gap on unidentifiable HRI."
+    },
+    {
+      "id": "opus-stage1",
+      "policy": "Opus 5.5 (Stage 1)",
+      "status": "paper_table",
+      "displayPercent": 73.05,
+      "paperPercent": 73.05,
+      "metricKind": "hard_tier_persona_recall_gap_pp",
+      "personaCounts": [],
+      "planned": 200000,
+      "observedPersonas": 217,
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/stage1_results_table.tex#tab:stage1-results",
+      "stage1": {
+        "easyAccuracyPercent": 98.32,
+        "hardMissingPercent": 47.21,
+        "hardConflictPercent": 47.05,
+        "overallAccuracyPercent": 72.73
+      },
+      "note": "Opus records the lowest easy-tier contextual accuracy of the five families and a large hard-tier gap."
+    },
+    {
+      "id": "deepseek-stage1",
+      "policy": "DeepSeek V4.1 Flash (Stage 1)",
+      "status": "paper_table",
+      "displayPercent": 62.51,
+      "paperPercent": 62.51,
+      "metricKind": "hard_tier_persona_recall_gap_pp",
+      "personaCounts": [],
+      "planned": 200000,
+      "observedPersonas": 217,
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/stage1_results_table.tex#tab:stage1-results",
+      "stage1": {
+        "easyAccuracyPercent": 98.9,
+        "hardMissingPercent": 47.8,
+        "hardConflictPercent": 47.23,
+        "overallAccuracyPercent": 73.21
+      },
+      "note": "DeepSeek preserves the smallest gap of the five cohorts while matching the others on overall agreement."
+    },
+    {
+      "id": "gemini-stage1",
+      "policy": "Gemini 4 (Stage 1)",
+      "status": "paper_table",
+      "displayPercent": 60.16,
+      "paperPercent": 60.16,
+      "metricKind": "hard_tier_persona_recall_gap_pp",
+      "personaCounts": [],
+      "planned": 200000,
+      "observedPersonas": 217,
+      "sourceCommit": "7bbb55c4795e61ad8615bd2e16dcbc8a128afabd",
+      "sourceTable": "CVPR 2027/sections/stage1_results_table.tex#tab:stage1-results",
+      "stage1": {
+        "easyAccuracyPercent": 99.99,
+        "hardMissingPercent": 47.5,
+        "hardConflictPercent": 47.07,
+        "overallAccuracyPercent": 73.64
+      },
+      "note": "Gemini Carbon/CLI records the smallest hard-tier recall gap with near-perfect easy-tier filtering."
     }
   ]
 }

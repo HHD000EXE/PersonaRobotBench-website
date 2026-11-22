@@ -376,19 +376,20 @@
       const maximum = Math.max(0, ...rows.filter((row) => row.scorePercent !== null).map((row) => row.scorePercent));
       const axisMax = Math.max(10, Math.ceil(maximum / 10) * 10);
       const tickStep = axisMax <= 10 ? 2 : axisMax <= 20 ? 5 : axisMax <= 50 ? 10 : 20;
+      const unit = board.unit || "%";
       const ticks = [];
       for (let tick = 0; tick < axisMax; tick += tickStep) ticks.push(tick);
       ticks.push(axisMax);
       const titleId = "leaderboard-board-" + index;
       const captionId = titleId + "-metric";
-      const tickMarkup = ticks.map((tick) => '<span style="left:' + (tick / axisMax * 100).toFixed(3) + '%">' + tick + '%</span>').join("");
+      const tickMarkup = ticks.map((tick) => '<span style="left:' + (tick / axisMax * 100).toFixed(3) + '%">' + tick + escape(unit) + '</span>').join("");
       const chartRows = rows.map((row) => '<li class="leaderboard-chart-row' + (row.scorePercent === null ? ' is-pending' : '') + '" data-policy="' + escape(row.id) + '"><div class="leaderboard-chart-label"><span class="leaderboard-policy">' + escape(row.policy) +
         '</span><span class="leaderboard-variant">' + escape(row.variant) + '</span></div>' + (row.scorePercent === null
           ? '<span class="leaderboard-score leaderboard-unreported">Not reported</span>'
-          : '<div class="leaderboard-bar-lane" aria-hidden="true"><span class="leaderboard-bar-fill" style="width:' + (row.scorePercent / axisMax * 100).toFixed(3) + '%"></span></div><span class="leaderboard-score">' + row.scorePercent.toFixed(1) + '<span>%</span></span>') + '</li>').join("");
+          : '<div class="leaderboard-bar-lane" aria-hidden="true"><span class="leaderboard-bar-fill" style="width:' + (row.scorePercent / axisMax * 100).toFixed(3) + '%"></span></div><span class="leaderboard-score">' + row.scorePercent.toFixed(1) + '<span>' + escape(unit) + '</span></span>') + '</li>').join("");
       return '<section class="leaderboard-board" aria-labelledby="' + titleId + '"><div class="leaderboard-board-heading"><h3 id="' + titleId + '">' + escape(board.title) +
         '</h3><p>' + escape(board.description) + '</p></div><figure class="leaderboard-chart" aria-labelledby="' + captionId + '" data-axis-max="' + axisMax + '" style="--grid-step:' + (tickStep / axisMax * 100).toFixed(3) + '%"><figcaption id="' + captionId + '">' + escape(board.metric) +
-        '<span class="visually-hidden">. Scale: 0 to ' + axisMax + ' percent.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
+        '<span class="visually-hidden">. Scale: 0 to ' + axisMax + (unit === "%" ? " percent" : " " + escape(unit)) + '.</span></figcaption><div class="leaderboard-chart-axis" aria-hidden="true"><div class="leaderboard-axis-track">' + tickMarkup + '</div></div><ol class="leaderboard-bars" role="list" aria-label="Policies ranked by ' + escape(board.metric) + '">' + chartRows +
         '</ol></figure></section>';
     }).join("");
     $("#leaderboard-status").textContent = data.updated ? "Results as of " + data.updated : "";
@@ -403,6 +404,53 @@
     } catch {
       $("#leaderboard-status").textContent = "The leaderboard is unavailable.";
       $("#leaderboard-boards").innerHTML = '<div class="empty-state"><p>Try again later.</p></div>';
+      return false;
+    }
+  }
+
+  // Gemini 4 replay gallery: one group per task, personas side by side.
+  function gemini4Case(item) {
+    const video = safeUrl(item.video);
+    const poster = safeUrl(item.poster) ?? "";
+    const success = item.outcome === "SUCCESS";
+    const seeds = Array.isArray(item.strictSuccessSeeds) ? item.strictSuccessSeeds.length : 0;
+    const captions = (Array.isArray(item.captions) ? item.captions : []).map((call) =>
+      '<div class="gemini4-caption"><span class="mono small-label">Skill call ' + escape(call.skillCall) + (call.startSeconds != null ? " · " + escape(Number(call.startSeconds).toFixed(1)) + " s" : "") + '</span>' +
+      (call.full_call ? '<pre class="gemini4-call">' + escape(call.full_call) + '</pre>' : "") +
+      (call.full_rationale ? '<p class="gemini4-rationale">' + escape(call.full_rationale) + '</p>' : "") + '</div>').join("");
+    return '<article class="gemini4-case"><div class="gemini4-case-head"><span class="persona-avatar"><span class="visually-hidden">Persona </span>' + escape(item.persona) +
+      '</span><span class="gemini4-case-label"><b>Task ' + escape(item.taskId) + ': ' + escape(item.taskKey) + ' / Persona ' + escape(item.persona) + '</b><span class="mono small-label">Seed ' + escape(item.seed) + '</span></span><span class="gemini4-badge ' + (success ? "is-success" : "is-failed") + '">' + (success ? "SUCCESS" : "FAILED") + '</span></div>' +
+      (video ? '<video class="rollout-video gemini4-video" controls playsinline preload="none" poster="' + escape(poster) + '" aria-label="Task ' + escape(item.taskId) + " persona " + escape(item.persona) + ' Gemini 4 replay"><source src="' + escape(video) + '" type="video/mp4">Your browser does not support embedded video. <a href="' + escape(video) + '">Download the replay</a>.</video>' : "") +
+      '<div class="gemini4-case-body"><p>' + escape(item.personaDescription) + '</p><p class="gemini4-seeds mono">Strict successes for this persona: ' + seeds + ' / 10 seeds</p>' +
+      (captions ? '<div class="gemini4-captions"><p class="gemini4-captions-title">Full text shortened in the video panel</p>' + captions + '</div>' : "") + '</div></article>';
+  }
+
+  function renderGemini4(data) {
+    if (!data || data.schema !== "personarobotbench.website-gemini4-rollouts/1" || !Array.isArray(data.entries)) throw new Error("Unknown gallery data");
+    const groups = new Map();
+    for (const item of data.entries) {
+      if (!groups.has(item.taskId)) groups.set(item.taskId, []);
+      groups.get(item.taskId).push(item);
+    }
+    $("#gemini4-gallery").innerHTML = [...groups.values()].map((items) => {
+      const first = items[0];
+      return '<section class="gemini4-group" aria-label="Task ' + escape(first.taskId) + ' Gemini 4 replays"><header class="gemini4-group-head"><span class="mono small-label">Task ' + escape(padded(first.taskId)) + ' · ' + escape(first.taskKey) +
+        '</span><h3>' + escape(first.title) + '</h3><p>“' + escape(first.instruction) + '”</p><span class="gemini4-model mono">' + escape(data.label) + '</span></header><div class="gemini4-pair" style="--gemini4-columns:' + items.length + '">' +
+        items.map(gemini4Case).join("") + '</div></section>';
+    }).join("");
+    const tasks = groups.size;
+    $("#gemini4-status").textContent = data.entries.length + " recorded episode replays across " + tasks + (tasks === 1 ? " task." : " tasks.");
+  }
+
+  async function loadGemini4() {
+    if (!$("#gemini4-gallery")) return false;
+    try {
+      const response = await fetch("data/gemini4-rollouts.json", { cache: "no-cache" });
+      if (!response.ok) throw new Error("Gallery unavailable");
+      renderGemini4(await response.json());
+      return true;
+    } catch {
+      $("#gemini4-status").textContent = "The Gemini 4 rollouts are unavailable.";
       return false;
     }
   }
@@ -428,6 +476,7 @@
 
   window.prbReady = start();
   window.prbLeaderboardReady = loadLeaderboard();
+  window.prbGemini4Ready = loadGemini4();
 })();
 
 // Progressive enhancement: content remains visible without observer support.
@@ -537,5 +586,59 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
     viewer.setAttribute('field-of-view', '45deg');
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) viewer.jumpCameraToGoal?.();
     status.textContent = 'View reset · drag to orbit · scroll to zoom';
+  });
+})();
+
+// V2D robot videos: a tile per source clip swaps the single player's content.
+(() => {
+  const tiles = document.querySelector('#v2d-demos .v2d-tiles');
+  const player = document.querySelector('#v2d-player');
+  if (!tiles || !player) return;
+  const buttons = [...tiles.querySelectorAll('[data-v2d-demo]')];
+  const select = (button, focus = false) => {
+    const template = document.getElementById('v2d-demo-' + button.dataset.v2dDemo);
+    if (!template || button.getAttribute('aria-selected') === 'true') {
+      if (focus) button.focus();
+      return;
+    }
+    player.querySelectorAll('video').forEach((video) => video.pause());
+    // Import into this document so the media elements load their posters normally.
+    player.replaceChildren(document.importNode(template.content, true));
+    player.setAttribute('aria-labelledby', button.id);
+    buttons.forEach((other) => {
+      const active = other === button;
+      other.setAttribute('aria-selected', String(active));
+      other.tabIndex = active ? 0 : -1;
+    });
+    if (focus) button.focus();
+  };
+  tiles.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-v2d-demo]');
+    if (button) select(button);
+  });
+  // Pairs: one button starts both recordings from the beginning, or pauses both.
+  player.addEventListener('click', (event) => {
+    const control = event.target.closest('.v2d-play-both');
+    if (!control) return;
+    const videos = [...player.querySelectorAll('video')];
+    const playing = videos.some((video) => !video.paused && !video.ended);
+    if (playing) {
+      videos.forEach((video) => video.pause());
+      control.innerHTML = '<span aria-hidden="true">▶</span> Play both together';
+      return;
+    }
+    videos.forEach((video) => {
+      video.preload = 'auto';
+      video.currentTime = 0;
+      video.play()?.catch?.(() => {});
+    });
+    control.innerHTML = '<span aria-hidden="true">❚❚</span> Pause both';
+  });
+  tiles.addEventListener('keydown', (event) => {
+    const current = buttons.findIndex((button) => button.getAttribute('aria-selected') === 'true');
+    const next = { ArrowRight: current + 1, ArrowLeft: current - 1, Home: 0, End: buttons.length - 1 }[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    select(buttons[(next + buttons.length) % buttons.length], true);
   });
 })();
