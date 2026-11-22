@@ -21,19 +21,19 @@ Taken from the institution's own site:
   cut to the university blue (#002A5C)
 - `16-tamu.webp` — tamu.edu, primary Texas A&M University lockup
 - `19-wisc.webp` — brand.wisc.edu, institutional logo
+- `26-matraix.webp` — matraix.ai, company logo
 
 ## Typeset fallbacks
 
-Three affiliations have no freely licensed official mark, so their names
-are set in type instead of using an invented or unrelated logo:
+Two affiliations have no reachable official mark, so their names are set
+in type rather than using an invented or unrelated logo:
 
-- Tundra Solutions
-- University College London (the only free file is an unofficial coat of
-  arms, and ucl.ac.uk refuses automated requests)
-- MatrAIx
+- Tundra Solutions — tundra.ca returns 404 over HTTP and presents a
+  certificate for a different host over HTTPS
+- University College London — ucl.ac.uk returns 403 to automated requests;
+  the only free file on Commons is an explicitly unofficial coat of arms
 
-Replace a text cell with an image only if the institution supplies its
-own file.
+Replace a text cell with an image when the institution supplies its file.
 
 These are the institutions' own marks and remain their trademarks; they
 are used here to identify an author's affiliation.
