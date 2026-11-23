@@ -948,10 +948,10 @@ test('V2D follows the paper order: motivation, construction, evidence, diagnosti
 
 test('the curated task rollout gallery omits withdrawn demos and private-repository entry points', async () => {
   const ctx = await boot({ examples: shippedExamples });
-  const withdrawn = new Set([2, 10, 52, 50, 88, 90, 9, 32, 3]);
-  assert.equal(shippedExamples.length, 32);
-  assert.equal(shippedExamples.filter(example => example.recording).length, 31);
-  assert.equal(shippedExamples.reduce((total, example) => total + example.personas.filter(persona => persona.video).length, 0), 65);
+  const withdrawn = new Set([2, 10, 52, 9, 32, 3]);
+  assert.equal(shippedExamples.length, 35);
+  assert.equal(shippedExamples.filter(example => example.recording).length, 34);
+  assert.equal(shippedExamples.reduce((total, example) => total + example.personas.filter(persona => persona.video).length, 0), 71);
   for (const taskId of [25, 30, 33, 40]) {
     const example = shippedExamples.find(example => example.id === taskId);
     assert.equal(example.recording.source, 'astra-high-background-repair');
